@@ -468,8 +468,11 @@ export class HakoDevice extends HTMLBase {
   }
 
   private placeInline(picture: HTMLElement, svg: string, label: string): void {
-    const doc = new DOMParser().parseFromString(svg, "image/svg+xml");
-    const node = document.importNode(doc.documentElement, true);
+    // the HTML parser: an XML one may answer with a viewer's own styled page, which a strict policy refuses
+    const template = document.createElement("template");
+    template.innerHTML = svg;
+    const node = template.content.firstElementChild;
+    if (!node) return;
     node.setAttribute("role", "img");
     node.setAttribute("aria-label", label);
     const wrap = document.createElement("div");
@@ -555,9 +558,9 @@ export class HakoDevice extends HTMLBase {
 
 const LINEUP_CSS = `
 :host { display: block; }
-.row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--hako-lineup-gap, 28px 24px); padding: 8px 2px; }
+.row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--hako-lineup-gap, 28px 24px); padding: 12px 2px; overflow: clip; }
 .item { flex: none; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; max-width: 100%; }
-.name { font-size: 0.8rem; line-height: 1.2; height: 2.4em; opacity: 0.85; width: 9rem; overflow: hidden; }
+.name { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: 0.8rem; line-height: 1.2; height: 2.4em; opacity: 0.85; width: 9rem; overflow: hidden; }
 .item hako-device { max-width: 100%; }
 .ruler { display: block; margin-top: 0.75rem; overflow: visible; }
 .ruler line { stroke: currentColor; stroke-width: 1; vector-effect: non-scaling-stroke; opacity: 0.7; }
@@ -625,6 +628,7 @@ export class HakoLineup extends HTMLBase {
         name.className = "name";
         name.setAttribute("part", "name");
         name.textContent = deviceByKey(key)?.name ?? key;
+        name.title = name.textContent;
         item.appendChild(name);
       }
       row.appendChild(item);
