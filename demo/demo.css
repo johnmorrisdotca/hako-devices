@@ -75,6 +75,10 @@ select, input[type="text"], input[type="search"] { min-height: 2.5rem; padding: 
 .facet-clear { min-height: 2.75rem; margin-bottom: 0.5rem; padding: 0 0.85rem; border: 1px solid var(--line); border-radius: 0.6rem; background: transparent; color: inherit; font: inherit; cursor: pointer; }
 .fold { border-top: 1px solid var(--line); }
 .fold > summary { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 2.75rem; cursor: pointer; font-weight: 600; }
+.fold > summary > :first-child { flex: 1; }
+.fold > summary::before { content: "›"; display: inline-block; width: 1rem; color: var(--muted); transition: transform 150ms; }
+.fold[open] > summary::before { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) { .fold > summary::before { transition: none; } }
 .fold-count { color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
 .fold-body { padding: 0 0 0.75rem; }
 .fold .fold { margin-left: 0.75rem; }
