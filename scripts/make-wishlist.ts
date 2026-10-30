@@ -16,6 +16,9 @@ export interface PlannedDevice {
   key: string;
   name: string;
   family: string;
+  /** Which shelf of the gallery it sits on: \`SHELVES\`. */
+  shelf: string;
+  maker: string;
   status: "planned";
 }
 
@@ -23,6 +26,8 @@ export interface CoveredDevice {
   key: string;
   name: string;
   family: string;
+  shelf: string;
+  maker: string;
   /** The catalogue key of the mesh that draws it. */
   mesh: string;
   status: "built";

@@ -11,8 +11,9 @@ export default defineConfig({
   testMatch: "*.demo.ts",
   fullyParallel: true,
   forbidOnly: true,
-  workers: 3,
-  timeout: 90_000,
+  // A hosted runner has two cores and draws 3D in software: one test at a time, with room for it.
+  workers: process.env.CI ? 1 : 3,
+  timeout: process.env.CI ? 240_000 : 90_000,
   reporter: "list",
   use: { baseURL: `http://127.0.0.1:${port}`, reducedMotion: "reduce", locale: "en-US" },
   webServer: { command: "node scripts/dev.ts", env: { PORT: String(port) }, url: `http://127.0.0.1:${port}/hako-devices/`, reuseExistingServer: false },

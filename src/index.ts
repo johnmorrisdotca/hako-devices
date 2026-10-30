@@ -21,5 +21,5 @@ export type { Box4, DrawStep, ScreenContent } from "./screen/picture.ts";
 export { COMING_SOON_SVG } from "./placeholder.ts";
 export { COVERED, PLANNED } from "./wishlist.ts";
 export type { CoveredDevice, PlannedDevice } from "./wishlist.ts";
-export { catalogue, catalogueCounts, meshOf, statusOf } from "./status.ts";
+export { catalogue, catalogueCounts, headingOf, meshOf, SHELVES, statusOf } from "./status.ts";
 export type { CatalogueEntry } from "./status.ts";

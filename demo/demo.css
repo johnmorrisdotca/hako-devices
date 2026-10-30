@@ -68,6 +68,12 @@ select, input[type="text"], input[type="search"] { min-height: 2.5rem; padding: 
 .search { flex: 1 1 16rem; display: grid; gap: 0.25rem; font-size: 0.85rem; color: var(--muted); }
 .seg { display: inline-flex; gap: 0.25rem; flex-wrap: wrap; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr)); gap: 0.6rem; }
+.fold { border-top: 1px solid var(--line); }
+.fold > summary { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 2.75rem; cursor: pointer; font-weight: 600; }
+.fold-count { color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
+.fold-body { padding: 0 0 0.75rem; }
+.fold .fold { margin-left: 0.75rem; }
+.fold .fold > summary { font-weight: 500; }
 .tile { display: grid; gap: 0.25rem; align-content: start; padding: 0.5rem; border: 1px solid var(--line); border-radius: 0.7rem; background: var(--ground); color: var(--ink); font: inherit; text-align: left; cursor: pointer; min-width: 0; }
 .tile:hover { border-color: var(--accent); }
 .tile[data-status="planned"] { cursor: default; opacity: 0.75; }

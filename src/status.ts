@@ -4,6 +4,20 @@ import { COVERED, type CoveredDevice, PLANNED, type PlannedDevice } from "./wish
 
 export type CatalogueEntry = Device | CoveredDevice | PlannedDevice;
 
+/** The list's shelves, in the order the gallery shows them. Each holds families, named by `headingOf`. */
+export const SHELVES: readonly { id: string; title: string }[] = [
+  { id: "apple", title: "Apple" },
+  { id: "microsoft", title: "Microsoft" },
+  { id: "consoles", title: "Game consoles" },
+  { id: "phones", title: "Retro phones and PDAs" },
+  { id: "computers", title: "Retro home computers" },
+];
+
+/** A family's name on its shelf: "Nintendo DS", "Ericsson T series". A shelf with one maker, or a family that names its maker, needs no more. */
+export function headingOf({ shelf, maker, family }: CoveredDevice | PlannedDevice): string {
+  return shelf === "apple" || shelf === "microsoft" || family.includes(maker) ? family : `${maker} ${family}`;
+}
+
 /** Every machine: the built ones, the real machines they cover, then those still to come. */
 export const catalogue = (): readonly CatalogueEntry[] => [...DEVICES, ...COVERED, ...PLANNED];
 

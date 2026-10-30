@@ -1,5 +1,5 @@
 // The demo page: a device large, the part builder, a lineup to scale, the gallery by family and a live screen. Everything comes from the package's own entries.
-import { catalogue, catalogueCounts, check, type CatalogueEntry, COVERED, deviceByKey, FAMILIES, meshOf, PARTS, partsOfKind, PRESETS, STYLE_NAMES, type Description, type Device, type Part, type StyleName } from "../src/index.ts";
+import { catalogue, catalogueCounts, check, type CatalogueEntry, COVERED, deviceByKey, FAMILIES, headingOf, meshOf, PARTS, partsOfKind, PRESETS, SHELVES, STYLE_NAMES, type Description, type Device, type Part, type StyleName } from "../src/index.ts";
 import { HakoDevice, setAssetBase } from "../src/element.ts";
 
 const assets = new URL("assets/", document.baseURI).href;
@@ -182,7 +182,6 @@ for (const value of [...STYLE_NAMES, "both"] as const) {
   styleRow.append(button);
 }
 const fileOf = (key: string, style: StyleName, folder = "") => `assets/${folder}${key}${style === "thin" ? "" : `.${style}`}.svg`;
-const titleOfFamily = (id: string) => FAMILIES.find((family) => family.id === id)?.title ?? id;
 function drawingImg(key: string, style: StyleName, label: string, folder = "") {
   const img = el("img", { src: fileOf(key, style, folder), alt: label, loading: "lazy", decoding: "async", width: 320, height: 220 });
   img.dataset.style = style;
@@ -227,6 +226,30 @@ function matches(entry: CatalogueEntry, text: string): boolean {
   const hay = `${entry.name} ${entry.key}`.toLowerCase();
   return text.toLowerCase().split(/\s+/).filter(Boolean).every((word) => hay.includes(word));
 }
+type Shelved = Exclude<CatalogueEntry, Device>;
+const openFolds = new Set<string>();
+function byHeading(members: readonly Shelved[]): [string, Shelved[]][] {
+  const found = new Map<string, Shelved[]>();
+  for (const entry of members) found.set(headingOf(entry), [...(found.get(headingOf(entry)) ?? []), entry]);
+  return [...found].sort(([a], [b]) => a.localeCompare(b, "en", { numeric: true }));
+}
+/** A group that opens and closes, its tiles made only when first opened: the whole list is 1,400 machines. A search opens what it found, and is not remembered. */
+function fold(title: string, count: number, id: string, searching: boolean, fill: (body: HTMLElement) => void): HTMLElement {
+  const body = el("div", { className: "fold-body" });
+  const node = el("details", { className: "fold" }, el("summary", {}, el("span", { textContent: title }), el("span", { className: "fold-count", textContent: String(count) })), body);
+  const show = () => {
+    if (node.open && body.childElementCount === 0) fill(body);
+  };
+  node.open = searching || openFolds.has(id);
+  show();
+  node.addEventListener("toggle", () => {
+    show();
+    if (searching) return;
+    if (node.open) openFolds.add(id);
+    else openFolds.delete(id);
+  });
+  return node;
+}
 function renderGallery() {
   for (const button of filterRow.querySelectorAll("button")) button.setAttribute("aria-pressed", String(button.dataset.value === filter));
   for (const button of styleRow.querySelectorAll("button")) button.setAttribute("aria-pressed", String(button.dataset.value === galleryStyle));
@@ -235,14 +258,14 @@ function renderGallery() {
   const text = search.value;
   const shown = entries.filter((entry) => (filter === "all" || entry.status === filter) && matches(entry, text));
   groups.replaceChildren();
-  const families = [...new Set([...FAMILIES.map((family) => family.id as string), ...shown.map((entry) => entry.family as string)])];
-  for (const family of families) {
-    const members = shown.filter((entry) => entry.family === family);
+  const devices = shown.filter((entry) => !("shelf" in entry));
+  for (const { id, title } of FAMILIES) {
+    const members = devices.filter((entry) => entry.family === id);
     if (members.length === 0) continue;
     const section = el("section");
     section.dataset.testid = "gallery-group";
-    section.dataset.family = family;
-    section.append(el("h3", { textContent: titleOfFamily(family) }), el("div", { className: "tiles" }, ...members.map(tile)));
+    section.dataset.family = id;
+    section.append(el("h3", { textContent: title }), el("div", { className: "tiles" }, ...members.map(tile)));
     groups.append(section);
   }
   if (filter !== "planned") {
@@ -254,6 +277,21 @@ function renderGallery() {
       section.append(el("h3", { textContent: "Parts on their own" }), el("div", { className: "tiles" }, ...parts.map(partTile)));
       groups.append(section);
     }
+  }
+  for (const { id, title } of SHELVES) {
+    const members = shown.filter((entry): entry is Shelved => "shelf" in entry && entry.shelf === id);
+    if (members.length === 0) continue;
+    const shelf = fold(title, members.length, id, text !== "", (body) => {
+      for (const [heading, machines] of byHeading(members)) {
+        const family = fold(heading, machines.length, `${id}/${heading}`, text !== "", (tiles) => tiles.append(el("div", { className: "tiles" }, ...machines.map(tile))));
+        family.dataset.testid = "gallery-family";
+        body.append(family);
+      }
+    });
+    shelf.dataset.testid = "gallery-shelf";
+    shelf.dataset.shelf = id;
+    shelf.dataset.count = String(members.length);
+    groups.append(shelf);
   }
   if (shown.length === 0) groups.append(el("p", { className: "empty", textContent: "Nothing has that name." }));
 }

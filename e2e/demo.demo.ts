@@ -1,7 +1,7 @@
 // The demo in a real browser: no console or policy error, the gallery, the styles, the builder, the lineup, the live screen, and every device reaching its 3D view.
 import { expect, type Page, test } from "@playwright/test";
 import { DEVICES } from "../src/catalogue.ts";
-import { catalogueCounts, COVERED, PLANNED } from "../src/index.ts";
+import { catalogueCounts, COVERED, headingOf, PLANNED } from "../src/index.ts";
 
 const URL = "/hako-devices/";
 
@@ -47,20 +47,31 @@ test("the gallery shows every built device by family, and what is coming", async
   await page.goto(URL);
   const counts = catalogueCounts();
   expect(counts.total).toBeGreaterThan(1000);
-  await expect(page.locator('[data-testid="tile"][data-status="built"]')).toHaveCount(counts.built);
+  await expect(page.locator('[data-testid="tile"][data-status="built"]')).toHaveCount(DEVICES.length);
+  await expect(page.locator('[data-testid="gallery-shelf"]')).not.toHaveCount(0);
   await expect(page.locator('[data-testid="gallery-count"]')).toHaveText(`${counts.built} of ${counts.total} built`);
   await expect(page.locator('[data-testid="part-tile"]').first()).toBeVisible();
   for (const family of ["pi-boards", "pi-dressed", "desktops", "laptops", "tablets-phones", "pcs", "nas", "clients"]) await expect(page.locator(`[data-testid="gallery-group"][data-family="${family}"]`)).toBeVisible();
   await page.locator('[data-testid="filter-planned"]').click();
   await expect(page.locator('[data-testid="tile"][data-status="built"]')).toHaveCount(0);
-  await expect(page.locator('[data-testid="tile"][data-status="planned"]')).toHaveCount(counts.planned);
-  // one picture for every machine still to come, its own name under it
+  // every machine still to come is on a shelf, and its tiles are made when its family opens
+  const shelved = await page.locator('[data-testid="gallery-shelf"]').evaluateAll((nodes) => nodes.map((node) => Number((node as HTMLElement).dataset.count)));
+  expect(shelved.reduce((sum, count) => sum + count, 0)).toBe(counts.planned);
+  await expect(page.locator('[data-testid="tile"]')).toHaveCount(0);
+  const first = PLANNED.find((entry) => entry.shelf === "consoles" && entry.family === "DS") ?? PLANNED[0];
+  const shelf = page.locator(`[data-testid="gallery-shelf"][data-shelf="${first.shelf}"]`);
+  await shelf.locator("summary").first().click();
+  const family = shelf.locator('[data-testid="gallery-family"]').filter({ hasText: headingOf(first) }).first();
+  await family.locator("summary").click();
+  await expect(family.locator(`[data-testid="tile"][data-key="${first.key}"]`)).toContainText(first.name);
+  await expect(family.locator(`[data-testid="tile"][data-key="${first.key}"]`)).toContainText("Coming soon");
+  // one picture for every machine still to come
   const sources = await page.evaluate(() => new Set([...document.querySelectorAll<HTMLImageElement>('[data-status="planned"] img')].map((image) => image.getAttribute("src"))).size);
   expect(sources).toBe(1);
-  await expect(page.locator(`[data-testid="tile"][data-key="${PLANNED[0].key}"]`)).toContainText(PLANNED[0].name);
-  await expect(page.locator(`[data-testid="tile"][data-key="${PLANNED[0].key}"]`)).toContainText("Coming soon");
+  // what was open stays open across a change of filter
   await page.locator('[data-testid="filter-all"]').click();
-  await expect(page.locator('[data-testid="tile"]')).toHaveCount(counts.total);
+  await expect(page.locator(`[data-testid="tile"][data-key="${first.key}"]`)).toBeVisible();
+  await expect(page.locator('[data-testid="tile"][data-status="built"]').first()).toBeVisible();
   await page.locator('[data-testid="filter-built"]').click();
   await page.locator('[data-testid="gallery-search"]').fill("rack nas");
   await expect(page.locator('[data-testid="tile"][data-key="nas-rack"]')).toBeVisible();
@@ -95,7 +106,7 @@ test("every drawing in the gallery loads, in thin, in thick and in both", async 
 
 test("every device reaches its 3D view", async ({ page, browserName }, info) => {
   test.skip(!is3d(browserName) || info.project.name !== "chromium-desk", "one browser is enough for this long walk");
-  test.setTimeout(300_000);
+  test.setTimeout(process.env.CI ? 900_000 : 300_000);
   const problems = watch(page);
   await page.goto(URL);
   const hero = page.locator("hako-device#hero");

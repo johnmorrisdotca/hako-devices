@@ -33,6 +33,8 @@ meshOf("mac-pro-2019"); // "mac-pro"
 catalogueCounts().total > 1000; // true
 ```
 
+Machines on the list carry a `shelf` (`SHELVES`: Apple, Microsoft, Game consoles, Retro phones and PDAs, Retro home computers), a `maker` and a `family`, and `headingOf(entry)` names the family on its shelf ("Nintendo DS"). The demo's gallery groups them that way.
+
 A real machine a built mesh covers is built, and `<hako-device key="mac-pro-2019">` draws that mesh. A planned one shows the one "Coming soon" picture.
 
 ## Finding the key for a real machine

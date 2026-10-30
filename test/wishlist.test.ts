@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { test } from "node:test";
 import { readWishlist } from "../scripts/wishlist-read.ts";
-import { catalogue, catalogueCounts, COMING_SOON_SVG, COVERED, DEVICES, deviceByKey, meshOf, PLANNED, statusOf } from "../src/index.ts";
+import { catalogue, catalogueCounts, COMING_SOON_SVG, COVERED, DEVICES, deviceByKey, headingOf, meshOf, PLANNED, SHELVES, statusOf } from "../src/index.ts";
 
 const raw = (): { key: string; status: string; dimensionsMm: number[] | null; dimensionsSource: string | null }[] => JSON.parse(readFileSync("data/wishlist.json", "utf8"));
 
@@ -44,14 +44,14 @@ test("the published package carries names only, none of the list's sizes", () =>
   assert.ok(!files.includes("data"));
 });
 
-test("a planned machine has a key, a name and a family, and no shape", () => {
+test("a planned machine has a key, a name and its place on a shelf, and no shape", () => {
   const keys = new Set<string>();
   for (const entry of PLANNED) {
     assert.ok(entry.key && entry.name && entry.family, JSON.stringify(entry));
     assert.ok(!keys.has(entry.key), `twice: ${entry.key}`);
     keys.add(entry.key);
     assert.equal(entry.status, "planned");
-    assert.deepEqual(Object.keys(entry).sort(), ["family", "key", "name", "status"]);
+    assert.deepEqual(Object.keys(entry).sort(), ["family", "key", "maker", "name", "shelf", "status"]);
     assert.equal(deviceByKey(entry.key), undefined);
   }
 });
@@ -65,4 +65,13 @@ test("the catalogue lists a machine once, built before planned", () => {
 test("there is one placeholder, in words and with no machine's shape", () => {
   assert.match(COMING_SOON_SVG, /Coming soon/);
   assert.equal([...COMING_SOON_SVG.matchAll(/<svg /g)].length, 1);
+});
+
+test("every machine on the list is on a known shelf, under a heading that names its maker", () => {
+  const shelves = new Set(SHELVES.map((shelf) => shelf.id));
+  for (const entry of [...PLANNED, ...COVERED]) assert.ok(shelves.has(entry.shelf), entry.key);
+  const ds = PLANNED.find((entry) => entry.maker === "Nintendo" && entry.family === "DS");
+  assert.equal(ds && headingOf(ds), "Nintendo DS");
+  const mac = PLANNED.find((entry) => entry.shelf === "apple" && entry.family === "Power Mac");
+  assert.equal(mac && headingOf(mac), "Power Mac");
 });

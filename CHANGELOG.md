@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- `SHELVES` and `headingOf`, and a `shelf` and `maker` on every machine on the list. The gallery groups the list by shelf and family, and opens them on demand.
+
 ## [0.1.0] - Not released
 
 The first version.
