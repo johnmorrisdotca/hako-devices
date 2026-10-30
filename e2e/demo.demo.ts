@@ -1,6 +1,7 @@
 // The demo in a real browser: no console or policy error, the gallery, the styles, the builder, the lineup, the live screen, and every device reaching its 3D view.
 import { expect, type Page, test } from "@playwright/test";
 import { DEVICES } from "../src/catalogue.ts";
+import { catalogueCounts, COVERED, PLANNED } from "../src/index.ts";
 
 const URL = "/hako-devices/";
 
@@ -37,17 +38,27 @@ test("the page loads clean, every address under the site's own path", async ({ p
 test("the gallery shows every built device by family, and what is coming", async ({ page }) => {
   const problems = watch(page);
   await page.goto(URL);
-  await expect(page.locator('[data-testid="tile"][data-status="built"]')).toHaveCount(DEVICES.length);
-  await expect(page.locator('[data-testid="gallery-count"]')).toContainText(`${DEVICES.length} of`);
+  const counts = catalogueCounts();
+  expect(counts.total).toBeGreaterThan(1000);
+  await expect(page.locator('[data-testid="tile"][data-status="built"]')).toHaveCount(counts.built);
+  await expect(page.locator('[data-testid="gallery-count"]')).toHaveText(`${counts.built} of ${counts.total} built`);
   await expect(page.locator('[data-testid="part-tile"]').first()).toBeVisible();
   for (const family of ["pi-boards", "pi-dressed", "desktops", "laptops", "tablets-phones", "pcs", "nas", "clients"]) await expect(page.locator(`[data-testid="gallery-group"][data-family="${family}"]`)).toBeVisible();
   await page.locator('[data-testid="filter-planned"]').click();
   await expect(page.locator('[data-testid="tile"][data-status="built"]')).toHaveCount(0);
+  await expect(page.locator('[data-testid="tile"][data-status="planned"]')).toHaveCount(counts.planned);
+  // one picture for every machine still to come, its own name under it
+  const sources = await page.evaluate(() => new Set([...document.querySelectorAll<HTMLImageElement>('[data-status="planned"] img')].map((image) => image.getAttribute("src"))).size);
+  expect(sources).toBe(1);
+  await expect(page.locator(`[data-testid="tile"][data-key="${PLANNED[0].key}"]`)).toContainText(PLANNED[0].name);
+  await expect(page.locator(`[data-testid="tile"][data-key="${PLANNED[0].key}"]`)).toContainText("Coming soon");
   await page.locator('[data-testid="filter-all"]').click();
-  await expect(page.locator('[data-testid="tile"][data-status="built"]')).toHaveCount(DEVICES.length);
+  await expect(page.locator('[data-testid="tile"]')).toHaveCount(counts.total);
   await page.locator('[data-testid="filter-built"]').click();
-  await page.locator('[data-testid="gallery-search"]').fill("nas rack");
-  await expect(page.locator('[data-testid="tile"]')).toHaveCount(1);
+  await page.locator('[data-testid="gallery-search"]').fill("rack nas");
+  await expect(page.locator('[data-testid="tile"][data-key="nas-rack"]')).toBeVisible();
+  await page.locator('[data-testid="gallery-search"]').fill("nothing has this name");
+  await expect(page.locator('[data-testid="tile"]')).toHaveCount(0);
   expect(problems).toEqual([]);
 });
 
@@ -322,11 +333,26 @@ test("the docs open at their relative address", async ({ page }) => {
   expect(problems).toEqual([]);
 });
 
-test("a planned key shows the one placeholder; style= names a style", async ({ page }) => {
+test("a planned key shows the one placeholder, a covered key its mesh; style= names a style", async ({ page }) => {
   await page.goto(`${URL}element-check.html`);
   const planned = page.locator("#planned");
   await expect(planned).toHaveAttribute("data-view", "planned");
+  await expect(planned).toHaveAttribute("data-why", "unknown-key");
   await expect(planned.locator("svg")).toContainText("Coming soon");
+  await page.evaluate(([plannedKey, coveredKey]) => {
+    const add = (id: string, key: string) => {
+      const d = document.createElement("hako-device");
+      d.id = id;
+      d.setAttribute("key", key);
+      d.setAttribute("mode", "drawing");
+      document.body.append(d);
+    };
+    add("on-the-list", plannedKey);
+    add("covered", coveredKey);
+  }, [PLANNED[0].key, COVERED[0].key]);
+  await expect(page.locator("#on-the-list")).toHaveAttribute("data-why", "planned");
+  await expect(page.locator("#on-the-list")).toHaveAttribute("data-name", PLANNED[0].name);
+  await expect(page.locator("#covered img")).toHaveAttribute("src", new RegExp(`/${COVERED[0].mesh}\\.svg$`));
   await expect(page.locator("#by-style img")).toHaveAttribute("src", /pi4\.thick\.svg$/);
 });
 
