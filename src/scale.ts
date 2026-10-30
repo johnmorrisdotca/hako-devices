@@ -28,8 +28,8 @@ export function plantMetrics(svg: string, metrics: ArtMetrics): string {
 /** Reads the numbers back from a drawing's text; null when it has none. */
 export function readMetrics(svg: string): ArtMetrics | null {
   const mm = /data-mm-per-unit="([\d.]+)"/.exec(svg);
-  const box = /data-box="([\d.\- ]+)"/.exec(svg);
-  const base = /data-baseline="([\d.\-]+)"/.exec(svg);
+  const box = /data-box="([\d. -]+)"/.exec(svg);
+  const base = /data-baseline="([\d.-]+)"/.exec(svg);
   if (!mm || !box || !base) return null;
   const parts = box[1].split(" ").map(Number);
   if (parts.length !== 4 || parts.some((v) => !Number.isFinite(v))) return null;
@@ -83,6 +83,8 @@ export function realScaleSvg(svg: string, unit: number, style: DrawingStyle): st
   if (!metrics) return svg;
   const k = metrics.mmPerUnit * unit;
   const placed = svg
+    // the halo belongs to a picture of its own: machines side by side share one ground
+    .replace(/<ellipse cx="160" cy="110"[^>]*fill="url\(#halo\)"\/>/, "")
     .replace(/ width="320" height="220"/, ` width="${r3(320 * k)}" height="${r3(220 * k)}"`)
     .replace(/<(path|circle|ellipse|rect)\b([^>]*?)stroke-width="([\d.]+)"([^>]*?)\/>/g, (whole, tag: string, a: string, width: string, b: string) => {
       if (`${a}${b}`.includes("stroke-dasharray") || !isLine(Number(width), style)) return whole;

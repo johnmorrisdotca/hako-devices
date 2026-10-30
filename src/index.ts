@@ -16,6 +16,8 @@ export { cleanStyle, DEFAULT_STYLE, drawingFile, inStyle, STYLE_NAMES, STYLES, w
 export type { DrawingStyle, StyleName } from "./styles.ts";
 export { artMetrics, parseUnit, plantMetrics, readMetrics, realPlacement, realScaleSvg } from "./scale.ts";
 export type { ArtMetrics, RealPlacement } from "./scale.ts";
+export { Bitmap, desktopPicture, OLED_H, OLED_W, oledPicture, panelPicture, paperPicture, phonePicture } from "./screen/picture.ts";
+export type { Box4, DrawStep, ScreenContent } from "./screen/picture.ts";
 export { COMING_SOON_SVG } from "./placeholder.ts";
 export { PLANNED } from "./wishlist.ts";
 export type { PlannedDevice } from "./wishlist.ts";
