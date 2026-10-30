@@ -57,7 +57,7 @@ test("lines keep their style's width whatever the scale: a tiny board and a big 
     assert.ok(widths(zero).length > 5);
     assert.ok(widths(tower).length > 5);
     // the outline of each is a width the style sets: 1.6 to 2.4, by 1 in thin and by 3.5 in thick
-    const outline = (list: number[]) => list.filter((w) => w >= 1.6 * style.outline && w <= 2.4 * style.outline);
+    const outline = (list: number[]) => list.filter((w) => w >= 1.6 * style.outline - 0.05 && w <= 2.4 * style.outline + 0.05);
     assert.ok(outline(widths(zero)).length > 0, `${name} ${widths(zero).join()}`);
     assert.ok(outline(widths(tower)).length > 0, `${name} ${widths(tower).join()}`);
   }

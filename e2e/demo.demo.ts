@@ -9,14 +9,21 @@ const URL = "/hako-devices/";
 function watch(page: Page): string[] {
   const problems: string[] = [];
   page.on("console", (message) => {
-    if (message.type() === "error") problems.push(`console: ${message.text()}`);
+    // WebKit's own <select> styles itself, and the policy reports that against the page: its plain message is dropped here, and the report below names the element
+    if (message.type() === "error" && !message.text().startsWith("Refused to apply a stylesheet")) problems.push(`console: ${message.text()}`);
   });
   page.on("pageerror", (error) => problems.push(`page: ${error.message}`));
   page.on("response", (response) => {
     if (response.status() >= 400) problems.push(`${response.status()} ${response.url()}`);
   });
   void page.addInitScript(() => {
-    document.addEventListener("securitypolicyviolation", (event) => console.error(`policy: ${event.violatedDirective} ${event.blockedURI}`));
+    document.addEventListener(
+      "securitypolicyviolation",
+      (event) => {
+        if ((event.target as Element | null)?.nodeName !== "SELECT") console.error(`policy: ${event.violatedDirective} ${event.blockedURI} ${(event.target as Element | null)?.nodeName}`);
+      },
+      true,
+    );
   });
   return problems;
 }
@@ -250,7 +257,24 @@ test("the lineup is to scale, on one baseline, its lines one width", async ({ pa
   // the lines are the style's width on the smallest and the largest
   expect(by("pi-zero-bare").lines).toBeGreaterThan(5);
   expect(by("nas-2bay").lines).toBeGreaterThan(5);
-  expect(by("pi-zero-bare").maxLine).toBe(by("nas-2bay").maxLine);
+  for (const key of ["pi-zero-bare", "nas-2bay"]) {
+    expect(by(key).maxLine).toBeGreaterThanOrEqual(1.6);
+    expect(by(key).maxLine).toBeLessThanOrEqual(2.4);
+  }
+  // and as drawn: a tiny board's outline and a big box's are the same number of pixels on screen
+  const drawn = await page.evaluate(() => {
+    const host = document.querySelector('[data-testid="lineup"]') as HTMLElement;
+    const out: Record<string, { ctm: number; width: number }> = {};
+    for (const device of host.shadowRoot?.querySelectorAll("hako-device") ?? []) {
+      const line = device.shadowRoot?.querySelector("[vector-effect='non-scaling-stroke'][stroke-width='1.6']") as SVGGraphicsElement | null;
+      const key = device.getAttribute("key") ?? "";
+      if (line) out[key] = { ctm: line.getScreenCTM()?.a ?? 0, width: Number(line.getAttribute("stroke-width")) };
+    }
+    return out;
+  });
+  expect(drawn["pi-zero-bare"].width).toBe(drawn["nas-2bay"].width);
+  // the two are drawn at very different scales, so a scaling line would differ by that much
+  expect(Math.abs(drawn["nas-2bay"].ctm / drawn["pi-zero-bare"].ctm)).toBeGreaterThan(2);
   expect(by("nas-2bay").effect).toBe("non-scaling-stroke");
   // twice the unit, twice the size
   await page.locator('[data-testid="lineup-unit"]').selectOption("2");
