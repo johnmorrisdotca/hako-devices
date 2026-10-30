@@ -85,7 +85,8 @@
     "site": "pnpm build && node scripts/site.ts",
     "dev": "pnpm site && node scripts/dev.ts",
     "test:demo": "pnpm site && playwright test",
-    "screenshots": "pnpm site && node scripts/screenshots.ts"
+    "screenshots": "pnpm site && node scripts/screenshots.ts",
+    "wishlist": "node scripts/make-wishlist.ts"
   },
   "peerDependencies": {
     "react": ">=18",
