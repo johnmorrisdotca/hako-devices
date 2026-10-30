@@ -210,7 +210,7 @@ export function checkWith(description: Description, bases: BaseLookup): FitRepor
     if (casePart && casePart.covers && overlaps(casePart.covers, reach)) under.push({ what: casePart.name, top: casePart.top });
     const highest = under.reduce<{ what: string; top: number } | null>((a, b) => (a === null || b.top > a.top ? b : a), null);
     const needed = highest ? Math.max(0, highest.top - FIT_TOLERANCE - base) : 0;
-    const roundUp = (v: number) => Math.ceil(v * 10) / 10;
+    const roundUp = (v: number) => Math.ceil(Math.round(v * 1000) / 100) / 10;
     let riser: number;
     if (d.riser === undefined) {
       riser = roundUp(needed);
@@ -224,7 +224,7 @@ export function checkWith(description: Description, bases: BaseLookup): FitRepor
       if (highest && riser < needed - 1e-9) warn("hat-meets-part", `${hatPart.name} meets ${highest.what}: it takes a ${roundUp(needed)} mm stacking header to clear it.`);
     }
     if (riser > MAX_RISER) fail("riser-too-tall", `A stacking header is ${MAX_RISER} mm at most.`);
-    stack = { riser, under: base + riser };
+    stack = { riser, under: Math.round((base + riser) * 100) / 100 };
     top = Math.max(top, stack.under + hatPart.size[2]);
   } else if (d.riser !== undefined) fail("riser-without-hat", "A stacking header goes under a hat.");
   if (casePart) top = Math.max(top, casePart.top);

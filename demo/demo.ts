@@ -1,5 +1,5 @@
 // The demo page: a device large, the part builder, a lineup to scale, the gallery by family and a live screen. Everything comes from the package's own entries.
-import { catalogue, catalogueCounts, check, type CatalogueEntry, deviceByKey, FAMILIES, PARTS, partsOfKind, PRESETS, STYLE_NAMES, type Description, type Device, type Part, type StyleName } from "../src/index.ts";
+import { catalogue, catalogueCounts, check, type CatalogueEntry, COVERED, deviceByKey, FAMILIES, meshOf, PARTS, partsOfKind, PRESETS, STYLE_NAMES, type Description, type Device, type Part, type StyleName } from "../src/index.ts";
 import { HakoDevice, setAssetBase } from "../src/element.ts";
 
 const assets = new URL("assets/", document.baseURI).href;
@@ -190,16 +190,18 @@ function drawingImg(key: string, style: StyleName, label: string, folder = "") {
 }
 function tile(entry: CatalogueEntry): HTMLElement {
   const built = entry.status === "built";
+  const mesh = meshOf(entry.key) ?? entry.key;
   const art = el("span", { className: "tile-art" });
   if (!built) art.append(el("img", { src: "assets/coming-soon.svg", alt: "", loading: "lazy", decoding: "async", width: 320, height: 220 }));
   else if (galleryStyle === "both") {
     art.dataset.both = "";
-    for (const style of STYLE_NAMES) art.append(drawingImg(entry.key, style, `${entry.name}, ${style}`));
-  } else art.append(drawingImg(entry.key, galleryStyle, entry.name));
+    for (const style of STYLE_NAMES) art.append(drawingImg(mesh, style, `${entry.name}, ${style}`));
+  } else art.append(drawingImg(mesh, galleryStyle, entry.name));
   const name = el("span", { className: "tile-name", textContent: entry.name });
   name.dataset.testid = "tile-name";
-  const size = built ? (entry as Device).size : null;
-  const words = el("span", { className: "tile-size", textContent: built ? (size ? `${size[0]} by ${size[1]} by ${size[2]} mm` : "No real size") : "Coming soon" });
+  const size = (entry as Device).size ?? null;
+  const covered = "mesh" in entry;
+  const words = el("span", { className: "tile-size", textContent: !built ? "Coming soon" : covered ? `Drawn as ${deviceByKey(mesh)?.name ?? mesh}` : size ? `${size[0]} by ${size[1]} by ${size[2]} mm` : "No real size" });
   const node = built ? el("button", { type: "button", className: "tile" }, art, name, words) : el("div", { className: "tile" }, art, name, words);
   node.dataset.testid = "tile";
   node.dataset.key = entry.key;
@@ -262,9 +264,11 @@ renderGallery();
 const dialog = byId<HTMLDialogElement>("device-dialog");
 const dialogView = byId("dialog-view");
 function openFromHash() {
-  const key = decodeURIComponent(location.hash.slice(1));
-  const part = key.startsWith("part:") ? PARTS[key.slice(5)] : undefined;
+  const asked = decodeURIComponent(location.hash.slice(1));
+  const part = asked.startsWith("part:") ? PARTS[asked.slice(5)] : undefined;
+  const key = meshOf(asked) ?? asked;
   const entry = deviceByKey(key);
+  const coveredName = COVERED.find((machine) => machine.key === asked)?.name;
   if (part) {
     byId("dialog-title").textContent = part.name;
     const view = new HakoDevice();
@@ -282,20 +286,21 @@ function openFromHash() {
     if (dialog.open) dialog.close();
     return;
   }
-  byId("dialog-title").textContent = entry.name;
+  byId("dialog-title").textContent = coveredName ?? entry.name;
   const view = new HakoDevice();
-  view.setAttribute("key", key);
+  view.setAttribute("key", asked);
   view.setAttribute("fireflies", "");
   view.dataset.testid = "dialog-device";
   dialogView.replaceChildren(view);
   const facts = byId("dialog-facts");
   facts.replaceChildren();
   const fact = (term: string, value: string) => facts.append(el("dt", { textContent: term }), el("dd", { textContent: value }));
-  fact("Key", key);
+  fact("Key", asked);
+  if (coveredName) fact("Drawn as", entry.name);
   fact("Real size", entry.size ? `${entry.size[0]} by ${entry.size[1]} by ${entry.size[2]} mm` : "No real size: a stand-in");
   fact("Ports", entry.ports.map((port) => `${port.count} ${port.kind}`).join(", ") || "None");
   fact("Parts", JSON.stringify(entry.parts));
-  byId("dialog-code").textContent = `<hako-device key="${key}"></hako-device>`;
+  byId("dialog-code").textContent = `<hako-device key="${asked}"></hako-device>`;
   if (!dialog.open) dialog.showModal();
 }
 byId("dialog-close").addEventListener("click", () => dialog.close());

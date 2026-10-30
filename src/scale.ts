@@ -74,7 +74,8 @@ export function realPlacement(metrics: ArtMetrics, unit: number, picture: readon
 
 /** Whether a line of this width in a style's drawing is a line, not a drawn shape: an outline or anything finer. A wider one (a handle) is a shape and scales with the device. */
 function isLine(width: number, style: DrawingStyle): boolean {
-  return width <= 1.6 * style.detail || (width >= 1.6 * style.outline && width <= 2.4 * style.outline);
+  const near = 0.05;
+  return width <= 1.6 * style.detail + near || (width >= 1.6 * style.outline - near && width <= 2.4 * style.outline + near);
 }
 
 /** A drawing at real scale: `unit` pixels a millimetre, its lines the same width whatever the scale (the width its style sets, in pixels). A dotted row keeps its shape. */

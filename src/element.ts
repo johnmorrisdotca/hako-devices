@@ -314,13 +314,25 @@ export class HakoDevice extends HTMLBase {
 
     const partId = this.getAttribute("part");
     const part = partId !== null && Object.hasOwn(PARTS, partId) ? PARTS[partId] : undefined;
-    const key = part ? part.id : this.keyName();
+    let key = part ? part.id : this.keyName();
     const description = part ? null : this.descriptionNow();
-    const entry = part ?? deviceByKey(key);
+    let entry = part ?? deviceByKey(key);
+    // a real machine a built mesh covers draws that mesh, under its own name
+    let ownName: string | undefined;
+    if (!description && !entry) {
+      const { COVERED } = await import("./wishlist.ts");
+      if (generation !== this.generation) return;
+      const covered = COVERED.find((machine) => machine.key === key);
+      if (covered) {
+        key = covered.mesh;
+        ownName = covered.name;
+        entry = deviceByKey(key);
+      }
+    }
     const real = this.getAttribute("scale") === "real";
     const style = this.drawingStyle();
     const base = `${this.getAttribute("assets") ? `${(this.getAttribute("assets") as string).replace(/\/$/, "")}/` : defaultBase()}${part ? "parts/" : ""}`;
-    const label = this.getAttribute("label") ?? entry?.name ?? (description ? "an assembled machine" : key);
+    const label = this.getAttribute("label") ?? ownName ?? entry?.name ?? (description ? "An assembled machine" : key);
 
     if (!description && !entry) {
       await this.showPlanned(picture, key, generation);
