@@ -131,6 +131,10 @@ import { HakoDevice } from "@johnmorrisdotca/hako-devices/react";
 
 Product names appear only as plain descriptive words in the catalogue and the docs. All trademarks belong to their owners, and this project is not affiliated with, sponsored by or endorsed by any of them. The drawings and meshes are original work drawn from plain geometry and published sizes.
 
+## Filter by what a machine is
+
+Every machine has tags: brand, type and decade, and CPU, cores, memory, screen, ports and parts where a source gives them. See [Built or planned](docs/assets.md#built-or-planned). The demo's gallery has a filter for each.
+
 ## Coming soon
 
 The catalogue also lists machines with no mesh yet (`status: "planned"`). They have a name and no shape: the gallery and `<hako-device key="...">` show the one "Coming soon" picture for each, and `catalogue()`, `statusOf(key)` and `catalogueCounts()` say which is which. [docs/wishlist.md](docs/wishlist.md) is the list.

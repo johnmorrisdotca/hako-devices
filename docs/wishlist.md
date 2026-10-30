@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-30.
 
-**1466 machines. 704 distinct shapes still to build. 104 entries are already built: the 55 devices in this package, plus the real models those meshes cover. 848 entries have a sourced size; the other 618 are `null` on purpose.**
+**1485 machines. 720 distinct shapes still to build. 104 entries are already built: the 55 devices in this package, plus the real models those meshes cover. 851 entries have a sourced size; the other 634 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -121,7 +121,13 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Small PC | 5 | 0 | 0 |
 |  | NAS | 5 | 0 | 0 |
 |  | iPhone | 1 | 0 | 1 |
-|  | **Total** | **1466** | **704** | **848** |
+| **7** | **Raspberry Pi** | **19** | **16** | **3** |
+|  | Compute Module | 6 | 3 | 0 |
+|  | Model A and B | 4 | 4 | 1 |
+|  | Zero | 4 | 4 | 2 |
+|  | Pico | 4 | 4 | 0 |
+|  | Keyboard computer | 1 | 1 | 0 |
+|  | **Total** | **1485** | **720** | **851** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -132,6 +138,7 @@ A shape shared across two rows is counted in each row, so a column of sub-rows c
 - `dimensionsSource` is the page the size was read from. `null` size means no source was used: nothing here is guessed.
 - `formFactorGroup` names the body. It is a first pass, made from model names and, for old Macs, the form factor on Apple's pages. Machines with the same outside size can still differ in ports or cameras; look before sharing a mesh. Groups in phases 1 and 2 are judged from the family and any published sizes.
 - `status` is `built` for this package's devices (phase 6, with their key) and for real models a built mesh covers (phase 4, noted). Generic drawings such as `pc-tower` and `client-browser` are in phase 6 only because they exist.
+- `tags` holds what a machine can be filtered by (`@johnmorrisdotca/hako-devices/tags`). A fact with no source is absent.
 - `notes` flags anything unconfirmed. Search for "unconfirmed" and "not confirmed".
 
 ## Sources and their limits
@@ -156,6 +163,7 @@ No open dataset of outer dimensions for consoles or old phones was found. One se
 
 ## Where this is incomplete
 
+- **Tags:** every machine has a brand and a type, and most a decade, worked out from the list itself. CPU, cores and memory come only from a source: Apple's spec pages, and Wikipedia's Raspberry Pi article, so far. iPhones, iPads, consoles, retro machines and Surface have none yet. RAM and cores list every option a page names.
 - **Years:** 87 entries carry a year that was not found in a source, or none. Most are BlackBerry, Siemens and Ericsson phones with no article of their own, Palm variants, some older Apple displays, and Apple keyboards and printers. Those years came from memory and are flagged in `notes`. Years for Macs with no year on Apple's page were read from the Wikipedia list of Mac models by eye; they are not flagged.
 - **Sizes for phases 1 to 3 are thin.** Palm m100 and Zire families, most Treo models, early BlackBerrys, Game & Watch (none at all), NES, Super NES, Genesis, the original PlayStation, Xbox 360, Virtual Boy, the Atari 2600 and most home computers have no size here. Wikipedia gave none and no other reusable source was found.
 - **A family article's size is applied to its models.** Where an article gives one size for a series, the models it names share it. Where Apple's page disagreed by more than 2 mm for a model, the note says so. A few sizes dropped for that reason (PowerBook 180c, 190cs, Duo 270c, 280, 280c, 2300c) now come from Apple's page where it gave one.
@@ -497,13 +505,13 @@ Atari Home Pong (1975).
 
 Atari XEGS (1987).
 
-**Bandai WonderSwan** (3 machines, 3 shapes)
-
-WonderSwan (1999), WonderSwan Color (2000), SwanCrystal (2002).
-
 **Bandai / Apple Pippin** (1 machines, 1 shapes)
 
 Apple Bandai Pippin (1996).
+
+**Bandai WonderSwan** (3 machines, 3 shapes)
+
+WonderSwan (1999), WonderSwan Color (2000), SwanCrystal (2002).
 
 **ColecoVision** (1 machines, 1 shapes)
 
@@ -1060,3 +1068,25 @@ Raspberry Pi 1 B+ *built*, Raspberry Pi 2 B *built*, Raspberry Pi 3 *built*, Ras
 **NAS** (5 machines, 0 shapes)
 
 Five-bay NAS *built*, Four-bay NAS *built*, One-bay NAS *built*, Rack NAS *built*, Two-bay NAS *built*.
+
+### Phase 7: Raspberry Pi (19 machines, 16 shapes to build)
+
+**Compute Module** (6 machines, 3 shapes)
+
+Compute Module 1 (2014), Compute Module 3 (2017), Compute Module 3+ (2019), Compute Module 4 (2020), Compute Module 5 (2024), Compute Module 4S.
+
+**Keyboard computer** (1 machines, 1 shapes)
+
+Raspberry Pi 500+ (2025).
+
+**Model A and B** (4 machines, 4 shapes)
+
+Raspberry Pi 1 Model B (2012), Raspberry Pi 1 Model A (2013), Raspberry Pi 1 Model A+ (2014), Raspberry Pi 2 Model B v1.2 (2016).
+
+**Pico** (4 machines, 4 shapes)
+
+Raspberry Pi Pico (2021), Raspberry Pi Pico W (2022), Raspberry Pi Pico 2 (2024), Raspberry Pi Pico 2 W.
+
+**Zero** (4 machines, 4 shapes)
+
+Raspberry Pi Zero (2015), Raspberry Pi Zero v1.3 (2016), Raspberry Pi Zero WH (2018), Raspberry Pi Zero 2 WH.

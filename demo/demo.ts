@@ -1,6 +1,7 @@
 // The demo page: a device large, the part builder, a lineup to scale, the gallery by family and a live screen. Everything comes from the package's own entries.
 import { catalogue, catalogueCounts, check, type CatalogueEntry, COVERED, deviceByKey, FAMILIES, headingOf, meshOf, PARTS, partsOfKind, PRESETS, SHELVES, STYLE_NAMES, type Description, type Device, type Part, type StyleName } from "../src/index.ts";
 import { HakoDevice, setAssetBase } from "../src/element.ts";
+import { facetCounts, FACETS, facetOrder, type FacetId, matchesPicks, type Picks } from "../src/tags.ts";
 
 const assets = new URL("assets/", document.baseURI).href;
 setAssetBase(assets);
@@ -154,6 +155,49 @@ let galleryStyle: StyleName | "both" = "thin";
 const entries = catalogue();
 const search = byId<HTMLInputElement>("gallery-search");
 const groups = byId("gallery-groups");
+const facetsBox = byId("gallery-facets");
+const picks: Partial<Record<FacetId, string[]>> = {};
+const anyPick = () => Object.values(picks).some((values) => values.length > 0);
+function togglePick(facet: FacetId, value: string) {
+  const now = picks[facet] ?? [];
+  picks[facet] = now.includes(value) ? now.filter((other) => other !== value) : [...now, value];
+  renderGallery();
+}
+/** One row per fact the machines can be filtered by, each with what picking a value would show. */
+function renderFacets(keys: readonly string[]) {
+  const counts = facetCounts(keys, picks as Picks);
+  facetsBox.replaceChildren();
+  if (anyPick()) {
+    const clear = el("button", { type: "button", className: "facet-clear", textContent: "Clear filters" });
+    clear.dataset.testid = "facet-clear";
+    clear.addEventListener("click", () => {
+      for (const { id } of FACETS) picks[id] = [];
+      renderGallery();
+    });
+    facetsBox.append(clear);
+  }
+  for (const { id, title } of FACETS) {
+    const values = facetOrder(id, counts[id]);
+    if (values.length === 0) continue;
+    const chosen = picks[id]?.length ?? 0;
+    const row = fold(chosen ? `${title}: ${picks[id]?.join(", ")}` : title, values.length, `facet/${id}`, false, (body) => {
+      const chips = el("div", { className: "facet-chips" });
+      for (const value of values) {
+        const chip = el("button", { type: "button", className: "facet-chip" }, el("span", { textContent: id === "cores" ? `${value} ${value === "1" ? "core" : "cores"}` : value }), el("span", { className: "fold-count", textContent: String(counts[id].get(value)) }));
+        chip.dataset.testid = "facet-chip";
+        chip.dataset.facet = id;
+        chip.dataset.value = value;
+        chip.setAttribute("aria-pressed", String(picks[id]?.includes(value) ?? false));
+        chip.addEventListener("click", () => togglePick(id, value));
+        chips.append(chip);
+      }
+      body.append(chips);
+    });
+    row.dataset.testid = "gallery-facet";
+    row.dataset.facet = id;
+    facetsBox.append(row);
+  }
+}
 const FILTERS: readonly [Filter, string][] = [
   ["built", "Built"],
   ["planned", "Coming soon"],
@@ -254,9 +298,12 @@ function renderGallery() {
   for (const button of filterRow.querySelectorAll("button")) button.setAttribute("aria-pressed", String(button.dataset.value === filter));
   for (const button of styleRow.querySelectorAll("button")) button.setAttribute("aria-pressed", String(button.dataset.value === galleryStyle));
   const counts = catalogueCounts();
-  byId("gallery-count").textContent = `${counts.built} of ${counts.total} built`;
   const text = search.value;
-  const shown = entries.filter((entry) => (filter === "all" || entry.status === filter) && matches(entry, text));
+  const offered = entries.filter((entry) => (filter === "all" || entry.status === filter) && matches(entry, text));
+  const shown = offered.filter((entry) => matchesPicks(entry.key, picks as Picks));
+  const narrowed = text !== "" || anyPick();
+  renderFacets(offered.map((entry) => entry.key));
+  byId("gallery-count").textContent = narrowed ? `${shown.length} of ${counts.total} match` : `${counts.built} of ${counts.total} built`;
   groups.replaceChildren();
   const devices = shown.filter((entry) => !("shelf" in entry));
   for (const { id, title } of FAMILIES) {
@@ -268,7 +315,7 @@ function renderGallery() {
     section.append(el("h3", { textContent: title }), el("div", { className: "tiles" }, ...members.map(tile)));
     groups.append(section);
   }
-  if (filter !== "planned") {
+  if (filter !== "planned" && !anyPick()) {
     const parts = Object.values(PARTS).filter((part) => part.kind !== "board" && matches({ key: part.id, name: part.name } as CatalogueEntry, text));
     if (parts.length) {
       const section = el("section");
@@ -281,9 +328,9 @@ function renderGallery() {
   for (const { id, title } of SHELVES) {
     const members = shown.filter((entry): entry is Shelved => "shelf" in entry && entry.shelf === id);
     if (members.length === 0) continue;
-    const shelf = fold(title, members.length, id, text !== "", (body) => {
+    const shelf = fold(title, members.length, id, narrowed, (body) => {
       for (const [heading, machines] of byHeading(members)) {
-        const family = fold(heading, machines.length, `${id}/${heading}`, text !== "", (tiles) => tiles.append(el("div", { className: "tiles" }, ...machines.map(tile))));
+        const family = fold(heading, machines.length, `${id}/${heading}`, narrowed, (tiles) => tiles.append(el("div", { className: "tiles" }, ...machines.map(tile))));
         family.dataset.testid = "gallery-family";
         body.append(family);
       }
@@ -293,7 +340,7 @@ function renderGallery() {
     shelf.dataset.count = String(members.length);
     groups.append(shelf);
   }
-  if (shown.length === 0) groups.append(el("p", { className: "empty", textContent: "Nothing has that name." }));
+  if (shown.length === 0) groups.append(el("p", { className: "empty", textContent: "Nothing matches." }));
 }
 search.addEventListener("input", renderGallery);
 renderGallery();

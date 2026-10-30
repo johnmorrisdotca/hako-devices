@@ -3,10 +3,23 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { DEVICES } from "../src/catalogue.ts";
-import { readWishlist } from "./wishlist-read.ts";
+import { readTags, readWishlist } from "./wishlist-read.ts";
+
+interface Raw {
+  key: string;
+  name: string;
+  brand: string;
+  family: string;
+  year: number | null;
+  dimensionsMm: number[] | null;
+  formFactorGroup: string;
+  phase: number;
+  status: string;
+}
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const { planned, covered } = readWishlist(JSON.parse(readFileSync(join(root, "data", "wishlist.json"), "utf8")), new Set(DEVICES.map((device) => device.key)));
+const data = JSON.parse(readFileSync(join(root, "data", "wishlist.json"), "utf8")) as Raw[];
+const { planned, covered } = readWishlist(data, new Set(DEVICES.map((device) => device.key)));
 const lines = (list: readonly unknown[]) => list.map((entry) => `  ${JSON.stringify(entry)},`).join("\n");
 writeFileSync(
   join(root, "src", "wishlist.ts"),
@@ -41,5 +54,57 @@ export const PLANNED: readonly PlannedDevice[] = [
 ${lines(planned)}
 ];
 `,
+);
+writeFileSync(
+  join(root, "src", "tag-data.ts"),
+  `// Every machine's tags, from data/wishlist.json by scripts/make-wishlist.ts. Do not edit: run \`pnpm wishlist\`.
+export const TAG_DATA: Readonly<Record<string, Readonly<Partial<Record<string, readonly string[]>>>>> = {
+${Object.entries(readTags(data)).map(([key, tags]) => `  ${JSON.stringify(key)}: ${JSON.stringify(tags)},`).join("\n")}
+};
+`,
+);
+
+// docs/wishlist.md: the counts, and the machines by phase. The words around them are written by hand.
+const PHASES: Readonly<Record<number, string>> = { 1: "Retro phones and PDAs", 2: "Game consoles", 3: "Retro home computers", 4: "Apple", 5: "Microsoft", 6: "What is built today", 7: "Raspberry Pi" };
+const builtGroups = new Set(data.filter((entry) => entry.status === "built").map((entry) => entry.formFactorGroup));
+const shapes = (rows: readonly Raw[]) => new Set(rows.filter((entry) => entry.status === "planned" && !builtGroups.has(entry.formFactorGroup)).map((entry) => entry.formFactorGroup)).size;
+const sized = (rows: readonly Raw[]) => rows.filter((entry) => entry.dimensionsMm).length;
+const groupBy = <K,>(rows: readonly Raw[], by: (entry: Raw) => K) => {
+  const found = new Map<K, Raw[]>();
+  for (const entry of rows) found.set(by(entry), [...(found.get(by(entry)) ?? []), entry]);
+  return found;
+};
+const phases = Object.keys(PHASES).map(Number);
+const of = (phase: number) => data.filter((entry) => entry.phase === phase);
+const countLines = ["## Counts", "", "| Phase | Group | Machines | Shapes to build | With a sourced size |", "|---|---|---:|---:|---:|"];
+for (const phase of phases) {
+  countLines.push(`| **${phase}** | **${PHASES[phase]}** | **${of(phase).length}** | **${shapes(of(phase))}** | **${sized(of(phase))}** |`);
+  const rows = [...groupBy(of(phase), (entry) => ([1, 2, 3].includes(phase) ? entry.brand : entry.family))].sort((a, b) => b[1].length - a[1].length);
+  for (const [name, list] of rows) countLines.push(`|  | ${name} | ${list.length} | ${shapes(list)} | ${sized(list)} |`);
+}
+countLines.push(`|  | **Total** | **${data.length}** | **${shapes(data)}** | **${sized(data)}** |`);
+const machineLines = ["## The machines", ""];
+for (const phase of phases) {
+  machineLines.push(`### Phase ${phase}: ${PHASES[phase]} (${of(phase).length} machines, ${shapes(of(phase))} shapes to build)`, "");
+  const rows = [...groupBy(of(phase), (entry) => `${entry.brand}|${entry.family}`)].sort(([a], [b]) => (a < b ? -1 : 1));
+  for (const [id, list] of rows) {
+    const [brand, family] = id.split("|");
+    machineLines.push(`**${family.includes(brand) || [4, 5, 6, 7].includes(phase) ? family : `${brand} ${family}`}** (${list.length} machines, ${shapes(list)} shapes)`, "");
+    const named = [...list].sort((a, b) => (a.year ?? 9999) - (b.year ?? 9999) || (a.name < b.name ? -1 : 1)).map((entry) => {
+      const dated = entry.year && !entry.name.includes(String(entry.year)) ? `${entry.name} (${entry.year})` : entry.name;
+      return entry.status === "built" ? `${dated} *built*` : dated;
+    });
+    machineLines.push(`${named.join(", ")}.`, "");
+  }
+}
+const docPath = join(root, "docs", "wishlist.md");
+const doc = readFileSync(docPath, "utf8");
+const built = data.filter((entry) => entry.status === "built").length;
+writeFileSync(
+  docPath,
+  doc
+    .replace(/\*\*\d+ machines\. \d+ distinct shapes still to build\. \d+ entries are already built([^]*?) \d+ entries have a sourced size; the other \d+ are/, (_all, words: string) => `**${data.length} machines. ${shapes(data)} distinct shapes still to build. ${built} entries are already built${words} ${sized(data)} entries have a sourced size; the other ${data.length - sized(data)} are`)
+    .replace(/## Counts\n[^]*?(?=\nA shape shared across two rows)/, countLines.join("\n") + "\n")
+    .replace(/## The machines\n[^]*$/, machineLines.join("\n")),
 );
 console.log(`wishlist: ${planned.length} planned, ${covered.length} covered by a built mesh`);

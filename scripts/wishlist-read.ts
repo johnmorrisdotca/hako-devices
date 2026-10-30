@@ -21,7 +21,14 @@ export interface CoveredEntry {
   status: "built";
 }
 
-const SHELF_OF_PHASE: Readonly<Record<number, string>> = { 1: "phones", 2: "consoles", 3: "computers", 4: "apple", 5: "microsoft" };
+const SHELF_OF_PHASE: Readonly<Record<number, string>> = { 1: "phones", 2: "consoles", 3: "computers", 4: "apple", 5: "microsoft", 7: "raspberry-pi" };
+
+/** The tags of every machine, built ones too, for src/tag-data.ts: the facts that stay facts when the sizes and sources stay in data/. */
+export function readTags(data: unknown): Record<string, Record<string, readonly string[]>> {
+  const tags: Record<string, Record<string, readonly string[]>> = {};
+  for (const raw of data as (RawEntry & { tags: Record<string, readonly string[]> })[]) tags[raw.key] = { maker: [raw.brand], ...raw.tags };
+  return tags;
+}
 
 interface RawEntry {
   key: string;

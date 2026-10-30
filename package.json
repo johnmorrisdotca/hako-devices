@@ -47,6 +47,11 @@
       "import": "./dist/build/index.js",
       "default": "./dist/build/index.js"
     },
+    "./tags": {
+      "types": "./dist/tags.d.ts",
+      "import": "./dist/tags.js",
+      "default": "./dist/tags.js"
+    },
     "./element": {
       "types": "./dist/element.d.ts",
       "import": "./dist/element.js",

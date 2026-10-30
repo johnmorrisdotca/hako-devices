@@ -35,6 +35,16 @@ catalogueCounts().total > 1000; // true
 
 Machines on the list carry a `shelf` (`SHELVES`: Apple, Microsoft, Game consoles, Retro phones and PDAs, Retro home computers), a `maker` and a `family`, and `headingOf(entry)` names the family on its shelf ("Nintendo DS"). The demo's gallery groups them that way.
 
+Every machine has tags, in `@johnmorrisdotca/hako-devices/tags`, its own entry point because the table is large: `FACETS` (brand, type, decade, CPU maker, CPU, cores, memory, screen, ports, parts), `tagsOf(key)`, `matchesPicks(key, picks)` and `facetCounts(keys, picks)`, with `facetOrder(facet, counts)` for reading them out. A fact with no source is absent, never guessed, so a CPU filter leaves out machines whose CPU nobody has sourced yet.
+
+```ts
+import { catalogue } from "@johnmorrisdotca/hako-devices";
+import { matchesPicks } from "@johnmorrisdotca/hako-devices/tags";
+
+const intelLaptops = catalogue().filter(({ key }) => matchesPicks(key, { type: ["Laptop"], cpuMaker: ["Intel"] }));
+intelLaptops.length > 0; // true
+```
+
 A real machine a built mesh covers is built, and `<hako-device key="mac-pro-2019">` draws that mesh. A planned one shows the one "Coming soon" picture.
 
 ## Finding the key for a real machine

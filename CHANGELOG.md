@@ -8,6 +8,8 @@ All notable changes to this project are written here. The format follows
 
 ### Added
 
+- `@johnmorrisdotca/hako-devices/tags`: every machine's brand, type and decade, and CPU, cores, memory, screen, ports and parts where a source gives them, with `matchesPicks` and `facetCounts` to filter by them. The gallery has a filter for each.
+- The Raspberry Pi line that is not drawn yet is on the list.
 - `SHELVES` and `headingOf`, and a `shelf` and `maker` on every machine on the list. The gallery groups the list by shelf and family, and opens them on demand.
 
 ## [0.1.0] - Not released

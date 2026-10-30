@@ -1,7 +1,8 @@
 // The demo in a real browser: no console or policy error, the gallery, the styles, the builder, the lineup, the live screen, and every device reaching its 3D view.
 import { expect, type Page, test } from "@playwright/test";
 import { DEVICES } from "../src/catalogue.ts";
-import { catalogueCounts, COVERED, headingOf, PLANNED } from "../src/index.ts";
+import { catalogue, catalogueCounts, COVERED, headingOf, PLANNED } from "../src/index.ts";
+import { matchesPicks } from "../src/tags.ts";
 
 const URL = "/hako-devices/";
 
@@ -335,6 +336,33 @@ test("a live screen takes words and a canvas", async ({ page, browserName }, inf
   await page.waitForTimeout(400);
   const painted = await device.screenshot();
   expect(Buffer.compare(changed, painted)).not.toBe(0);
+  expect(problems).toEqual([]);
+});
+
+test("filters by brand, CPU maker and decade narrow the whole catalogue, and clear", async ({ page }) => {
+  const problems = watch(page);
+  await page.goto(URL);
+  await page.locator('[data-testid="filter-all"]').click();
+  const open = (facet: string) => page.locator(`[data-testid="gallery-facet"][data-facet="${facet}"] summary`).click();
+  const chip = (facet: string, value: string) => page.locator(`[data-testid="facet-chip"][data-facet="${facet}"][data-value="${value}"]`);
+  await open("maker");
+  await chip("maker", "Apple").click();
+  await open("cpuMaker");
+  await chip("cpuMaker", "Motorola").click();
+  const picks = { maker: ["Apple"], cpuMaker: ["Motorola"] };
+  const expected = catalogue().filter((entry) => matchesPicks(entry.key, picks));
+  expect(expected.length).toBeGreaterThan(10);
+  await expect(page.locator('[data-testid="gallery-count"]')).toContainText(`${expected.length} of`);
+  await expect(page.locator('[data-testid="tile"]')).toHaveCount(expected.length);
+  await expect(chip("maker", "Apple")).toHaveAttribute("aria-pressed", "true");
+  // another brand stays on offer, so a second can be added
+  await expect(chip("maker", "Raspberry Pi")).toHaveCount(0);
+  await page.locator('[data-testid="facet-clear"]').click();
+  await expect(page.locator('[data-testid="facet-clear"]')).toHaveCount(0);
+  await expect(page.locator('[data-testid="gallery-count"]')).toContainText("built");
+  await open("type");
+  await chip("type", "Single-board computer").click();
+  await expect(page.locator('[data-testid="tile"][data-key="rpi-zero"]')).toContainText("Raspberry Pi Zero");
   expect(problems).toEqual([]);
 });
 
