@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'none'" />
+    <title>Hako Devices</title>
+    <meta name="description" content="Line drawings and 3D views of computers, boards, hats, NAS boxes, tablets and more, as a web component, with a typed way to assemble machines from parts." />
+    <link rel="icon" href="assets/parts/pi-zero-2w.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">
+        <h1>Hako Devices <span class="kanji" lang="ja">箱</span></h1>
+        <p class="pitch">Line drawings and 3D views of computers, boards, hats, NAS boxes and tablets, that you drop into a page and assemble from parts.</p>
+      </div>
+      <nav class="links" aria-label="Sections">
+        <a href="#builder">Build</a>
+        <a href="#lineup">To scale</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#screen">Live screen</a>
+        <a href="docs/index.html">Docs</a>
+        <a href="https://github.com/johnmorrisdotca/hako-devices">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero panel" aria-labelledby="hero-title">
+        <div class="hero-view">
+          <hako-device id="hero" key="pi4-pitft" fireflies data-testid="hero-device"></hako-device>
+        </div>
+        <div class="hero-side">
+          <h2 id="hero-title">One device, large</h2>
+          <p class="note">It starts as its drawing and becomes the 3D view without a jump. Drag to turn it, or use the arrow keys; double-click or Home puts it back.</p>
+          <div class="chips" id="hero-chips" role="group" aria-label="Pick a device"></div>
+          <pre class="code" id="hero-code"><code></code></pre>
+        </div>
+      </section>
+
+      <section class="panel" id="builder" aria-labelledby="builder-title">
+        <h2 id="builder-title">Build a computer from parts</h2>
+        <p class="note">Pick a board, a case and a hat. Every choice is checked for fit by real sizes and mount types, and one description makes the mesh and the drawing.</p>
+        <div class="builder">
+          <form class="builder-form" id="builder-form">
+            <label>Board <select id="pick-board" data-testid="pick-board"></select></label>
+            <label>Case <select id="pick-case" data-testid="pick-case"></select></label>
+            <label>Hat <select id="pick-hat" data-testid="pick-hat"></select></label>
+            <label>Screen module <select id="pick-screen" data-testid="pick-screen"></select></label>
+            <label>Cooler <select id="pick-cooler" data-testid="pick-cooler"></select></label>
+            <label class="check"><input type="checkbox" id="pick-solder" data-testid="pick-solder" /> Solder a header on</label>
+            <label>Your own print <input type="text" id="pick-print" maxlength="40" placeholder="At your own risk" data-testid="pick-print" /></label>
+            <div class="presets" id="builder-presets" role="group" aria-label="Machines people have built"></div>
+          </form>
+          <div class="builder-view">
+            <div class="builder-stage" id="builder-stage"></div>
+            <ul class="issues" id="builder-issues" role="status" data-testid="builder-issues"></ul>
+            <p class="size" id="builder-size" data-testid="builder-size"></p>
+          </div>
+          <div class="builder-code">
+            <div class="tabs" role="tablist" aria-label="Code to copy" id="code-tabs"></div>
+            <pre class="code"><code id="builder-code" data-testid="builder-code"></code></pre>
+            <button type="button" class="btn" id="builder-copy">Copy</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="lineup" aria-labelledby="lineup-title">
+        <h2 id="lineup-title">To scale</h2>
+        <p class="note">Each drawing fills its own picture by default. With <code>scale="real"</code> machines stand side by side at their true relative size on one baseline, and the lines keep the same width at any size.</p>
+        <div class="lineup-controls">
+          <label>Machines <input type="text" id="lineup-keys" value="pi-zero-bare,pi-zero,pi5,pi4-pitft,nas-1bay,nas-2bay,mac-mini,ipad-mini,iphone" data-testid="lineup-keys" /></label>
+          <label>Pixels a millimetre <select id="lineup-unit" data-testid="lineup-unit">
+              <option value="0.5">0.5</option>
+              <option value="1" selected>1</option>
+              <option value="1.5">1.5</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+          </select></label>
+        </div>
+        <hako-lineup id="lineup-view" keys="pi-zero-bare,pi-zero,pi5,pi4-pitft,nas-1bay,nas-2bay,mac-mini,ipad-mini,iphone" unit="1" ruler="200" labels data-testid="lineup"></hako-lineup>
+      </section>
+
+      <section class="panel" id="gallery" aria-labelledby="gallery-title">
+        <div class="gallery-head">
+          <h2 id="gallery-title">Gallery</h2>
+          <p class="count" id="gallery-count" role="status" data-testid="gallery-count"></p>
+        </div>
+        <div class="gallery-tools">
+          <label class="search">Search <input type="search" id="gallery-search" placeholder="MacBook, Pi 4, NAS" autocomplete="off" data-testid="gallery-search" /></label>
+          <div class="seg" role="group" aria-label="Show" id="gallery-filter"></div>
+          <div class="seg" role="group" aria-label="Drawing style" id="gallery-style"></div>
+        </div>
+        <div id="gallery-groups"></div>
+      </section>
+
+      <section class="panel" id="screen" aria-labelledby="screen-title">
+        <h2 id="screen-title">A live screen</h2>
+        <p class="note">Paint a device's screen with your own words or your own canvas, as often as you like.</p>
+        <div class="screen-demo">
+          <hako-device id="screen-device" key="pi4-pitft" spin="off" data-testid="screen-device"></hako-device>
+          <form class="builder-form" id="screen-form">
+            <label>Device <select id="screen-pick" data-testid="screen-pick"></select></label>
+            <label>Title <input type="text" id="screen-title-input" value="Good evening" maxlength="40" data-testid="screen-title-input" /></label>
+            <label>Line <input type="text" id="screen-line-input" value="Three screens are on" maxlength="60" /></label>
+            <button type="button" class="btn" id="screen-canvas" data-testid="screen-canvas">Paint a canvas instead</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="dialog" id="device-dialog" data-testid="device-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-head">
+        <h2 id="dialog-title"></h2>
+        <button type="button" class="btn" id="dialog-close" data-testid="dialog-close">Close</button>
+      </div>
+      <div class="dialog-view" id="dialog-view"></div>
+      <dl class="facts" id="dialog-facts"></dl>
+      <pre class="code"><code id="dialog-code"></code></pre>
+    </dialog>
+
+    <footer class="foot">
+      <p>MIT licence. Product names appear only as plain descriptive words. All trademarks belong to their owners, and this project is not affiliated with any of them. No logo or brand printing is drawn on any device.</p>
+    </footer>
+    <script type="module" src="js/demo.js"></script>
+  </body>
+</html>
