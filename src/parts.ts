@@ -145,7 +145,7 @@ const HEADER_B: HeaderMount = { kind: "soldered", bx: 32.5, bz: 52.5 };
 
 /** The tall sockets of a full-size board at the right-hand edge. */
 const sockets = (ethernet: number, usb: readonly [number, number]): TallZone[] => [
-  { what: "the network socket", rect: [64, ethernet - 8, 87.5, ethernet + 8], top: 14.9 },
+  { what: "the network socket", rect: [66.5, ethernet - 8, 87.5, ethernet + 8], top: 14.9 },
   { what: "the USB sockets", rect: [70, usb[0] - 6.6, 87.5, usb[0] + 6.6], top: 17.1 },
   { what: "the USB sockets", rect: [70, usb[1] - 6.6, 87.5, usb[1] + 6.6], top: 17.1 },
 ];

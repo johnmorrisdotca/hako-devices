@@ -38,6 +38,7 @@ test("a case fits only the sockets it is cut for", () => {
   fails({ board: "pi3b", case: "armor" }, "case-wrong-board");
   fails({ board: "pi5", case: "argon" }, "case-wrong-board");
   fails({ board: "pi4", case: "unipi" }, "case-wrong-board");
+  fails({ board: "cm4-io", case: "armor" }, "case-too-small");
   assert.ok(check({ board: "pi3b", case: "plate" }).ok);
   assert.ok(check({ board: "cm4-io", case: "plate" }).ok);
 });
