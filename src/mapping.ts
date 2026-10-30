@@ -82,7 +82,7 @@ export function piKey(model: string, panel: unknown = ""): string | null {
 /** A NAS series' picture: its bays. A number is its series then a two-digit year (DS1515+ is series 15). A 6- or 8-bay shows the 5-bay one; a series not listed the 4-bay one. */
 const SERIES_BAYS: Readonly<Record<string, number>> = { "1": 1, "2": 2, "3": 2, "4": 4, "6": 5, "7": 2, "8": 5, "9": 4, "10": 5, "15": 5, "16": 5, "18": 5 };
 
-/** A NAS's key from its model name ("DS718+", "RS820RP+"), with or without its maker's name; null when it is not one. */
+/** A NAS's key from its model name ("DS923+", "RS820RP+"), with or without its maker's name; null when it is not one. */
 export function nasKey(name: string): string | null {
   const model = text(name).replace(/^synology\s+/i, "").toUpperCase();
   if (!/^(DS|RS)\d{2,4}[A-Z+]*$/.test(model)) return null;
