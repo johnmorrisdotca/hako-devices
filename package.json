@@ -1,0 +1,126 @@
+{
+  "name": "@johnmorrisdotca/hako-devices",
+  "version": "0.1.0",
+  "description": "Hako Devices 箱: line drawings and 3D views of computers, single-board boards, hats, NAS boxes, tablets and more, as a web component, with a typed way to assemble machines from parts. No logos. three.js is a peer dependency.",
+  "keywords": [
+    "3d",
+    "svg",
+    "glb",
+    "gltf",
+    "three",
+    "web-component",
+    "custom-element",
+    "devices",
+    "computers",
+    "single-board-computer",
+    "hat",
+    "nas",
+    "tablet",
+    "line-drawing",
+    "typescript"
+  ],
+  "homepage": "https://johnmorrisdotca.github.io/hako-devices/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnmorrisdotca/hako-devices.git"
+  },
+  "bugs": {
+    "url": "https://github.com/johnmorrisdotca/hako-devices/issues"
+  },
+  "author": "John Morris",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "./dist/element.js"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./build": {
+      "types": "./dist/build/index.d.ts",
+      "import": "./dist/build/index.js",
+      "default": "./dist/build/index.js"
+    },
+    "./element": {
+      "types": "./dist/element.d.ts",
+      "import": "./dist/element.js",
+      "default": "./dist/element.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js",
+      "default": "./dist/react.js"
+    },
+    "./assets/*": "./dist/assets/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "LICENSES",
+    "NOTICE.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig.json && node scripts/make-assets.ts",
+    "assets": "node scripts/make-assets.ts",
+    "lint": "eslint .",
+    "typecheck": "tsc -p tsconfig.check.json && tsc -p tsconfig.tools.json && tsc -p tsconfig.demo.json",
+    "test": "node --test test/*.test.ts",
+    "test:package": "pnpm build && node scripts/check-package.ts",
+    "test:readme": "pnpm build && node scripts/check-readme-examples.ts",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build && node scripts/check-package.ts",
+    "verify": "pnpm check && node scripts/check-readme-examples.ts && pnpm test:demo",
+    "prepublishOnly": "pnpm check",
+    "site": "pnpm build && node scripts/site.ts",
+    "dev": "pnpm site && node scripts/dev.ts",
+    "test:demo": "pnpm site && playwright test",
+    "screenshots": "pnpm site && node scripts/screenshots.ts"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "three": ">=0.170.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "three": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@playwright/test": "1.64.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "0.186.0",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "three": "0.186.1",
+    "typescript": "^5.9.0",
+    "typescript-eslint": "^8.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@10.11.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
