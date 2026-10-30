@@ -45,8 +45,7 @@ test("the code that draws has no mark in it", () => {
 
 test("nothing private: no project word, no owner's address, no home, in the source or the demo", () => {
   const banned = /hotaru|hotarutv|\bowner's\b|the owner|10\.0\.0\.|192\.168\.|relay's|\/Users\/john|Projects\/backups/i;
-  // docs/wishlist.md and data/ come from the list's own maker, and are read as they are
-  const docs = walk("docs").filter((file) => file.endsWith(".md") && !file.endsWith("wishlist.md"));
+  const docs = [...walk("docs").filter((file) => file.endsWith(".md")), "data/wishlist.json"];
   for (const file of [...walk("src"), ...walk("demo"), ...docs, "README.md", "NOTICE.md", "CONTRIBUTING.md", "SECURITY.md"]) {
     const text = readFileSync(file, "utf8");
     assert.ok(!banned.test(text), `${file}: ${banned.exec(text)?.[0]}`);

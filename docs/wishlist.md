@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-30.
 
-**1408 machines. 661 distinct shapes still to build. 104 entries are already built: the 55 drawings in hotaru, plus the real models those meshes cover. 532 entries have a sourced size; the other 876 are `null` on purpose.**
+**1408 machines. 661 distinct shapes still to build. 104 entries are already built: the 55 devices in this package, plus the real models those meshes cover. 532 entries have a sourced size; the other 876 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -128,12 +128,12 @@ A shape shared across two rows is counted in each row, so a column of sub-rows c
 - A size from a source that gave inches is converted and rounded to 0.1 mm, so it can sit a millimetre off the metric figure.
 - `dimensionsSource` is the page the size was read from. `null` size means no source was used: nothing here is guessed.
 - `formFactorGroup` names the body. It is a first pass, made from model names and, for old Macs, the form factor on Apple's pages. Machines with the same outside size can still differ in ports or cameras; look before sharing a mesh. Groups in phases 1 and 2 are judged from the family and any published sizes.
-- `status` is `built` for hotaru's drawings (phase 6, with their hotaru key) and for real models a built mesh covers (phase 4, noted). Generic drawings such as `pc-tower` and `client-browser` are in phase 6 only because they exist; the brief says generic PCs are not wanted.
+- `status` is `built` for this package's devices (phase 6, with their key) and for real models a built mesh covers (phase 4, noted). Generic drawings such as `pc-tower` and `client-browser` are in phase 6 only because they exist.
 - `notes` flags anything unconfirmed. Search for "unconfirmed" and "not confirmed".
 
 ## Sources and their limits
 
-**Apple sizes: one decision for the owner.** Apple's spec pages are the best source for its machines: names, years and sizes for almost everything back to 1984. But [Apple's site terms](https://www.apple.com/legal/internet-services/terms/site.html) say no content may be copied or republished, and that data sheets are for personal, non-commercial use and not to be copied or posted on a networked computer. This package is public, so Apple's figures are **not** in this file. Apple's pages were read to check names, years and Wikipedia's figures, and their addresses are in `notes`. Sizes in the file come from Wikipedia. Whether single published measurements may be used is the owner's call. If yes, the gap fills in one run.
+**Apple sizes.** Apple's spec pages are the best source for its machines: names, years and sizes for almost everything back to 1984. But [Apple's site terms](https://www.apple.com/legal/internet-services/terms/site.html) say no content may be copied or republished, and that data sheets are for personal, non-commercial use and not to be copied or posted on a networked computer. This package is public, so Apple's figures are **not** in this file. Apple's pages were read to check names, years and Wikipedia's figures, and their addresses are in `notes`. Sizes in the file come from Wikipedia.
 
 Apple in this file: 780 machines, 290 with a Wikipedia size, 490 without.
 

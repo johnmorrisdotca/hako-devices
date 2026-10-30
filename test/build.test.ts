@@ -18,7 +18,7 @@ function glbJson(bytes: Uint8Array): { nodes: { name: string; scale?: number[]; 
   return JSON.parse(new TextDecoder().decode(bytes.subarray(20, 20 + length)));
 }
 
-test("the owner's example builds one mesh and one drawing", () => {
+test("the README's example builds one mesh and one drawing", () => {
   const machine = build({ board: "pi4", case: "armor", hat: "pitft-28" });
   assert.ok(machine.report.ok);
   assert.ok(machine.glb().bytes.byteLength > 1000);

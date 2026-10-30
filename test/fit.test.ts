@@ -15,7 +15,7 @@ const warns = (d: Description, code: FitCode) => {
   assert.ok(report.issues.some((issue) => issue.code === code && issue.level === "warning"), `${code} in ${JSON.stringify(report.issues)}`);
 };
 
-test("the owner's three machines fit", () => {
+test("the three presets of real machines fit", () => {
   assert.deepEqual(codes({ board: "pi4", case: "armor", hat: "pitft-28" }), []);
   assert.deepEqual(codes({ board: "pi3b", hat: "oled-bonnet" }), []);
   assert.deepEqual(codes({ board: "pi-zero-2w", case: "unipi" }), []);
