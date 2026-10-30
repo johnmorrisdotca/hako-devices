@@ -1,0 +1,23 @@
+// The pure core: the catalogue, the parts and how they fit, the camera rule, the mapping helpers, the screen pictures, the styles and the scale. No three.js, no DOM.
+export { baseInfo, check, DEVICES, deviceByKey, FAMILIES, PRESETS } from "./catalogue.ts";
+export type { Device, FamilyId, Port, PortKind } from "./catalogue.ts";
+export { checkWith } from "./fit.ts";
+export type { BaseInfo, BaseLookup, Description, FitCode, FitIssue, FitReport, Print } from "./fit.ts";
+export { BOARDS, CASES, COOLERS, DRIVES, FIT_TOLERANCE, HATS, HAT_STACK, MAX_RISER, PARTS, partsOfKind, SCREENS, STANDS } from "./parts.ts";
+export type { BoardId, BoardPart, BoardShape, CaseId, CasePart, CoolerId, CoolerPart, DriveId, DrivePart, HatId, HatPart, Part, Rect, ScreenId, ScreenInfo, ScreenPart, Size, StandId, StandPart, TallZone } from "./parts.ts";
+export { FOV_DEG, frameFor } from "./framing.ts";
+export type { Framing, Vec3 } from "./framing.ts";
+export { CROSSFADE_MS, DRAWING_HOLD_MS, REDUCED_FADE_MS, revealDelay } from "./crossfade.ts";
+export { tiltMode, tiltTurn } from "./tilt.ts";
+export type { Reading, TiltMode } from "./tilt.ts";
+export { cleanPanelFace, deviceKeyOf, macKey, nasKey, pcKey, piBoard, piKey } from "./mapping.ts";
+export type { DeviceFacts, PanelFace } from "./mapping.ts";
+export { cleanStyle, DEFAULT_STYLE, drawingFile, inStyle, STYLE_NAMES, STYLES, withHeavierLine } from "./styles.ts";
+export type { DrawingStyle, StyleName } from "./styles.ts";
+export { artMetrics, parseUnit, plantMetrics, readMetrics, realPlacement, realScaleSvg } from "./scale.ts";
+export type { ArtMetrics, RealPlacement } from "./scale.ts";
+export { COMING_SOON_SVG } from "./placeholder.ts";
+export { PLANNED } from "./wishlist.ts";
+export type { PlannedDevice } from "./wishlist.ts";
+export { catalogue, catalogueCounts, statusOf } from "./status.ts";
+export type { CatalogueEntry } from "./status.ts";

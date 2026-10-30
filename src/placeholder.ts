@@ -1,0 +1,4 @@
+// The one "Coming soon" picture: a plain dashed box and two words, the same for every machine that has no mesh yet. No shape is drawn for any of them.
+
+/** The placeholder's drawing, in the drawings' own picture size and colours. */
+export const COMING_SOON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" width="320" height="220" fill="none" stroke-linejoin="round" stroke-linecap="round"><rect x="96" y="58" width="128" height="84" rx="10" fill="#0e1522" stroke="#8fa1b8" stroke-width="1.6" stroke-dasharray="6 6"/><path d="M110 122h60M110 110h36" stroke="#8fa1b8" stroke-width="1.6" opacity=".55"/><circle cx="204" cy="78" r="4" stroke="#8fa1b8" stroke-width="1.2" opacity=".7"/><text x="160" y="172" fill="#9aa6b8" font-family="system-ui,sans-serif" font-size="14" font-weight="600" text-anchor="middle">Coming soon</text></svg>\n`;
