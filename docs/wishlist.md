@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-30.
 
-**1408 machines. 661 distinct shapes still to build. 104 entries are already built: the 55 devices in this package, plus the real models those meshes cover. 532 entries have a sourced size; the other 876 are `null` on purpose.**
+**1466 machines. 704 distinct shapes still to build. 104 entries are already built: the 55 devices in this package, plus the real models those meshes cover. 848 entries have a sourced size; the other 618 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -62,36 +62,39 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **780** | **228** | **290** |
-|  | Power Mac | 92 | 19 | 42 |
-|  | Performa | 71 | 9 | 0 |
-|  | MacBook Pro | 69 | 14 | 32 |
-|  | PowerBook | 61 | 15 | 25 |
-|  | iMac | 61 | 14 | 5 |
+| **4** | **Apple** | **838** | **271** | **603** |
+|  | Power Mac | 92 | 19 | 88 |
+|  | Performa | 71 | 9 | 71 |
+|  | MacBook Pro | 69 | 14 | 64 |
+|  | PowerBook | 61 | 15 | 60 |
+|  | iMac | 61 | 14 | 35 |
 |  | iPhone | 55 | 36 | 55 |
 |  | iPad | 46 | 16 | 46 |
-|  | Display | 38 | 37 | 2 |
-|  | iPod | 37 | 22 | 13 |
+|  | Display | 38 | 37 | 28 |
+|  | iPod | 37 | 22 | 20 |
 |  | Apple Watch | 36 | 8 | 0 |
 |  | MacBook Air | 28 | 5 | 12 |
-|  | Workgroup Server | 21 | 10 | 0 |
-|  | iBook | 20 | 5 | 1 |
-|  | Mac mini | 19 | 2 | 6 |
-|  | Compact Mac | 16 | 5 | 10 |
-|  | AirPort | 13 | 5 | 0 |
-|  | MacBook | 13 | 4 | 3 |
+|  | Printer | 26 | 16 | 0 |
+|  | Keyboard | 25 | 23 | 0 |
+|  | Workgroup Server | 21 | 10 | 16 |
+|  | iBook | 20 | 5 | 2 |
+|  | Mac mini | 19 | 2 | 18 |
+|  | Compact Mac | 16 | 5 | 12 |
+|  | AirPort | 13 | 5 | 4 |
+|  | MacBook | 13 | 4 | 13 |
 |  | LC | 12 | 3 | 12 |
-|  | Quadra | 11 | 7 | 9 |
+|  | Quadra | 11 | 7 | 11 |
 |  | Xserve | 11 | 2 | 0 |
-|  | Mac Pro | 10 | 3 | 5 |
-|  | Macintosh II | 8 | 4 | 7 |
-|  | Apple TV | 7 | 4 | 0 |
-|  | Time Capsule | 5 | 2 | 0 |
+|  | Mac Pro | 10 | 3 | 8 |
+|  | Macintosh II | 8 | 4 | 8 |
+|  | Apple TV | 7 | 4 | 5 |
+|  | AirPods | 7 | 4 | 0 |
+|  | Time Capsule | 5 | 2 | 1 |
 |  | Mac Studio | 4 | 0 | 4 |
-|  | eMac | 4 | 1 | 0 |
-|  | Centris | 3 | 2 | 0 |
+|  | eMac | 4 | 1 | 3 |
+|  | Centris | 3 | 2 | 3 |
 |  | HomePod | 3 | 2 | 0 |
-|  | Network Server | 3 | 1 | 0 |
+|  | Network Server | 3 | 1 | 3 |
 |  | Portable | 2 | 1 | 1 |
 |  | Vision Pro | 1 | 1 | 0 |
 | **5** | **Microsoft** | **73** | **39** | **43** |
@@ -109,16 +112,16 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Surface table | 2 | 2 | 0 |
 |  | Surface Laptop SE | 1 | 1 | 0 |
 |  | Surface Neo | 1 | 1 | 0 |
-| **6** | **What is built today** | **55** | **0** | **10** |
+| **6** | **What is built today** | **55** | **0** | **13** |
 |  | Raspberry Pi | 20 | 0 | 0 |
 |  | Clients | 8 | 0 | 0 |
-|  | Generic | 6 | 0 | 3 |
-|  | Mac | 5 | 0 | 2 |
+|  | Generic | 6 | 0 | 4 |
+|  | Mac | 5 | 0 | 3 |
 |  | iPad | 5 | 0 | 5 |
 |  | Small PC | 5 | 0 | 0 |
 |  | NAS | 5 | 0 | 0 |
-|  | iPhone | 1 | 0 | 0 |
-|  | **Total** | **1408** | **661** | **532** |
+|  | iPhone | 1 | 0 | 1 |
+|  | **Total** | **1466** | **704** | **848** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -133,9 +136,9 @@ A shape shared across two rows is counted in each row, so a column of sub-rows c
 
 ## Sources and their limits
 
-**Apple sizes.** Apple's spec pages are the best source for its machines: names, years and sizes for almost everything back to 1984. But [Apple's site terms](https://www.apple.com/legal/internet-services/terms/site.html) say no content may be copied or republished, and that data sheets are for personal, non-commercial use and not to be copied or posted on a networked computer. This package is public, so Apple's figures are **not** in this file. Apple's pages were read to check names, years and Wikipedia's figures, and their addresses are in `notes`. Sizes in the file come from Wikipedia.
+**Apple sizes.** Apple's spec pages are the best source for its machines: names, years and sizes for almost everything back to 1984. The project decided on 2026-10-30 to use them, as a free public fan site with nothing for sale. [Apple's site terms](https://www.apple.com/legal/internet-services/terms/site.html) still restrict copying, so this is a decision and not a licence from Apple. Each figure names its page in `dimensionsSource`, so it can be found and removed if Apple asks. Where Wikipedia already gave a size it stays; a missing one was filled from Apple's page when the page gave one size for that model. Pages that give several sizes and no way to tell which is which were left `null`.
 
-Apple in this file: 780 machines, 290 with a Wikipedia size, 490 without.
+Apple in this file: 869 machines, 316 with a size from Apple, 305 from Wikipedia, 248 without.
 
 | Source | What it gave | Licence or terms | Reused here? |
 |---|---|---|---|
@@ -144,20 +147,20 @@ Apple in this file: 780 machines, 290 with a Wikipedia size, 490 without.
 | [AppleDB](https://github.com/littlebyteorg/appledb) | Apple device names, model ids, release dates; the Mac file sampled had no sizes | MIT | Free to reuse. Not copied here; a good cross-check for names and dates later |
 | [Game Boy hardware database](https://gbhwdb.gekkio.fi/) | Board and part data for Game Boys | CC BY-SA 4.0 (per the site; source code MIT) | Not used, and not checked for outer sizes |
 | [MobileModels](https://github.com/KHwang9883/MobileModels) | Phone model names, mostly recent | CC BY-NC-SA 4.0 | No: non-commercial |
-| Apple support pages | Names, years, sizes | Copying restricted (see above) | Read to check only |
+| Apple support pages | Names, years, sizes | Copying restricted (see above) | Yes, by decision: single figures, each linked from its entry |
 | [EveryMac](https://everymac.com/) | Mac specifications | Its pages say copying and scraping are not allowed without permission | Not used |
 | [GSMArena](https://www.gsmarena.com/) | Phone sizes | Its terms forbid reproducing information without permission | Not used |
-| iFixit | Teardowns | User content CC BY-NC-SA | Not used: non-commercial |
+| iFixit | Teardowns, photos, some measurements | User content CC BY-NC-SA | Allowed as a reference for where parts sit and for a size. Nothing is copied into this file: that licence is non-commercial and cannot sit under MIT |
 
 No open dataset of outer dimensions for consoles or old phones was found. One search is not proof that none exists.
 
 ## Where this is incomplete
 
-- **Years:** 66 entries carry a year that was not found in a source, or none. Most are BlackBerry, Siemens and Ericsson phones with no article of their own, Palm variants, and some older Apple displays. Those years came from memory and are flagged in `notes`. Years for Macs with no year on Apple's page were read from the Wikipedia list of Mac models by eye; they are not flagged.
+- **Years:** 87 entries carry a year that was not found in a source, or none. Most are BlackBerry, Siemens and Ericsson phones with no article of their own, Palm variants, some older Apple displays, and Apple keyboards and printers. Those years came from memory and are flagged in `notes`. Years for Macs with no year on Apple's page were read from the Wikipedia list of Mac models by eye; they are not flagged.
 - **Sizes for phases 1 to 3 are thin.** Palm m100 and Zire families, most Treo models, early BlackBerrys, Game & Watch (none at all), NES, Super NES, Genesis, the original PlayStation, Xbox 360, Virtual Boy, the Atari 2600 and most home computers have no size here. Wikipedia gave none and no other reusable source was found.
-- **A family article's size is applied to its models.** Where an article gives one size for a series, the models it names share it. Where Apple's page disagreed by more than 2 mm for a model, the note says so, or the size was dropped (PowerBook 180c, 190cs, Duo 270c, 280, 280c, 2300c).
+- **A family article's size is applied to its models.** Where an article gives one size for a series, the models it names share it. Where Apple's page disagreed by more than 2 mm for a model, the note says so. A few sizes dropped for that reason (PowerBook 180c, 190cs, Duo 270c, 280, 280c, 2300c) now come from Apple's page where it gave one.
 - **Axes:** many Wikipedia sizes have no labels. Those are assigned by shape and say so in `notes`. A few console sizes differ between an article's infobox and its text (32X, PlayStation 3 Slim); notes name them.
-- **Not listed from Apple:** printers, scanners, cameras, keyboards, mice, AirPods, AirTag, Pencil, docks and adapters. Apple's older monitors are listed by name only.
+- **Not listed from Apple:** scanners, cameras, mice, AirTag, Pencil, docks and adapters. Keyboards, printers and AirPods are listed with years and no sizes yet; AirPods Pro 3 and the USB-C AirPods Max are left out until checked. Apple's older monitors are listed by name only.
 - **Consoles:** body variants are listed where they are well known, not exhaustively: Genesis has three models here, but regional and third-party ones (Aiwa, Pioneer, Hi-Saturn, V-Saturn), PlayStation 2 slim revisions, Xbox and Wii U revisions, and the mini Famicom are left out or folded into their parent. Colour variants and special editions are not separate.
 - **Phones:** "the famous ones" is a judgement. Nokia, Motorola, Sony Ericsson, Siemens and Ericsson are selections, not complete lines. Palm and Handspring are close to complete, Sidekick is complete per its article's table.
 - **Home computers:** a selection, as asked. MSX is a standard with many makers; six machines stand in for it.
@@ -812,7 +815,11 @@ TI-99/4A (1981).
 
 Yamaha CX5M (1984).
 
-### Phase 4: Apple (780 machines, 228 shapes to build)
+### Phase 4: Apple (838 machines, 271 shapes to build)
+
+**AirPods** (7 machines, 4 shapes)
+
+AirPods (1st generation) (2016), AirPods (2nd generation) (2019), AirPods Pro (1st generation) (2019), AirPods Max (2020), AirPods (3rd generation) (2021), AirPods Pro (2nd generation) (2022), AirPods 4 (2024).
 
 **AirPort** (13 machines, 5 shapes)
 
@@ -841,6 +848,10 @@ AppleColor High-Resolution RGB Monitor (1987), Apple High-Resolution Monochrome 
 **HomePod** (3 machines, 2 shapes)
 
 HomePod (1st generation) (2018), HomePod mini (2020), HomePod (2nd generation) (2023).
+
+**Keyboard** (25 machines, 23 shapes)
+
+Lisa Keyboard (1983), Macintosh Keyboard (1984), Macintosh Numeric Keypad (1984), Apple Desktop Bus Keyboard (1986), Macintosh Plus Keyboard (1986), Apple Extended Keyboard (1987), Apple Keyboard (M0116) (1987), Numeric Keypad II (1987), Apple Extended Keyboard II (1990), Apple Keyboard II (1990), Apple Adjustable Keyboard (1993), AppleDesign Keyboard (1993), Newton Keyboard (1994), Twentieth Anniversary Macintosh Keyboard (1997), Apple USB Keyboard (1998), Apple Pro Keyboard (2000), Apple Keyboard (white, 109 keys) (2003), Apple Wireless Keyboard (2003), Apple Keyboard (aluminium, 109 and 78 keys) (2007), Apple Wireless Keyboard (2007), Magic Keyboard (2015), Smart Keyboard for iPad (2015), Magic Keyboard with Numeric Keypad (2017), Magic Keyboard for iPad (2020), Magic Keyboard with Touch ID (2021).
 
 **LC** (12 machines, 3 shapes)
 
@@ -893,6 +904,10 @@ Power Macintosh 6100/60 (1994), Power Macintosh 6100/60AV (1994), Power Macintos
 **PowerBook** (61 machines, 15 shapes)
 
 Macintosh PowerBook 100 (1991), Macintosh PowerBook 140 (1991), Macintosh PowerBook 170 (1991), Macintosh PowerBook 145 (1992), Macintosh PowerBook 160 (1992), Macintosh PowerBook 180 (1992), Macintosh PowerBook Duo 210 (1992), Macintosh PowerBook Duo 230 (1992), Macintosh PowerBook 145B (1993), Macintosh PowerBook 165 (1993), Macintosh PowerBook 165c (1993), Macintosh PowerBook 180c (1993), Macintosh PowerBook Duo 250 (1993), Macintosh PowerBook Duo 270c (1993), Macintosh PowerBook 150 (1994), Macintosh PowerBook 520 (1994), Macintosh PowerBook 520c (1994), Macintosh PowerBook 540 (1994), Macintosh PowerBook 540c (1994), Macintosh PowerBook Duo 280 (1994), Macintosh PowerBook Duo 280c (1994), Macintosh PowerBook 190 (1995), Macintosh PowerBook 190cs (1995), Macintosh PowerBook 500 with PowerPC (1995), Macintosh PowerBook 5300/100 (1995), Macintosh PowerBook 5300c/100 (1995), Macintosh PowerBook 5300ce/117 (1995), Macintosh PowerBook 5300cs/100 (1995), Macintosh PowerBook 550c (1995), Macintosh PowerBook Duo 2300c/100 (1995), Macintosh PowerBook 1400c/117 (1996), Macintosh PowerBook 1400c/133 (1996), Macintosh PowerBook 1400cs/117 (1996), Macintosh PowerBook 1400c/166 (1997), Macintosh PowerBook 1400cs/133 (1997), Macintosh PowerBook 1400cs/166 (1997), Macintosh PowerBook 2400c/180 (1997), Macintosh PowerBook 3400c/180 (1997), Macintosh PowerBook 3400c/200 (1997), Macintosh PowerBook 3400c/240 (1997), PowerBook G3 (1997), PowerBook G3 Series (1998), PowerBook (FireWire) (2000), PowerBook G4 (2001), PowerBook G4 (Gigabit Ethernet) (2001), PowerBook G4 (1GHz/867MHz) (2002), PowerBook G4 (DVI) (2002), PowerBook G4 (12-inch DVI) (2003), PowerBook G4 (12-inch) (2003), PowerBook G4 (15-inch FW800) (2003), PowerBook G4 (17-inch 1.33GHz) (2003), PowerBook G4 (17-inch) (2003), PowerBook G4 (12-inch 1.33GHz) (2004), PowerBook G4 (15-inch 1.5/1.33GHz) (2004), PowerBook G4 (17-inch 1.5GHz) (2004), PowerBook G4 (12-inch 1.5 GHz, 15-inch 1.67/1.5GHz, 17-inch 1.67 GHz) (12-inch) (2005), PowerBook G4 (12-inch 1.5 GHz, 15-inch 1.67/1.5GHz, 17-inch 1.67 GHz) (15-inch) (2005), PowerBook G4 (12-inch 1.5 GHz, 15-inch 1.67/1.5GHz, 17-inch 1.67 GHz) (17-inch) (2005), PowerBook G4 (12-inch, 15-inch, 17-inch Double-Layer SD) (12-inch) (2005), PowerBook G4 (12-inch, 15-inch, 17-inch Double-Layer SD) (15-inch) (2005), PowerBook G4 (12-inch, 15-inch, 17-inch Double-Layer SD) (17-inch) (2005).
+
+**Printer** (26 machines, 16 shapes)
+
+Silentype (1979), Apple Dot Matrix Printer (1982), ImageWriter (1983), ImageWriter II (1985), LaserWriter (1985), LaserWriter Plus (1986), ImageWriter LQ (1987), LaserWriter IINT (1988), LaserWriter IINTX (1988), LaserWriter IISC (1988), LaserWriter IIf (1991), LaserWriter IIg (1991), Personal LaserWriter NTR (1992), Portable StyleWriter (1993), Color StyleWriter Pro (1994), LaserWriter 8500 (1997), Color StyleWriter 1500, Color StyleWriter 2200, Color StyleWriter 2400, Color StyleWriter 2500, Color StyleWriter 4100, Color StyleWriter 4500, Color StyleWriter 6500, StyleWriter, StyleWriter 1200, StyleWriter II.
 
 **Quadra** (11 machines, 7 shapes)
 

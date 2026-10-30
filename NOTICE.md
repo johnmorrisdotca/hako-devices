@@ -8,7 +8,7 @@ Product names appear only as plain descriptive words, in the catalogue, the part
 
 ## The list of machines
 
-`data/wishlist.json` and `docs/wishlist.md` list machines still to come. Where an entry gives a size, it was read from Wikipedia, whose text is under the [Creative Commons Attribution-ShareAlike 4.0 licence](https://creativecommons.org/licenses/by-sa/4.0/), and the entry names its page in `dimensionsSource`, entry by entry. Those sizes keep that licence as far as it covers them, and they are not under this package's MIT licence. Neither file is in the published package, which carries only the names of the machines (`src/wishlist.ts`), under which no shape is drawn.
+`data/wishlist.json` and `docs/wishlist.md` list machines still to come. Where an entry gives a size, it was read from Wikipedia or from Apple's spec pages, and the entry names its page in `dimensionsSource`, entry by entry. Wikipedia's text is under the [Creative Commons Attribution-ShareAlike 4.0 licence](https://creativecommons.org/licenses/by-sa/4.0/); those sizes keep that licence as far as it covers them. Apple's pages are Apple's, under [its site terms](https://www.apple.com/legal/internet-services/terms/site.html), and are used by this project's decision, with no licence from Apple. Neither kind of size is under this package's MIT licence. Neither file is in the published package, which carries only the names of the machines (`src/wishlist.ts`), under which no shape is drawn.
 
 ## What it uses
 
