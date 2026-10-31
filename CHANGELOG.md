@@ -6,6 +6,12 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-30
+
+### Changed
+
+- The package's description and keywords now name the machines it covers, so a search on npm finds them. No code changed.
+
 ## [0.1.0] - 2026-10-30
 
 The first version.
