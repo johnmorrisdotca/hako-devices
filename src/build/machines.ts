@@ -44,12 +44,6 @@ const front = (kind: MarkKind, x: number, y: number, w: number, h: number, more:
 const top = (kind: MarkKind, x: number, y: number, w: number, h: number, more: Partial<Mark> = {}): Mark => ({ face: "top", kind, x, y, w, h, ...more });
 
 export const MACHINES: Readonly<Record<string, MachineSpec>> = {
-  "macintosh-128k": {
-    size: [243.8, 276.9, 345.4],
-    body: "plastic-grey",
-    corner: 8,
-    marks: [front("panel", 0, 236, 205, 165), front("screen", 0, 240, 175, 130), front("dark", 0, 130, 225, 2), front("slot", 42, 82, 92, 6), front("dark", 0, 28, 225, 2)],
-  },
   "game-boy-dmg-01": {
     size: [90, 32, 148],
     body: "plastic-grey",

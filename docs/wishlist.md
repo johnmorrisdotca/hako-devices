@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-30.
 
-**1767 machines. 901 distinct shapes still to build. 258 entries are already built: the 129 devices in this package, plus the real models those meshes cover. 923 entries have a sourced size; the other 844 are `null` on purpose.**
+**1767 machines. 871 distinct shapes still to build. 492 entries are already built: the 162 devices in this package, plus the real models those meshes cover. 924 entries have a sourced size; the other 843 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -62,9 +62,9 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **884** | **260** | **659** |
-|  | Power Mac | 92 | 18 | 90 |
-|  | Performa | 71 | 9 | 71 |
+| **4** | **Apple** | **884** | **230** | **660** |
+|  | Power Mac | 92 | 0 | 90 |
+|  | Performa | 71 | 0 | 71 |
 |  | MacBook Pro | 69 | 13 | 64 |
 |  | iMac | 63 | 0 | 62 |
 |  | PowerBook | 61 | 15 | 60 |
@@ -77,29 +77,29 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Printer | 26 | 16 | 0 |
 |  | Keyboard | 25 | 23 | 0 |
 |  | Mac mini | 21 | 0 | 20 |
-|  | Workgroup Server | 21 | 10 | 16 |
+|  | Workgroup Server | 21 | 0 | 16 |
 |  | iBook | 20 | 5 | 2 |
-|  | Compact Mac | 16 | 4 | 12 |
+|  | Compact Mac | 16 | 0 | 13 |
 |  | Mouse | 14 | 12 | 3 |
 |  | AirPort | 13 | 5 | 4 |
 |  | MacBook | 13 | 4 | 13 |
-|  | LC | 12 | 3 | 12 |
+|  | LC | 12 | 0 | 12 |
 |  | Mac Pro | 12 | 0 | 12 |
 |  | AirPods | 12 | 0 | 9 |
-|  | Quadra | 11 | 7 | 11 |
+|  | Quadra | 11 | 0 | 11 |
 |  | Xserve | 11 | 2 | 0 |
 |  | Mac Studio | 8 | 0 | 8 |
-|  | Macintosh II | 8 | 4 | 8 |
+|  | Macintosh II | 8 | 0 | 8 |
 |  | Apple TV | 7 | 3 | 5 |
 |  | Time Capsule | 5 | 2 | 1 |
 |  | Camera | 5 | 3 | 0 |
-|  | eMac | 4 | 1 | 3 |
+|  | eMac | 4 | 0 | 3 |
 |  | Pencil | 4 | 4 | 3 |
-|  | Centris | 3 | 2 | 3 |
+|  | Centris | 3 | 0 | 3 |
 |  | HomePod | 3 | 2 | 0 |
 |  | Network Server | 3 | 1 | 3 |
 |  | Trackpad | 3 | 3 | 0 |
-|  | Portable | 2 | 1 | 1 |
+|  | Portable | 2 | 0 | 1 |
 |  | AirTag | 2 | 1 | 2 |
 |  | Remote | 2 | 2 | 0 |
 |  | Vision Pro | 1 | 0 | 0 |
@@ -157,7 +157,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-|  | **Total** | **1767** | **901** | **923** |
+|  | **Total** | **1767** | **871** | **924** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -854,7 +854,7 @@ TI-99/4A (1981).
 
 Yamaha CX5M (1984).
 
-### Phase 4: Apple (884 machines, 260 shapes to build)
+### Phase 4: Apple (884 machines, 230 shapes to build)
 
 **AirPods** (12 machines, 0 shapes)
 
@@ -880,13 +880,13 @@ Apple Watch (1st generation) (38 mm) (2015), Apple Watch (1st generation) (42 mm
 
 QuickTake 150 (1995), QuickTake 200 (1996), iSight (external) (2003), QuickTake 100, QuickTake 100 Plus.
 
-**Centris** (3 machines, 2 shapes)
+**Centris** (3 machines, 0 shapes)
 
-Macintosh Centris 610 (1993), Macintosh Centris 660AV (1993), Centris 650 (1994).
+Macintosh Centris 610 (1993) *built*, Macintosh Centris 660AV (1993) *built*, Centris 650 (1994) *built*.
 
-**Compact Mac** (16 machines, 4 shapes)
+**Compact Mac** (16 machines, 0 shapes)
 
-Apple Lisa (1983), Apple Lisa 2 (1984), Macintosh 128K (1984) *built*, Macintosh 128K (revised) (1984), Macintosh 512K (1984), Macintosh XL (1985), Macintosh 512Ke (1986), Macintosh Plus (1986), Macintosh Plus (Platinum) (1987), Macintosh SE (1987), Macintosh SE FDHD (1989), Macintosh SE/30 (1989), Macintosh Classic (1990), Macintosh Classic II (1991), Macintosh Color Classic (1993), Macintosh Color Classic II (1993).
+Apple Lisa (1983) *built*, Apple Lisa 2 (1984) *built*, Macintosh 128K (1984) *built*, Macintosh 128K (revised) (1984) *built*, Macintosh 512K (1984) *built*, Macintosh XL (1985) *built*, Macintosh 512Ke (1986) *built*, Macintosh Plus (1986) *built*, Macintosh Plus (Platinum) (1987) *built*, Macintosh SE (1987) *built*, Macintosh SE FDHD (1989) *built*, Macintosh SE/30 (1989) *built*, Macintosh Classic (1990) *built*, Macintosh Classic II (1991) *built*, Macintosh Color Classic (1993) *built*, Macintosh Color Classic II (1993) *built*.
 
 **Display** (38 machines, 37 shapes)
 
@@ -900,9 +900,9 @@ HomePod (1st generation) (2018), HomePod mini (2020), HomePod (2nd generation) (
 
 Lisa Keyboard (1983), Macintosh Keyboard (1984), Macintosh Numeric Keypad (1984), Apple Desktop Bus Keyboard (1986), Macintosh Plus Keyboard (1986), Apple Extended Keyboard (1987), Apple Keyboard (M0116) (1987), Numeric Keypad II (1987), Apple Extended Keyboard II (1990), Apple Keyboard II (1990), Apple Adjustable Keyboard (1993), AppleDesign Keyboard (1993), Newton Keyboard (1994), Twentieth Anniversary Macintosh Keyboard (1997), Apple USB Keyboard (1998), Apple Pro Keyboard (2000), Apple Keyboard (white, 109 keys) (2003), Apple Wireless Keyboard (2003), Apple Keyboard (aluminium, 109 and 78 keys) (2007), Apple Wireless Keyboard (2007), Magic Keyboard (2015), Smart Keyboard for iPad (2015), Magic Keyboard with Numeric Keypad (2017), Magic Keyboard for iPad (2020), Magic Keyboard with Touch ID (2021).
 
-**LC** (12 machines, 3 shapes)
+**LC** (12 machines, 0 shapes)
 
-Macintosh LC (1990), Macintosh LC II (1992), Macintosh LC 475 (1993), Macintosh LC 520 (1993), Macintosh LC III (1993), Macintosh LC III+ (1993), Macintosh TV (1993), Macintosh LC 475/605 (1994), Macintosh LC 550 (1994), Macintosh LC 575 (1994), Macintosh LC 630 (1994), Macintosh LC 580 (1995).
+Macintosh LC (1990) *built*, Macintosh LC II (1992) *built*, Macintosh LC 475 (1993) *built*, Macintosh LC 520 (1993) *built*, Macintosh LC III (1993) *built*, Macintosh LC III+ (1993) *built*, Macintosh TV (1993) *built*, Macintosh LC 475/605 (1994) *built*, Macintosh LC 550 (1994) *built*, Macintosh LC 575 (1994) *built*, Macintosh LC 630 (1994) *built*, Macintosh LC 580 (1995) *built*.
 
 **Mac Pro** (12 machines, 0 shapes)
 
@@ -928,9 +928,9 @@ MacBook Air (Early 2008), MacBook Air (Late 2008), MacBook Air (Mid 2009), MacBo
 
 MacBook Pro (15-inch Glossy) (2006), MacBook Pro (17-inch) (2006) *built*, MacBook Pro (Late 2006) (15-inch), MacBook Pro (Late 2006) (17-inch), MacBook Pro (original) (2006), MacBook Pro (Late 2007, 2.4/2.2GHz) (15-inch), MacBook Pro (Late 2007, 2.4/2.2GHz) (17-inch), MacBook Pro (Mid 2007, 2.4/2.2GHz) (15-inch), MacBook Pro (Mid 2007, 2.4/2.2GHz) (17-inch), MacBook Pro (15-inch, Late 2008), MacBook Pro (Early 2008, 15-inch), MacBook Pro (Early 2008, 17-inch), MacBook Pro (13-inch, Mid 2009), MacBook Pro (15-inch, Mid 2009) and (15-inch, 2.53 GHz, Mid 2009), MacBook Pro (17-inch, Early 2009), MacBook Pro (17-inch, Mid 2009), MacBook Pro (13-inch, Mid 2010), MacBook Pro (15-inch, Mid 2010), MacBook Pro (17-inch, Mid 2010), MacBook Pro (13-inch, Early 2011), MacBook Pro (13-inch, Late 2011), MacBook Pro (15-inch, Early 2011), MacBook Pro (15-inch, Late 2011), MacBook Pro (17-inch, Early 2011), MacBook Pro (17-inch, Late 2011), MacBook Pro (13-inch, Mid 2012), MacBook Pro (15-inch, Mid 2012), MacBook Pro (Retina, 13-inch, Late 2012), MacBook Pro (Retina, 15-inch, Mid 2012), MacBook Pro (Retina, 13-inch, Early 2013), MacBook Pro (Retina, 13-inch, Late 2013), MacBook Pro (Retina, 15-inch, Early 2013), MacBook Pro (Retina, 15-inch, Late 2013), MacBook Pro (Retina, 13-inch, Mid 2014), MacBook Pro (Retina, 15-inch, Mid 2014), MacBook Pro (Retina, 13-inch, Early 2015), MacBook Pro (Retina, 15-inch, Mid 2015), MacBook Pro (13-inch, 2016, Four Thunderbolt 3 ports), MacBook Pro (13-inch, 2016, Two Thunderbolt 3 ports), MacBook Pro (15-inch, 2016), MacBook Pro (13-inch, 2017, Four Thunderbolt 3 ports), MacBook Pro (13-inch, 2017, Two Thunderbolt 3 ports), MacBook Pro (15-inch, 2017), MacBook Pro (13-inch, 2018, Four Thunderbolt 3 ports), MacBook Pro (15-inch, 2018), MacBook Pro (13-inch, 2019, Four Thunderbolt 3 ports), MacBook Pro (13-inch, 2019, Two Thunderbolt 3 ports), MacBook Pro (15-inch, 2019), MacBook Pro (16-inch, 2019), MacBook Pro (13-inch, 2020, Four Thunderbolt 3 ports), MacBook Pro (13-inch, 2020, Two Thunderbolt 3 ports), MacBook Pro (13-inch, M1, 2020), MacBook Pro (14-inch, 2021) *built*, MacBook Pro (16-inch, 2021) *built*, MacBook Pro (13-inch, M2, 2022), MacBook Pro (14-inch, 2023) *built*, MacBook Pro (14-inch, M3 Pro or M3 Max, Nov 2023) *built*, MacBook Pro (14-inch, M3, Nov 2023) *built*, MacBook Pro (16-inch, 2023) *built*, MacBook Pro (16-inch, Nov 2023) *built*, MacBook Pro (14-inch, M4 Pro or M4 Max, 2024) *built*, MacBook Pro (14-inch, M4, 2024) *built*, MacBook Pro (16-inch, 2024) *built*, MacBook Pro (14-inch, M5) (2025) *built*, MacBook Pro (14-inch, M5 Pro or M5 Max) (2026) *built*, MacBook Pro (14-inch, M6) (2026) *built*, MacBook Pro (16-inch, M5 Pro or M5 Max) (2026) *built*, MacBook Pro with PROLED XDR Display (14-inch) (2026), MacBook Pro with PROLED XDR Display (16-inch) (2026).
 
-**Macintosh II** (8 machines, 4 shapes)
+**Macintosh II** (8 machines, 0 shapes)
 
-Macintosh II (1987), Macintosh IIx (1988), Macintosh IIci (1989), Macintosh IIcx (1989), Macintosh IIfx (1990), Macintosh IIsi (1990), Macintosh IIvi (1992), Macintosh IIvx (1992).
+Macintosh II (1987) *built*, Macintosh IIx (1988) *built*, Macintosh IIci (1989) *built*, Macintosh IIcx (1989) *built*, Macintosh IIfx (1990) *built*, Macintosh IIsi (1990) *built*, Macintosh IIvi (1992) *built*, Macintosh IIvx (1992) *built*.
 
 **Mouse** (14 machines, 12 shapes)
 
@@ -944,17 +944,17 @@ Network Server 500/132 (1996), Network Server 700/150 (1996), Network Server 700
 
 Apple Pencil (1st generation) (2015), Apple Pencil (2nd generation) (2018), Apple Pencil (USB-C) (2023), Apple Pencil Pro (2024).
 
-**Performa** (71 machines, 9 shapes)
+**Performa** (71 machines, 0 shapes)
 
-Macintosh Performa 200 (1992), Macintosh Performa 400 (1992), Macintosh Performa 600 and 600CD (1992), Macintosh Performa 250 (1993), Macintosh Performa 275 (1993), Macintosh Performa 405 (1993), Macintosh Performa 410 (1993), Macintosh Performa 430 (1993), Macintosh Performa 450 (1993), Macintosh Performa 460 (1993), Macintosh Performa 466 (1993), Macintosh Performa 467 (1993), Macintosh Performa 475 (1993), Macintosh Performa 476 (1993), Macintosh Performa 520 (1993), Macintosh Performa 550 (1993), Macintosh Performa 560 (1994), Macintosh Performa 575 (1994), Macintosh Performa 577 (1994), Macintosh Performa 578 (1994), Macintosh Performa 6110CD (1994), Macintosh Performa 6112CD (1994), Macintosh Performa 6115CD (1994), Macintosh Performa 6117CD (1994), Macintosh Performa 6118CD (1994), Macintosh Performa 630 and 630CD (1994), Macintosh Performa 635CD (1994), Macintosh Performa 636 and 636CD (1994), Macintosh Performa 637CD (1994), Macintosh Performa 638CD (1994), Macintosh Performa 5200CD (1995), Macintosh Performa 5210CD (1995), Macintosh Performa 5215CD (1995), Macintosh Performa 5220CD (1995), Macintosh Performa 5300CD (1995), Macintosh Performa 5320CD (1995), Macintosh Performa 580CD (1995), Macintosh Performa 588CD (1995), Macintosh Performa 6116CD (1995), Macintosh Performa 6200CD (1995), Macintosh Performa 6205CD (1995), Macintosh Performa 6210CD (1995), Macintosh Performa 6214CD (1995), Macintosh Performa 6216CD (1995), Macintosh Performa 6218CD (1995), Macintosh Performa 6220CD (1995), Macintosh Performa 6230CD (1995), Macintosh Performa 6300CD (1995), Macintosh Performa 630CD DOS Compatible (1995), Macintosh Performa 631CD (1995), Macintosh Performa 640CD DOS Compatible (1995), Macintosh Performa 5260/120 (1996), Macintosh Performa 5260CD (1996), Macintosh Performa 5270CD (1996), Macintosh Performa 5280 (1996), Macintosh Performa 5400/160 (1996), Macintosh Performa 5400/180 (1996), Macintosh Performa 5400CD (1996), Macintosh Performa 5410CD (1996), Macintosh Performa 5420CD (1996), Macintosh Performa 5430 (1996), Macintosh Performa 5440 (1996), Macintosh Performa 6260CD (1996), Macintosh Performa 6290CD (1996), Macintosh Performa 6310CD (1996), Macintosh Performa 6320CD (1996), Macintosh Performa 6360 (1996), Macintosh Performa 6400/180 (1996), Macintosh Performa 6400/200 (1996), Macintosh Performa 6410 (1996), Macintosh Performa 6420 (1996).
+Macintosh Performa 200 (1992) *built*, Macintosh Performa 400 (1992) *built*, Macintosh Performa 600 and 600CD (1992) *built*, Macintosh Performa 250 (1993) *built*, Macintosh Performa 275 (1993) *built*, Macintosh Performa 405 (1993) *built*, Macintosh Performa 410 (1993) *built*, Macintosh Performa 430 (1993) *built*, Macintosh Performa 450 (1993) *built*, Macintosh Performa 460 (1993) *built*, Macintosh Performa 466 (1993) *built*, Macintosh Performa 467 (1993) *built*, Macintosh Performa 475 (1993) *built*, Macintosh Performa 476 (1993) *built*, Macintosh Performa 520 (1993) *built*, Macintosh Performa 550 (1993) *built*, Macintosh Performa 560 (1994) *built*, Macintosh Performa 575 (1994) *built*, Macintosh Performa 577 (1994) *built*, Macintosh Performa 578 (1994) *built*, Macintosh Performa 6110CD (1994) *built*, Macintosh Performa 6112CD (1994) *built*, Macintosh Performa 6115CD (1994) *built*, Macintosh Performa 6117CD (1994) *built*, Macintosh Performa 6118CD (1994) *built*, Macintosh Performa 630 and 630CD (1994) *built*, Macintosh Performa 635CD (1994) *built*, Macintosh Performa 636 and 636CD (1994) *built*, Macintosh Performa 637CD (1994) *built*, Macintosh Performa 638CD (1994) *built*, Macintosh Performa 5200CD (1995) *built*, Macintosh Performa 5210CD (1995) *built*, Macintosh Performa 5215CD (1995) *built*, Macintosh Performa 5220CD (1995) *built*, Macintosh Performa 5300CD (1995) *built*, Macintosh Performa 5320CD (1995) *built*, Macintosh Performa 580CD (1995) *built*, Macintosh Performa 588CD (1995) *built*, Macintosh Performa 6116CD (1995) *built*, Macintosh Performa 6200CD (1995) *built*, Macintosh Performa 6205CD (1995) *built*, Macintosh Performa 6210CD (1995) *built*, Macintosh Performa 6214CD (1995) *built*, Macintosh Performa 6216CD (1995) *built*, Macintosh Performa 6218CD (1995) *built*, Macintosh Performa 6220CD (1995) *built*, Macintosh Performa 6230CD (1995) *built*, Macintosh Performa 6300CD (1995) *built*, Macintosh Performa 630CD DOS Compatible (1995) *built*, Macintosh Performa 631CD (1995) *built*, Macintosh Performa 640CD DOS Compatible (1995) *built*, Macintosh Performa 5260/120 (1996) *built*, Macintosh Performa 5260CD (1996) *built*, Macintosh Performa 5270CD (1996) *built*, Macintosh Performa 5280 (1996) *built*, Macintosh Performa 5400/160 (1996) *built*, Macintosh Performa 5400/180 (1996) *built*, Macintosh Performa 5400CD (1996) *built*, Macintosh Performa 5410CD (1996) *built*, Macintosh Performa 5420CD (1996) *built*, Macintosh Performa 5430 (1996) *built*, Macintosh Performa 5440 (1996) *built*, Macintosh Performa 6260CD (1996) *built*, Macintosh Performa 6290CD (1996) *built*, Macintosh Performa 6310CD (1996) *built*, Macintosh Performa 6320CD (1996) *built*, Macintosh Performa 6360 (1996) *built*, Macintosh Performa 6400/180 (1996) *built*, Macintosh Performa 6400/200 (1996) *built*, Macintosh Performa 6410 (1996) *built*, Macintosh Performa 6420 (1996) *built*.
 
-**Portable** (2 machines, 1 shapes)
+**Portable** (2 machines, 0 shapes)
 
-Macintosh Portable (1989), Macintosh Portable (backlit screen) (1991).
+Macintosh Portable (1989) *built*, Macintosh Portable (backlit screen) (1991) *built*.
 
-**Power Mac** (92 machines, 18 shapes)
+**Power Mac** (92 machines, 0 shapes)
 
-Power Macintosh 6100/60 (1994), Power Macintosh 6100/60AV (1994), Power Macintosh 7100/66 (1994), Power Macintosh 7100/66AV (1994), Power Macintosh 8100/110 (1994), Power Macintosh 8100/80 (1994), Power Macintosh 8100/80AV (1994), Power Macintosh 5200/75 LC (1995), Power Macintosh 5300/100 LC (1995), Power Macintosh 6100/66 (1995), Power Macintosh 6100/66 DOS Compatible (1995), Power Macintosh 6100/66AV (1995), Power Macintosh 6200/75 (1995), Power Macintosh 7100/80 (1995), Power Macintosh 7100/80AV (1995), Power Macintosh 7200/75 (1995), Power Macintosh 7200/90 (1995), Power Macintosh 7500/100 (1995), Power Macintosh 8100/100 (1995), Power Macintosh 8100/100AV (1995), Power Macintosh 8115/110 (1995), Power Macintosh 8500/120 (1995), Power Macintosh 9500/120 (1995), Power Macintosh 9500/132 (1995), Power Macintosh 9515/132 (1995), Power Macintosh 4400/160 (1996), Power Macintosh 5260/100 (1996), Power Macintosh 5260/120 (1996), Power Macintosh 5400/120 (1996), Power Macintosh 5400/180 (1996), Power Macintosh 6300/120 (1996), Power Macintosh 6300/160 (1996), Power Macintosh 6400/200 (1996), Power Macintosh 7200/120 (1996), Power Macintosh 7200/120 PC Compatible (1996), Power Macintosh 7215/90 (1996), Power Macintosh 7600/120 (1996), Power Macintosh 7600/132 (1996), Power Macintosh 8200/100 (1996), Power Macintosh 8200/120 (1996), Power Macintosh 8500/132 (1996), Power Macintosh 8500/150 (1996), Power Macintosh 8500/180 (1996), Power Macintosh 8515/120 (1996), Power Macintosh 9500/150 (1996), Power Macintosh 9500/180MP (1996), Power Macintosh 9500/200 (1996), Power Macintosh 4400/200 (1997), Power Macintosh 4400/200 PC Compatible (1997), Power Macintosh 5400/200 (1997), Power Macintosh 5500/225 (1997), Power Macintosh 5500/250 (1997), Power Macintosh 6500/225 (1997), Power Macintosh 6500/250 (1997), Power Macintosh 6500/275 (1997), Power Macintosh 6500/300 (1997), Power Macintosh 7220/200 (1997), Power Macintosh 7220/200 PC Compatible (1997), Power Macintosh 7300/166 (1997), Power Macintosh 7300/180 (1997), Power Macintosh 7300/180 PC Compatible (1997), Power Macintosh 7300/200 (1997), Power Macintosh 7600/200 (1997), Power Macintosh 8600/200 (1997), Power Macintosh 8600/250 (1997), Power Macintosh 8600/300 (1997), Power Macintosh 9600/200 (1997), Power Macintosh 9600/200MP (1997), Power Macintosh 9600/233 (1997), Power Macintosh 9600/300 (1997), Power Macintosh 9600/350 (1997), Power Macintosh G3 Desktop (1997), Power Macintosh G3 Mini Tower (1997), Twentieth Anniversary Macintosh (1997), Power Macintosh G3 All-In-One (1998), Power Mac G4 (AGP Graphics) (1999), Power Mac G4 (PCI Graphics) (1999), Power Macintosh G3 (Blue and White) (1999), Power Mac G4 (Cube) (2000), Power Mac G4 (Gigabit Ethernet) (2000), Power Mac G4 (Digital Audio) (2001), Power Mac G4 (Quicksilver) (2001), Power Mac G4 (Mirrored Drive Doors) (2002), Power Mac G4 (Quicksilver 2002), Power Mac G4 (FW800) (2003), Power Mac G4 (Mirrored Drive Doors 2003), Power Mac G5 (2003) *built*, Power Mac G5 (June 2004) *built*, Power Mac G5 (Late 2004) *built*, Developer Transition Kit (2005), Power Mac G5 (Early 2005) *built*, Power Mac G5 (Late 2005) *built*.
+Power Macintosh 6100/60 (1994) *built*, Power Macintosh 6100/60AV (1994) *built*, Power Macintosh 7100/66 (1994) *built*, Power Macintosh 7100/66AV (1994) *built*, Power Macintosh 8100/110 (1994) *built*, Power Macintosh 8100/80 (1994) *built*, Power Macintosh 8100/80AV (1994) *built*, Power Macintosh 5200/75 LC (1995) *built*, Power Macintosh 5300/100 LC (1995) *built*, Power Macintosh 6100/66 (1995) *built*, Power Macintosh 6100/66 DOS Compatible (1995) *built*, Power Macintosh 6100/66AV (1995) *built*, Power Macintosh 6200/75 (1995) *built*, Power Macintosh 7100/80 (1995) *built*, Power Macintosh 7100/80AV (1995) *built*, Power Macintosh 7200/75 (1995) *built*, Power Macintosh 7200/90 (1995) *built*, Power Macintosh 7500/100 (1995) *built*, Power Macintosh 8100/100 (1995) *built*, Power Macintosh 8100/100AV (1995) *built*, Power Macintosh 8115/110 (1995) *built*, Power Macintosh 8500/120 (1995) *built*, Power Macintosh 9500/120 (1995) *built*, Power Macintosh 9500/132 (1995) *built*, Power Macintosh 9515/132 (1995) *built*, Power Macintosh 4400/160 (1996) *built*, Power Macintosh 5260/100 (1996) *built*, Power Macintosh 5260/120 (1996) *built*, Power Macintosh 5400/120 (1996) *built*, Power Macintosh 5400/180 (1996) *built*, Power Macintosh 6300/120 (1996) *built*, Power Macintosh 6300/160 (1996) *built*, Power Macintosh 6400/200 (1996) *built*, Power Macintosh 7200/120 (1996) *built*, Power Macintosh 7200/120 PC Compatible (1996) *built*, Power Macintosh 7215/90 (1996) *built*, Power Macintosh 7600/120 (1996) *built*, Power Macintosh 7600/132 (1996) *built*, Power Macintosh 8200/100 (1996) *built*, Power Macintosh 8200/120 (1996) *built*, Power Macintosh 8500/132 (1996) *built*, Power Macintosh 8500/150 (1996) *built*, Power Macintosh 8500/180 (1996) *built*, Power Macintosh 8515/120 (1996) *built*, Power Macintosh 9500/150 (1996) *built*, Power Macintosh 9500/180MP (1996) *built*, Power Macintosh 9500/200 (1996) *built*, Power Macintosh 4400/200 (1997) *built*, Power Macintosh 4400/200 PC Compatible (1997) *built*, Power Macintosh 5400/200 (1997) *built*, Power Macintosh 5500/225 (1997) *built*, Power Macintosh 5500/250 (1997) *built*, Power Macintosh 6500/225 (1997) *built*, Power Macintosh 6500/250 (1997) *built*, Power Macintosh 6500/275 (1997) *built*, Power Macintosh 6500/300 (1997) *built*, Power Macintosh 7220/200 (1997) *built*, Power Macintosh 7220/200 PC Compatible (1997) *built*, Power Macintosh 7300/166 (1997) *built*, Power Macintosh 7300/180 (1997) *built*, Power Macintosh 7300/180 PC Compatible (1997) *built*, Power Macintosh 7300/200 (1997) *built*, Power Macintosh 7600/200 (1997) *built*, Power Macintosh 8600/200 (1997) *built*, Power Macintosh 8600/250 (1997) *built*, Power Macintosh 8600/300 (1997) *built*, Power Macintosh 9600/200 (1997) *built*, Power Macintosh 9600/200MP (1997) *built*, Power Macintosh 9600/233 (1997) *built*, Power Macintosh 9600/300 (1997) *built*, Power Macintosh 9600/350 (1997) *built*, Power Macintosh G3 Desktop (1997) *built*, Power Macintosh G3 Mini Tower (1997) *built*, Twentieth Anniversary Macintosh (1997) *built*, Power Macintosh G3 All-In-One (1998) *built*, Power Mac G4 (AGP Graphics) (1999) *built*, Power Mac G4 (PCI Graphics) (1999) *built*, Power Macintosh G3 (Blue and White) (1999) *built*, Power Mac G4 (Cube) (2000) *built*, Power Mac G4 (Gigabit Ethernet) (2000) *built*, Power Mac G4 (Digital Audio) (2001) *built*, Power Mac G4 (Quicksilver) (2001) *built*, Power Mac G4 (Mirrored Drive Doors) (2002) *built*, Power Mac G4 (Quicksilver 2002) *built*, Power Mac G4 (FW800) (2003) *built*, Power Mac G4 (Mirrored Drive Doors 2003) *built*, Power Mac G5 (2003) *built*, Power Mac G5 (June 2004) *built*, Power Mac G5 (Late 2004) *built*, Developer Transition Kit (2005) *built*, Power Mac G5 (Early 2005) *built*, Power Mac G5 (Late 2005) *built*.
 
 **PowerBook** (61 machines, 15 shapes)
 
@@ -964,9 +964,9 @@ Macintosh PowerBook 100 (1991), Macintosh PowerBook 140 (1991), Macintosh PowerB
 
 Silentype (1979), Apple Dot Matrix Printer (1982), ImageWriter (1983), ImageWriter II (1985), LaserWriter (1985), LaserWriter Plus (1986), ImageWriter LQ (1987), LaserWriter IINT (1988), LaserWriter IINTX (1988), LaserWriter IISC (1988), LaserWriter IIf (1991), LaserWriter IIg (1991), StyleWriter (1991), Personal LaserWriter NTR (1992), Portable StyleWriter (1993), StyleWriter II (1993), Color StyleWriter 2400 (1994), Color StyleWriter Pro (1994), Color StyleWriter 2200 (1995), StyleWriter 1200 (1995), Color StyleWriter 1500 (1996), Color StyleWriter 2500 (1996), Color StyleWriter 4100 (1997), Color StyleWriter 4500 (1997), Color StyleWriter 6500 (1997), LaserWriter 8500 (1997).
 
-**Quadra** (11 machines, 7 shapes)
+**Quadra** (11 machines, 0 shapes)
 
-Macintosh Quadra 700 (1991), Macintosh Quadra 900 (1991), Macintosh Quadra 950 (1992), Macintosh Quadra 605 (1993), Macintosh Quadra 610 (1993), Macintosh Quadra 650 (1993), Macintosh Quadra 660AV (1993), Macintosh Quadra 800 (1993), Macintosh Quadra 840AV (1993), Macintosh Quadra 610 DOS Compatible (1994), Macintosh Quadra 630 (1994).
+Macintosh Quadra 700 (1991) *built*, Macintosh Quadra 900 (1991) *built*, Macintosh Quadra 950 (1992) *built*, Macintosh Quadra 605 (1993) *built*, Macintosh Quadra 610 (1993) *built*, Macintosh Quadra 650 (1993) *built*, Macintosh Quadra 660AV (1993) *built*, Macintosh Quadra 800 (1993) *built*, Macintosh Quadra 840AV (1993) *built*, Macintosh Quadra 610 DOS Compatible (1994) *built*, Macintosh Quadra 630 (1994) *built*.
 
 **Remote** (2 machines, 2 shapes)
 
@@ -988,17 +988,17 @@ Magic Trackpad (1st generation) (2010), Magic Trackpad (2nd generation) (2015), 
 
 Apple Vision Pro (2024) *built*.
 
-**Workgroup Server** (21 machines, 10 shapes)
+**Workgroup Server** (21 machines, 0 shapes)
 
-Workgroup Server 60 (1993), Workgroup Server 60 (50/25 MHz) (1993), Workgroup Server 80 (1993), Workgroup Server 95 (1993), Workgroup Server 6150 (1994), Workgroup Server 8150 (1994), Workgroup Server 9150 (1994), Workgroup Server 6150/66 (1995), Workgroup Server 8150/110 (1995), Workgroup Server 9150/120 (1995), Workgroup Server 7250/120 (1996), Workgroup Server 8550/132 (1996), Workgroup Server 8550/200 (1996), Workgroup Server 7350/180 (1997), Workgroup Server 9650/233 (1997), Workgroup Server 9650/350 (1997), Macintosh Server G3 (1998), Macintosh Server G3 Blue and White (1999), Macintosh Server G4 (1999), Macintosh Server G4 Quicksilver (2001), Macintosh Server G4 MDD (2002).
+Workgroup Server 60 (1993) *built*, Workgroup Server 60 (50/25 MHz) (1993) *built*, Workgroup Server 80 (1993) *built*, Workgroup Server 95 (1993) *built*, Workgroup Server 6150 (1994) *built*, Workgroup Server 8150 (1994) *built*, Workgroup Server 9150 (1994) *built*, Workgroup Server 6150/66 (1995) *built*, Workgroup Server 8150/110 (1995) *built*, Workgroup Server 9150/120 (1995) *built*, Workgroup Server 7250/120 (1996) *built*, Workgroup Server 8550/132 (1996) *built*, Workgroup Server 8550/200 (1996) *built*, Workgroup Server 7350/180 (1997) *built*, Workgroup Server 9650/233 (1997) *built*, Workgroup Server 9650/350 (1997) *built*, Macintosh Server G3 (1998) *built*, Macintosh Server G3 Blue and White (1999) *built*, Macintosh Server G4 (1999) *built*, Macintosh Server G4 Quicksilver (2001) *built*, Macintosh Server G4 MDD (2002) *built*.
 
 **Xserve** (11 machines, 2 shapes)
 
 Xserve (2002), Xserve (Slot Load) (2003), Xserve G4 Cluster Node (2003), Xserve RAID (2003), Xserve G5 (2004), Xserve G5 Cluster Node (2004), Xserve RAID (SFP) (2004), Xserve (Late 2006), Xserve RAID (Early 2007), Xserve (Early 2008), Xserve (2009).
 
-**eMac** (4 machines, 1 shapes)
+**eMac** (4 machines, 0 shapes)
 
-eMac (2002), eMac (ATI Graphics) (2003), eMac (USB 2.0) (2004), eMac (2005).
+eMac (2002) *built*, eMac (ATI Graphics) (2003) *built*, eMac (USB 2.0) (2004) *built*, eMac (2005) *built*.
 
 **iBook** (20 machines, 5 shapes)
 

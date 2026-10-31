@@ -94,6 +94,28 @@ function drawMark(d: Drawing, mark: Mark, layer: number) {
   }
   const cols = mark.cols ?? 1;
   const rows = mark.rows ?? 1;
+  if (!mark.round && rows === 1 && cols > 10 && mark.h > mark.w * 2) {
+    // ribs: one thin line each
+    const pitch = mark.w + (mark.gap ?? 0);
+    const lines: [Vec3, Vec3][] = [];
+    for (let c = 0; c < cols; c++) {
+      const x = mark.x + (c - (cols - 1) / 2) * pitch;
+      lines.push([facePoint(mark.face, mark.at, x, mark.y - mark.h / 2, 0.1), facePoint(mark.face, mark.at, x, mark.y + mark.h / 2, 0.1)]);
+    }
+    d.lines(lines, { stroke: "#05080e", sw: 0.7 }, layer, n);
+    return;
+  }
+  if (!mark.round && cols === 1 && rows > 2) {
+    // grooves: one thin line each
+    const pitchY = mark.h + (mark.gapY ?? mark.gap ?? 0);
+    const lines: [Vec3, Vec3][] = [];
+    for (let row = 0; row < rows; row++) {
+      const y = mark.y + ((rows - 1) / 2 - row) * pitchY;
+      lines.push([facePoint(mark.face, mark.at, mark.x - mark.w / 2, y, 0.1), facePoint(mark.face, mark.at, mark.x + mark.w / 2, y, 0.1)]);
+    }
+    d.lines(lines, { stroke: "#05080e", sw: 0.7 }, layer, n);
+    return;
+  }
   if (cols * rows > 10 || (mark.round && cols * rows > 3)) {
     // a field of small marks: one dotted line a row, which costs far fewer bytes
     const pitch = mark.w + (mark.gap ?? 0);

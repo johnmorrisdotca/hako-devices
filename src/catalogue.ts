@@ -128,7 +128,6 @@ export const DEVICES: readonly Device[] = [
   whole("nas-5bay", "Five-bay NAS", "nas", [226, 223, 166], ports({ "usb-a": 3, ethernet: 2, esata: 1, power: 1 })),
   whole("nas-rack", "Rack NAS", "nas", [482, 460, 44], ports({ "usb-a": 2, ethernet: 4, power: 2 })),
 
-  whole("macintosh-128k", "Macintosh 128K", "classic-macs", [243.8, 276.9, 345.4], ports({ power: 1 })),
   whole("game-boy-dmg-01", "Game Boy (DMG-01)", "classics", [90, 32, 148], ports({ audio: 1 })),
   whole("nokia-3310", "Nokia 3310", "classics", [48, 22, 113], []),
   whole("palm-iii", "Palm III", "classics", [81, 18, 119], []),

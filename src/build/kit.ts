@@ -61,8 +61,8 @@ export const MATERIALS = {
   "shell-deep-blue": { color: "#5b84b4", metal: 0.65, rough: 0.34 },
   // the plastics and shells of the older Macs
   clear: { color: "#dfe7ee", metal: 0, rough: 0.08, alpha: 0.22 },
-  "plastic-beige": { color: "#cdc4a8", metal: 0, rough: 0.55 },
-  "plastic-platinum": { color: "#d6d3c6", metal: 0, rough: 0.5 },
+  "plastic-beige": { color: "#b3a988", metal: 0, rough: 0.55 },
+  "plastic-platinum": { color: "#bdb9aa", metal: 0, rough: 0.5 },
   "plastic-graphite": { color: "#3c4148", metal: 0.1, rough: 0.3 },
   "plastic-bondi": { color: "#2f7d8c", metal: 0.1, rough: 0.28 },
   "plastic-blue": { color: "#3f6fb0", metal: 0.1, rough: 0.3 },
