@@ -1047,9 +1047,9 @@ function lanBack(s: Faces<Socket>): Faces<Socket> {
     ...s,
     back: [
       ...(s.back ?? []),
-      ["rj45", 0, 40],
-      ["usb-a", 24, 40],
-      ["usb-a", -24, 40],
+      ["rj45", 0, 37],
+      ["usb-a", 24, 38],
+      ["usb-a", -24, 38],
     ],
   };
 }
