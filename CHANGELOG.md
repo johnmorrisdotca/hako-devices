@@ -6,6 +6,24 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- NeXT, on a shelf of its own: the NeXT Computer and NeXTcube, the NeXTstation and the MegaPixel Display as bodies, and the NeXTcube Turbo and NeXTstation Color, Turbo and Turbo Color they draw.
+- Every iMac body: G3 tray-loading and slot-loading, the G4 lamp in three sizes, the white G5 and Intel ones with and without a camera, aluminium, unibody, the thin edge, the iMac Pro, and the 24-inch with four ports or two.
+- Every Mac Pro body: the 2006 to 2012 tower, the 2013 cylinder, the steel towers and racks of 2019 and 2023, each with its own back. Every Mac mini body, and every Mac Studio chip Apple lists on the list.
+- The Macs before those: the Power Mac G4 Cube, the Twentieth Anniversary Macintosh, the eMac, compact Macs, the Lisa, the II, LC, Centris and Quadra lines, Performas, Power Macintosh towers and desktops, and the Power Mac G3 and G4. A body whose back no photograph showed has its back left plain, and its note says so.
+- `build/desks/`: a machine described as a list of pieces, one description for its mesh and its drawing.
+- `macKey` knows more identifiers, each giving the Mac its own body. A new `classic-macs` family holds the Macs before the iMac, and a `next` family the NeXT machines.
+
+### Changed
+
+- `mac-pro` is now the 2023 tower, and `mac-pro-2019` the 2019 one; `MacPro7,1` gives that. `macintosh-128k` and `power-mac-g5-2003` moved from `classics` to `classic-macs`.
+
+### Fixed
+
+- The Mac Studio and the small Mac mini had the wrong ports: on their sides, in the wrong places, and on the small mini a perforated back it does not have. They now follow Apple's pictures of each model's front and back. The Mac mini's flat body likewise. The Mac Pro's legs and handles are the right height, and its back has its real panel and ports.
+- The iMac 24-inch sat 18 mm too low in its panel, and had no ports on its back.
+
 ## [0.3.0] - 2026-10-31
 
 ### Added

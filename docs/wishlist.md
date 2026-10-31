@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2255 machines. 863 distinct shapes still to build. 998 entries are already built: the 238 devices in this package, plus the real models those meshes cover. 1305 entries have a sourced size; the other 950 are `null` on purpose.**
+**2260 machines. 863 distinct shapes still to build. 1003 entries are already built: the 238 devices in this package, plus the real models those meshes cover. 1305 entries have a sourced size; the other 955 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -62,11 +62,11 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **884** | **230** | **659** |
+| **4** | **Apple** | **889** | **230** | **659** |
 |  | Power Mac | 92 | 0 | 90 |
 |  | Performa | 71 | 0 | 71 |
 |  | MacBook Pro | 69 | 13 | 64 |
-|  | iMac | 63 | 0 | 62 |
+|  | iMac | 68 | 0 | 62 |
 |  | PowerBook | 61 | 15 | 60 |
 |  | iPhone | 55 | 35 | 55 |
 |  | iPad | 46 | 10 | 46 |
@@ -186,7 +186,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-|  | **Total** | **2255** | **863** | **1305** |
+|  | **Total** | **2260** | **863** | **1305** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -883,7 +883,7 @@ TI-99/4A (1981).
 
 Yamaha CX5M (1984).
 
-### Phase 4: Apple (884 machines, 230 shapes to build)
+### Phase 4: Apple (889 machines, 230 shapes to build)
 
 **AirPods** (12 machines, 0 shapes)
 
@@ -1033,9 +1033,9 @@ eMac (2002) *built*, eMac (ATI Graphics) (2003) *built*, eMac (USB 2.0) (2004) *
 
 iBook (1999), iBook (FireWire) (2000), iBook SE (2000), iBook (Dual USB) (2001), iBook (Late 2001), iBook (14.1 LCD) (2002), iBook (16 VRAM), iBook (14.1 LCD 16 VRAM) (12-inch) (2002), iBook (16 VRAM), iBook (14.1 LCD 16 VRAM) (14-inch) (2002), iBook (Opaque 16 VRAM), (32 VRAM), (14.1 LCD 32 VRAM) (12-inch) (2002), iBook (Opaque 16 VRAM), (32 VRAM), (14.1 LCD 32 VRAM) (14-inch) (2002), iBook (800 MHz 32 VRAM), iBook (900 MHz 32 VRAM), iBook (14.1 LCD 900 MHz 32 VRAM) (12-inch) (2003), iBook (800 MHz 32 VRAM), iBook (900 MHz 32 VRAM), iBook (14.1 LCD 900 MHz 32 VRAM) (14-inch) (2003), iBook G4 (2003, 12-inch), iBook G4 (2003, 14-inch), iBook G4 (Early 2004) (12-inch), iBook G4 (Early 2004) (14-inch), iBook G4 (Late 2004) (12-inch), iBook G4 (Late 2004) (14-inch), iBook G4 (Mid 2005) (12-inch), iBook G4 (Mid 2005) (14-inch).
 
-**iMac** (63 machines, 0 shapes)
+**iMac** (68 machines, 0 shapes)
 
-iMac (1998) *built*, iMac (266 MHz) (1999) *built*, iMac (333 MHz) (1999) *built*, iMac (Slot Loading) (1999) *built*, iMac (Summer 2000) *built*, iMac (Early 2001) *built*, iMac (Summer 2001) *built*, iMac (Flat Panel) (15-inch) (2002) *built*, iMac (Flat Panel) (17-inch) (2002) *built*, iMac (17-inch 1Ghz) (2003) *built*, iMac (USB 2.0) (15-inch) (2003) *built*, iMac (USB 2.0) (17-inch) (2003) *built*, iMac (USB 2.0) (20-inch) (2003) *built*, iMac G5 (2004, 17-inch) *built*, iMac G5 (2004, 20-inch) *built*, iMac G5 (Ambient Light Sensor) (17-inch) (2005) *built*, iMac G5 (Ambient Light Sensor) (20-inch) (2005) *built*, iMac G5 (iSight) (17-inch) (2005) *built*, iMac G5 (iSight) (20-inch) (2005) *built*, iMac (Early 2006) (17-inch) *built*, iMac (Early 2006) (20-inch) *built*, iMac (Late 2006) (17-inch) *built*, iMac (Late 2006) (20-inch) *built*, iMac (Late 2006) (24-inch) *built*, iMac (Mid 2007) (20-inch) *built*, iMac (Mid 2007) (24-inch) *built*, iMac (Early 2008) (20-inch) *built*, iMac (Early 2008) (24-inch) *built*, iMac (20-inch, Mid 2009) *built*, iMac (21.5-inch, Late 2009) *built*, iMac (27-inch, Late 2009) *built*, iMac (Early 2009) (20-inch) *built*, iMac (Early 2009) (24-inch) *built*, iMac (21.5-inch, Mid 2010) *built*, iMac (27-inch, Mid 2010) *built*, iMac (21.5-inch, Late 2011) *built*, iMac (21.5-inch, Mid 2011) *built*, iMac (27-inch, Mid 2011) *built*, iMac (21.5-inch, Late 2012) *built*, iMac (27-inch, Late 2012) *built*, iMac (21.5-inch, Late 2013) *built*, iMac (27-inch, Late 2013) *built*, iMac (21.5-inch, Mid 2014) *built*, iMac (Retina 5K, 27-inch, Late 2014) *built*, iMac (21.5-inch, Late 2015) *built*, iMac (Retina 4K, 21.5-inch, Late 2015) *built*, iMac (Retina 5K, 27-inch, Late 2015) *built*, iMac (Retina 5K, 27-inch, Mid 2015) *built*, iMac (21.5-inch, 2017) *built*, iMac (Retina 4K, 21.5-inch, 2017) *built*, iMac (Retina 5K, 27-inch, 2017) *built*, iMac Pro (2017) *built*, iMac (Retina 4K, 21.5-inch, 2019) *built*, iMac (Retina 5K, 27-inch, 2019) *built*, iMac (Retina 5K, 27-inch, 2020) *built*, iMac (24-inch, M1, 2021, Four ports) *built*, iMac (24-inch, M1, 2021, Two ports) *built*, iMac (24-inch, 2023, Four ports) *built*, iMac (24-inch, 2023, Two ports) *built*, iMac (24-inch, 2024, Four ports) *built*, iMac (24-inch, 2024, Two ports) *built*, iMac (24-inch, M6) (2026) *built*, iMac 24-inch, two ports: M1, M3 and M4 *built*.
+iMac (1998) *built*, iMac (266 MHz) (1999) *built*, iMac (333 MHz) (1999) *built*, iMac (Slot Loading) (1999) *built*, iMac DV (1999) *built*, iMac DV Special Edition (1999) *built*, iMac (Summer 2000) *built*, iMac DV (Summer 2000) *built*, iMac DV Special Edition (Summer 2000) *built*, iMac DV+ (Summer 2000) *built*, iMac (Early 2001) *built*, iMac (Summer 2001) *built*, iMac (Flat Panel) (15-inch) (2002) *built*, iMac (Flat Panel) (17-inch) (2002) *built*, iMac (17-inch 1Ghz) (2003) *built*, iMac (USB 2.0) (15-inch) (2003) *built*, iMac (USB 2.0) (17-inch) (2003) *built*, iMac (USB 2.0) (20-inch) (2003) *built*, iMac G5 (2004, 17-inch) *built*, iMac G5 (2004, 20-inch) *built*, iMac G5 (Ambient Light Sensor) (17-inch) (2005) *built*, iMac G5 (Ambient Light Sensor) (20-inch) (2005) *built*, iMac G5 (iSight) (17-inch) (2005) *built*, iMac G5 (iSight) (20-inch) (2005) *built*, iMac (Early 2006) (17-inch) *built*, iMac (Early 2006) (20-inch) *built*, iMac (Late 2006) (17-inch) *built*, iMac (Late 2006) (20-inch) *built*, iMac (Late 2006) (24-inch) *built*, iMac (Mid 2007) (20-inch) *built*, iMac (Mid 2007) (24-inch) *built*, iMac (Early 2008) (20-inch) *built*, iMac (Early 2008) (24-inch) *built*, iMac (20-inch, Mid 2009) *built*, iMac (21.5-inch, Late 2009) *built*, iMac (27-inch, Late 2009) *built*, iMac (Early 2009) (20-inch) *built*, iMac (Early 2009) (24-inch) *built*, iMac (21.5-inch, Mid 2010) *built*, iMac (27-inch, Mid 2010) *built*, iMac (21.5-inch, Late 2011) *built*, iMac (21.5-inch, Mid 2011) *built*, iMac (27-inch, Mid 2011) *built*, iMac (21.5-inch, Late 2012) *built*, iMac (27-inch, Late 2012) *built*, iMac (21.5-inch, Late 2013) *built*, iMac (27-inch, Late 2013) *built*, iMac (21.5-inch, Mid 2014) *built*, iMac (Retina 5K, 27-inch, Late 2014) *built*, iMac (21.5-inch, Late 2015) *built*, iMac (Retina 4K, 21.5-inch, Late 2015) *built*, iMac (Retina 5K, 27-inch, Late 2015) *built*, iMac (Retina 5K, 27-inch, Mid 2015) *built*, iMac (21.5-inch, 2017) *built*, iMac (Retina 4K, 21.5-inch, 2017) *built*, iMac (Retina 5K, 27-inch, 2017) *built*, iMac Pro (2017) *built*, iMac (Retina 4K, 21.5-inch, 2019) *built*, iMac (Retina 5K, 27-inch, 2019) *built*, iMac (Retina 5K, 27-inch, 2020) *built*, iMac (24-inch, M1, 2021, Four ports) *built*, iMac (24-inch, M1, 2021, Two ports) *built*, iMac (24-inch, 2023, Four ports) *built*, iMac (24-inch, 2023, Two ports) *built*, iMac (24-inch, 2024, Four ports) *built*, iMac (24-inch, 2024, Two ports) *built*, iMac (24-inch, M6) (2026) *built*, iMac 24-inch, two ports: M1, M3 and M4 *built*.
 
 **iPad** (46 machines, 10 shapes)
 

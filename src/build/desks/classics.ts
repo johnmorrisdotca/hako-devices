@@ -10,18 +10,6 @@ const PLATINUM: Material = "plastic-platinum";
 /** A row of upright ribs along a base, as most of the beige Macs have. */
 const ribs = (f: Face, y: number, w: number, h: number): Piece => f.mark("dark", 0, y, 1.4, h, { cols: Math.floor(w / 5), gap: 3.6 });
 
-/** The back of a beige Mac as a list of its sockets, left to right as seen from behind. */
-const sockets = (b: Face, y: number, list: readonly (readonly [string, number])[]): Piece[] =>
-  list.map(([kind, x]) => {
-    if (kind === "db") return b.port(x, y, 34, 9, 2);
-    if (kind === "din") return b.jack(x, y, 10);
-    if (kind === "jack") return b.jack(x, y, 6);
-    if (kind === "ac") return b.port(x, y, 28, 20, 2);
-    if (kind === "net") return b.port(x, y, 13, 12, 1);
-    if (kind === "scsi") return b.port(x, y, 46, 10, 2);
-    return b.port(x, y, 12, 8, 1);
-  });
-
 interface Compact {
   W: number;
   D: number;
@@ -66,11 +54,8 @@ function compact({ W, D, H, mat, plinth, bezel, picture, y, front, back, r = 6 }
   };
 }
 
-const oldBack = (b: Face): Piece[] => [
-  b.mark("dark", 0, 300, 180, 2, { rows: 5, gapY: 4 }),
-  b.mark("dark", 0, 100, 180, 2, { rows: 4, gapY: 4 }),
-  ...sockets(b, 42, [["ac", -82], ["din", -52], ["db", -26], ["din", 6], ["din", 22], ["db", 52]]),
-];
+/** No photograph of this back was opened, so nothing is placed on it. */
+const plainBack = (): Piece[] => [];
 
 export const MAC_128K = compact({
   W: 243.8,
@@ -82,7 +67,7 @@ export const MAC_128K = compact({
   picture: [175, 130],
   y: 240,
   front: (f) => [f.mark("dark", 0, 130, 225, 1.4), f.mark("slot", 42, 82, 92, 5, { r: 2 }), f.mark("dark", 0, 28, 225, 1.4)],
-  back: oldBack,
+  back: plainBack,
 });
 
 export const MAC_SE = compact({
@@ -103,10 +88,7 @@ export const MAC_SE = compact({
     f.round("dark", 98, 128, 3),
     f.round("dark", 98, 72, 3),
   ],
-  back: (b) => [
-    b.mark("dark", 0, 300, 180, 2, { rows: 6, gapY: 4 }),
-    ...sockets(b, 50, [["ac", -82], ["din", -52], ["din", -36], ["scsi", -4], ["din", 30], ["din", 46], ["jack", 62], ["din", 80]]),
-  ],
+  back: plainBack,
 });
 
 export const MAC_CLASSIC = compact({
@@ -120,7 +102,7 @@ export const MAC_CLASSIC = compact({
   y: 232,
   r: 12,
   front: (f) => [f.mark("slot", 44, 98, 92, 4, { r: 1 }), f.mark("dark", 0, 62, 220, 1.2, { rows: 3, gapY: 9 }), f.round("dark", 100, 98, 3)],
-  back: (b) => [b.mark("dark", 0, 298, 180, 2, { rows: 5, gapY: 4 }), ...sockets(b, 48, [["ac", -82], ["din", -48], ["din", -32], ["scsi", 0], ["din", 36], ["din", 54], ["jack", 72]])],
+  back: plainBack,
 });
 
 /** The Color Classic: a taller face with the picture in a deep wide recess, the slot and the buttons below it, a speaker in the base between two round feet. */
@@ -131,7 +113,6 @@ export const MAC_COLOR_CLASSIC: DeskSpec = (() => {
   const F = D / 2;
   const foot = 28;
   const f = onFace("front", F);
-  const b = onFace("back", -F + 4);
   return {
     pieces: [
       block(PLATINUM, 0, -4, W - 10, D - 40, 0, foot + 4, { r: 30, edge: 4 }),
@@ -144,7 +125,6 @@ export const MAC_COLOR_CLASSIC: DeskSpec = (() => {
       f.round("light", -84, 112, 3),
       f.round("dark", 0, 16, 2.4, { cols: 14, rows: 3, gap: 4.4 }),
       onFace("top", H - 37).mark("slot", 0, -F + 62, 120, 14, { r: 6 }),
-      ...sockets(b, 62, [["ac", -74], ["din", -44], ["din", -28], ["scsi", 2], ["db", 50]]),
     ],
     prints: [{ id: "front", at: [0, 60, F + 0.3], turn: [0, 0, 0], w: 100, h: 14 }],
   };
@@ -157,19 +137,17 @@ export const LISA: DeskSpec = (() => {
   const H = 386.1;
   const F = D / 2;
   const f = onFace("front", F);
-  const b = onFace("back", -F);
   return {
     pieces: [
-      block(BEIGE, 0, 0, W, D, 0, H, { r: 8, edge: 3 }),
-      ribs(f, 12, W - 20, 18),
-      f.mark("panel", -82, 244, 262, 200, { r: 6, mat: "plastic-grey" }),
-      { is: "screen", at: [-82, 244, F + 0.3], w: 220, h: 165, radius: 8, kind: "panel" },
-      f.mark("shell", 150, 244, 110, 200, { r: 3, mat: BEIGE }),
-      f.mark("slot", 150, 268, 92, 4, { r: 1, over: 1 }),
-      f.round("key", 186, 60, 12),
-      f.mark("dark", 0, 110, W - 20, 1.4),
-      b.mark("dark", 0, 320, W - 80, 2, { rows: 6, gapY: 4 }),
-      ...sockets(b, 60, [["ac", -180], ["db", -120], ["db", -70], ["din", -30], ["din", -10], ["db", 30], ["scsi", 90]]),
+      block(BEIGE, 0, 30, W, D - 60, 0, 40),
+      block(BEIGE, 0, 0, W, D, 40, H, { r: 8, edge: 3 }),
+      // from a photograph of a Lisa 2: the picture to the left, a block of vents over the drive to its right
+      f.mark("panel", -82, 220, 262, 240, { r: 6, mat: "plastic-grey" }),
+      { is: "screen", at: [-82, 220, F + 0.3], w: 220, h: 165, radius: 8, kind: "panel" },
+      f.mark("dark", 150, 300, 110, 2, { rows: 12, gapY: 4 }),
+      f.mark("slot", 150, 150, 92, 4, { r: 1 }),
+      f.mark("shell", 186, 150, 22, 10, { r: 2, mat: "alu-dark", over: 1 }),
+      onFace("left", -W / 2).mark("dark", 90, H - 40, 110, 2, { rows: 6, gapY: 3 }),
     ],
     prints: [{ id: "front", at: [0, 76, F + 0.3], turn: [0, 0, 0], w: 240, h: 20 }],
   };
@@ -207,7 +185,7 @@ function beigeBox({ W, D, H, mat = PLATINUM, plinth = 14, inset = 5, r = 2, topR
         ? { is: "side", mat, w: W - inset * 2, points: [[F - 8, plinth + 1], [F - 8, 0], [F - 40, 0], [-F + 40, 0], [-F + 8, 0], [-F + 8, plinth + 1]] }
         : block(mat, 0, 0, W - inset * 2, D - inset * 2, 0, plinth + 1),
       block(mat, 0, 0, W, D, plinth, H, r > 0 ? { r, edge: 1.5 } : {}),
-      ...(topRibs ? [top.mark("dark", 0, -F * 0.12, W - 60, 2, { rows: topRibs, gapY: 8 })] : []),
+      ...(topRibs ? [top.mark("dark", 0, -F * 0.2, 1.4, D * 0.68, { cols: topRibs, gap: (W - 40) / topRibs - 1.4 })] : []),
       ...(sideVents ? [right.mark("dark", -D * 0.12, plinth + (H - plinth) * 0.55, D * 0.55, 2, { rows: sideVents, gapY: 5 }), left.mark("dark", D * 0.12, plinth + (H - plinth) * 0.55, D * 0.55, 2, { rows: sideVents, gapY: 5 })] : []),
       ...front(f, plinth),
       ...back(b, plinth),
@@ -227,7 +205,7 @@ export const MAC_II = beigeBox({
   mat: BEIGE,
   plinth: 22,
   inset: 4,
-  topRibs: 30,
+  topRibs: 44,
   sideVents: 6,
   front: (f, base) => [
     ribs(f, base / 2, 460, 18),
@@ -238,9 +216,16 @@ export const MAC_II = beigeBox({
     f.mark("dark", -170, 100, 10, 2),
   ],
   back: (b) => [
-    b.mark("slot", 100, 92, 18, 70, { cols: 6, gap: 12 }),
-    b.mark("dark", -60, 92, 120, 40),
-    ...sockets(b, 42, [["ac", -200], ["din", -160], ["din", -140], ["scsi", -96], ["din", -50], ["din", -32], ["jack", -14]]),
+    // measured off a photograph of the back: the vent, five blank slots and one with the video card, the two power sockets, and the row along the foot
+    b.mark("dark", -92, 72, 176, 72),
+    b.mark("shell", 68.5, 72, 20, 74, { cols: 5, gap: 2.8, mat: BEIGE }),
+    b.mark("slot", 137, 72, 20, 74),
+    b.port(187, 98, 25, 24, 2),
+    b.port(187, 50, 25, 24, 2),
+    b.round("key", -213, 19, 11),
+    b.jack(-170, 19, 7),
+    ...[-153, -133, -113, -94].map((x) => b.jack(x, 19, 10)),
+    b.port(-35, 19, 52, 9, 2),
   ],
 });
 
@@ -254,15 +239,22 @@ export const MAC_IICX = beigeBox({
   sideVents: 6,
   front: (f) => [f.mark("dark", 0, 104, 296, 1.4), f.mark("dark", 0, 86, 296, 1.4), ...slot35(f, 58, 112), f.mark("dark", -130, 96, 8, 2), ...power(f, 128, 50)],
   back: (b) => [
-    // measured off a photograph of a IIci: the two power sockets, the vent, the name plate, three card slots, and the row of sockets along the foot
-    b.port(-116, 110, 30, 20, 2),
-    b.port(-116, 80, 30, 20, 2),
-    b.mark("dark", -46, 90, 3, 66, { cols: 10, gap: 4.4 }),
-    b.mark("shell", 42, 94, 54, 60, { mat: PLATINUM }),
-    b.mark("shell", 74, 92, 14, 68, { r: 1, mat: PLATINUM }),
-    b.mark("slot", 96, 92, 14, 68),
-    b.mark("shell", 116, 92, 14, 68, { r: 1, mat: PLATINUM }),
-    ...sockets(b, 22, [["jack", -122], ["db", -80], ["scsi", -24], ["db", 26], ["din", 62], ["din", 78], ["jack", 92], ["din", 106], ["din", 122]]),
+    // measured off a photograph of a IIci: the two power sockets, the vent, three card slots, and the row of sockets along the foot
+    b.port(-110, 100, 30, 20, 2),
+    b.port(-110, 57, 30, 20, 2),
+    b.mark("dark", -49, 85, 3, 82, { cols: 10, gap: 5 }),
+    b.mark("shell", 75, 84, 14, 78, { r: 1, mat: PLATINUM }),
+    b.mark("slot", 97, 84, 14, 78),
+    b.mark("shell", 120, 84, 14, 78, { r: 1, mat: "alu-dark" }),
+    b.round("key", -119, 21, 7),
+    b.port(-85, 21, 34, 9, 2),
+    b.port(-35, 21, 46, 9, 2),
+    b.port(12, 21, 34, 9, 2),
+    b.jack(42, 21, 9),
+    b.jack(60, 21, 9),
+    b.jack(77, 21, 6),
+    b.jack(94, 21, 9),
+    b.jack(112, 21, 9),
   ],
 });
 
@@ -272,10 +264,10 @@ export const MAC_IISI = beigeBox({
   H: 101.6,
   plinth: 8,
   inset: 3,
-  topRibs: 16,
+  topRibs: 30,
   sideVents: 4,
   front: (f) => [f.mark("dark", 0, 62, 308, 1.4), ...slot35(f, 60, 74), f.mark("dark", -134, 72, 8, 2), ...power(f, 134, 34)],
-  back: (b) => [b.port(-120, 62, 30, 20, 2), b.mark("slot", 100, 62, 40, 36), ...sockets(b, 20, [["db", -96], ["scsi", -42], ["din", 4], ["din", 20], ["jack", 36], ["din", 52], ["db", 92]])],
+  back: plainBack,
 });
 
 export const MAC_LC = beigeBox({
@@ -285,9 +277,9 @@ export const MAC_LC = beigeBox({
   plinth: 4,
   inset: 2,
   r: 3,
-  topRibs: 10,
+  topRibs: 30,
   front: (f) => [...slot35(f, 60, 46), f.mark("dark", -130, 44, 8, 2), f.mark("dark", 0, 22, 300, 1.2), ...power(f, 132, 24)],
-  back: (b) => [b.mark("slot", 104, 44, 60, 16), ...sockets(b, 22, [["ac", -128], ["db", -86], ["scsi", -36], ["din", 8], ["din", 24], ["jack", 40], ["jack", 54], ["db", 92]])],
+  back: plainBack,
 });
 
 export const MAC_CENTRIS_610 = beigeBox({
@@ -297,9 +289,9 @@ export const MAC_CENTRIS_610 = beigeBox({
   plinth: 6,
   inset: 2,
   r: 3,
-  topRibs: 8,
-  front: (f) => [...slot35(f, 90, 54), f.mark("shell", -80, 48, 134, 24, { r: 2 }), f.mark("dark", 0, 20, 404, 1.2), ...power(f, 186, 28), f.mark("dark", -186, 24, 8, 2)],
-  back: (b) => [b.mark("slot", 150, 46, 80, 18), b.port(-180, 46, 30, 20, 2), ...sockets(b, 22, [["db", -130], ["scsi", -80], ["din", -38], ["din", -22], ["jack", -6], ["net", 14], ["db", 64]])],
+  // from a photograph of a Quadra 610: the door in the middle, the slot and a round button to its right, a few long ribs at the back of its top
+  front: (f) => [onFace("top", 86.4).mark("dark", 0, -150, 240, 1.6, { rows: 4, gapY: 6 }), f.mark("shell", 36, 42, 151, 44, { r: 2 }), f.mark("slot", 36, 48, 120, 8, { r: 1, over: 1 }), f.mark("shell", 158, 42, 88, 44, { r: 2 }), f.mark("slot", 158, 52, 72, 4, { r: 1, over: 1 }), f.round("key", 180, 34, 9, { over: 1 }), f.mark("dark", 0, 16, 404, 1.2), f.round("key", -180, 18, 5)],
+  back: plainBack,
 });
 
 export const MAC_IIVX = beigeBox({
@@ -310,9 +302,9 @@ export const MAC_IIVX = beigeBox({
   inset: 3,
   r: 3,
   sideVents: 6,
-  topRibs: 10,
-  front: (f) => [...cdDoor(f, 70, 118), ...slot35(f, 70, 80), f.round("dark", -56, 62, 2.2, { cols: 14, rows: 8, gap: 3.6 }), ...power(f, 150, 26), f.mark("dark", 0, 16, 320, 1.2)],
-  back: (b) => [b.mark("slot", 100, 90, 18, 64, { cols: 3, gap: 12 }), b.port(-140, 108, 30, 20, 2), b.mark("dark", -60, 110, 60, 40), ...sockets(b, 34, [["db", -116], ["scsi", -60], ["din", -14], ["din", 2], ["jack", 18], ["net", 36], ["db", 78]])],
+  // from a photograph of a IIvx: the drive's door high on the right, under it a grille's door to the left and a blank door to the right, the power switch and a light low down, the dots on top
+  front: (f) => [onFace("top", 152.4).round("dark", -90, -90, 2.4, { cols: 12, rows: 14, gap: 4.6 }), f.mark("shell", 90, 118, 110, 18, { r: 2 }), f.mark("slot", 90, 122, 92, 4, { r: 1, over: 1 }), f.mark("dark", 0, 86, 320, 1.2), f.mark("shell", -78, 56, 148, 50, { r: 2 }), f.round("dark", -78, 56, 2.2, { cols: 14, rows: 6, gap: 3.6, over: 1 }), f.mark("shell", 80, 56, 150, 50, { r: 2 }), f.round("key", -140, 20, 7), f.round("key", -118, 20, 7)],
+  back: plainBack,
 });
 
 export const MAC_630 = beigeBox({
@@ -326,7 +318,19 @@ export const MAC_630 = beigeBox({
   sideVents: 5,
   runners: true,
   front: (f, base) => [...cdDoor(f, -62, 72, 120), ...slot35(f, 62, 78), f.mark("key", 138, 62, 7, 5, { cols: 2, gap: 1 }), f.mark("panel", 138, 84, 18, 10), ...power(f, 138, 44), f.round("dark", 40, base + 4, 2, { cols: 18, gap: 2 })],
-  back: (b) => [b.port(-130, 62, 28, 20, 2), b.mark("slot", 104, 62, 80, 22), ...sockets(b, 28, [["db", -96], ["scsi", -42], ["din", 4], ["din", 20], ["jack", 36], ["jack", 50], ["db", 88]])],
+  // measured off a photograph of its back
+  back: (b) => [
+    b.mark("dark", -43, 68, 2, 18, { cols: 9, gap: 4 }),
+    b.mark("shell", 118, 89, 60, 16, { mat: PLATINUM }),
+    b.port(118, 89, 28, 9, 2, { over: 2 }),
+    b.mark("shell", -110, 28, 40, 32, { mat: PLATINUM }),
+    b.port(-110, 26, 22, 20, 2, { over: 2 }),
+    ...[-59, -40, -21].map((x) => b.jack(x, 20, 9)),
+    b.port(20, 28, 46, 9, 2),
+    b.jack(55, 36, 7),
+    b.jack(70, 36, 7),
+    b.port(133, 54, 13, 12, 1),
+  ],
 });
 
 export const MAC_7200 = beigeBox({
@@ -339,8 +343,9 @@ export const MAC_7200 = beigeBox({
   topRibs: 8,
   sideVents: 6,
   runners: true,
-  front: (f, base) => [...slot35(f, 90, 128), ...cdDoor(f, 90, 90, 140), f.round("dark", -116, 80, 2.2, { cols: 10, rows: 8, gap: 3.6 }), ...power(f, -140, base - 8), f.mark("dark", 0, base + 2, 355, 1.2)],
-  back: (b) => [b.mark("slot", 110, 96, 18, 70, { cols: 3, gap: 12 }), b.port(-150, 112, 30, 20, 2), ...sockets(b, 40, [["db", -130], ["scsi", -76], ["din", -30], ["din", -14], ["jack", 2], ["net", 20], ["db", 62]])],
+  // from a photograph of a 7200: the slot over the disc door on the right, a blank door beside it, a speaker to the left, the power button under that
+  front: (f, base) => [...slot35(f, 93, 128), ...cdDoor(f, 93, 88, 140), f.mark("shell", -30, 80, 96, 42, { r: 2 }), f.round("dark", -130, 80, 2.2, { cols: 10, rows: 8, gap: 3.6 }), ...power(f, -140, base - 8), f.mark("dark", 0, base + 2, 355, 1.2)],
+  back: plainBack,
 });
 
 export const MAC_4400 = beigeBox({
@@ -352,7 +357,7 @@ export const MAC_4400 = beigeBox({
   r: 3,
   topRibs: 8,
   front: (f) => [...cdDoor(f, -60, 86), ...slot35(f, 90, 92), f.round("dark", -150, 60, 2, { cols: 10, rows: 5, gap: 3.4 }), ...power(f, 170, 40), f.mark("dark", 0, 22, 370, 1.2)],
-  back: (b) => [b.mark("slot", 120, 84, 60, 44), b.port(-160, 84, 30, 20, 2), ...sockets(b, 30, [["db", -130], ["scsi", -76], ["din", -30], ["din", -14], ["jack", 2], ["net", 20], ["db", 62]])],
+  back: plainBack,
 });
 
 /** The beige G3 desktop, from a photograph: a drive and zip door under a sloping top, a speaker to the left, ribs on its sides. */
@@ -377,7 +382,7 @@ export const MAC_G3_DESKTOP = beigeBox({
     ...power(f, -130, base - 2),
     f.mark("dark", 0, base + 8, 356, 1.2),
   ],
-  back: (b) => [b.mark("slot", 110, 100, 18, 80, { cols: 3, gap: 12 }), b.port(-150, 116, 30, 20, 2), ...sockets(b, 44, [["db", -130], ["scsi", -76], ["din", -30], ["din", -14], ["jack", 2], ["net", 20], ["db", 62]])],
+  back: plainBack,
 });
 
 interface Upright {
@@ -409,20 +414,32 @@ function tower({ W, D, H, mat = PLATINUM, plinth = 12, front, back, sideVent }: 
   };
 }
 
-const towerBack = (b: Face, H: number, base = 40): Piece[] => [
-  b.mark("slot", 46, H - 120, 80, 12, { rows: 6, gapY: 8 }),
-  b.port(-58, H - 60, 30, 20, 2),
-  b.round("dark", -58, H - 130, 2.2, { cols: 12, rows: 12, gap: 4 }),
-  ...sockets(b, base, [["db", -66], ["scsi", -14], ["din", 30], ["din", 46], ["jack", 62], ["net", 78]]),
-];
+/** A row of bays above a door with a grille, and a strip on the right with the power button, from photographs of an 8600 and a beige G3 mini tower. */
+const bayTower = (f: Face, W: number, H: number, plinth: number): Piece[] => {
+  const main = W * 0.79;
+  const x = -W / 2 + main / 2;
+  const span = H - plinth;
+  const y = (share: number) => plinth + span * share;
+  return [
+    f.mark("dark", -W / 2 + main, y(0.5), 1.4, span),
+    ...[0.77, 0.61, 0.45, 0.3].map((share) => f.mark("dark", x, y(share), main, 1.2)),
+    f.mark("slot", x, y(0.87), main * 0.6, 4, { r: 1 }),
+    f.mark("shell", x, y(0.7), main * 0.78, y(0.05), { r: 2 }),
+    f.round("key", x + main * 0.32, y(0.65), 5, { over: 1 }),
+    f.mark("slot", x, y(0.54), main * 0.55, 3, { r: 1 }),
+    f.round("dark", x, y(0.1), 2.2, { cols: 14, rows: 5, gap: 3.6 }),
+    f.round("key", -W / 2 + main + (W - main) / 2, y(0.2), 9),
+  ];
+};
 
 export const MAC_QUADRA_800 = tower({
   W: 195.6,
   D: 400,
   H: 355.6,
   plinth: 10,
-  front: (f) => [...cdDoor(f, -6, 318, 150), f.mark("dark", 0, 298, 186, 1.2), ...slot35(f, -6, 276), f.mark("dark", 0, 254, 186, 1.2), ...power(f, -78, 24), f.round("dark", -6, 60, 2.2, { cols: 18, rows: 4, gap: 3.6 })],
-  back: (b) => towerBack(b, 355.6),
+  // no photograph of it was opened: its front follows the 9500's order of bays
+  front: (f) => [...cdDoor(f, -6, 318, 150), f.mark("dark", 0, 298, 186, 1.2), ...slot35(f, -6, 276), f.mark("dark", 0, 254, 186, 1.2), ...power(f, 84, 24)],
+  back: plainBack,
 });
 
 export const MAC_9500 = tower({
@@ -432,7 +449,24 @@ export const MAC_9500 = tower({
   plinth: 10,
   sideVent: true,
   front: (f) => [...cdDoor(f, -10, 392, 150), f.mark("dark", -10, 372, 164, 1.2), ...slot35(f, -10, 348), f.mark("dark", -10, 322, 164, 1.2), f.mark("dark", -10, 278, 164, 1.2), f.mark("dark", 74, 216, 1.2, 412), ...power(f, 84, 34), f.round("light", 84, 56, 2)],
-  back: (b) => towerBack(b, 429.3),
+  // measured off a photograph of the back: the sockets in a column on the left, two power sockets over the vent, the cards below
+  back: (b) => [
+    b.port(-73, 341, 12, 50, 2),
+    b.port(-73, 297, 12, 14, 1),
+    b.port(-73, 270, 13, 12, 1),
+    b.jack(-73, 241, 9),
+    b.jack(-58, 241, 9),
+    b.mark("slot", -73, 209, 10, 40),
+    b.jack(-73, 179, 9),
+    b.jack(-73, 164, 7),
+    b.jack(-60, 164, 7),
+    b.port(14, 338, 22, 28, 2),
+    b.port(51, 338, 22, 28, 2),
+    b.mark("dark", 8.5, 260, 127, 2, { rows: 16, gapY: 4.7 }),
+    b.mark("shell", 2, 180, 85, 40, { mat: PLATINUM }),
+    b.mark("dark", -23, 76, 91, 3, { rows: 6, gapY: 17 }),
+    b.mark("shell", 62, 81, 65, 155, { mat: PLATINUM }),
+  ],
 });
 
 export const MAC_9600 = tower({
@@ -441,8 +475,8 @@ export const MAC_9600 = tower({
   H: 439.4,
   plinth: 12,
   sideVent: true,
-  front: (f) => [...cdDoor(f, 0, 400, 150), f.mark("dark", 0, 380, 200, 1.2), ...slot35(f, 0, 356), f.mark("dark", 0, 328, 200, 1.2), ...power(f, 100, 40), f.round("dark", 0, 70, 2.2, { cols: 18, rows: 5, gap: 3.6 })],
-  back: (b) => towerBack(b, 439.4),
+  front: (f, base) => bayTower(f, 246.4, 439.4, base),
+  back: plainBack,
 });
 
 export const MAC_6400 = tower({
@@ -450,8 +484,9 @@ export const MAC_6400 = tower({
   D: 429.3,
   H: 406.4,
   plinth: 18,
-  front: (f) => [...cdDoor(f, 0, 356, 140), ...slot35(f, 0, 316), f.mark("shell", 0, 262, 140, 36, { r: 4 }), f.round("dark", 0, 110, 2.2, { cols: 14, rows: 12, gap: 3.6 }), ...power(f, 78, 36)],
-  back: (b) => towerBack(b, 406.4),
+  // from a photograph of a 6500: a slot high up, the disc door, the floppy slot, the button, a band of slits and the foot
+  front: (f) => [f.mark("slot", 0, 372, 110, 5, { r: 1 }), f.mark("dark", 0, 350, 188, 1.2), ...cdDoor(f, 0, 320, 150), f.mark("slot", 0, 276, 92, 4, { r: 1 }), f.round("key", 0, 238, 9), f.mark("dark", 0, 110, 120, 2, { rows: 5, gapY: 2 })],
+  back: plainBack,
 });
 
 export const MAC_G3_TOWER = tower({
@@ -459,8 +494,8 @@ export const MAC_G3_TOWER = tower({
   D: 452.1,
   H: 386.1,
   plinth: 14,
-  front: (f) => [...cdDoor(f, 0, 350, 150), ...slot35(f, 0, 312), f.mark("shell", 0, 268, 150, 40, { r: 3 }), f.round("dark", -70, 60, 2.2, { cols: 10, rows: 6, gap: 3.6 }), ...power(f, 100, 34)],
-  back: (b) => towerBack(b, 386.1),
+  front: (f, base) => bayTower(f, 243.8, 386.1, base),
+  back: plainBack,
 });
 
 /** The Quadra 900 and 950, from a photograph: a tall case, the key and two buttons in a strip beside the door, the drive high up and a grille at its foot. */
@@ -479,7 +514,7 @@ export const MAC_QUADRA_900 = tower({
     f.round("key", -92, 284, 10),
     f.mark("dark", 20, 60, 176, 2, { rows: 17, gapY: 3.4 }),
   ],
-  back: (b) => towerBack(b, 472.4, 44),
+  back: plainBack,
 });
 
 /** An all-in-one with a tube over a base of drives: the LC 520 and its kin, and in black the Macintosh TV. */
@@ -490,7 +525,6 @@ function allInOne(mat: Material): DeskSpec {
   const F = D / 2;
   const baseH = 150;
   const f = onFace("front", F);
-  const b = onFace("back", -F + 2);
   return {
     pieces: [
       block(mat, 0, 0, W - 30, D - 30, 0, 20, { r: 16, edge: 2 }),
@@ -510,7 +544,6 @@ function allInOne(mat: Material): DeskSpec {
       ...slot35(f, 76, baseH - 38),
       f.round("dark", 0, 40, 2.2, { cols: 34, rows: 4, gap: 3.8 }),
       ...power(f, 150, 80),
-      ...sockets(b, 52, [["ac", -74], ["db", -36], ["scsi", 14], ["din", 58], ["din", 74]]),
     ],
     prints: [{ id: "front", at: [0, 66, F + 0.3], turn: [0, 0, 0], w: 120, h: 14 }],
   };
@@ -549,7 +582,20 @@ function slabCrt({ W, D, H, soft }: { W: number; D: number; H: number; soft: boo
       f.mark("key", 56, foot + 36, 7, 5, { cols: 4, gap: 1 }),
       f.mark("panel", 104, foot + 36, 24, 10),
       f.round("key", 140, foot + 36, 8),
-      ...sockets(b, 76, [["ac", -74], ["db", -36], ["scsi", 14], ["din", 58], ["din", 74]]),
+      // measured off a photograph of a 5260's back; none was opened for the softer ones
+      ...(soft
+        ? []
+        : [
+            b.port(-137, 244, 30, 50, 2),
+            b.mark("shell", 0, 150, 340, 90, { mat: PLATINUM }),
+            b.jack(-114, 134, 11),
+            b.jack(-92, 134, 11),
+            b.port(-20, 134, 59, 12, 2, { over: 2 }),
+            b.jack(26, 134, 9),
+            b.jack(44, 134, 9),
+            b.port(80, 134, 22, 12, 1, { over: 2 }),
+            b.port(124, 140, 14, 22, 1, { over: 2 }),
+          ]),
     ],
     prints: [{ id: "front", at: [0, foot + 18, F + 0.3], turn: [0, 0, 0], w: 110, h: 12 }],
   };
@@ -558,28 +604,31 @@ function slabCrt({ W, D, H, soft }: { W: number; D: number; H: number; soft: boo
 export const MAC_5200 = slabCrt({ W: 406.4, D: 383.5, H: 444.5, soft: false });
 export const MAC_5400 = slabCrt({ W: 406.4, D: 383.5, H: 444.5, soft: true });
 
-/** The Macintosh Portable: a heavy lid over a keyboard, open, the battery and drives under its deck. */
+/** The Macintosh Portable, from a photograph: the lid stands up, its picture between two square panels; on the deck the keys to the left and the ball to the right, a band of slits behind them. */
 export const MAC_PORTABLE: DeskSpec = (() => {
   const W = 387.3;
   const D = 366.5;
   const H = 102.9;
   const F = D / 2;
-  const hinge = lean(62, H - 10, -F + 76);
-  const f = onFace("front", F);
-  const top = onFace("top", H - 22);
-  const b = onFace("back", -F);
+  const hingeY = H - 8;
+  const hingeZ = -F + 30;
+  const hinge = lean(14, hingeY, hingeZ);
+  const f = onFace("front", hingeZ, hinge);
+  const top = onFace("top", 60.4, lean(-10.2, 60, 70));
   return {
     pieces: [
-      { is: "side", mat: BEIGE, w: W, points: [[F, 0], [-F, 0], [-F, H - 10], [-F + 80, H - 10], [F - 30, 44], [F, 30]] },
-      // the lid, folded back about its hinge, with its screen in it
-      { is: "loft", mat: BEIGE, frame: hinge, rings: [{ z: -F + 96, w: W - 8, h: 248, y: H - 10 + 124, r: 10 }, { z: -F + 76, w: W - 8, h: 248, y: H - 10 + 124, r: 8 }] },
-      onFace("front", -F + 96, hinge).mark("panel", 0, H + 120, 296, 186, { r: 4, mat: "plastic-grey" }),
-      { is: "screen", frame: hinge, at: [0, H + 120, -F + 96.3], w: 254, h: 170, kind: "panel" },
-      top.mark("key", 0, F - 208, 15, 15, { cols: 14, rows: 5, gap: 3 }),
-      f.mark("slot", 80, 20, 92, 4, { r: 1 }),
-      ...sockets(b, 40, [["ac", -150], ["db", -100], ["scsi", -40], ["din", 10], ["din", 28], ["jack", 46]]),
+      { is: "side", mat: BEIGE, w: W, points: [[F, 0], [-F, 0], [-F, H - 8], [-F + 60, H - 8], [F - 22, 44], [F, 28]] },
+      { is: "loft", mat: BEIGE, frame: hinge, rings: [{ z: hingeZ, w: W, h: 226, y: hingeY + 113, r: 4 }, { z: hingeZ - 18, w: W, h: 226, y: hingeY + 113, r: 4 }] },
+      f.mark("panel", 0, hingeY + 120, 256, 172, { mat: "plastic-grey" }),
+      { is: "screen", frame: hinge, at: [0, hingeY + 120, hingeZ + 0.3], w: 244, h: 160, kind: "panel" },
+      f.mark("shell", -158, hingeY + 150, 34, 40, { mat: BEIGE }),
+      f.mark("shell", 158, hingeY + 150, 34, 40, { mat: BEIGE }),
+      // on the deck, lying on its slope
+      top.mark("key", -56, 72, 15, 15, { cols: 14, rows: 5, gap: 3 }),
+      top.mark("shell", 136, 74, 80, 80, { r: 4, mat: "plastic-grey" }),
+      top.round("metal", 136, 70, 42, { over: 1 }),
     ],
-    prints: [{ id: "lid", at: [0, H + 120, -F + 76 - 0.2], turn: [0, 180, 0], w: 180, h: 30, frame: hinge }],
+    prints: [{ id: "lid", at: [0, hingeY + 113, hingeZ - 18.3], turn: [0, 180, 0], w: 180, h: 30, frame: hinge }],
   };
 })();
 
@@ -593,7 +642,6 @@ export const TAM: DeskSpec = (() => {
   const z = 70;
   const tilt = lean(14, y0, z);
   const f = onFace("front", z, tilt);
-  const b = onFace("back", z - T, tilt);
   const P = H - y0 + 10;
   return {
     pieces: [
@@ -615,8 +663,6 @@ export const TAM: DeskSpec = (() => {
       f.mark("slot", -116, y0 + 130, 3, 26, { cols: 2, gap: 14, over: 1 }),
       f.mark("slot", 110, y0 + 110, 3, 42, { over: 1 }),
       f.round("dark", -116, y0 + 30, 5, { rows: 2, gap: 8 }),
-      // the back and the big block behind it that holds the board
-      ...[-1].flatMap(() => [b.mark("panel", 0, y0 + 170, 300, 300, { r: 10 }), b.mark("dark", 0, y0 + 260, 240, 2, { rows: 12, gapY: 6 }), b.port(0, y0 + 50, 60, 16, 3), b.port(-60, y0 + 50, 30, 16, 3), b.port(60, y0 + 50, 30, 16, 3)]),
     ],
     prints: [{ id: "back", at: [0, y0 + P * 0.85, z - T - 0.3], turn: [0, 180, 0], w: 200, h: 30, frame: tilt }],
   };
@@ -698,17 +744,19 @@ function curvedTower({ shell, panel, handles, front }: Curved): DeskSpec {
 }
 
 export const G3_BLUE = curvedTower({
-  shell: "plastic-platinum",
-  panel: "plastic-blue",
-  handles: "plastic-platinum",
-  front: (f) => [f.mark("shell", 0, 280, 120, 22, { r: 11, mat: "plastic-blue" }), f.mark("shell", 0, 240, 120, 22, { r: 11, mat: "plastic-blue" }), f.round("key", 0, 200, 12), f.round("dark", 0, 110, 2.2, { cols: 8, rows: 6, gap: 4 })],
+  // its side and colours from a photograph; no photograph of its front was opened, so only the bays and the power button are placed
+  shell: "plastic-blue",
+  panel: "plastic-white",
+  handles: "plastic-white",
+  front: (f) => [f.mark("shell", 0, 280, 120, 22, { r: 11, mat: "plastic-white" }), f.mark("shell", 0, 240, 120, 22, { r: 11, mat: "plastic-white" }), f.round("key", 0, 200, 12)],
 });
 
 export const G4_GRAPHITE = curvedTower({
   shell: "plastic-graphite",
   panel: "plastic-graphite",
   handles: "plastic-graphite",
-  front: (f) => [f.mark("shell", 0, 280, 120, 22, { r: 11, mat: "alu-dark" }), f.mark("shell", 0, 240, 120, 22, { r: 11, mat: "alu-dark" }), f.round("key", 0, 200, 12), f.round("dark", 0, 110, 2.2, { cols: 8, rows: 6, gap: 4 })],
+  // no photograph of it was opened: the Quicksilver's shape in graphite, the bays and the power button only
+  front: (f) => [f.mark("shell", 0, 280, 120, 22, { r: 11, mat: "alu-dark" }), f.mark("shell", 0, 240, 120, 22, { r: 11, mat: "alu-dark" }), f.round("key", 0, 200, 12)],
 });
 
 export const G4_QUICKSILVER = curvedTower({
@@ -754,12 +802,13 @@ export const G3_ALL_IN_ONE: DeskSpec = (() => {
       { is: "loft", mat: PLATINUM, frame: lean(degrees, 14, F), rings: sliced(outline, (t) => ({ w: t < 0.5 ? W : W - (t - 0.5) * 300, r: 26 + t * 70 }), 14, { degrees, pivot: [14, F] }) },
       f.mark("panel", 0, 330, 300, 240, { r: 16, mat: "plastic-grey" }),
       { is: "screen", frame: lean(degrees, 14, F), at: [0, 330, F + 0.3], w: 281, h: 215, radius: 12 },
-      ...cdDoor(f, -40, 142, 130),
-      ...slot35(f, 90, 150),
-      f.round("dark", -160, 150, 2.2, { cols: 6, rows: 10, gap: 3.6 }),
-      f.round("dark", 170, 150, 2.2, { cols: 6, rows: 10, gap: 3.6 }),
-      ...power(f, 0, 76),
-      ...sockets(onFace("back", -F + 2), 120, [["ac", -74], ["db", -36], ["scsi", 14], ["din", 58], ["din", 74]]),
+      // from a photograph of its front: two curved slots side by side over the disc door, a grille each side
+      f.mark("slot", -74, 150, 88, 5, { r: 2 }),
+      f.mark("slot", 74, 150, 88, 5, { r: 2 }),
+      f.mark("shell", 0, 100, 150, 26, { r: 2, mat: PLATINUM }),
+      f.mark("dark", 0, 92, 130, 1, { over: 1 }),
+      f.round("dark", -170, 120, 2.2, { cols: 6, rows: 10, gap: 3.6 }),
+      f.round("dark", 170, 120, 2.2, { cols: 6, rows: 10, gap: 3.6 }),
     ],
     prints: [{ id: "front", at: [0, 84, F + 0.3], turn: [0, 0, 0], w: 120, h: 12 }],
   };
@@ -788,16 +837,23 @@ export const EMAC: DeskSpec = (() => {
   const right = onFace("right", W * 0.46);
   return {
     pieces: [
-      { is: "loft", mat: "plastic-white", frame, rings: sliced(outline, (t) => ({ w: t < 0.35 ? W : W - (t - 0.35) * 420, r: 26 + t * 90 }), 16, { degrees, pivot: [10, F] }) },
+      { is: "loft", mat: "pale-glass", frame, rings: sliced(outline, (t) => ({ w: W - (t - 0.35) * 420, r: 26 + t * 90 }), 4, { degrees, pivot: [10, F], from: 0.84, to: 1 }) },
+      { is: "loft", mat: "plastic-white", frame, rings: sliced(outline, (t) => ({ w: t < 0.35 ? W : W - (t - 0.35) * 420, r: 26 + t * 90 }), 14, { degrees, pivot: [10, F], from: 0, to: 0.84 }) },
       f.mark("panel", 0, 252, 330, 246, { mat: "bezel" }),
       { is: "screen", frame, at: [0, 252, F + 0.3], w: 320, h: 240 },
       f.round("dark", -130, 72, 42),
       f.round("dark", 130, 72, 42),
       f.mark("shell", 0, 72, 150, 34, { r: 17, mat: "plastic-white" }),
-      right.mark("panel", -40, 86, 80, 34, { r: 6 }),
-      right.port(-60, 86, 12, 10, 1),
-      right.port(-40, 86, 12, 10, 1),
-      right.port(-20, 86, 12, 10, 1),
+      // measured off a photograph of its right side: the sockets in a long dish, the power button behind it
+      right.mark("shell", -61, 67, 155, 20, { r: 10, mat: "plastic-grey" }),
+      right.jack(-129, 67, 5),
+      right.jack(-114, 67, 5),
+      ...[-102, -90, -80].map((x) => right.port(x, 67, 5.6, 13, 0.6, { over: 1 })),
+      ...[-69, -57].map((x) => right.port(x, 67, 6.3, 10, 1, { over: 1 })),
+      right.port(-42, 67, 10, 10, 1, { over: 1 }),
+      right.port(-22, 67, 13, 12, 1, { over: 1 }),
+      right.port(-5, 67, 5, 10, 1, { over: 1 }),
+      right.round("key", 35, 70, 12),
     ],
     prints: [{ id: "front", at: [0, 60, F + 0.3], turn: [0, 0, 0], w: 110, h: 20 }],
   };
