@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2255 machines. 863 distinct shapes still to build. 998 entries are already built: the 238 devices in this package, plus the real models those meshes cover. 1306 entries have a sourced size; the other 949 are `null` on purpose.**
+**2255 machines. 863 distinct shapes still to build. 998 entries are already built: the 238 devices in this package, plus the real models those meshes cover. 1305 entries have a sourced size; the other 950 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -62,7 +62,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **884** | **230** | **660** |
+| **4** | **Apple** | **884** | **230** | **659** |
 |  | Power Mac | 92 | 0 | 90 |
 |  | Performa | 71 | 0 | 71 |
 |  | MacBook Pro | 69 | 13 | 64 |
@@ -79,7 +79,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Mac mini | 21 | 0 | 20 |
 |  | Workgroup Server | 21 | 0 | 16 |
 |  | iBook | 20 | 5 | 2 |
-|  | Compact Mac | 16 | 0 | 13 |
+|  | Compact Mac | 16 | 0 | 12 |
 |  | Mouse | 14 | 12 | 3 |
 |  | AirPort | 13 | 5 | 4 |
 |  | MacBook | 13 | 4 | 13 |
@@ -186,7 +186,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-|  | **Total** | **2255** | **863** | **1306** |
+|  | **Total** | **2255** | **863** | **1305** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 

@@ -72,6 +72,6 @@ test("every machine on the list is on a known shelf, under a heading that names 
   for (const entry of [...PLANNED, ...COVERED]) assert.ok(shelves.has(entry.shelf), entry.key);
   const ds = PLANNED.find((entry) => entry.maker === "Nintendo" && entry.family === "DS");
   assert.equal(ds && headingOf(ds), "Nintendo DS");
-  const mac = PLANNED.find((entry) => entry.shelf === "apple" && entry.family === "Power Mac");
+  const mac = COVERED.find((entry) => entry.shelf === "apple" && entry.family === "Power Mac");
   assert.equal(mac && headingOf(mac), "Power Mac");
 });

@@ -55,8 +55,7 @@ test("a count is what picking that value would show, and a facet's own picks do 
 });
 
 test("a machine carries the rest of its facts where a source gives them", () => {
-  const mac = catalogue().find((entry) => entry.name === "Macintosh XL");
-  assert.ok(mac && tagsOf(mac.key).weight?.length);
+  assert.ok(tagsOf("macintosh-xl").weight?.length);
   assert.deepEqual(tagsOf("iphone-4").os, ["iOS"]);
   const third = catalogue().find((entry) => entry.name === "AirPods (3rd generation)");
   assert.ok(third);

@@ -43,7 +43,7 @@ export const DESKS: Readonly<Record<string, DeskSpec>> = {
   "macintosh-se": C.MAC_SE,
   "macintosh-classic": C.MAC_CLASSIC,
   "macintosh-color-classic": C.MAC_COLOR_CLASSIC,
-  "apple-lisa": C.LISA,
+  "macintosh-xl": C.LISA,
   "macintosh-portable": C.MAC_PORTABLE,
   "macintosh-ii": C.MAC_II,
   "macintosh-iicx": C.MAC_IICX,
