@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { DEVICES } from "../src/catalogue.ts";
 import { buildDevice } from "../src/build/index.ts";
@@ -21,4 +22,29 @@ test("every iPad Pro body is built", () => {
   const pros = DEVICES.filter((device) => device.key.startsWith("ipad-pro"));
   assert.equal(pros.length, 11);
   for (const device of pros) assert.ok(buildDevice(device.key), device.key);
+});
+
+const list = (): { key: string; family: string; brand: string; dimensionsMm: number[] | null; dimensionsSource: string | null; released?: string; discontinued?: string; lastUpdate?: string; factsSources?: string[] }[] => JSON.parse(readFileSync("data/wishlist.json", "utf8"));
+const slabLines = (entry: { family: string }) => /^(iPhone|iPad|Galaxy Tab)/.test(entry.family);
+
+test("a phone or tablet in the list has the longer side as its height, and it names its pages", () => {
+  for (const entry of list().filter(slabLines)) {
+    if (entry.dimensionsMm) {
+      const [width, depth, height] = entry.dimensionsMm;
+      assert.ok(height >= width && width > depth, `${entry.key}: ${entry.dimensionsMm.join(" x ")}`);
+      assert.ok(entry.dimensionsSource, entry.key);
+    }
+  }
+  const tabs = list().filter((entry) => entry.brand === "Samsung" && entry.family.startsWith("Galaxy Tab"));
+  assert.equal(tabs.length, 88);
+  for (const entry of tabs) assert.ok(entry.factsSources?.length, entry.key);
+});
+
+test("a date in the list is a whole date, in order", () => {
+  const whole = /^\d{4}-\d{2}-\d{2}$/;
+  for (const { key, released, discontinued, lastUpdate } of list()) {
+    for (const date of [released, discontinued, lastUpdate]) if (date) assert.match(date, whole, key);
+    if (released && discontinued) assert.ok(released <= discontinued, key);
+    if (released && lastUpdate) assert.ok(released <= lastUpdate, key);
+  }
 });

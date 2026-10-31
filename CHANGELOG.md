@@ -6,6 +6,14 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- The list has every Galaxy Tab released so far: 68 more models, in the families Galaxy Tab A, E, S and Active, 88 in all. A row of the phones and tablets also gives `released`, `discontinued`, `lastUpdate`, `weightG`, `colours` and the pages in `factsSources`, each only where a page says so.
+
+### Fixed
+
+- Sizes in the list now follow Apple's own figures to the hundredth, the iPad (3rd and 4th generation) outline among them. A Galaxy Tab's height is its longer side. The generic `iphone` row no longer copies the first iPhone's size.
+
 ## [0.4.0] - 2026-10-31
 
 ### Added
