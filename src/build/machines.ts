@@ -261,6 +261,52 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     shape: "can",
     marks: [front("slot", 0, 36, 3, 22, { cols: 8, rows: 1, gap: 2 })],
   },
+  // A photograph of the Pocket: a screen, a cross, two round buttons, and two small buttons. Places are not measured. Size is the list's 77.6 by 25.3 by 127.6 mm.
+  "game-boy-pocket-mgb-001": {
+    size: [77.6, 25.3, 127.6],
+    body: "plastic-grey",
+    corner: 6,
+    marks: [
+      front("lcd", 0, 92, 48, 40),
+      front("key", -20, 52, 22, 7),
+      front("key", -20, 52, 7, 22),
+      front("key", 12, 48, 11, 11, { round: true }),
+      front("key", 28, 48, 11, 11, { round: true }),
+      front("dark", -8, 28, 10, 3),
+      front("dark", 6, 28, 10, 3),
+    ],
+  },
+  // No size on the list. 80 by 28 by 132 mm is a stand-in, not the Pocket's size. The photograph has a dark panel around the screen.
+  "game-boy-color-cgb-001": {
+    size: [80, 28, 132],
+    body: "plastic-grey",
+    corner: 8,
+    marks: [
+      front("panel", 0, 96, 68, 58),
+      front("lcd", 6, 100, 40, 36),
+      front("key", -22, 52, 20, 7),
+      front("key", -22, 52, 7, 20),
+      front("key", 8, 46, 10, 10, { round: true }),
+      front("key", 24, 46, 10, 10, { round: true }),
+    ],
+  },
+  // The list already stores 150 by 161 by 110 mm. A round lid on top and four round ports on the front, from a photograph. The handle is not drawn.
+  "nintendo-gamecube": {
+    size: [150, 161, 110],
+    body: "plastic-char",
+    corner: 8,
+    marks: [
+      top("dark", 0, -10, 70, 70, { round: true }),
+      front("slot", 0, 48, 12, 12, { round: true, cols: 4, rows: 1, gap: 6 }),
+    ],
+  },
+  // Closed size already on the list: 134 across, 22 thick, 74 tall. The photograph opened is the unit open, so the screens are not drawn on the outside. A line marks the hinge.
+  "nintendo-3ds-ctr-001": {
+    size: [134, 22, 74],
+    body: "plastic-char",
+    corner: 6,
+    marks: [front("slot", 0, 37, 120, 2)],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };

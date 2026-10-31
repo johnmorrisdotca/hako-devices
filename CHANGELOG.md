@@ -13,6 +13,7 @@ All notable changes to this project are written here. The format follows
 - The HP-12C, as a flat body.
 - The HP-15C, HP-35, TI-83, TI-84 Plus, TI-30, Casio fx-82 and Curta Type I. A size a page does not name stays blank, and the mesh stand-in is in the note. The TI-84 Plus back has its battery door. The others have no back photograph, so the back is plain.
  Its size on the list stays blank: the Voyager page's 128 by 79 by 15 mm names no axes, and the mesh uses that triple as a stand-in after a photograph. The underside is plain.
+- The Game Boy Pocket, Game Boy Color, GameCube and the original 3DS. The Pocket, the GameCube and the closed 3DS use sizes already on the list. The Color has no listed size, so its mesh is a stand-in. The 3DS photograph is the open unit, so the screens are not drawn on the closed outside.
 
 ### Fixed
 

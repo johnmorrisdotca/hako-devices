@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2517 machines. 1047 distinct shapes still to build. 1138 entries are already built: the 346 devices in this package, plus the real models those meshes cover. 1472 entries have a sourced size; the other 1045 are `null` on purpose.**
+**2517 machines. 1043 distinct shapes still to build. 1142 entries are already built: the 350 devices in this package, plus the real models those meshes cover. 1472 entries have a sourced size; the other 1045 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -30,8 +30,8 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Atari | 1 | 1 | 0 |
 |  | Hewlett-Packard | 1 | 1 | 0 |
 |  | Casio | 1 | 1 | 0 |
-| **2** | **Game consoles** | **237** | **167** | **72** |
-|  | Nintendo | 111 | 51 | 29 |
+| **2** | **Game consoles** | **237** | **163** | **72** |
+|  | Nintendo | 111 | 47 | 29 |
 |  | Sony | 27 | 23 | 24 |
 |  | Sega | 22 | 21 | 6 |
 |  | Atari | 14 | 13 | 1 |
@@ -279,7 +279,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2517** | **1047** | **1472** |
+|  | **Total** | **2517** | **1043** | **1472** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -657,7 +657,7 @@ Sony Ericsson W800 (2005), Sony Ericsson W810 (2006).
 
 Sony Ericsson Xperia X1 (2008), Sony Ericsson Xperia X10 (2010), Sony Ericsson Xperia Play (2011).
 
-### Phase 2: Game consoles (237 machines, 167 shapes to build)
+### Phase 2: Game consoles (237 machines, 163 shapes to build)
 
 **ASUS ROG Ally** (2 machines, 2 shapes)
 
@@ -771,9 +771,9 @@ PC Engine (1987), PC Engine CD-ROM² unit (1988), PC Engine CoreGrafx (1989), PC
 
 PC-FX (1994).
 
-**Nintendo 3DS** (6 machines, 6 shapes)
+**Nintendo 3DS** (6 machines, 5 shapes)
 
-Nintendo 3DS (CTR-001) (2011), Nintendo 3DS XL (SPR-001) (2012), Nintendo 2DS (FTR-001) (2013), New Nintendo 3DS (KTR-001) (2014), New Nintendo 3DS XL (RED-001) (2014), New Nintendo 2DS XL (JAN-001) (2017).
+Nintendo 3DS (CTR-001) (2011) *built*, Nintendo 3DS XL (SPR-001) (2012), Nintendo 2DS (FTR-001) (2013), New Nintendo 3DS (KTR-001) (2014), New Nintendo 3DS XL (RED-001) (2014), New Nintendo 2DS XL (JAN-001) (2017).
 
 **Nintendo Classic Edition** (2 machines, 2 shapes)
 
@@ -791,17 +791,17 @@ Nintendo DS (NTR-001) (2004) *built*, Nintendo DS Lite (USG-001) (2006), Nintend
 
 Game & Watch Ball (AC-01) (1980), Game & Watch Fire (RC-04) (1980), Game & Watch Flagman (FL-02) (1980), Game & Watch Judge (IP-05) (1980), Game & Watch Vermin (MT-03) (1980), Game & Watch Chef (FP-24) (1981), Game & Watch Egg (EG-26) (1981), Game & Watch Fire (FR-27) (1981), Game & Watch Helmet (CN-07) (1981), Game & Watch Lion (LN-08) (1981), Game & Watch Manhole (MH-06) (1981), Game & Watch Mickey Mouse (MC-25) (1981), Game & Watch Octopus (OC-22) (1981), Game & Watch Parachute (PR-21) (1981), Game & Watch Popeye (PP-23) (1981), Game & Watch Donkey Kong (DK-52) (1982), Game & Watch Donkey Kong Jr. (DJ-101) (1982), Game & Watch Fire Attack (ID-29) (1982), Game & Watch Green House (GH-54) (1982), Game & Watch Mickey & Donald (DM-53) (1982), Game & Watch Oil Panic (OP-51) (1982), Game & Watch Snoopy Tennis (SP-30) (1982), Game & Watch Turtle Bridge (TL-28) (1982), Game & Watch Donkey Kong II (JR-55) (1983), Game & Watch Donkey Kong Jr. (CJ-71) (1983), Game & Watch Donkey Kong Jr. (CJ-93) (1983), Game & Watch Lifeboat (TC-58) (1983), Game & Watch Manhole (NH-103) (1983), Game & Watch Mario Bros. (MW-56) (1983), Game & Watch Mario's Bombs Away (TB-94) (1983), Game & Watch Mario's Cement Factory (CM-72) (1983), Game & Watch Mario's Cement Factory (ML-102) (1983), Game & Watch Pinball (PB-59) (1983), Game & Watch Popeye (PG-74) (1983), Game & Watch Popeye (PG-92) (1983), Game & Watch Rain Shower (LP-57) (1983), Game & Watch Snoopy (SM-73) (1983), Game & Watch Snoopy (SM-91) (1983), Game & Watch Boxing (BX-301) (1984), Game & Watch Crab Grab (UD-202) (1984), Game & Watch Donkey Kong 3 (AK-302) (1984), Game & Watch Donkey Kong Circus (MK-96) (1984), Game & Watch Donkey Kong Hockey (HK-303) (1984), Game & Watch Mickey Mouse (DC-95) (1984), Game & Watch Spitball Sparky (BU-201) (1984), Game & Watch Black Jack (BJ-60) (1985), Game & Watch Tropical Fish (TF-104) (1985), Game & Watch Balloon Fight (BF-803) (1986), Game & Watch Climber (DR-802) (1986), Game & Watch Squish (MG-61) (1986), Game & Watch Super Mario Bros. (YM-801) (1986), Game & Watch Bomb Sweeper (BD-62) (1987), Game & Watch Super Mario Bros. (YM-901-S) (1987), Game & Watch Balloon Fight (BF-107) (1988), Game & Watch Climber (DR-106) (1988), Game & Watch Gold Cliff (MV-64) (1988), Game & Watch Safebuster (JB-63) (1988), Game & Watch Super Mario Bros. (YM-105) (1988), Game & Watch Tetris Jr. (TR-66) (1989), Game & Watch Zelda (ZL-65) (1989), Game & Watch Mario the Juggler (MB-108) (1991), Game & Watch: Super Mario Bros. 35th Anniversary Edition (2020), Game & Watch: The Legend of Zelda 35th Anniversary Edition (2021).
 
-**Nintendo Game Boy** (4 machines, 3 shapes)
+**Nintendo Game Boy** (4 machines, 1 shapes)
 
-Game Boy (DMG-01) (1989) *built*, Game Boy Pocket (MGB-001) (1996), Game Boy Color (CGB-001) (1998), Game Boy Light (MGB-101) (1998).
+Game Boy (DMG-01) (1989) *built*, Game Boy Pocket (MGB-001) (1996) *built*, Game Boy Color (CGB-001) (1998) *built*, Game Boy Light (MGB-101) (1998).
 
 **Nintendo Game Boy Advance** (4 machines, 2 shapes)
 
 Game Boy Advance (AGB-001) (2001) *built*, Game Boy Advance SP (AGS-001) (2003), Game Boy Advance SP (AGS-101) (2005), Game Boy Micro (OXY-001) (2005).
 
-**Nintendo GameCube** (1 machines, 1 shapes)
+**Nintendo GameCube** (1 machines, 0 shapes)
 
-Nintendo GameCube (2001).
+Nintendo GameCube (2001) *built*.
 
 **Nintendo NES and Famicom** (5 machines, 4 shapes)
 

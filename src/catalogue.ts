@@ -228,6 +228,10 @@ export const DEVICES: readonly Device[] = [
   whole("ti-30", "TI-30", "classics", [76, 22, 148], []),
   whole("casio-fx-82", "Casio fx-82", "classics", [78, 14, 160], []),
   whole("curta-type-i", "Curta Type I", "classics", [50, 50, 80], []),
+  whole("game-boy-pocket-mgb-001", "Game Boy Pocket (MGB-001)", "classics", [77.6, 25.3, 127.6], []),
+  whole("game-boy-color-cgb-001", "Game Boy Color (CGB-001)", "classics", [80, 28, 132], []),
+  whole("nintendo-gamecube", "Nintendo GameCube", "classics", [150, 161, 110], []),
+  whole("nintendo-3ds-ctr-001", "Nintendo 3DS (CTR-001)", "classics", [134, 22, 74], []),
 
   whole("nintendo-64", "Nintendo 64", "classics", [260, 190, 73], ports({ power: 1 })),
   whole("game-boy-advance-agb-001", "Game Boy Advance (AGB-001)", "classics", [144.5, 24.5, 82], ports({ audio: 1 })),
