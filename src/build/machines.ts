@@ -307,6 +307,47 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     corner: 6,
     marks: [front("slot", 0, 37, 120, 2)],
   },
+  // A collector page names 150 mm across, 220 mm deep and 60 mm tall. The red band has no red in the palette, so it is a dark stripe. Controllers are not part of the body.
+  "family-computer-famicom": {
+    size: [150, 220, 60],
+    body: "plastic-white",
+    corner: 4,
+    marks: [front("dark", 0, 28, 130, 10), top("slot", 0, -40, 90, 28)],
+  },
+  // Nintendo of Europe lists 255 by 85 by 202 mm and names no axes. The mesh uses 255 across, 202 deep and 85 tall: the photograph is a low box, and 85 is the only figure short enough to be its height. The black band and the rear sockets follow the photograph. Places are not measured.
+  "nintendo-entertainment-system-nes-001": {
+    size: [255, 202, 85],
+    body: "plastic-grey",
+    corner: 4,
+    marks: [top("panel", -80, 0, 36, 150), top("dark", -40, 0, 28, 120), back("slot", -40, 22, 8, 8), back("slot", 0, 22, 8, 8), back("slot", 40, 22, 8, 8)],
+  },
+  // Nintendo of Europe lists 200 by 72 by 242 mm and names no axes. The mesh uses 200 across, 242 deep and 72 tall after the photograph. A quoted 74 mm height was not used. The cartridge slot, three switches and the front ports follow the photograph. Places are not measured.
+  "super-famicom": {
+    size: [200, 242, 72],
+    body: "plastic-grey",
+    corner: 8,
+    marks: [
+      top("slot", 0, -20, 140, 18),
+      top("key", -50, 30, 22, 12),
+      top("key", 0, 30, 36, 14),
+      top("key", 55, 30, 22, 12),
+      front("slot", -30, 28, 28, 10),
+      front("slot", 30, 28, 36, 8),
+    ],
+  },
+  // No page opened names this body's size. 190 by 180 by 70 mm is a stand-in, not a measurement. The cartridge slot, two buttons and two front ports follow the photograph. Places are not measured.
+  "super-nintendo-entertainment-system-sns-001": {
+    size: [190, 180, 70],
+    body: "plastic-grey",
+    corner: 10,
+    marks: [
+      top("slot", 0, -20, 120, 16),
+      top("key", -50, 24, 18, 14, { round: true }),
+      top("key", -50, 6, 16, 12, { round: true }),
+      front("slot", -28, 22, 32, 10),
+      front("slot", 28, 22, 32, 10),
+    ],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };

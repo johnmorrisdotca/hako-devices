@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2517 machines. 1043 distinct shapes still to build. 1142 entries are already built: the 350 devices in this package, plus the real models those meshes cover. 1472 entries have a sourced size; the other 1045 are `null` on purpose.**
+**2517 machines. 1039 distinct shapes still to build. 1146 entries are already built: the 354 devices in this package, plus the real models those meshes cover. 1473 entries have a sourced size; the other 1044 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -30,8 +30,8 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Atari | 1 | 1 | 0 |
 |  | Hewlett-Packard | 1 | 1 | 0 |
 |  | Casio | 1 | 1 | 0 |
-| **2** | **Game consoles** | **237** | **163** | **72** |
-|  | Nintendo | 111 | 47 | 29 |
+| **2** | **Game consoles** | **237** | **159** | **73** |
+|  | Nintendo | 111 | 43 | 30 |
 |  | Sony | 27 | 23 | 24 |
 |  | Sega | 22 | 21 | 6 |
 |  | Atari | 14 | 13 | 1 |
@@ -279,7 +279,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2517** | **1043** | **1472** |
+|  | **Total** | **2517** | **1039** | **1473** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -657,7 +657,7 @@ Sony Ericsson W800 (2005), Sony Ericsson W810 (2006).
 
 Sony Ericsson Xperia X1 (2008), Sony Ericsson Xperia X10 (2010), Sony Ericsson Xperia Play (2011).
 
-### Phase 2: Game consoles (237 machines, 163 shapes to build)
+### Phase 2: Game consoles (237 machines, 159 shapes to build)
 
 **ASUS ROG Ally** (2 machines, 2 shapes)
 
@@ -803,9 +803,9 @@ Game Boy Advance (AGB-001) (2001) *built*, Game Boy Advance SP (AGS-001) (2003),
 
 Nintendo GameCube (2001) *built*.
 
-**Nintendo NES and Famicom** (5 machines, 4 shapes)
+**Nintendo NES and Famicom** (5 machines, 2 shapes)
 
-Family Computer (Famicom) (1983), Nintendo Entertainment System (NES-001) (1985), Famicom Disk System (1986), AV Famicom (HVC-101) (1993), NES-101 (top loader) (1993).
+Family Computer (Famicom) (1983) *built*, Nintendo Entertainment System (NES-001) (1985) *built*, Famicom Disk System (1986), AV Famicom (HVC-101) (1993), NES-101 (top loader) (1993).
 
 **Nintendo 64** (2 machines, 1 shapes)
 
@@ -815,9 +815,9 @@ Nintendo 64 (1996) *built*, Nintendo 64DD (1999).
 
 Pokémon Mini (2001).
 
-**Nintendo SNES and Super Famicom** (5 machines, 4 shapes)
+**Nintendo SNES and Super Famicom** (5 machines, 2 shapes)
 
-Super Famicom (1990), Super Nintendo Entertainment System (SNS-001) (1991), Satellaview (1995), Super NES (SNS-101) (1997), Super Famicom Jr. (SHVC-101) (1998).
+Super Famicom (1990) *built*, Super Nintendo Entertainment System (SNS-001) (1991) *built*, Satellaview (1995), Super NES (SNS-101) (1997), Super Famicom Jr. (SHVC-101) (1998).
 
 **Nintendo Switch** (3 machines, 2 shapes)
 

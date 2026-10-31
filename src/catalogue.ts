@@ -232,6 +232,10 @@ export const DEVICES: readonly Device[] = [
   whole("game-boy-color-cgb-001", "Game Boy Color (CGB-001)", "classics", [80, 28, 132], []),
   whole("nintendo-gamecube", "Nintendo GameCube", "classics", [150, 161, 110], []),
   whole("nintendo-3ds-ctr-001", "Nintendo 3DS (CTR-001)", "classics", [134, 22, 74], []),
+  whole("family-computer-famicom", "Family Computer (Famicom)", "classics", [150, 220, 60], []),
+  whole("nintendo-entertainment-system-nes-001", "Nintendo Entertainment System (NES-001)", "classics", [255, 202, 85], []),
+  whole("super-famicom", "Super Famicom", "classics", [200, 242, 72], []),
+  whole("super-nintendo-entertainment-system-sns-001", "Super Nintendo Entertainment System (SNS-001)", "classics", [190, 180, 70], []),
 
   whole("nintendo-64", "Nintendo 64", "classics", [260, 190, 73], ports({ power: 1 })),
   whole("game-boy-advance-agb-001", "Game Boy Advance (AGB-001)", "classics", [144.5, 24.5, 82], ports({ audio: 1 })),
