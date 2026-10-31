@@ -138,7 +138,7 @@ A shape shared across two rows is counted in each row, so a column of sub-rows c
 - `dimensionsSource` is the page the size was read from. `null` size means no source was used: nothing here is guessed.
 - `formFactorGroup` names the body. It is a first pass, made from model names and, for old Macs, the form factor on Apple's pages. Machines with the same outside size can still differ in ports or cameras; look before sharing a mesh. Groups in phases 1 and 2 are judged from the family and any published sizes.
 - `status` is `built` for this package's devices (phase 6, with their key) and for real models a built mesh covers (phase 4, noted). Generic drawings such as `pc-tower` and `client-browser` are in phase 6 only because they exist.
-- `tags` holds what a machine can be filtered by (`@johnmorrisdotca/hako-devices/tags`). A fact with no source is absent.
+- `tags` holds what a machine can be filtered by (`@johnmorrisdotca/hako-devices/tags`), and `tagsSource` the page its CPU facts came from. A fact with no source is absent.
 - `notes` flags anything unconfirmed. Search for "unconfirmed" and "not confirmed".
 
 ## Sources and their limits
@@ -163,7 +163,7 @@ No open dataset of outer dimensions for consoles or old phones was found. One se
 
 ## Where this is incomplete
 
-- **Tags:** every machine has a brand and a type, and most a decade, worked out from the list itself. CPU, cores and memory come only from a source: Apple's spec pages, and Wikipedia's Raspberry Pi article, so far. iPhones, iPads, consoles, retro machines and Surface have none yet. RAM and cores list every option a page names.
+- **Tags:** every machine has a brand and a type, and most a decade, worked out from the list itself. CPU, cores and memory come only from a source, named in `tagsSource` when it is not the machine's own Apple page: 850 of the machines have a CPU. Apple's spec pages come first, then Wikipedia: the iPhone and iPad model lists, the list of Macs by CPU, and each console's or computer's own article. **A family's article is applied to its models**, so a later revision with a different chip reads as the first one, and the memory is the article's first figure. Memory and cores list every option a page names. Still none: Surface, Apple Watch, iPod, most Intel MacBooks, Mac minis and old phones and PDAs.
 - **Years:** 87 entries carry a year that was not found in a source, or none. Most are BlackBerry, Siemens and Ericsson phones with no article of their own, Palm variants, some older Apple displays, and Apple keyboards and printers. Those years came from memory and are flagged in `notes`. Years for Macs with no year on Apple's page were read from the Wikipedia list of Mac models by eye; they are not flagged.
 - **Sizes for phases 1 to 3 are thin.** Palm m100 and Zire families, most Treo models, early BlackBerrys, Game & Watch (none at all), NES, Super NES, Genesis, the original PlayStation, Xbox 360, Virtual Boy, the Atari 2600 and most home computers have no size here. Wikipedia gave none and no other reusable source was found.
 - **A family article's size is applied to its models.** Where an article gives one size for a series, the models it names share it. Where Apple's page disagreed by more than 2 mm for a model, the note says so. A few sizes dropped for that reason (PowerBook 180c, 190cs, Duo 270c, 280, 280c, 2300c) now come from Apple's page where it gave one.
