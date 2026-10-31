@@ -1301,7 +1301,7 @@ ASUS NUC 16 Pro NUC16GDB Board (2026) *built*, ASUS NUC 16 Pro NUC16GDK Mini PC 
 
 **ROG NUC** (6 machines, 0 shapes)
 
-ROG NUC (2024) *built*, ROG GR70 (listed among ASUS's NUCs; AMD inside) (2025) *built*, ROG NUC 2025 (NUC15JNK) *built*, ROG NUC 16 (NUC16JNK) (2026) *built*, ROG NUC 16 Edition 20 (2026) *built*, ROG NUC 16 x Phantom Blade Zero (2026) *built*.
+ROG NUC (2024) *built*, ROG NUC 2025 (NUC15JNK) *built*, ROG NUC 16 (NUC16JNK) (2026) *built*, ROG NUC 16 Edition 20 (2026) *built*, ROG NUC 16 x Phantom Blade Zero (2026) *built*, ROG GR70 (listed among ASUS's NUCs; AMD inside) *built*.
 
 **NUC** (39 machines, 0 shapes)
 
