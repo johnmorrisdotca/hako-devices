@@ -183,6 +183,22 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     corner: 12,
     marks: [top("panel", 0, -20, 130, 130, { round: true }), top("key", 80, 58, 10, 10, { round: true }), front("dark", 0, 22, 28, 13, { cols: 4, rows: 1, gap: 12 })],
   },
+  // A 1988 unit's photograph: the screen sits at the far end of the top, and the keys are four rows of ten. Places are a regular grid, not a measured drawing. The underside, with its battery door, is left plain.
+  "hp-12c": {
+    size: [128, 79, 15],
+    body: "plastic-char",
+    corner: 2,
+    marks: [
+      top("lcd", 0, -26, 70, 12),
+      top("key", 0, -2, 8, 6, { cols: 10, rows: 1, gap: 2 }),
+      top("key", 0, 6, 8, 6, { cols: 10, rows: 1, gap: 2 }),
+      top("key", -25, 14, 8, 6, { cols: 5, rows: 1, gap: 2 }),
+      top("key", -25, 22, 8, 6, { cols: 5, rows: 1, gap: 2 }),
+      top("key", 5, 18, 8, 14),
+      top("key", 30, 14, 8, 6, { cols: 4, rows: 1, gap: 2 }),
+      top("key", 30, 22, 8, 6, { cols: 4, rows: 1, gap: 2 }),
+    ],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };

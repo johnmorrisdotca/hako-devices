@@ -220,6 +220,7 @@ export const DEVICES: readonly Device[] = [
   whole("amiga-500", "Amiga 500", "classics", [474, 330, 62], ports({ power: 1 })),
   whole("zx-spectrum-16k-48k", "ZX Spectrum 16K/48K", "classics", [233, 144, 30], ports({ audio: 2, power: 1 })),
   whole("dreamcast", "Dreamcast", "classics", [190, 195.8, 75.5], ports({ audio: 1, power: 1 })),
+  whole("hp-12c", "HP-12C", "classics", [128, 79, 15], []),
 
   whole("nintendo-64", "Nintendo 64", "classics", [260, 190, 73], ports({ power: 1 })),
   whole("game-boy-advance-agb-001", "Game Boy Advance (AGB-001)", "classics", [144.5, 24.5, 82], ports({ audio: 1 })),

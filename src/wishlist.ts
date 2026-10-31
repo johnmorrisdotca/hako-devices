@@ -2016,7 +2016,6 @@ export const PLANNED: readonly PlannedDevice[] = [
   {"key":"simplynuc-nuc7i5dnfe","name":"NUC7i5DNFE fanless (Porcoolpine)","family":"NUC 7 fanless","shelf":"mini-pcs","maker":"Simply NUC","status":"planned"},
   {"key":"simplynuc-nuc7i7dnfe","name":"NUC7i7DNFE fanless (Porcoolpine)","family":"NUC 7 fanless","shelf":"mini-pcs","maker":"Simply NUC","status":"planned"},
   {"key":"hp-35","name":"HP-35","family":"HP-35","shelf":"calculators","maker":"Hewlett-Packard","status":"planned"},
-  {"key":"hp-12c","name":"HP-12C","family":"Voyager","shelf":"calculators","maker":"Hewlett-Packard","status":"planned"},
   {"key":"hp-15c","name":"HP-15C","family":"Voyager","shelf":"calculators","maker":"Hewlett-Packard","status":"planned"},
   {"key":"hp-16c","name":"HP-16C","family":"Voyager","shelf":"calculators","maker":"Hewlett-Packard","status":"planned"},
   {"key":"hp-10c","name":"HP-10C","family":"Voyager","shelf":"calculators","maker":"Hewlett-Packard","status":"planned"},
