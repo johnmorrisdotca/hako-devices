@@ -162,6 +162,8 @@ The catalogue also lists machines with no mesh yet (`status: "planned"`). They h
 
 A blank is always fine. A guess never is: every fact names the page it came from, so please link yours. [Open an issue](https://github.com/johnmorrisdotca/hako-devices/issues) with the machine, the fact and the link, or send a pull request following [CONTRIBUTING.md](CONTRIBUTING.md#add-or-correct-a-fact).
 
+**Want to draw machines?** [Building machines](docs/building-machines.md) has the steps, the mistakes to avoid and ready prompts for directing a coding agent to the same standard.
+
 ## The rest
 
 [CONTRIBUTING.md](CONTRIBUTING.md) · [SECURITY.md](SECURITY.md) · [CHANGELOG.md](CHANGELOG.md) · [NOTICE.md](NOTICE.md) · MIT licence

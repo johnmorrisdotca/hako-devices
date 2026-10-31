@@ -15,6 +15,7 @@ All notable changes to this project are written here. The format follows
 ### Fixed
 
 - Sizes in the list now follow Apple's own figures to the hundredth, the iPad (3rd and 4th generation) outline among them. A Galaxy Tab's height is its longer side. The generic `iphone` row no longer copies the first iPhone's size.
+- [Building machines](docs/building-machines.md): how to add a machine to the same standard, with prompts for a coding agent.
 
 ## [0.4.0] - 2026-10-31
 
