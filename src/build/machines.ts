@@ -335,7 +335,7 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("slot", 30, 28, 36, 8),
     ],
   },
-  // No page opened names this body's size. 190 by 180 by 70 mm is a stand-in, not a measurement. The cartridge slot, two buttons and two front ports follow the photograph. Places are not measured.
+  // No page opened names this body's size. 190 by 180 by 70 mm is a stand-in, not a measurement. The cartridge slot, two buttons and two front ports follow the photograph. Places are not measured. The side ribs are not drawn.
   "super-nintendo-entertainment-system-sns-001": {
     size: [190, 180, 70],
     body: "plastic-grey",
@@ -347,6 +347,48 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("slot", -28, 22, 32, 10),
       front("slot", 28, 22, 32, 10),
     ],
+  },
+  // Wikipedia gives 365 by 170 by 70 mm and names no axes. The mesh uses 365 across, 170 deep and 70 tall after the photograph: a long low box. The cartridge slot, the card slot and the rear vent follow the photographs. Places are not measured. There is no red in the palette.
+  "master-system-original": {
+    size: [365, 170, 70],
+    body: "plastic-char",
+    corner: 4,
+    marks: [top("slot", 60, -10, 140, 14), front("slot", 80, 22, 40, 10), back("dark", -20, 36, 180, 14), back("slot", 120, 22, 8, 8, { cols: 4, rows: 1, gap: 6 })],
+  },
+  // Sega names 280 mm wide, 212 mm deep and 70 mm tall. A round lid, a vent, a power switch and a reset button, from a photograph. Places are not measured.
+  "mega-drive-genesis-model-1": {
+    size: [280, 212, 70],
+    body: "plastic-char",
+    corner: 6,
+    marks: [
+      top("dark", 40, -16, 130, 130, { round: true }),
+      top("dark", -100, -30, 36, 40),
+      top("key", -80, 16, 8, 22),
+      top("key", -40, 28, 18, 8),
+      front("slot", 20, 20, 22, 10),
+    ],
+  },
+  // Wikipedia names 210 mm wide, 113 mm high and 38 mm deep. A screen, a pad, two buttons and a start button, from a photograph. Places are not measured. No back photograph was opened.
+  "game-gear": {
+    size: [210, 38, 113],
+    body: "plastic-char",
+    corner: 16,
+    marks: [
+      front("lcd", 8, 68, 72, 50),
+      front("key", -72, 52, 22, 8),
+      front("key", -72, 52, 8, 22),
+      front("key", 62, 46, 14, 14, { round: true }),
+      front("key", 82, 40, 14, 14, { round: true }),
+      front("key", 72, 68, 12, 12, { round: true }),
+      front("dark", -72, 18, 28, 12),
+    ],
+  },
+  // The manual names width 260 mm, length 230 mm and height 83 mm. A disc lid, two buttons and a front slot, from a photograph. Places are not measured. The side vents are not drawn.
+  "saturn-model-1": {
+    size: [260, 230, 83],
+    body: "plastic-char",
+    corner: 8,
+    marks: [top("dark", 0, -20, 150, 100), top("key", -70, 40, 24, 8), top("key", -30, 40, 24, 8), front("slot", 0, 24, 48, 10)],
   },
 };
 

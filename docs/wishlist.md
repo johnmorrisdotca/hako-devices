@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2517 machines. 1039 distinct shapes still to build. 1146 entries are already built: the 354 devices in this package, plus the real models those meshes cover. 1473 entries have a sourced size; the other 1044 are `null` on purpose.**
+**2517 machines. 1035 distinct shapes still to build. 1150 entries are already built: the 358 devices in this package, plus the real models those meshes cover. 1473 entries have a sourced size; the other 1044 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -30,10 +30,10 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Atari | 1 | 1 | 0 |
 |  | Hewlett-Packard | 1 | 1 | 0 |
 |  | Casio | 1 | 1 | 0 |
-| **2** | **Game consoles** | **237** | **159** | **73** |
+| **2** | **Game consoles** | **237** | **155** | **73** |
 |  | Nintendo | 111 | 43 | 30 |
 |  | Sony | 27 | 23 | 24 |
-|  | Sega | 22 | 21 | 6 |
+|  | Sega | 22 | 17 | 6 |
 |  | Atari | 14 | 13 | 1 |
 |  | NEC | 13 | 11 | 1 |
 |  | Microsoft | 9 | 8 | 6 |
@@ -279,7 +279,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2517** | **1039** | **1473** |
+|  | **Total** | **2517** | **1035** | **1473** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -657,7 +657,7 @@ Sony Ericsson W800 (2005), Sony Ericsson W810 (2006).
 
 Sony Ericsson Xperia X1 (2008), Sony Ericsson Xperia X10 (2010), Sony Ericsson Xperia Play (2011).
 
-### Phase 2: Game consoles (237 machines, 159 shapes to build)
+### Phase 2: Game consoles (237 machines, 155 shapes to build)
 
 **ASUS ROG Ally** (2 machines, 2 shapes)
 
@@ -867,17 +867,17 @@ Neo Geo Pocket (1998), Neo Geo Pocket Color (1999).
 
 Dreamcast (1998) *built*.
 
-**Sega Game Gear** (1 machines, 1 shapes)
+**Sega Game Gear** (1 machines, 0 shapes)
 
-Game Gear (1990).
+Game Gear (1990) *built*.
 
-**Sega Genesis** (7 machines, 7 shapes)
+**Sega Genesis** (7 machines, 6 shapes)
 
-Mega Drive / Genesis (model 1) (1988), TeraDrive (1991), Wondermega (1992), Mega Drive / Genesis (model 2) (1993), Mega Jet (1993), Nomad (1995), Genesis 3 (1998).
+Mega Drive / Genesis (model 1) (1988) *built*, TeraDrive (1991), Wondermega (1992), Mega Drive / Genesis (model 2) (1993), Mega Jet (1993), Nomad (1995), Genesis 3 (1998).
 
-**Sega Master System** (3 machines, 3 shapes)
+**Sega Master System** (3 machines, 2 shapes)
 
-Sega Mark III (1985), Master System (original) (1986), Master System II (1990).
+Sega Mark III (1985), Master System (original) (1986) *built*, Master System II (1990).
 
 **Sega Pico** (1 machines, 1 shapes)
 
@@ -887,9 +887,9 @@ Pico (1993).
 
 SC-3000 (1983), SG-1000 (1983), SG-1000 II (1984).
 
-**Sega Saturn** (2 machines, 2 shapes)
+**Sega Saturn** (2 machines, 1 shapes)
 
-Saturn (model 1) (1994), Saturn (model 2) (1995).
+Saturn (model 1) (1994) *built*, Saturn (model 2) (1995).
 
 **Sega CD** (3 machines, 3 shapes)
 

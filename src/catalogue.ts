@@ -236,6 +236,10 @@ export const DEVICES: readonly Device[] = [
   whole("nintendo-entertainment-system-nes-001", "Nintendo Entertainment System (NES-001)", "classics", [255, 202, 85], []),
   whole("super-famicom", "Super Famicom", "classics", [200, 242, 72], []),
   whole("super-nintendo-entertainment-system-sns-001", "Super Nintendo Entertainment System (SNS-001)", "classics", [190, 180, 70], []),
+  whole("master-system-original", "Master System (original)", "classics", [365, 170, 70], []),
+  whole("mega-drive-genesis-model-1", "Mega Drive / Genesis (model 1)", "classics", [280, 212, 70], []),
+  whole("game-gear", "Game Gear", "classics", [210, 38, 113], []),
+  whole("saturn-model-1", "Saturn (model 1)", "classics", [260, 230, 83], []),
 
   whole("nintendo-64", "Nintendo 64", "classics", [260, 190, 73], ports({ power: 1 })),
   whole("game-boy-advance-agb-001", "Game Boy Advance (AGB-001)", "classics", [144.5, 24.5, 82], ports({ audio: 1 })),
