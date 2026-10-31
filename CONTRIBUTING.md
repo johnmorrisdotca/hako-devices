@@ -16,6 +16,14 @@ Thank you for helping. Bug reports, ideas and pull requests are all welcome. Bug
 - **Needs Node 22 or later** to use the package, and **22.18 or later** to work on it: the tests and scripts run TypeScript directly with Node's own type stripping. So the TypeScript uses only syntax that can be erased (`erasableSyntaxOnly`), `import type` for types and a `.ts` extension on every relative import.
 - **Ports.** This package owns local ports 7800 to 7899 and nothing outside them. The demo's server is on 7800 (`scripts/dev.ts`), the tests' on 7801 (`playwright.config.ts`; `TEST_PORT` names another), the picture script's on 7802, and any other server or worktree takes 7803 and up. Check with `lsof -iTCP:<port> -sTCP:LISTEN` first, and stop a server by its process id, never by name.
 
+## Add or correct a fact
+
+The list is `data/wishlist.json`, one machine per line. An issue with the machine, the fact and a link is all we need. To send a pull request instead, change that line and run `pnpm wishlist`, which writes the files made from it.
+
+- **A blank is fine, a guess is not.** Leave out what you cannot source. A wrong fact is worse than a missing one.
+- **Name the page.** A size goes with its `dimensionsSource`, and tags with their `tagsSource`. The maker's own page is best, then a reference such as Wikipedia, then a review.
+- **Facts only.** Copy no pictures, 3D files or passages of text from those pages.
+
 ## Pull requests
 
 One change per pull request. Say what changed and how you checked it, and add a line to `CHANGELOG.md` under **Unreleased**.

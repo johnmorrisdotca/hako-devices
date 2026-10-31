@@ -9,6 +9,7 @@ import * as drawMachines from "../draw/machines.ts";
 import { deskDrawing } from "../draw/desk.ts";
 import * as drawMacs from "../draw/macs.ts";
 import * as drawNas from "../draw/nas.ts";
+import { nucBody as drawNucBody } from "../draw/nuc.ts";
 import * as drawPc from "../draw/pc.ts";
 import * as drawTablets from "../draw/tablets.ts";
 import { check } from "../catalogue.ts";
@@ -25,6 +26,8 @@ import * as laptops from "./laptops.ts";
 import { MACHINES, machine } from "./machines.ts";
 import * as macs from "./macs.ts";
 import * as nas from "./nas.ts";
+import { nucBody } from "./nuc.ts";
+import { NUC_BODIES } from "./nuc-bodies.ts";
 import * as pc from "./pc.ts";
 import * as boards from "./pi/boards.ts";
 import type { BoardContext } from "./pi/boards.ts";
@@ -132,8 +135,6 @@ const BASE_ART: Record<string, BaseArt> = {
     draw: (d, _m, { drives }) => void drawNas.nasRack(d, drives),
   },
   nuc: plain(pc.nuc, drawPc.nuc),
-  "nuc-12-tall": plain(pc.nuc12Tall, drawPc.nuc12Tall),
-  "nuc-12-slim": plain(pc.nuc12Slim, drawPc.nuc12Slim),
   "mini-pc": plain(pc.miniPc, drawPc.miniPc),
   "pc-tower": plain(pc.pcTower, drawPc.pcTower),
   unknown: plain(pc.unknownBox, drawPc.unknownBox),
@@ -147,6 +148,7 @@ const BASE_ART: Record<string, BaseArt> = {
   "client-android-phone": { mesh: (m, { stand }) => void clients.clientAndroidPhone(m, stand), draw: (d, m) => void drawClients.clientAndroidPhone(d, m) },
   "client-computer": plain(clients.clientComputer, drawClients.clientComputer),
   "client-browser": plain(clients.clientBrowser, drawClients.clientBrowser),
+  ...Object.fromEntries(Object.entries(NUC_BODIES).map(([key, body]) => [key, plain((m) => nucBody(m, body), (d, m) => drawNucBody(d, m, body))])),
   ...Object.fromEntries(Object.entries(MACHINES).map(([key, spec]) => [key, plain((m) => machine(m, spec), (d) => drawMachines.machine(d, spec))])),
   ...Object.fromEntries(Object.entries(DESKS).map(([key, spec]) => [key, plain((m) => deskMesh(m, spec), (d) => deskDrawing(d, spec))])),
 };

@@ -134,13 +134,85 @@ export function macKey(macModel: string): string {
   return "mac-mini";
 }
 
-/** A PC's key by its product name: a NUC 12 Pro by its product code (H the tall chassis, K the slim one), any other NUC the plain small PC, else `unknown`. */
+// Which body a NUC's product code names. The code's letters say the family and, where a family has two heights, H is tall and K is slim. Case does not matter; a code may start with the retail R.
+const NUC_BODY_CODES: readonly [RegExp, string][] = [
+  [/DCCP847|DC3217I/, "nuc-deep-canyon"],
+  [/DC3217BY/, "nuc-box-canyon"],
+  [/DC53427/, "nuc-horse-canyon"],
+  [/DN2820FYKH/, "nuc-forest-canyon"],
+  [/DE3815TYK/, "nuc-thin-canyon"],
+  [/D\d+WYKH/, "nuc-wilson-canyon-tall"],
+  [/D\d+WYK/, "nuc-wilson-canyon-slim"],
+  [/NUC5\w*RYK/, "nuc-rock-canyon-slim"],
+  [/NUC5\w*RYH/, "nuc-rock-canyon-tall"],
+  [/NUC5\w*MYH/, "nuc-maple-canyon"],
+  [/NUC5(CP|PP|PG)YH/, "nuc-pinnacle-canyon"],
+  [/NUC6\w*SYK/, "nuc-swift-canyon-slim"],
+  [/NUC6\w*SYH/, "nuc-swift-canyon-tall"],
+  [/NUC6I7KYK/, "nuc-skull-canyon"],
+  [/NUC6CAY[HS]/, "nuc-arches-canyon"],
+  [/NUC7\w*BNK/, "nuc-baby-canyon-slim"],
+  [/NUC7\w*BNH/, "nuc-baby-canyon-tall"],
+  [/NUC7\w*DNK/, "nuc-dawson-canyon-slim"],
+  [/NUC7\w*DNH/, "nuc-dawson-canyon-tall"],
+  [/NUC7[CP]JY[HS]/, "nuc-june-canyon"],
+  [/NUC8I7H[VN]K/, "nuc-hades-canyon"],
+  [/NUC8\w*BEK/, "nuc-bean-canyon-slim"],
+  [/NUC8\w*BEH/, "nuc-bean-canyon-tall"],
+  [/NUC8I3CYS/, "nuc-crimson-canyon"],
+  [/NUC8\w*INH/, "nuc-islay-canyon"],
+  [/NUC8\w*PNK/, "nuc-provo-canyon-slim"],
+  [/NUC8\w*PNH/, "nuc-provo-canyon-tall"],
+  [/NUC8CCHK/, "nuc-chaco-canyon"],
+  [/NUC9\w*QNX/, "nuc-ghost-canyon"],
+  [/NUC9\w*QNB|NUC11DBB|NUC12EDB/, "nuc-compute-element-h"],
+  [/NUC13SBB/, "nuc-compute-element-shrike"],
+  [/NUC10\w*FNK/, "nuc-frost-canyon-slim"],
+  [/NUC10\w*FNH/, "nuc-frost-canyon-tall"],
+  [/NUC11PHK/, "nuc-phantom-canyon"],
+  [/NUC11PAK/, "nuc-panther-canyon-slim"],
+  [/NUC11PAH/, "nuc-panther-canyon-tall"],
+  [/NUC11PAQ/, "nuc-panther-canyon-pad"],
+  [/NUC11TNK/, "nuc-tiger-canyon-slim"],
+  [/NUC11TNH\w*0L/, "nuc-tiger-canyon-lan"],
+  [/NUC11TNH/, "nuc-tiger-canyon-tall"],
+  [/NUC11ATK/, "nuc-atlas-canyon"],
+  [/NUC11BTM|NUC12DCM/, "nuc-beast-canyon"],
+  [/NUC12SNK/, "nuc-serpent-canyon"],
+  [/NUC12WSK/, "nuc-12-slim"],
+  [/NUC12WSH\w*0L/, "nuc-wall-street-canyon-lan"],
+  [/NUC12WSH/, "nuc-12-tall"],
+  [/NUC13RNG/, "nuc-raptor-canyon"],
+  [/NUC13(AN|L3|L5|LC)K/, "nuc-arena-canyon-slim"],
+  [/NUC13(AN|L3|LC)H/, "nuc-arena-canyon-tall"],
+  [/NUC13VYK/, "nuc-vivid-canyon"],
+  [/NUC13BR[F]/, "nuc-bravo-canyon-fins"],
+  [/NUC13BRK/, "nuc-bravo-canyon"],
+  [/NUC14RVS/, "nuc-revel-canyon-plus"],
+  [/NUC14RVK/, "nuc-revel-canyon-slim"],
+  [/NUC14RVH/, "nuc-revel-canyon-tall"],
+  [/NUC14LNS/, "nuc-lunar-canyon-plus"],
+  [/NUC14LNK/, "nuc-lunar-canyon"],
+  [/NUC14MNK/, "nuc-mill-canyon"],
+  [/NUC14SRK/, "nuc-scorpion-canyon"],
+  [/NUC15JNK/, "nuc-jean-canyon"],
+  [/NUC16JNK/, "nuc-rog-16"],
+  [/NUC15CRS/, "nuc-cyber-canyon-plus"],
+  [/NUC15CRK/, "nuc-cyber-canyon-slim"],
+  [/NUC15CRH/, "nuc-cyber-canyon-tall"],
+  [/NUC16GD[K]/, "nuc-grand-canyon"],
+  [/LAPQC/, "nuc-queens-county"],
+  [/LAP(KC|AC)/, "nuc-king-county"],
+  [/LAP(BC|RC)/, "nuc-bishop-county"],
+  [/\b(CM8|CM11|B?ELM1)/, "nuc-compute-element"],
+];
+
+/** A PC's key by its product name: a NUC by its product code, one whose code is not known the plain small PC, else `unknown`. */
 export function pcKey(dmiProduct: string): string {
-  const name = text(dmiProduct);
-  const twelve = /\bR?NUC12WS([HK])/i.exec(name)?.[1]?.toUpperCase();
-  if (twelve === "H") return "nuc-12-tall";
-  if (twelve === "K") return "nuc-12-slim";
-  return /\bR?NUC/i.test(name) ? "nuc" : "unknown";
+  const name = text(dmiProduct).toUpperCase();
+  const found = NUC_BODY_CODES.find(([code]) => code.test(name));
+  if (found) return found[1];
+  return /\bR?NUC/.test(name) ? "nuc" : "unknown";
 }
 
 /** One key for a machine. Order: a board, a NAS someone named, a Mac (not in a container), a small PC, else `unknown`. */

@@ -110,6 +110,10 @@ export function macbookNotch(m: Box, { w, d, h, shell, pro, screen, radius, lid 
   return m;
 }
 
+/** A laptop of no notch and plain sides, for a body drawn only from its size. */
+export const laptopNoNotch = (m: Box, { w, d, h, shell, screen, u }: { w: number; d: number; h: number; shell: Material; screen: readonly [number, number]; u: number }) =>
+  macbookNotch(m, { w, d, h, shell, pro: false, screen: [screen[0], screen[1]], radius: 6, lid: 5, u, notch: 0 });
+
 /** A thin 13-inch laptop: 304 by 215 by 11.3 mm, a dark blue shell, a 13.6-inch picture. */
 export const macbookAir13 = (m: Box) =>
   macbookNotch(m, {

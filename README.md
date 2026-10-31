@@ -151,6 +151,17 @@ const intelLaptops = catalogue().filter(({ key }) => matchesPicks(key, { type: [
 
 The catalogue also lists machines with no mesh yet (`status: "planned"`). They have a name and no shape: the gallery and `<hako-device key="...">` show the one "Coming soon" picture for each, and `catalogue()`, `statusOf(key)` and `catalogueCounts()` say which is which. [docs/wishlist.md](docs/wishlist.md) is the list.
 
+## Help fill it in
+
+**This list has gaps, and you can help close them.** Thousands of machines are listed, and many are missing a size, a CPU, a year or a date. Most are still waiting for a drawing, and some drawings are missing details a real owner would spot at once. If you know a machine, or have one on your desk, you can make this better:
+
+- **Add a fact you can source:** a size, a CPU, a release or end-of-support date, or where a button or camera really sits.
+- **Correct something wrong:** a wrong fact matters more than a missing one, so these come first.
+- **Add a machine that is missing,** or a whole product line nobody has listed yet.
+- **Look at a drawing beside the real thing** and tell us what is off.
+
+A blank is always fine. A guess never is: every fact names the page it came from, so please link yours. [Open an issue](https://github.com/johnmorrisdotca/hako-devices/issues) with the machine, the fact and the link, or send a pull request following [CONTRIBUTING.md](CONTRIBUTING.md#add-or-correct-a-fact).
+
 ## The rest
 
 [CONTRIBUTING.md](CONTRIBUTING.md) · [SECURITY.md](SECURITY.md) · [CHANGELOG.md](CHANGELOG.md) · [NOTICE.md](NOTICE.md) · MIT licence
