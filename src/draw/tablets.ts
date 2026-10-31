@@ -1,6 +1,7 @@
 // The drawings of the tablets and phones (tablets.ts): the same style as the rest. No marks.
 import * as THREE from "three";
 import type { Box, Vec3 } from "../build/kit.ts";
+import { homeButtonX } from "../build/tablets.ts";
 import type { Drawing } from "./drawing.ts";
 import { homePicture, phonePicture } from "./pictures.ts";
 
@@ -45,6 +46,21 @@ export const ipadPlain = (d: Drawing, model: Box) => slabOnStand(d, model, { she
 export const ipadAir = (d: Drawing, model: Box) => slabOnStand(d, model, { shell: "#5e5583" });
 export const ipadPro11 = (d: Drawing, model: Box) => slabOnStand(d, model, { shell: "#141c2a" });
 export const ipadPro13 = (d: Drawing, model: Box) => slabOnStand(d, model, metalShell);
+
+/** An older iPad Pro: the wide border and the round home button beside the picture. */
+export const ipadProHome = (d: Drawing, model: Box) => {
+  slabOnStand(d, model, { shell: "#141c2a" });
+  const { w, h, screen, frame } = model.slabFacts as NonNullable<Box["slabFacts"]>;
+  const out: Vec3 = new THREE.Vector3(0, 0, 1).transformDirection(frame).toArray();
+  const x = homeButtonX(w, screen[0]);
+  const ring: Vec3[] = [];
+  for (let k = 0; k < 16; k++) {
+    const a = (k * Math.PI) / 8;
+    ring.push(new THREE.Vector3(x + 5.5 * Math.cos(a), h / 2 + 5.5 * Math.sin(a), 0.2).applyMatrix4(frame).toArray());
+  }
+  d.flat(ring, out, { fill: "#05080e", stroke: "#8fa1b8", sw: 1 }, 5);
+  return d;
+};
 
 export const iphone = (d: Drawing, model: Box) => {
   slabOnStand(d, model, { shell: "#3e5f8a", picture: phonePicture });

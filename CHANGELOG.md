@@ -6,6 +6,16 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-31
+
+### Added
+
+- Every iPad Pro from 2015 to now, each body with its own cameras: the 2015 12.9-inch, the 9.7-inch, the 10.5-inch, the 2017 12.9-inch, the 2018 11-inch and 12.9-inch, the 2020 to 2022 11-inch, and the 2020 and 2021 to 2022 12.9-inch. The older ones have a home button.
+
+### Fixed
+
+- The iPad Pro 11-inch and 13-inch (M4 and M5) had the wrong cameras: a wide pill in the middle of the top edge. They now have the square in the corner, with one lens over the LiDAR, the flash, a light sensor and a microphone, placed from Apple's picture of the model. Their names now say which chips they cover.
+
 ## [0.1.1] - 2026-10-30
 
 ### Changed

@@ -51,24 +51,98 @@ export function standing(m: Box, { w, h, t, r, shell, screen, kind = "desktop", 
 }
 
 /** A round lens in its ring, on the back. */
-const lens = (add: SlabAdd, x: number, y: number, z: number, r: number, material: Material = "black-glass") => {
-  add("steel", cyl(r + 0.5, 0.5, 20), [x, y, z - 0.25], upright);
+const lens = (add: SlabAdd, x: number, y: number, z: number, r: number, material: Material = "black-glass", ring: Material = "steel") => {
+  add(ring, cyl(r + 0.5, 0.5, 20), [x, y, z - 0.25], upright);
   add(material, disc(r, 18), [x, y, z - 0.51], [0, 180, 0]);
 };
 
-/** The back of a tablet: its one camera, the top button and the USB-C on the side. */
+/** One round thing on a tablet's back: [across, down, radius] in mm from the corner, with the tablet upright, seen from behind, and the cameras top left. */
+type CameraSpot = readonly [number, number, number];
+
+/** The iPad Pro's cameras over the years, measured off Apple's pictures of each model's back. */
+export const PRO_CAMERAS: Readonly<Record<string, { square?: { inset: number; size: number; face: boolean }; lenses: readonly CameraSpot[]; marks: readonly (readonly [Material, ...CameraSpot])[] }>> = {
+  // 2015: one small lens and a microphone, no flash
+  lens: { lenses: [[11.5, 11.5, 3]], marks: [["hole", 18, 11.5, 0.4]] },
+  // 2016
+  "lens-flash-mic": {
+    lenses: [[11.8, 11.8, 3.7]],
+    marks: [
+      ["gold", 11.8, 20.1, 1.8],
+      ["hole", 18, 11.8, 0.4],
+    ],
+  },
+  // 2017
+  "lens-flash": { lenses: [[10.3, 10.8, 4]], marks: [["gold", 10.3, 18.8, 1.8]] },
+  // 2018: a wider ring, the microphone between it and the flash
+  "ring-lens": {
+    lenses: [[14.1, 13.4, 5.6]],
+    marks: [
+      ["hole", 14.1, 22.7, 0.4],
+      ["gold", 14.1, 28, 1.9],
+    ],
+  },
+  // 2020 to 2022: a black square with two lenses, the flash, the LiDAR and a microphone
+  "two-lenses": {
+    square: { inset: 6.5, size: 26.5, face: true },
+    lenses: [
+      [13.4, 13.4, 4.5],
+      [13.4, 25.3, 4.7],
+    ],
+    marks: [
+      ["gold", 26.3, 11.3, 2.1],
+      ["alu-dark", 26.3, 19.4, 3.7],
+      ["hole", 26.3, 27.3, 0.8],
+    ],
+  },
+  // 2024 on: the square in the tablet's own colour, one lens over the LiDAR, a light sensor, the flash and a microphone
+  "one-lens-lidar": {
+    square: { inset: 6.8, size: 27.7, face: false },
+    lenses: [[14.5, 14.7, 4.8]],
+    marks: [
+      ["black-glass", 14.5, 26.7, 4.1],
+      ["black-glass", 27.2, 12.6, 1.7],
+      ["steel", 27.2, 20.7, 3.2],
+      ["hole", 27.2, 28.6, 0.5],
+    ],
+  },
+};
+
+type TabletCamera = "one" | keyof typeof PRO_CAMERAS;
+
+/** An iPad Pro's cameras. Long side down, the top left corner from behind is top right, so down runs along the slab from its end and across runs down from its top. */
+function proCameras(add: SlabAdd, camera: string, shell: Material, w: number, h: number, z: number) {
+  const { square, lenses, marks } = PRO_CAMERAS[camera];
+  const x = (down: number) => -w / 2 + down;
+  const y = (across: number) => h - across;
+  let face = z;
+  if (square) {
+    const { inset, size } = square;
+    const middle = inset + size / 2;
+    face = z - 0.9;
+    add(shell, slab(roundedSquare(size, size, 7.5, 6), 0.9, 0.3, { curve: 6, bevelSeg: 1 }), [x(middle), y(middle), face], upright);
+    if (square.face) {
+      face = z - 1;
+      add("black-glass", slab(roundedSquare(size - 1.6, size - 1.6, 6.5, 6), 0.12, 0.03, { curve: 6, bevelSeg: 1 }), [x(middle), y(middle), face], upright);
+    }
+  }
+  for (const [across, down, r] of lenses) lens(add, x(down), y(across), face + 0.1, r, "black-glass", square ? "alu-dark" : "steel");
+  for (const [material, across, down, r] of marks) add(material, disc(r, 16), [x(down), y(across), face - 0.03], [0, 180, 0]);
+}
+
+/** The home button's place: the middle of the wide border beside the picture, on the end the charging port is on. */
+export const homeButtonX = (w: number, screenW: number) => (w + screenW) / 4;
+
+/** The back of a tablet: its cameras, the top button and the port on the side, with a home button on the front of the older ones. */
 const tabletBack =
-  (camera: "one" | "wide"): SlabBack =>
+  (camera: TabletCamera, shell: Material, homeX: number | null): SlabBack =>
   (add, { w, h, t }, m, frame) => {
     const z = -t;
-    const cx = w / 2 - 15;
-    const cy = h - 15;
-    if (camera === "wide") {
-      add("shell-graphite", slab(roundedSquare(33, 15, 6, 6), 0.9, 0.3, { curve: 6, bevelSeg: 1 }), [0, cy, z - 0.9], upright);
-      lens(add, -8, cy, z - 0.6, 4);
-      lens(add, 3, cy, z - 0.6, 3);
-      add("hole", disc(1.6, 12), [11, cy, z - 0.92], [0, 180, 0]);
-    } else lens(add, -cx, cy, z, 4.4);
+    if (camera === "one") lens(add, -(w / 2 - 15), h - 15, z, 4.4);
+    else proCameras(add, camera, shell, w, h, z);
+    if (homeX !== null) {
+      add("steel", disc(5.5, 24), [homeX, h / 2, 0.16]);
+      add("black-glass", disc(5, 24), [homeX, h / 2, 0.18]);
+    }
     m.printFace("back", [0, h / 2, z - 0.05], [0, 180, 0], w * 0.5, w * 0.1, frame);
     // the top button and the volume keys, along the top edge
     add("alu-dark", rbox(19, 1.4, Math.max(2.6, t - 2), 0.5, 1), [w / 2 - 28, h + 0.1, -t / 2]);
@@ -78,13 +152,32 @@ const tabletBack =
   };
 
 /** The tablets' sizes and colours, long side down. */
-const tablet = (w: number, h: number, t: number, r: number, shell: Material, screen: [number, number], camera: "one" | "wide" = "one"): SlabOptions => ({ w, h, t, r, shell, screen, back: tabletBack(camera) });
+const tablet = (w: number, h: number, t: number, r: number, shell: Material, screen: [number, number], camera: TabletCamera = "one", home = false): SlabOptions => ({
+  w,
+  h,
+  t,
+  r,
+  shell,
+  screen,
+  // the pictures with a home button beside them have square corners
+  ...(home ? { glassR: 0.5 } : {}),
+  back: tabletBack(camera, shell, home ? homeButtonX(w, screen[0]) : null),
+});
 
 export const ipadMini = tablet(195.4, 134.8, 6.3, 15, "shell-sand", [177, 123]);
 export const ipadPlain = tablet(248.6, 179.5, 7, 18, "shell-blue", [227, 158]);
 export const ipadAir = tablet(247.6, 178.5, 6.1, 18, "shell-violet", [230, 160]);
-export const ipadPro11 = tablet(249.7, 177.5, 5.3, 15, "shell-graphite", [233.5, 161], "wide");
-export const ipadPro13 = tablet(281.6, 215.5, 5.1, 15, "shell-silver", [264.4, 198.3], "wide");
+export const ipadPro11 = tablet(249.7, 177.5, 5.3, 15, "shell-graphite", [233.5, 161], "one-lens-lidar");
+export const ipadPro13 = tablet(281.6, 215.5, 5.1, 15, "shell-silver", [264.4, 198.3], "one-lens-lidar");
+export const ipadPro12First = tablet(305.7, 220.6, 6.9, 15, "shell-graphite", [262.9, 197.1], "lens", true);
+export const ipadPro9 = tablet(240, 169.5, 6.1, 13, "shell-graphite", [197.1, 147.8], "lens-flash-mic", true);
+export const ipadPro10 = tablet(250.6, 174.1, 6.1, 13, "shell-graphite", [214, 160.5], "lens-flash", true);
+export const ipadPro12Second = tablet(305.7, 220.6, 6.9, 15, "shell-graphite", [262.9, 197.1], "lens-flash", true);
+export const ipadPro11First = tablet(247.6, 178.5, 5.9, 15, "shell-graphite", [229.8, 160.5], "ring-lens");
+export const ipadPro12Third = tablet(280.6, 214.9, 5.9, 15, "shell-graphite", [262.9, 197.1], "ring-lens");
+export const ipadPro11Second = tablet(247.6, 178.5, 5.9, 15, "shell-graphite", [229.8, 160.5], "two-lenses");
+export const ipadPro12Fourth = tablet(280.6, 214.9, 5.9, 15, "shell-graphite", [262.9, 197.1], "two-lenses");
+export const ipadPro12Fifth = tablet(280.6, 214.9, 6.4, 15, "shell-graphite", [262.9, 197.1], "two-lenses");
 
 /** The back of a phone: the square of cameras in the corner. */
 const phoneBack: SlabBack = (add, { w, h, t }, m, frame) => {
