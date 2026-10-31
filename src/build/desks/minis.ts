@@ -102,7 +102,11 @@ function flatMini({ shell, slot, infrared, sockets, vent, ventY, lightX, lightY 
       ...(slot ? [f.mark("slot", 0, 26.7, 138, 2.6, { over: 1 })] : []),
       ...(infrared ? [f.round("dark", 66, 26.7, 5)] : []),
       f.mark("light", lightX, lightY, 1.6, 1.6, { round: true }),
-      ...sockets.flatMap(([kind, x, y]) => socket(b, kind, x, y)),
+      // a socket past the flat of the back sits back with the corner it lies on
+      ...sockets.flatMap(([kind, x, y]) => {
+        const past = Math.max(0, Math.abs(x) - (F - 28));
+        return socket(onFace("back", -F + 28 - Math.sqrt(28 * 28 - past * past)), kind, x, y);
+      }),
       b.mark("slot", vent[0], ventY, vent[1], 6, { r: 3, over: 1 }),
     ],
     prints: [{ id: "lid", at: [0, H + 0.04, 0], turn: [-90, 0, 0], w: 90, h: 18 }],
