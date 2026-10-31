@@ -116,7 +116,7 @@ test("every drawing in the gallery loads, in thin, in thick and in both", async 
 
 test("every device reaches its 3D view", async ({ page, browserName }, info) => {
   test.skip(!is3d(browserName) || info.project.name !== "chromium-desk", "one browser is enough for this long walk");
-  test.setTimeout(process.env.CI ? 900_000 : 300_000);
+  test.setTimeout(process.env.CI ? 1_500_000 : 600_000);
   const problems = watch(page);
   await page.goto(URL);
   const hero = page.locator("hako-device#hero");

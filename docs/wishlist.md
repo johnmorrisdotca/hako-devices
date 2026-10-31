@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-30.
 
-**1745 machines. 933 distinct shapes still to build. 136 entries are already built: the 65 devices in this package, plus the real models those meshes cover. 875 entries have a sourced size; the other 870 are `null` on purpose.**
+**1745 machines. 922 distinct shapes still to build. 150 entries are already built: the 86 devices in this package, plus the real models those meshes cover. 875 entries have a sourced size; the other 870 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -27,9 +27,9 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Kyocera | 1 | 1 | 1 |
 |  | Qualcomm | 1 | 1 | 0 |
 |  | Sharp | 1 | 1 | 0 |
-| **2** | **Game consoles** | **227** | **163** | **72** |
-|  | Nintendo | 111 | 55 | 29 |
-|  | Sony | 27 | 25 | 24 |
+| **2** | **Game consoles** | **227** | **157** | **72** |
+|  | Nintendo | 111 | 51 | 29 |
+|  | Sony | 27 | 23 | 24 |
 |  | Sega | 22 | 21 | 6 |
 |  | Atari | 14 | 13 | 1 |
 |  | NEC | 13 | 11 | 1 |
@@ -63,16 +63,16 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **874** | **290** | **620** |
-|  | Power Mac | 92 | 19 | 88 |
+| **4** | **Apple** | **874** | **285** | **620** |
+|  | Power Mac | 92 | 18 | 88 |
 |  | Performa | 71 | 9 | 71 |
 |  | MacBook Pro | 69 | 13 | 64 |
 |  | PowerBook | 61 | 15 | 60 |
 |  | iMac | 61 | 14 | 35 |
-|  | iPhone | 55 | 36 | 55 |
+|  | iPhone | 55 | 35 | 55 |
 |  | iPad | 46 | 16 | 46 |
 |  | Display | 38 | 37 | 28 |
-|  | iPod | 37 | 22 | 20 |
+|  | iPod | 37 | 20 | 20 |
 |  | Apple Watch | 36 | 8 | 0 |
 |  | MacBook Air | 28 | 5 | 12 |
 |  | Printer | 26 | 16 | 0 |
@@ -90,7 +90,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Xserve | 11 | 2 | 0 |
 |  | Mac Pro | 10 | 3 | 8 |
 |  | Macintosh II | 8 | 4 | 8 |
-|  | Apple TV | 7 | 4 | 5 |
+|  | Apple TV | 7 | 3 | 5 |
 |  | Time Capsule | 5 | 2 | 1 |
 |  | Camera | 5 | 3 | 0 |
 |  | Mac Studio | 4 | 0 | 4 |
@@ -152,7 +152,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Arduino Uno | 4 | 4 | 0 |
 | **11** | **Mini PCs** | **21** | **9** | **0** |
 |  | NUC | 21 | 9 | 0 |
-|  | **Total** | **1745** | **933** | **875** |
+|  | **Total** | **1745** | **922** | **875** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -162,7 +162,7 @@ A shape shared across two rows is counted in each row, so a column of sub-rows c
 - A size from a source that gave inches is converted and rounded to 0.1 mm, so it can sit a millimetre off the metric figure.
 - `dimensionsSource` is the page the size was read from. `null` size means no source was used: nothing here is guessed.
 - `formFactorGroup` names the body. It is a first pass, made from model names and, for old Macs, the form factor on Apple's pages. Machines with the same outside size can still differ in ports or cameras; look before sharing a mesh. Groups in phases 1 and 2 are judged from the family and any published sizes.
-- `status` is `built` for this package's devices (phase 6, with their key) and for real models a built mesh covers (phase 4, noted). Ten well-known machines (the Classics) are drawn in `src/build/machines.ts` from one description each. Generic drawings such as `pc-tower` and `client-browser` are in phase 6 only because they exist.
+- `status` is `built` for this package's devices (phase 6, with their key) and for real models a built mesh covers (phase 4, noted). Well-known machines (the Classics) are drawn in `src/build/machines.ts` from one description each. Generic drawings such as `pc-tower` and `client-browser` are in phase 6 only because they exist.
 - `tags` holds what a machine can be filtered by (`@johnmorrisdotca/hako-devices/tags`), and `tagsSource` the page its CPU facts came from. A fact with no source is absent.
 - `notes` flags anything unconfirmed. Search for "unconfirmed" and "not confirmed".
 
@@ -501,7 +501,7 @@ Sony Ericsson W800 (2005), Sony Ericsson W810 (2006).
 
 Sony Ericsson Xperia X1 (2008), Sony Ericsson Xperia X10 (2010), Sony Ericsson Xperia Play (2011).
 
-### Phase 2: Game consoles (227 machines, 163 shapes to build)
+### Phase 2: Game consoles (227 machines, 157 shapes to build)
 
 **Atari 2600** (5 machines, 4 shapes)
 
@@ -607,9 +607,9 @@ NES Classic Edition (2016), Super NES Classic Edition (2017).
 
 Color TV-Game 6 (1977), Color TV-Game 15 (1978), Color TV-Game Racing 112 (1978), Color TV-Game Block Breaker (1979), Computer TV-Game (1980).
 
-**Nintendo DS** (4 machines, 4 shapes)
+**Nintendo DS** (4 machines, 3 shapes)
 
-Nintendo DS (NTR-001) (2004), Nintendo DS Lite (USG-001) (2006), Nintendo DSi (TWL-001) (2008), Nintendo DSi XL (UTL-001) (2009).
+Nintendo DS (NTR-001) (2004) *built*, Nintendo DS Lite (USG-001) (2006), Nintendo DSi (TWL-001) (2008), Nintendo DSi XL (UTL-001) (2009).
 
 **Nintendo Game & Watch** (63 machines, 12 shapes)
 
@@ -619,9 +619,9 @@ Game & Watch Ball (AC-01) (1980), Game & Watch Fire (RC-04) (1980), Game & Watch
 
 Game Boy (DMG-01) (1989) *built*, Game Boy Pocket (MGB-001) (1996), Game Boy Color (CGB-001) (1998), Game Boy Light (MGB-101) (1998).
 
-**Nintendo Game Boy Advance** (4 machines, 3 shapes)
+**Nintendo Game Boy Advance** (4 machines, 2 shapes)
 
-Game Boy Advance (AGB-001) (2001), Game Boy Advance SP (AGS-001) (2003), Game Boy Advance SP (AGS-101) (2005), Game Boy Micro (OXY-001) (2005).
+Game Boy Advance (AGB-001) (2001) *built*, Game Boy Advance SP (AGS-001) (2003), Game Boy Advance SP (AGS-101) (2005), Game Boy Micro (OXY-001) (2005).
 
 **Nintendo GameCube** (1 machines, 1 shapes)
 
@@ -631,9 +631,9 @@ Nintendo GameCube (2001).
 
 Family Computer (Famicom) (1983), Nintendo Entertainment System (NES-001) (1985), Famicom Disk System (1986), AV Famicom (HVC-101) (1993), NES-101 (top loader) (1993).
 
-**Nintendo 64** (2 machines, 2 shapes)
+**Nintendo 64** (2 machines, 1 shapes)
 
-Nintendo 64 (1996), Nintendo 64DD (1999).
+Nintendo 64 (1996) *built*, Nintendo 64DD (1999).
 
 **Nintendo Other handheld** (1 machines, 1 shapes)
 
@@ -643,9 +643,9 @@ Pokémon Mini (2001).
 
 Super Famicom (1990), Super Nintendo Entertainment System (SNS-001) (1991), Satellaview (1995), Super NES (SNS-101) (1997), Super Famicom Jr. (SHVC-101) (1998).
 
-**Nintendo Switch** (3 machines, 3 shapes)
+**Nintendo Switch** (3 machines, 2 shapes)
 
-Nintendo Switch (2017), Nintendo Switch Lite (2019), Nintendo Switch OLED Model (2021).
+Nintendo Switch (2017) *built*, Nintendo Switch Lite (2019), Nintendo Switch OLED Model (2021).
 
 **Nintendo Switch 2** (1 machines, 1 shapes)
 
@@ -735,13 +735,13 @@ PlayStation 2 (fat) (2000) *built*, PSX (DESR) (2003), PlayStation 2 Slim (2004)
 
 PlayStation 3 (original) (2006), PlayStation 3 Slim (2009), PlayStation 3 Super Slim (2012).
 
-**Sony PlayStation 4** (3 machines, 3 shapes)
+**Sony PlayStation 4** (3 machines, 2 shapes)
 
-PlayStation 4 (original) (2013), PlayStation 4 Pro (2016), PlayStation 4 Slim (2016).
+PlayStation 4 (original) (2013) *built*, PlayStation 4 Pro (2016), PlayStation 4 Slim (2016).
 
-**Sony PlayStation 5** (6 machines, 6 shapes)
+**Sony PlayStation 5** (6 machines, 5 shapes)
 
-PlayStation 5 (2020), PlayStation 5 Digital Edition (2020), PlayStation 5 Slim (2023), PlayStation 5 Slim Digital Edition (2023), PlayStation Portal (2023), PlayStation 5 Pro (2024).
+PlayStation 5 (2020) *built*, PlayStation 5 Digital Edition (2020), PlayStation 5 Slim (2023), PlayStation 5 Slim Digital Edition (2023), PlayStation Portal (2023), PlayStation 5 Pro (2024).
 
 **Sony Vita** (3 machines, 3 shapes)
 
@@ -853,7 +853,7 @@ TI-99/4A (1981).
 
 Yamaha CX5M (1984).
 
-### Phase 4: Apple (874 machines, 290 shapes to build)
+### Phase 4: Apple (874 machines, 285 shapes to build)
 
 **AirPods** (12 machines, 0 shapes)
 
@@ -867,9 +867,9 @@ AirPort Base Station (Graphite) (1999), AirPort Base Station (Dual Ethernet) (20
 
 AirTag (1st generation) (2021), AirTag (2nd generation) (2026).
 
-**Apple TV** (7 machines, 4 shapes)
+**Apple TV** (7 machines, 3 shapes)
 
-Apple TV (1st generation) (2007), Apple TV (2nd generation) (2010), Apple TV (3rd generation) (2012), Apple TV HD (2015), Apple TV 4K (1st generation) (2017), Apple TV 4K (2nd generation) (2021), Apple TV 4K (3rd generation) (2022).
+Apple TV (1st generation) (2007), Apple TV (2nd generation) (2010), Apple TV (3rd generation) (2012), Apple TV HD (2015), Apple TV 4K (1st generation) (2017) *built*, Apple TV 4K (2nd generation) (2021) *built*, Apple TV 4K (3rd generation) (2022).
 
 **Apple Watch** (36 machines, 8 shapes)
 
@@ -951,9 +951,9 @@ Macintosh Performa 200 (1992), Macintosh Performa 400 (1992), Macintosh Performa
 
 Macintosh Portable (1989), Macintosh Portable (backlit screen) (1991).
 
-**Power Mac** (92 machines, 19 shapes)
+**Power Mac** (92 machines, 18 shapes)
 
-Power Macintosh 6100/60 (1994), Power Macintosh 6100/60AV (1994), Power Macintosh 7100/66 (1994), Power Macintosh 7100/66AV (1994), Power Macintosh 8100/110 (1994), Power Macintosh 8100/80 (1994), Power Macintosh 8100/80AV (1994), Power Macintosh 5200/75 LC (1995), Power Macintosh 5300/100 LC (1995), Power Macintosh 6100/66 (1995), Power Macintosh 6100/66 DOS Compatible (1995), Power Macintosh 6100/66AV (1995), Power Macintosh 6200/75 (1995), Power Macintosh 7100/80 (1995), Power Macintosh 7100/80AV (1995), Power Macintosh 7200/75 (1995), Power Macintosh 7200/90 (1995), Power Macintosh 7500/100 (1995), Power Macintosh 8100/100 (1995), Power Macintosh 8100/100AV (1995), Power Macintosh 8115/110 (1995), Power Macintosh 8500/120 (1995), Power Macintosh 9500/120 (1995), Power Macintosh 9500/132 (1995), Power Macintosh 9515/132 (1995), Power Macintosh 4400/160 (1996), Power Macintosh 5260/100 (1996), Power Macintosh 5260/120 (1996), Power Macintosh 5400/120 (1996), Power Macintosh 5400/180 (1996), Power Macintosh 6300/120 (1996), Power Macintosh 6300/160 (1996), Power Macintosh 6400/200 (1996), Power Macintosh 7200/120 (1996), Power Macintosh 7200/120 PC Compatible (1996), Power Macintosh 7215/90 (1996), Power Macintosh 7600/120 (1996), Power Macintosh 7600/132 (1996), Power Macintosh 8200/100 (1996), Power Macintosh 8200/120 (1996), Power Macintosh 8500/132 (1996), Power Macintosh 8500/150 (1996), Power Macintosh 8500/180 (1996), Power Macintosh 8515/120 (1996), Power Macintosh 9500/150 (1996), Power Macintosh 9500/180MP (1996), Power Macintosh 9500/200 (1996), Power Macintosh 4400/200 (1997), Power Macintosh 4400/200 PC Compatible (1997), Power Macintosh 5400/200 (1997), Power Macintosh 5500/225 (1997), Power Macintosh 5500/250 (1997), Power Macintosh 6500/225 (1997), Power Macintosh 6500/250 (1997), Power Macintosh 6500/275 (1997), Power Macintosh 6500/300 (1997), Power Macintosh 7220/200 (1997), Power Macintosh 7220/200 PC Compatible (1997), Power Macintosh 7300/166 (1997), Power Macintosh 7300/180 (1997), Power Macintosh 7300/180 PC Compatible (1997), Power Macintosh 7300/200 (1997), Power Macintosh 7600/200 (1997), Power Macintosh 8600/200 (1997), Power Macintosh 8600/250 (1997), Power Macintosh 8600/300 (1997), Power Macintosh 9600/200 (1997), Power Macintosh 9600/200MP (1997), Power Macintosh 9600/233 (1997), Power Macintosh 9600/300 (1997), Power Macintosh 9600/350 (1997), Power Macintosh G3 Desktop (1997), Power Macintosh G3 Mini Tower (1997), Twentieth Anniversary Macintosh (1997), Power Macintosh G3 All-In-One (1998), Power Mac G4 (AGP Graphics) (1999), Power Mac G4 (PCI Graphics) (1999), Power Macintosh G3 (Blue and White) (1999), Power Mac G4 (Cube) (2000), Power Mac G4 (Gigabit Ethernet) (2000), Power Mac G4 (Digital Audio) (2001), Power Mac G4 (Quicksilver) (2001), Power Mac G4 (Mirrored Drive Doors) (2002), Power Mac G4 (Quicksilver 2002), Power Mac G4 (FW800) (2003), Power Mac G4 (Mirrored Drive Doors 2003), Power Mac G5 (2003), Power Mac G5 (June 2004), Power Mac G5 (Late 2004), Developer Transition Kit (2005), Power Mac G5 (Early 2005), Power Mac G5 (Late 2005).
+Power Macintosh 6100/60 (1994), Power Macintosh 6100/60AV (1994), Power Macintosh 7100/66 (1994), Power Macintosh 7100/66AV (1994), Power Macintosh 8100/110 (1994), Power Macintosh 8100/80 (1994), Power Macintosh 8100/80AV (1994), Power Macintosh 5200/75 LC (1995), Power Macintosh 5300/100 LC (1995), Power Macintosh 6100/66 (1995), Power Macintosh 6100/66 DOS Compatible (1995), Power Macintosh 6100/66AV (1995), Power Macintosh 6200/75 (1995), Power Macintosh 7100/80 (1995), Power Macintosh 7100/80AV (1995), Power Macintosh 7200/75 (1995), Power Macintosh 7200/90 (1995), Power Macintosh 7500/100 (1995), Power Macintosh 8100/100 (1995), Power Macintosh 8100/100AV (1995), Power Macintosh 8115/110 (1995), Power Macintosh 8500/120 (1995), Power Macintosh 9500/120 (1995), Power Macintosh 9500/132 (1995), Power Macintosh 9515/132 (1995), Power Macintosh 4400/160 (1996), Power Macintosh 5260/100 (1996), Power Macintosh 5260/120 (1996), Power Macintosh 5400/120 (1996), Power Macintosh 5400/180 (1996), Power Macintosh 6300/120 (1996), Power Macintosh 6300/160 (1996), Power Macintosh 6400/200 (1996), Power Macintosh 7200/120 (1996), Power Macintosh 7200/120 PC Compatible (1996), Power Macintosh 7215/90 (1996), Power Macintosh 7600/120 (1996), Power Macintosh 7600/132 (1996), Power Macintosh 8200/100 (1996), Power Macintosh 8200/120 (1996), Power Macintosh 8500/132 (1996), Power Macintosh 8500/150 (1996), Power Macintosh 8500/180 (1996), Power Macintosh 8515/120 (1996), Power Macintosh 9500/150 (1996), Power Macintosh 9500/180MP (1996), Power Macintosh 9500/200 (1996), Power Macintosh 4400/200 (1997), Power Macintosh 4400/200 PC Compatible (1997), Power Macintosh 5400/200 (1997), Power Macintosh 5500/225 (1997), Power Macintosh 5500/250 (1997), Power Macintosh 6500/225 (1997), Power Macintosh 6500/250 (1997), Power Macintosh 6500/275 (1997), Power Macintosh 6500/300 (1997), Power Macintosh 7220/200 (1997), Power Macintosh 7220/200 PC Compatible (1997), Power Macintosh 7300/166 (1997), Power Macintosh 7300/180 (1997), Power Macintosh 7300/180 PC Compatible (1997), Power Macintosh 7300/200 (1997), Power Macintosh 7600/200 (1997), Power Macintosh 8600/200 (1997), Power Macintosh 8600/250 (1997), Power Macintosh 8600/300 (1997), Power Macintosh 9600/200 (1997), Power Macintosh 9600/200MP (1997), Power Macintosh 9600/233 (1997), Power Macintosh 9600/300 (1997), Power Macintosh 9600/350 (1997), Power Macintosh G3 Desktop (1997), Power Macintosh G3 Mini Tower (1997), Twentieth Anniversary Macintosh (1997), Power Macintosh G3 All-In-One (1998), Power Mac G4 (AGP Graphics) (1999), Power Mac G4 (PCI Graphics) (1999), Power Macintosh G3 (Blue and White) (1999), Power Mac G4 (Cube) (2000), Power Mac G4 (Gigabit Ethernet) (2000), Power Mac G4 (Digital Audio) (2001), Power Mac G4 (Quicksilver) (2001), Power Mac G4 (Mirrored Drive Doors) (2002), Power Mac G4 (Quicksilver 2002), Power Mac G4 (FW800) (2003), Power Mac G4 (Mirrored Drive Doors 2003), Power Mac G5 (2003) *built*, Power Mac G5 (June 2004) *built*, Power Mac G5 (Late 2004) *built*, Developer Transition Kit (2005), Power Mac G5 (Early 2005), Power Mac G5 (Late 2005).
 
 **PowerBook** (61 machines, 15 shapes)
 
@@ -1011,13 +1011,13 @@ iMac (1998), iMac (266 MHz) (1999), iMac (333 MHz) (1999), iMac (Slot Loading) (
 
 iPad (1st generation) (2010), iPad 2 (2011), iPad (3rd generation) (2012), iPad (4th generation) (2012), iPad mini (1st generation) (2012), iPad Air (1st generation) (2013), iPad mini 2 (2013), iPad Air 2 (2014), iPad mini 3 (2014), iPad Pro (12.9-inch) (2015), iPad mini 4 (2015), iPad Pro (9.7-inch) (2016), iPad (5th generation) (2017), iPad Pro (10.5-inch) (2017), iPad Pro 12.9-inch (2nd generation) (2017), iPad (6th generation) (2018), iPad Pro 11-inch (2018), iPad Pro 12.9-inch (3rd generation) (2018), iPad (7th generation) (2019), iPad Air (3rd generation) (2019), iPad mini (5th generation) (2019), iPad (8th generation) (2020), iPad Air (4th generation) (2020) *built*, iPad Pro 11-inch (2nd generation) (2020), iPad Pro 12.9-inch (4th generation) (2020), iPad (9th generation) (2021), iPad Pro 11-inch (3rd generation) (2021), iPad Pro 12.9-inch (5th generation) (2021), iPad mini (6th generation) (2021) *built*, iPad (10th generation) (2022) *built*, iPad Air (5th generation) (2022) *built*, iPad Pro 11-inch (4th generation) (2022), iPad Pro 12.9-inch (6th generation) (2022), iPad Air 11-inch (M2) (2024) *built*, iPad Air 13-inch (M2) (2024), iPad Pro 11-inch (M4) (2024) *built*, iPad Pro 13-inch (M4) (2024) *built*, iPad mini (A17 Pro) (2024) *built*, iPad (A16) (2025) *built*, iPad Air 11-inch (M3) (2025) *built*, iPad Air 13-inch (M3) (2025), iPad Pro 11-inch (M5) (2025) *built*, iPad Pro 13-inch (M5) (2025) *built*, iPad Air 11‑inch (M4) (2026) *built*, iPad Air 13‑inch (M4) (2026), iPad mini (A20 Pro) (2026).
 
-**iPhone** (55 machines, 36 shapes)
+**iPhone** (55 machines, 35 shapes)
 
-iPhone (1st generation) (2007), iPhone 3G (2008), iPhone 3GS (2009), iPhone 4 (2010), iPhone 4s (2011), iPhone 5 (2012), iPhone 5c (2013), iPhone 5s (2013), iPhone 6 (2014), iPhone 6 Plus (2014), iPhone 6s (2015), iPhone 6s Plus (2015), iPhone 7 (2016), iPhone 7 Plus (2016), iPhone SE (1st generation) (2016), iPhone 8 (2017), iPhone 8 Plus (2017), iPhone X (2017), iPhone XR (2018), iPhone XS (2018), iPhone XS Max (2018), iPhone 11 (2019), iPhone 11 Pro (2019), iPhone 11 Pro Max (2019), iPhone 12 (2020), iPhone 12 Pro (2020), iPhone 12 Pro Max (2020), iPhone 12 mini (2020), iPhone SE (2nd generation) (2020), iPhone 13 (2021), iPhone 13 Pro (2021), iPhone 13 Pro Max (2021), iPhone 13 mini (2021), iPhone 14 (2022), iPhone 14 Plus (2022), iPhone 14 Pro (2022), iPhone 14 Pro Max (2022), iPhone SE (3rd generation) (2022), iPhone 15 (2023), iPhone 15 Plus (2023), iPhone 15 Pro (2023), iPhone 15 Pro Max (2023), iPhone 16 (2024), iPhone 16 Plus (2024), iPhone 16 Pro (2024), iPhone 16 Pro Max (2024), iPhone 16e (2025), iPhone 17 (2025), iPhone 17 Pro (2025), iPhone 17 Pro Max (2025), iPhone Air (2025), iPhone 17e (2026), iPhone 18 Pro (2026), iPhone 18 Pro Max (2026), iPhone Duo (2026).
+iPhone (1st generation) (2007) *built*, iPhone 3G (2008), iPhone 3GS (2009), iPhone 4 (2010), iPhone 4s (2011), iPhone 5 (2012), iPhone 5c (2013), iPhone 5s (2013), iPhone 6 (2014), iPhone 6 Plus (2014), iPhone 6s (2015), iPhone 6s Plus (2015), iPhone 7 (2016), iPhone 7 Plus (2016), iPhone SE (1st generation) (2016), iPhone 8 (2017), iPhone 8 Plus (2017), iPhone X (2017), iPhone XR (2018), iPhone XS (2018), iPhone XS Max (2018), iPhone 11 (2019), iPhone 11 Pro (2019), iPhone 11 Pro Max (2019), iPhone 12 (2020), iPhone 12 Pro (2020), iPhone 12 Pro Max (2020), iPhone 12 mini (2020), iPhone SE (2nd generation) (2020), iPhone 13 (2021), iPhone 13 Pro (2021), iPhone 13 Pro Max (2021), iPhone 13 mini (2021), iPhone 14 (2022), iPhone 14 Plus (2022), iPhone 14 Pro (2022), iPhone 14 Pro Max (2022), iPhone SE (3rd generation) (2022), iPhone 15 (2023), iPhone 15 Plus (2023), iPhone 15 Pro (2023), iPhone 15 Pro Max (2023), iPhone 16 (2024), iPhone 16 Plus (2024), iPhone 16 Pro (2024), iPhone 16 Pro Max (2024), iPhone 16e (2025), iPhone 17 (2025), iPhone 17 Pro (2025), iPhone 17 Pro Max (2025), iPhone Air (2025), iPhone 17e (2026), iPhone 18 Pro (2026), iPhone 18 Pro Max (2026), iPhone Duo (2026).
 
-**iPod** (37 machines, 22 shapes)
+**iPod** (37 machines, 20 shapes)
 
-iPod (Scroll Wheel) (2001), iPod (Touch Wheel) (2002), iPod (Dock Connector) (2003), iPod (Click Wheel) (2004), iPod Special Edition U2 (2004), iPod mini (1st generation) (2004), iPod photo (2004), iPod (5th generation) (2005), iPod mini (2nd generation) (2005), iPod nano (1st generation) (2005), iPod shuffle (1st generation) (2005), iPod with color display (2005), iPod (5th generation, Late 2006), iPod nano (2nd generation) (2006), iPod shuffle (2nd generation) (2006), iPod classic (2007), iPod nano (3rd generation) (2007), iPod touch (1st generation) (2007), iPod classic (120 GB) (2008), iPod nano (4th generation) (2008), iPod touch (2nd generation) (2008), iPod classic 160 GB (Late 2009), iPod nano (5th generation) (2009), iPod shuffle (3rd generation Late 2009), iPod shuffle (3rd generation) (2009), iPod touch (3rd generation) (2009), iPod nano (6th generation) (2010), iPod shuffle (4th generation) (2010), iPod touch (4th generation) (2010), iPod nano (7th generation) (2012), iPod shuffle (4th generation Late 2012), iPod touch (5th generation) (2012), iPod touch (5th generation 16 GB, Mid 2013), iPod nano (7th generation Mid 2015), iPod shuffle (4th generation Mid 2015), iPod touch (6th generation) (2015), iPod touch (7th generation) (2019).
+iPod (Scroll Wheel) (2001), iPod (Touch Wheel) (2002), iPod (Dock Connector) (2003), iPod (Click Wheel) (2004), iPod Special Edition U2 (2004), iPod mini (1st generation) (2004), iPod photo (2004), iPod (5th generation) (2005), iPod mini (2nd generation) (2005), iPod nano (1st generation) (2005) *built*, iPod shuffle (1st generation) (2005), iPod with color display (2005), iPod (5th generation, Late 2006), iPod nano (2nd generation) (2006) *built*, iPod shuffle (2nd generation) (2006), iPod classic (2007), iPod nano (3rd generation) (2007), iPod touch (1st generation) (2007), iPod classic (120 GB) (2008), iPod nano (4th generation) (2008), iPod touch (2nd generation) (2008), iPod classic 160 GB (Late 2009), iPod nano (5th generation) (2009), iPod shuffle (3rd generation Late 2009), iPod shuffle (3rd generation) (2009), iPod touch (3rd generation) (2009), iPod nano (6th generation) (2010), iPod shuffle (4th generation) (2010), iPod touch (4th generation) (2010), iPod nano (7th generation) (2012), iPod shuffle (4th generation Late 2012), iPod touch (5th generation) (2012), iPod touch (5th generation 16 GB, Mid 2013), iPod nano (7th generation Mid 2015), iPod shuffle (4th generation Mid 2015), iPod touch (6th generation) (2015), iPod touch (7th generation) (2019).
 
 ### Phase 5: Microsoft (73 machines, 39 shapes to build)
 

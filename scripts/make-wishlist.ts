@@ -104,6 +104,7 @@ writeFileSync(
   docPath,
   doc
     .replace(/\*\*\d+ machines\. \d+ distinct shapes still to build\. \d+ entries are already built([^]*?) \d+ entries have a sourced size; the other \d+ are/, (_all, words: string) => `**${data.length} machines. ${shapes(data)} distinct shapes still to build. ${built} entries are already built${words} ${sized(data)} entries have a sourced size; the other ${data.length - sized(data)} are`)
+    .replace(/the \d+ devices in this package/, `the ${DEVICES.length} devices in this package`)
     .replace(/## Counts\n[^]*?(?=\nA shape shared across two rows)/, countLines.join("\n") + "\n")
     .replace(/## The machines\n[^]*$/, machineLines.join("\n")),
 );

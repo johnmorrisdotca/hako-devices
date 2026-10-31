@@ -10,7 +10,7 @@ All notable changes to this project are written here. The format follows
 
 - `@johnmorrisdotca/hako-devices/tags`: every machine's brand, type and decade, and CPU, cores, memory, screen, ports and parts where a source gives them, with `matchesPicks` and `facetCounts` to filter by them. The gallery has a filter for each.
 - The Raspberry Pi line that is not drawn yet is on the list, with Apple's mice, trackpads, cameras, Pencil and AirTag, and shelves for Android phones and tablets, TV sticks and boxes, other small boards and Mini PCs.
-- Ten classic machines, drawn and in 3D: Macintosh 128K, Game Boy, Nokia 3310, Palm III, Wii, Xbox Series X, PlayStation 2, Amiga 500, ZX Spectrum and Dreamcast.
+- Classic machines, drawn and in 3D: Macintosh 128K, Game Boy, Game Boy Advance, Nintendo DS, Nintendo 64, Switch, Nokia 3310, Palm III, Wii, Xbox Series X, PlayStation 2, 4 and 5, Amiga 500, ZX Spectrum, Dreamcast, iPhone, iPod nano, Apple TV 4K and Power Mac G5.
 - `groupLayout` and `groupSample` for a group's picture, and `FINISHES` for a machine's other colours. The gallery opens on groups.
 - The plain Pi Zero and the WH boards, the 17-inch MacBook Pro, AirPods, AirPods Max and the Vision Pro.
 - More tags: operating system, wireless, weight and generation, with more CPUs.
