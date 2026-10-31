@@ -57,7 +57,7 @@ try {
   await page.close();
   const phone = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
   await phone.goto(url);
-  await phone.waitForSelector('[data-testid="tile"]');
+  await phone.waitForSelector('[data-testid="gallery-card"]');
   await phone.waitForTimeout(1500);
   await phone.screenshot({ path: join(out, "phone.jpg"), type: "jpeg", quality: 82 });
   await phone.close();

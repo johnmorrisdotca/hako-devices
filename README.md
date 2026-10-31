@@ -1,7 +1,7 @@
 <h1 align="center">Hako Devices <sub>箱</sub></h1>
 
 <p align="center"><strong>Line drawings and 3D views of computers, that you drop into a page and assemble from parts.</strong><br>
-Boards, hats, cases, NAS boxes, desktops, laptops, tablets and more: a <code>.svg</code> and a <code>.glb</code> for each, a web component that shows the drawing first and crossfades to 3D, and a typed model that checks whether a machine really goes together.</p>
+Boards, hats, cases, NAS boxes, desktops, laptops, tablets, game consoles, old phones and more: a <code>.svg</code> and a <code>.glb</code> for each, a web component that shows the drawing first and crossfades to 3D, and a typed model that checks whether a machine really goes together.</p>
 
 <p align="center">
   <a href="https://github.com/johnmorrisdotca/hako-devices/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/johnmorrisdotca/hako-devices/actions/workflows/ci.yml/badge.svg"></a>
@@ -12,9 +12,11 @@ Boards, hats, cases, NAS boxes, desktops, laptops, tablets and more: a <code>.sv
 
 <p align="center"><a href="https://johnmorrisdotca.github.io/hako-devices/"><strong>Open the demo →</strong></a> · <a href="./docs/parts.md">Build from parts</a> · <a href="./docs/element.md">The element</a> · <a href="./docs/scale.md">To scale</a> · <a href="./docs/styles.md">Styles</a></p>
 
-<p align="center"><img alt="A gallery of line drawings on a night-blue page: single-board computers, boards with hats and cases, desktops, laptops, tablets, small PCs and NAS boxes." src="https://raw.githubusercontent.com/johnmorrisdotca/hako-devices/main/docs/images/gallery.jpg" width="820"></p>
+<p align="center"><img alt="A gallery on a night-blue page: groups of line drawings such as single-board computers, desktops, laptops and classic machines, each a bunch of its machines." src="https://raw.githubusercontent.com/johnmorrisdotca/hako-devices/main/docs/images/gallery.jpg" width="820"></p>
 
 <p align="center"><img alt="The part builder: a small computer in a finned case with a touch screen hat, in 3D, beside its choices and the code to copy." src="https://raw.githubusercontent.com/johnmorrisdotca/hako-devices/main/docs/images/builder.jpg" width="820"></p>
+
+> **Not on npm yet.** The install line below works once the first version is published. Until then, the [demo](https://johnmorrisdotca.github.io/hako-devices/) shows everything.
 
 ## One minute
 
@@ -59,6 +61,7 @@ report.issues[0].message; // "Faceted metal case (Argon ONE style) closes over t
 | Entry | What | Needs |
 | --- | --- | --- |
 | `@johnmorrisdotca/hako-devices` | The catalogue (`DEVICES`, `catalogue()`, `statusOf`), the parts (`PARTS`), the fit check (`check`), the camera rule (`frameFor`), mapping helpers (`piKey`, `macKey`, `nasKey`, `pcKey`, `deviceKeyOf`), styles, scale helpers, screen pictures | Nothing |
+| `.../tags` | `FACETS`, `tagsOf(key)`, `matchesPicks(key, picks)`, `facetCounts(keys, picks)`: filter machines by what they are. Its own entry because the table is large | Nothing |
 | `.../build` | `build(description)`, `buildDevice(key)`, `buildPart(id)`: one mesh and one drawing. `toGlb`, `Drawing`, `Box` | `three` |
 | `.../element` | `<hako-device>` and `<hako-lineup>`: load `three` only when a 3D view is wanted | `three` for 3D |
 | `.../react` | A thin `<HakoDevice>` wrapper | `react` |
@@ -133,7 +136,18 @@ Product names appear only as plain descriptive words in the catalogue and the do
 
 ## Filter by what a machine is
 
-Every machine has tags: brand, type and decade, and CPU, cores, memory, screen, ports and parts where a source gives them. See [Built or planned](docs/assets.md#built-or-planned). The demo's gallery has a filter for each.
+Every machine on the list has a brand and a type, and most a decade. Where a source gives them, it also has its CPU and CPU maker, cores, memory, operating system, screen, ports, wireless, weight, generation and parts. A fact with no source is left out, never guessed, so a filter by CPU leaves out machines nobody has sourced yet.
+
+```ts
+import { catalogue } from "@johnmorrisdotca/hako-devices";
+import { matchesPicks } from "@johnmorrisdotca/hako-devices/tags";
+
+const intelLaptops = catalogue().filter(({ key }) => matchesPicks(key, { type: ["Laptop"], cpuMaker: ["Intel"] }));
+```
+
+## Groups and colours
+
+`groupLayout` and `groupSample` lay out a group's picture, a few of its machines in a bunch. `FINISHES` lists a machine's other colours, each a device of its own. See [docs/assets.md](docs/assets.md).
 
 ## Coming soon
 
