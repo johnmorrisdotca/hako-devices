@@ -85,13 +85,8 @@ export const MAC_PRO_TOWER = alloy(
     f.port(-74, 160, 10, 5, 1, { over: 2 }),
     f.port(-74, 148, 10, 5, 1, { over: 2 }),
   ],
-  alloyBack((b) => [
-    ...[192, 178].map((y) => b.jack(56, y, 6)),
-    ...[162, 148].map((y) => b.port(56, y, 11, 10, 1)),
-    ...[130, 118].map((y) => b.port(56, y, 11, 8, 1)),
-    ...[102, 92, 82].map((y) => b.usba(56, y, false)),
-    ...[68, 52].map((y) => b.port(56, y, 13, 12, 1)),
-  ]),
+  // no photograph of its back was opened, so nothing is placed on it
+  () => [],
 );
 
 const R = 83.8;
@@ -110,11 +105,12 @@ export const MAC_PRO_CYLINDER: DeskSpec = (() => {
         is: "turned",
         mat: shell,
         seg: 64,
-        rims: [247],
-        points: [[0, 244], [58, 244], [66, 250], [76, CH], [80, CH - 1], [83, CH - 5], [R, CH - 14], [R, 14], [R - 2, 13], [0, 13]],
+        rims: [CH],
+        // from a photograph: the open top, a rolled lip round a deep dark hole
+        points: [[0, 196], [62, 196], [64, 204], [64, CH - 6], [68, CH - 1], [74, CH], [80, CH - 2], [R - 1, CH - 8], [R, CH - 18], [R, 14], [R - 2, 13], [0, 13]],
       },
       b.mark("panel", 0, 134, 62, 150, { r: 6 }),
-      // the sockets as Apple's specification lists them: audio, four USB, six Thunderbolt, two Ethernet and one HDMI, from the top down
+      // the sockets Apple's specification lists, in its order, from the top down. No picture of this back was opened, so where they sit is not measured
       b.jack(-10, 198, 5),
       b.jack(10, 198, 5),
       b.mark("slot", 0, 176, 13, 5.6, { cols: 2, rows: 2, gap: 8, gapY: 6, r: 0.6, over: 1 }),

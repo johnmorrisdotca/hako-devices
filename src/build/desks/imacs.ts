@@ -390,8 +390,6 @@ function imac24(sockets: number): DeskSpec {
       f.round("slot", 0, y0 + P - 6.5, 3, { over: 2 }),
       // Apple's picture of the back: the ports in a row low on the left, seen from behind
       ...[-185, -170, -155, -140].slice(0, sockets).map((x) => b.usbc(x, y0 + 26)),
-      // the magnetic power socket beside the stand
-      b.round("slot", 90, y0 + 60, 12),
     ],
     prints: [{ id: "back", at: [0, mid + 40, z - T - 0.3], turn: [0, 180, 0], w: 160, h: 32, frame }],
   };
