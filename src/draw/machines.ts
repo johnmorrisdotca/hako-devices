@@ -24,7 +24,10 @@ export function machine(d: Drawing, spec: MachineSpec) {
     d.rect([0, h / 2, depth / 2 + 0.2], X, Y, w - 14, h - 14, SCREEN, 2, spec.corner - 6);
     return d;
   }
-  d.rounded(0, 0, w, depth, Math.min(spec.corner, Math.min(w, depth) / 2 - 0.1), 0, h, { layer: 1 }, 5);
+  if (spec.shape === "can") {
+    d.rounded(0, 0, w, depth, Math.min(w, depth) / 2 - 0.1, 0, h * 0.78, { layer: 1 }, 5);
+    d.rect([w * 0.2, h * 0.86, 0], X, Y, w * 0.5, 4, { stroke: "#8fa1b8", sw: 1 }, 2, 1);
+  } else d.rounded(0, 0, w, depth, Math.min(spec.corner, Math.min(w, depth) / 2 - 0.1), 0, h, { layer: 1 }, 5);
   spec.marks.forEach((mark, i) => {
     const layer = 2 + Math.min(i, 3);
     const cols = mark.cols ?? 1;
@@ -42,9 +45,10 @@ export function machine(d: Drawing, spec: MachineSpec) {
       return;
     }
     eachMark(mark, (x, y) => {
-      const c: Vec3 = mark.face === "front" ? [x, y, depth / 2 + 0.2] : [x, h + 0.2, y];
-      const v: Vec3 = mark.face === "front" ? Y : FLAT;
-      if (mark.kind === "light") d.light(c, "#ff5a4a", mark.w / 2, layer + 1, mark.face === "front" ? [0, 0, 1] : null);
+      const c: Vec3 = mark.face === "top" ? [x, h + 0.2, y] : [x, y, mark.face === "back" ? -depth / 2 - 0.2 : depth / 2 + 0.2];
+      const v: Vec3 = mark.face === "top" ? FLAT : Y;
+      if (mark.kind === "light" && mark.round) d.light(c, "#ff5a4a", mark.w / 2, layer + 1, mark.face === "top" ? null : [0, 0, mark.face === "back" ? -1 : 1]);
+      else if (mark.kind === "light") d.rect(c, X, v, mark.w, mark.h, { fill: "#ff5a4a", stroke: "#8fa1b8", sw: 0.6 }, layer, 1);
       else if (mark.round) d.circle(c, X, v, mark.w / 2, STYLE[mark.kind], layer);
       else d.rect(c, X, v, mark.w, mark.h, STYLE[mark.kind], layer, Math.min(mark.w, mark.h) * 0.12);
     });

@@ -4,7 +4,7 @@ import { type Box, box, cyl, type Material, rbox, tube, type Vec3 } from "./kit.
 export type MarkKind = "screen" | "lcd" | "dark" | "panel" | "slot" | "key" | "light";
 
 export interface Mark {
-  face: "front" | "top";
+  face: "front" | "top" | "back";
   kind: MarkKind;
   /** Across the machine from its middle. */
   x: number;
@@ -26,7 +26,7 @@ export interface MachineSpec {
   corner: number;
   marks: readonly Mark[];
   /** Not one block: its own shape, in its size. */
-  shape?: "headphones" | "headset";
+  shape?: "headphones" | "headset" | "can";
 }
 
 /** Points along the band over the head of a pair of headphones, or round the back of a headset. */
@@ -41,7 +41,19 @@ export function bandPoints(shape: "headphones" | "headset", w: number, d: number
 }
 
 const front = (kind: MarkKind, x: number, y: number, w: number, h: number, more: Partial<Mark> = {}): Mark => ({ face: "front", kind, x, y, w, h, ...more });
+const back = (kind: MarkKind, x: number, y: number, w: number, h: number, more: Partial<Mark> = {}): Mark => ({ face: "back", kind, x, y, w, h, ...more });
 const top = (kind: MarkKind, x: number, y: number, w: number, h: number, more: Partial<Mark> = {}): Mark => ({ face: "top", kind, x, y, w, h, ...more });
+
+/** A graphing calculator: a screen, one row under it, a round pad, and a block of keys. Places follow the photographs and are not measured. */
+function graphing(size: readonly [number, number, number]): Mark[] {
+  const [w, , h] = size;
+  return [
+    front("lcd", 0, h * 0.78, w * 0.68, h * 0.2),
+    front("key", 0, h * 0.6, 10, 6, { cols: 5, rows: 1, gap: 3 }),
+    front("key", w * 0.24, h * 0.44, 14, 14, { round: true }),
+    front("key", -w * 0.06, h * 0.28, 8, 6, { cols: 5, rows: 4, gap: 2 }),
+  ];
+}
 
 export const MACHINES: Readonly<Record<string, MachineSpec>> = {
   "game-boy-dmg-01": {
@@ -199,6 +211,56 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       top("key", 30, 22, 8, 6, { cols: 4, rows: 1, gap: 2 }),
     ],
   },
+  // The same unlabeled Voyager triple, assigned the same way after a photograph: display at the far end, keys towards the viewer. The key field is a grid, not the HP-12C's tall key.
+  "hp-15c": {
+    size: [128, 79, 15],
+    body: "plastic-char",
+    corner: 2,
+    marks: [top("lcd", 0, -26, 70, 12), top("key", 0, 8, 7, 5, { cols: 10, rows: 4, gap: 1.5 })],
+  },
+  // Width 81 mm and length 150 mm from the HP-35 page. Thickness is 33 mm, the larger end of the page's 18 to 33 mm, because the page gives no single thickness.
+  "hp-35": {
+    size: [81, 33, 150],
+    body: "plastic-char",
+    corner: 3,
+    marks: [front("light", 0, 128, 54, 12), front("dark", 0, 114, 16, 5), front("key", 0, 62, 10, 7, { cols: 5, rows: 5, gap: 2 })],
+  },
+  // Texas Instruments lists 1.0 by 3.5 by 7.3 inches as height, width and length. That is 25.4 mm thick, 88.9 mm across and 185.4 mm tall.
+  "ti-83": {
+    size: [88.9, 25.4, 185.4],
+    body: "plastic-char",
+    corner: 8,
+    marks: graphing([88.9, 25.4, 185.4]),
+  },
+  // The size page's TI-84 Plus row matches its TI-89 Titanium row and does not match the photograph, so it is not used. 90 by 24 by 180 mm is a stand-in, not a measurement. The back photograph shows a battery door; the front is the silver-top body.
+  "ti-84-plus": {
+    size: [90, 24, 180],
+    body: "plastic-grey",
+    corner: 8,
+    marks: [...graphing([90, 24, 180]), back("dark", 0, 55, 62, 78), back("slot", 0, 100, 18, 6)],
+  },
+  // No size was on the pages opened. The mesh is a stand-in so the red-display body can be drawn. The photograph is the early TI-30 with a red window.
+  "ti-30": {
+    size: [76, 22, 148],
+    body: "plastic-char",
+    corner: 3,
+    marks: [front("light", 0, 128, 52, 12), front("key", 0, 68, 9, 6, { cols: 5, rows: 8, gap: 2 })],
+  },
+  // No size was on the series page. The mesh is a stand-in. The photograph shows a display, a slide, and a keypad.
+  "casio-fx-82": {
+    size: [78, 14, 160],
+    body: "plastic-char",
+    corner: 3,
+    marks: [front("dark", -28, 140, 10, 5), front("lcd", 0, 118, 52, 18), front("key", 0, 55, 10, 6, { cols: 5, rows: 6, gap: 2 })],
+  },
+  // The infobox gives a weight and no size. 50 mm across and 80 mm tall is a stand-in. Eight slider slots follow the photograph and are not measured.
+  "curta-type-i": {
+    size: [50, 50, 80],
+    body: "plastic-char",
+    corner: 1,
+    shape: "can",
+    marks: [front("slot", 0, 36, 3, 22, { cols: 8, rows: 1, gap: 2 })],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };
@@ -211,7 +273,7 @@ export function eachMark(mark: Mark, each: (x: number, y: number) => void) {
   for (let c = 0; c < cols; c++) {
     for (let r = 0; r < rows; r++) {
       const x = mark.x + (c - (cols - 1) / 2) * (mark.w + gap);
-      const y = mark.y + ((rows - 1) / 2 - r) * (mark.h + gap) * (mark.face === "front" ? 1 : -1);
+      const y = mark.y + ((rows - 1) / 2 - r) * (mark.h + gap) * (mark.face === "top" ? -1 : 1);
       each(x, y);
     }
   }
@@ -233,19 +295,21 @@ export function machine(m: Box, spec: MachineSpec) {
     m.add("plastic-grey", tube(bandPoints("headset", w, d, h), 6, 32, 8));
     return m;
   }
-  m.add(spec.body, rbox(w, h, d, Math.min(spec.corner, Math.min(w, d, h) / 2 - 0.1), 4), [0, h / 2, 0]);
+  if (spec.shape === "can") {
+    const r = Math.min(w, d) / 2;
+    m.add(spec.body, cyl(r, h * 0.78, 32), [0, h * 0.42, 0]);
+    m.add(spec.body, box(r, 4, 4), [r * 0.4, h * 0.86, 0]);
+    m.add(spec.body, cyl(4, 10, 16), [r * 0.85, h * 0.86, 0]);
+  } else m.add(spec.body, rbox(w, h, d, Math.min(spec.corner, Math.min(w, d, h) / 2 - 0.1), 4), [0, h / 2, 0]);
   const thin = 0.5;
   for (const mark of spec.marks) {
     eachMark(mark, (x, y) => {
-      if (mark.face === "front") {
-        const at: [number, number, number] = [x, y, d / 2 - thin / 2 + 0.05];
-        if (mark.round) m.add(MATERIAL[mark.kind], cyl(mark.w / 2, thin, 24), at, [90, 0, 0]);
-        else m.add(MATERIAL[mark.kind], box(mark.w, mark.h, thin), at);
-      } else {
-        const at: [number, number, number] = [x, h - thin / 2 + 0.05, y];
-        if (mark.round) m.add(MATERIAL[mark.kind], cyl(mark.w / 2, thin, 32), at);
-        else m.add(MATERIAL[mark.kind], box(mark.w, thin, mark.h), at);
-      }
+      const onTop = mark.face === "top";
+      const z = mark.face === "back" ? -d / 2 + thin / 2 - 0.05 : d / 2 - thin / 2 + 0.05;
+      const at: [number, number, number] = onTop ? [x, h - thin / 2 + 0.05, y] : [x, y, z];
+      if (mark.round) m.add(MATERIAL[mark.kind], cyl(mark.w / 2, thin, 24), at, onTop ? [0, 0, 0] : [90, 0, 0]);
+      else if (onTop) m.add(MATERIAL[mark.kind], box(mark.w, thin, mark.h), at);
+      else m.add(MATERIAL[mark.kind], box(mark.w, mark.h, thin), at);
     });
   }
   return m;

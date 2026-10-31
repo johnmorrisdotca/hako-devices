@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2515 machines. 1052 distinct shapes still to build. 1131 entries are already built: the 339 devices in this package, plus the real models those meshes cover. 1471 entries have a sourced size; the other 1044 are `null` on purpose.**
+**2517 machines. 1047 distinct shapes still to build. 1138 entries are already built: the 346 devices in this package, plus the real models those meshes cover. 1472 entries have a sourced size; the other 1045 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -220,15 +220,17 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-| **13** | **Calculators** | **32** | **31** | **0** |
-|  | Voyager | 6 | 5 | 0 |
-|  | TI-83 | 3 | 3 | 0 |
-|  | Curta | 2 | 2 | 0 |
-|  | fx-82 | 2 | 2 | 0 |
+| **13** | **Calculators** | **34** | **26** | **1** |
+|  | Voyager | 6 | 4 | 0 |
+|  | TI-83 | 3 | 2 | 1 |
+|  | Curta | 2 | 1 | 0 |
+|  | fx-82 | 2 | 1 | 0 |
 |  | TI graphing | 2 | 2 | 0 |
 |  | TI-Nspire | 2 | 2 | 0 |
-|  | HP-35 | 1 | 1 | 0 |
+|  | HP-35 | 1 | 0 | 0 |
 |  | 48 | 1 | 1 | 0 |
+|  | TI-84 | 1 | 0 | 0 |
+|  | TI-30 | 1 | 0 | 0 |
 |  | EL-8 | 1 | 1 | 0 |
 |  | fx graphing | 1 | 1 | 0 |
 |  | Calculator watch | 1 | 1 | 0 |
@@ -277,7 +279,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2515** | **1052** | **1471** |
+|  | **Total** | **2517** | **1047** | **1472** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -1625,7 +1627,7 @@ NeXT Keyboard, NeXT Mouse.
 
 NeXT Laser Printer (1988), NeXT Color Printer.
 
-### Phase 13: Calculators (32 machines, 31 shapes to build)
+### Phase 13: Calculators (34 machines, 26 shapes to build)
 
 **Bowmar Brain** (1 machines, 1 shapes)
 
@@ -1647,13 +1649,13 @@ Casio CA-53W (1988).
 
 Casio fx-7000G (1985).
 
-**Casio fx-82** (2 machines, 2 shapes)
+**Casio fx-82** (2 machines, 1 shapes)
 
-Casio fx-82 (1982), Casio fx-82A (1985).
+Casio fx-82 (1982) *built*, Casio fx-82A (1985).
 
-**Contina Curta** (2 machines, 2 shapes)
+**Contina Curta** (2 machines, 1 shapes)
 
-Curta Type I (1948), Curta Type II (1954).
+Curta Type I (1948) *built*, Curta Type II (1954).
 
 **Hewlett-Packard 48** (1 machines, 1 shapes)
 
@@ -1667,9 +1669,9 @@ HP 9100A (1968).
 
 HP-25 (1975).
 
-**Hewlett-Packard HP-35** (1 machines, 1 shapes)
+**Hewlett-Packard HP-35** (1 machines, 0 shapes)
 
-HP-35 (1972).
+HP-35 (1972) *built*.
 
 **Hewlett-Packard HP-41** (1 machines, 1 shapes)
 
@@ -1683,9 +1685,9 @@ HP-45 (1973).
 
 HP-65 (1974).
 
-**Hewlett-Packard Voyager** (6 machines, 5 shapes)
+**Hewlett-Packard Voyager** (6 machines, 4 shapes)
 
-HP-11C (1981), HP-12C (1981) *built*, HP-10C (1982), HP-15C (1982), HP-16C (1982), HP 12c Platinum (2003).
+HP-11C (1981), HP-12C (1981) *built*, HP-10C (1982), HP-15C (1982) *built*, HP-16C (1982), HP 12c Platinum (2003).
 
 **Sharp EL-8** (1 machines, 1 shapes)
 
@@ -1703,9 +1705,17 @@ TI SR-50 (1974).
 
 TI-81 (1990), TI-89 (1998).
 
-**Texas Instruments TI-83** (3 machines, 3 shapes)
+**Texas Instruments TI-30** (1 machines, 0 shapes)
 
-TI-83 (1996), TI-83 Plus (1999), TI-83 Plus Silver Edition (2001).
+TI-30 *built*.
+
+**Texas Instruments TI-83** (3 machines, 2 shapes)
+
+TI-83 (1996) *built*, TI-83 Plus (1999), TI-83 Plus Silver Edition (2001).
+
+**Texas Instruments TI-84** (1 machines, 0 shapes)
+
+TI-84 Plus *built*.
 
 **Texas Instruments TI-Nspire** (2 machines, 2 shapes)
 

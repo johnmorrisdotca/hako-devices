@@ -10,6 +10,9 @@ All notable changes to this project are written here. The format follows
 
 - Calculators, personal music, e-readers and headsets, as shelves. The first rows are machines whose pages were opened again: the HP-35, the Voyager models, the HP 48GX, both Curtas, the TI-83 family, the fx-82 and fx-82A, the Sharp EL-8, the Rio PMP300, both Nook 1st Edition models, the Oculus Rift CV1, and the IBM 5150. A size with no named axes is left blank.
 - The HP-12C, as a flat body. Its size on the list stays blank: the Voyager page's 128 by 79 by 15 mm names no axes, and the mesh uses that triple as a stand-in after a photograph. The underside is plain.
+- The HP-12C, as a flat body.
+- The HP-15C, HP-35, TI-83, TI-84 Plus, TI-30, Casio fx-82 and Curta Type I. A size a page does not name stays blank, and the mesh stand-in is in the note. The TI-84 Plus back has its battery door. The others have no back photograph, so the back is plain.
+ Its size on the list stays blank: the Voyager page's 128 by 79 by 15 mm names no axes, and the mesh uses that triple as a stand-in after a photograph. The underside is plain.
 
 ### Fixed
 
