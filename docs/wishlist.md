@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-30.
 
-**1742 machines. 940 distinct shapes still to build. 119 entries are already built: the 65 devices in this package, plus the real models those meshes cover. 866 entries have a sourced size; the other 876 are `null` on purpose.**
+**1742 machines. 940 distinct shapes still to build. 119 entries are already built: the 65 devices in this package, plus the real models those meshes cover. 873 entries have a sourced size; the other 869 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -10,9 +10,9 @@ The shape count is the real work: a group of machines that share a body is one m
 
 | Phase | Group | Machines | Shapes to build | With a sourced size |
 |---|---|---:|---:|---:|
-| **1** | **Retro phones and PDAs** | **214** | **169** | **104** |
+| **1** | **Retro phones and PDAs** | **214** | **169** | **106** |
 |  | Nokia | 53 | 49 | 43 |
-|  | Palm | 48 | 32 | 14 |
+|  | Palm | 48 | 32 | 15 |
 |  | BlackBerry | 32 | 20 | 10 |
 |  | Handspring | 13 | 7 | 3 |
 |  | Sony Ericsson | 13 | 12 | 13 |
@@ -21,7 +21,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Danger | 9 | 8 | 2 |
 |  | Apple | 8 | 4 | 4 |
 |  | Ericsson | 8 | 8 | 0 |
-|  | Psion | 2 | 2 | 1 |
+|  | Psion | 2 | 2 | 2 |
 |  | Compaq | 1 | 1 | 0 |
 |  | IBM | 1 | 1 | 1 |
 |  | Kyocera | 1 | 1 | 1 |
@@ -105,10 +105,10 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Remote | 2 | 2 | 0 |
 |  | Vision Pro | 1 | 1 | 0 |
 |  | Scanner | 1 | 1 | 0 |
-| **5** | **Microsoft** | **73** | **39** | **43** |
+| **5** | **Microsoft** | **73** | **39** | **46** |
 |  | Surface Laptop | 17 | 9 | 5 |
 |  | Surface Pro | 16 | 7 | 14 |
-|  | Zune | 9 | 4 | 6 |
+|  | Zune | 9 | 4 | 9 |
 |  | Surface Book | 6 | 2 | 4 |
 |  | Surface Go | 4 | 1 | 4 |
 |  | Surface Hub | 4 | 4 | 1 |
@@ -140,10 +140,10 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Fire TV | 12 | 12 | 0 |
 |  | Chromecast | 7 | 7 | 0 |
 |  | Shield TV | 5 | 5 | 0 |
-| **9** | **Android phones and tablets** | **71** | **71** | **0** |
+| **9** | **Android phones and tablets** | **71** | **71** | **2** |
 |  | Pixel | 39 | 39 | 0 |
-|  | Galaxy Tab | 20 | 20 | 0 |
-|  | Nexus | 12 | 12 | 0 |
+|  | Galaxy Tab | 20 | 20 | 1 |
+|  | Nexus | 12 | 12 | 1 |
 | **10** | **Other small boards** | **49** | **49** | **0** |
 |  | Banana Pi | 20 | 20 | 0 |
 |  | Jetson | 10 | 10 | 0 |
@@ -152,7 +152,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Arduino Uno | 4 | 4 | 0 |
 | **11** | **Mini PCs** | **21** | **9** | **0** |
 |  | NUC | 21 | 9 | 0 |
-|  | **Total** | **1742** | **940** | **866** |
+|  | **Total** | **1742** | **940** | **873** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -188,7 +188,7 @@ No open dataset of outer dimensions for consoles or old phones was found. One se
 
 ## Where this is incomplete
 
-- **Tags:** every machine has a brand and a type, and most a decade, worked out from the list itself. CPU, cores and memory come only from a source, named in `tagsSource` when it is not the machine's own Apple page: 1001 of 1742 machines have a CPU. Apple's spec pages come first (they also give ports, wireless and weight), then Wikipedia: the iPhone and iPad model lists, Macs by CPU, Surface, Apple Watch, each product line's table and each console's or computer's own article. **A family's article is applied to its models**, so a later revision with a different chip reads as the first one, and the memory is the article's first figure, except where a name says otherwise (Xbox One X, Xbox Series S). The operating system is the family's, not a measured fact. Still no CPU: iPod, some Intel Macs, some Surfaces and Fire TVs, old phones and PDAs.
+- **Tags:** every machine has a brand and a type, and most a decade, worked out from the list itself. CPU, cores and memory come only from a source, named in `tagsSource` when it is not the machine's own Apple page: 1143 of 1742 machines have a CPU. Apple's spec pages come first (they also give ports, wireless and weight), then Wikipedia: the iPhone and iPad model lists, Macs by CPU, Surface, Apple Watch, each product line's table and each machine's own article where the article's title and brand match it. **A family's article is applied to its models**, so a later revision with a different chip reads as the first one, and the memory is the article's first figure, except where a name says otherwise (Xbox One X, Xbox Series S). The operating system is the family's, not a measured fact. Still no CPU: iPod, some Intel Macs and Surfaces, Fire TVs and many old phones and PDAs. CPU names are the source's words, so the same chip can read two ways.
 - **Years:** 87 entries carry a year that was not found in a source, or none. Most are BlackBerry, Siemens and Ericsson phones with no article of their own, Palm variants, some older Apple displays, and Apple keyboards and printers. Those years came from memory and are flagged in `notes`. Years for Macs with no year on Apple's page were read from the Wikipedia list of Mac models by eye; they are not flagged.
 - **Sizes for phases 1 to 3 are thin.** Palm m100 and Zire families, most Treo models, early BlackBerrys, Game & Watch (none at all), NES, Super NES, Genesis, the original PlayStation, Xbox 360, Virtual Boy, the Atari 2600 and most home computers have no size here. Wikipedia gave none and no other reusable source was found.
 - **A family article's size is applied to its models.** Where an article gives one size for a series, the models it names share it. Where Apple's page disagreed by more than 2 mm for a model, the note says so. A few sizes dropped for that reason (PowerBook 180c, 190cs, Duo 270c, 280, 280c, 2300c) now come from Apple's page where it gave one.
