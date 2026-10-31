@@ -160,21 +160,20 @@ test("drag and keys turn the view; Home brings it back", async ({ page, browserN
   await page.waitForTimeout(300);
   await hero.locator("canvas").focus();
   const before = await azimuth();
+  // The view writes its angle when it draws a frame, which can be slow on a busy machine or with no graphics card: wait for the turn, not for a time.
+  const turned = async (from: number) => Math.abs((await azimuth()) - from);
   await page.keyboard.press("ArrowRight");
-  await page.waitForTimeout(300);
+  await expect.poll(() => turned(before), { timeout: 15_000 }).toBeGreaterThan(0.1);
   const after = await azimuth();
-  expect(Math.abs(after - before)).toBeGreaterThan(0.1);
   const box = await hero.boundingBox();
   if (!box) throw new Error("no box");
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
   await page.mouse.down();
   await page.mouse.move(box.x + box.width / 2 + 120, box.y + box.height / 2, { steps: 5 });
   await page.mouse.up();
-  await page.waitForTimeout(300);
-  expect(Math.abs((await azimuth()) - after)).toBeGreaterThan(0.1);
+  await expect.poll(() => turned(after), { timeout: 15_000 }).toBeGreaterThan(0.1);
   await page.keyboard.press("Home");
-  await page.waitForTimeout(900);
-  expect(Math.abs((await azimuth()) - before)).toBeLessThan(0.15);
+  await expect.poll(() => turned(before), { timeout: 15_000 }).toBeLessThan(0.15);
 });
 
 test("the builder checks the fit and writes the code", async ({ page }) => {

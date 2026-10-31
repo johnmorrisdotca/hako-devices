@@ -65,7 +65,7 @@ ${Object.entries(readTags(data)).map(([key, tags]) => `  ${JSON.stringify(key)}:
 );
 
 // docs/wishlist.md: the counts, and the machines by phase. The words around them are written by hand.
-const PHASES: Readonly<Record<number, string>> = { 1: "Retro phones and PDAs", 2: "Game consoles", 3: "Retro home computers", 4: "Apple", 5: "Microsoft", 6: "What is built today", 7: "Raspberry Pi" };
+const PHASES: Readonly<Record<number, string>> = { 1: "Retro phones and PDAs", 2: "Game consoles", 3: "Retro home computers", 4: "Apple", 5: "Microsoft", 6: "What is built today", 7: "Raspberry Pi", 8: "TV sticks and boxes", 9: "Android phones and tablets", 10: "Other small boards", 11: "Mini PCs" };
 const builtGroups = new Set(data.filter((entry) => entry.status === "built").map((entry) => entry.formFactorGroup));
 const shapes = (rows: readonly Raw[]) => new Set(rows.filter((entry) => entry.status === "planned" && !builtGroups.has(entry.formFactorGroup)).map((entry) => entry.formFactorGroup)).size;
 const sized = (rows: readonly Raw[]) => rows.filter((entry) => entry.dimensionsMm).length;
@@ -89,7 +89,7 @@ for (const phase of phases) {
   const rows = [...groupBy(of(phase), (entry) => `${entry.brand}|${entry.family}`)].sort(([a], [b]) => (a < b ? -1 : 1));
   for (const [id, list] of rows) {
     const [brand, family] = id.split("|");
-    machineLines.push(`**${family.includes(brand) || [4, 5, 6, 7].includes(phase) ? family : `${brand} ${family}`}** (${list.length} machines, ${shapes(list)} shapes)`, "");
+    machineLines.push(`**${family.includes(brand) || [4, 5, 6, 7, 11].includes(phase) ? family : `${brand} ${family}`}** (${list.length} machines, ${shapes(list)} shapes)`, "");
     const named = [...list].sort((a, b) => (a.year ?? 9999) - (b.year ?? 9999) || (a.name < b.name ? -1 : 1)).map((entry) => {
       const dated = entry.year && !entry.name.includes(String(entry.year)) ? `${entry.name} (${entry.year})` : entry.name;
       return entry.status === "built" ? `${dated} *built*` : dated;

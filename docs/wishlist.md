@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-30.
 
-**1485 machines. 720 distinct shapes still to build. 104 entries are already built: the 55 devices in this package, plus the real models those meshes cover. 851 entries have a sourced size; the other 634 are `null` on purpose.**
+**1742 machines. 940 distinct shapes still to build. 119 entries are already built: the 65 devices in this package, plus the real models those meshes cover. 866 entries have a sourced size; the other 876 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -10,9 +10,9 @@ The shape count is the real work: a group of machines that share a body is one m
 
 | Phase | Group | Machines | Shapes to build | With a sourced size |
 |---|---|---:|---:|---:|
-| **1** | **Retro phones and PDAs** | **214** | **171** | **104** |
-|  | Nokia | 53 | 50 | 43 |
-|  | Palm | 48 | 33 | 14 |
+| **1** | **Retro phones and PDAs** | **214** | **169** | **104** |
+|  | Nokia | 53 | 49 | 43 |
+|  | Palm | 48 | 32 | 14 |
 |  | BlackBerry | 32 | 20 | 10 |
 |  | Handspring | 13 | 7 | 3 |
 |  | Sony Ericsson | 13 | 12 | 13 |
@@ -27,13 +27,13 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Kyocera | 1 | 1 | 1 |
 |  | Qualcomm | 1 | 1 | 0 |
 |  | Sharp | 1 | 1 | 0 |
-| **2** | **Game consoles** | **225** | **167** | **72** |
-|  | Nintendo | 111 | 57 | 29 |
-|  | Sony | 27 | 26 | 24 |
-|  | Sega | 22 | 22 | 6 |
+| **2** | **Game consoles** | **227** | **163** | **72** |
+|  | Nintendo | 111 | 55 | 29 |
+|  | Sony | 27 | 25 | 24 |
+|  | Sega | 22 | 21 | 6 |
 |  | Atari | 14 | 13 | 1 |
 |  | NEC | 13 | 11 | 1 |
-|  | Microsoft | 9 | 9 | 6 |
+|  | Microsoft | 9 | 8 | 6 |
 |  | SNK | 6 | 6 | 3 |
 |  | Magnavox | 4 | 4 | 0 |
 |  | Bandai | 3 | 3 | 2 |
@@ -41,18 +41,19 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sharp | 3 | 3 | 0 |
 |  | Coleco | 2 | 2 | 0 |
 |  | Mattel | 2 | 2 | 0 |
+|  | Valve | 2 | 1 | 0 |
 |  | Bandai / Apple | 1 | 1 | 0 |
 |  | GCE / Milton Bradley | 1 | 1 | 0 |
 |  | Goldstar | 1 | 1 | 0 |
 |  | INTV | 1 | 1 | 0 |
 |  | Milton Bradley | 1 | 1 | 0 |
 |  | iQue | 1 | 1 | 0 |
-| **3** | **Retro home computers** | **61** | **56** | **13** |
-|  | Commodore | 19 | 18 | 8 |
+| **3** | **Retro home computers** | **61** | **54** | **13** |
+|  | Commodore | 19 | 17 | 8 |
 |  | Apple | 8 | 6 | 1 |
 |  | Acorn | 6 | 4 | 1 |
 |  | Atari | 6 | 6 | 0 |
-|  | Sinclair | 6 | 6 | 2 |
+|  | Sinclair | 6 | 5 | 2 |
 |  | Amstrad | 4 | 4 | 0 |
 |  | NeXT | 2 | 2 | 1 |
 |  | Panasonic | 2 | 2 | 0 |
@@ -62,7 +63,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **838** | **271** | **603** |
+| **4** | **Apple** | **874** | **297** | **618** |
 |  | Power Mac | 92 | 19 | 88 |
 |  | Performa | 71 | 9 | 71 |
 |  | MacBook Pro | 69 | 14 | 64 |
@@ -79,24 +80,31 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Workgroup Server | 21 | 10 | 16 |
 |  | iBook | 20 | 5 | 2 |
 |  | Mac mini | 19 | 2 | 18 |
-|  | Compact Mac | 16 | 5 | 12 |
+|  | Compact Mac | 16 | 4 | 12 |
+|  | Mouse | 14 | 12 | 3 |
 |  | AirPort | 13 | 5 | 4 |
 |  | MacBook | 13 | 4 | 13 |
 |  | LC | 12 | 3 | 12 |
+|  | AirPods | 12 | 5 | 7 |
 |  | Quadra | 11 | 7 | 11 |
 |  | Xserve | 11 | 2 | 0 |
 |  | Mac Pro | 10 | 3 | 8 |
 |  | Macintosh II | 8 | 4 | 8 |
 |  | Apple TV | 7 | 4 | 5 |
-|  | AirPods | 7 | 4 | 0 |
 |  | Time Capsule | 5 | 2 | 1 |
+|  | Camera | 5 | 3 | 0 |
 |  | Mac Studio | 4 | 0 | 4 |
 |  | eMac | 4 | 1 | 3 |
+|  | Pencil | 4 | 4 | 3 |
 |  | Centris | 3 | 2 | 3 |
 |  | HomePod | 3 | 2 | 0 |
 |  | Network Server | 3 | 1 | 3 |
+|  | Trackpad | 3 | 3 | 0 |
 |  | Portable | 2 | 1 | 1 |
+|  | AirTag | 2 | 1 | 2 |
+|  | Remote | 2 | 2 | 0 |
 |  | Vision Pro | 1 | 1 | 0 |
+|  | Scanner | 1 | 1 | 0 |
 | **5** | **Microsoft** | **73** | **39** | **43** |
 |  | Surface Laptop | 17 | 9 | 5 |
 |  | Surface Pro | 16 | 7 | 14 |
@@ -121,13 +129,30 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Small PC | 5 | 0 | 0 |
 |  | NAS | 5 | 0 | 0 |
 |  | iPhone | 1 | 0 | 1 |
-| **7** | **Raspberry Pi** | **19** | **16** | **3** |
+| **7** | **Raspberry Pi** | **19** | **11** | **3** |
 |  | Compute Module | 6 | 3 | 0 |
-|  | Model A and B | 4 | 4 | 1 |
-|  | Zero | 4 | 4 | 2 |
+|  | Model A and B | 4 | 3 | 1 |
+|  | Zero | 4 | 0 | 2 |
 |  | Pico | 4 | 4 | 0 |
 |  | Keyboard computer | 1 | 1 | 0 |
-|  | **Total** | **1485** | **720** | **851** |
+| **8** | **TV sticks and boxes** | **78** | **78** | **0** |
+|  | Roku players | 54 | 54 | 0 |
+|  | Fire TV | 12 | 12 | 0 |
+|  | Chromecast | 7 | 7 | 0 |
+|  | Shield TV | 5 | 5 | 0 |
+| **9** | **Android phones and tablets** | **71** | **71** | **0** |
+|  | Pixel | 39 | 39 | 0 |
+|  | Galaxy Tab | 20 | 20 | 0 |
+|  | Nexus | 12 | 12 | 0 |
+| **10** | **Other small boards** | **49** | **49** | **0** |
+|  | Banana Pi | 20 | 20 | 0 |
+|  | Jetson | 10 | 10 | 0 |
+|  | BeagleBoard | 10 | 10 | 0 |
+|  | Orange Pi | 5 | 5 | 0 |
+|  | Arduino Uno | 4 | 4 | 0 |
+| **11** | **Mini PCs** | **21** | **9** | **0** |
+|  | NUC | 21 | 9 | 0 |
+|  | **Total** | **1742** | **940** | **866** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -137,7 +162,7 @@ A shape shared across two rows is counted in each row, so a column of sub-rows c
 - A size from a source that gave inches is converted and rounded to 0.1 mm, so it can sit a millimetre off the metric figure.
 - `dimensionsSource` is the page the size was read from. `null` size means no source was used: nothing here is guessed.
 - `formFactorGroup` names the body. It is a first pass, made from model names and, for old Macs, the form factor on Apple's pages. Machines with the same outside size can still differ in ports or cameras; look before sharing a mesh. Groups in phases 1 and 2 are judged from the family and any published sizes.
-- `status` is `built` for this package's devices (phase 6, with their key) and for real models a built mesh covers (phase 4, noted). Generic drawings such as `pc-tower` and `client-browser` are in phase 6 only because they exist.
+- `status` is `built` for this package's devices (phase 6, with their key) and for real models a built mesh covers (phase 4, noted). Ten well-known machines (the Classics) are drawn in `src/build/machines.ts` from one description each. Generic drawings such as `pc-tower` and `client-browser` are in phase 6 only because they exist.
 - `tags` holds what a machine can be filtered by (`@johnmorrisdotca/hako-devices/tags`), and `tagsSource` the page its CPU facts came from. A fact with no source is absent.
 - `notes` flags anything unconfirmed. Search for "unconfirmed" and "not confirmed".
 
@@ -145,7 +170,7 @@ A shape shared across two rows is counted in each row, so a column of sub-rows c
 
 **Apple sizes.** Apple's spec pages are the best source for its machines: names, years and sizes for almost everything back to 1984. The project decided on 2026-10-30 to use them, as a free public fan site with nothing for sale. [Apple's site terms](https://www.apple.com/legal/internet-services/terms/site.html) still restrict copying, so this is a decision and not a licence from Apple. Each figure names its page in `dimensionsSource`, so it can be found and removed if Apple asks. Where Wikipedia already gave a size it stays; a missing one was filled from Apple's page when the page gave one size for that model. Pages that give several sizes and no way to tell which is which were left `null`.
 
-Apple in this file: 869 machines, 316 with a size from Apple, 305 from Wikipedia, 248 without.
+Apple in this file: 905 machines, 316 with a size from Apple, 320 from Wikipedia, 269 without.
 
 | Source | What it gave | Licence or terms | Reused here? |
 |---|---|---|---|
@@ -163,13 +188,14 @@ No open dataset of outer dimensions for consoles or old phones was found. One se
 
 ## Where this is incomplete
 
-- **Tags:** every machine has a brand and a type, and most a decade, worked out from the list itself. CPU, cores and memory come only from a source, named in `tagsSource` when it is not the machine's own Apple page: 850 of the machines have a CPU. Apple's spec pages come first, then Wikipedia: the iPhone and iPad model lists, the list of Macs by CPU, and each console's or computer's own article. **A family's article is applied to its models**, so a later revision with a different chip reads as the first one, and the memory is the article's first figure. Memory and cores list every option a page names. Still none: Surface, Apple Watch, iPod, most Intel MacBooks, Mac minis and old phones and PDAs.
+- **Tags:** every machine has a brand and a type, and most a decade, worked out from the list itself. CPU, cores and memory come only from a source, named in `tagsSource` when it is not the machine's own Apple page: 1001 of 1742 machines have a CPU. Apple's spec pages come first (they also give ports, wireless and weight), then Wikipedia: the iPhone and iPad model lists, Macs by CPU, Surface, Apple Watch, each product line's table and each console's or computer's own article. **A family's article is applied to its models**, so a later revision with a different chip reads as the first one, and the memory is the article's first figure, except where a name says otherwise (Xbox One X, Xbox Series S). The operating system is the family's, not a measured fact. Still no CPU: iPod, some Intel Macs, some Surfaces and Fire TVs, old phones and PDAs.
 - **Years:** 87 entries carry a year that was not found in a source, or none. Most are BlackBerry, Siemens and Ericsson phones with no article of their own, Palm variants, some older Apple displays, and Apple keyboards and printers. Those years came from memory and are flagged in `notes`. Years for Macs with no year on Apple's page were read from the Wikipedia list of Mac models by eye; they are not flagged.
 - **Sizes for phases 1 to 3 are thin.** Palm m100 and Zire families, most Treo models, early BlackBerrys, Game & Watch (none at all), NES, Super NES, Genesis, the original PlayStation, Xbox 360, Virtual Boy, the Atari 2600 and most home computers have no size here. Wikipedia gave none and no other reusable source was found.
 - **A family article's size is applied to its models.** Where an article gives one size for a series, the models it names share it. Where Apple's page disagreed by more than 2 mm for a model, the note says so. A few sizes dropped for that reason (PowerBook 180c, 190cs, Duo 270c, 280, 280c, 2300c) now come from Apple's page where it gave one.
 - **Axes:** many Wikipedia sizes have no labels. Those are assigned by shape and say so in `notes`. A few console sizes differ between an article's infobox and its text (32X, PlayStation 3 Slim); notes name them.
-- **Not listed from Apple:** scanners, cameras, mice, AirTag, Pencil, docks and adapters. Keyboards, printers and AirPods are listed with years and no sizes yet; AirPods Pro 3 and the USB-C AirPods Max are left out until checked. Apple's older monitors are listed by name only.
+- **Not listed from Apple:** docks and adapters, and Apple's other scanners. Sizes are still missing for keyboards, printers and most accessories.
 - **Consoles:** body variants are listed where they are well known, not exhaustively: Genesis has three models here, but regional and third-party ones (Aiwa, Pioneer, Hi-Saturn, V-Saturn), PlayStation 2 slim revisions, Xbox and Wii U revisions, and the mini Famicom are left out or folded into their parent. Colour variants and special editions are not separate.
+- **Other makers:** started, not finished. TV sticks and boxes, Android phones and tablets, small boards and Intel NUCs come from Wikipedia's tables; NUC years are mostly empty, and only 21 NUCs were read. NAS makers are not listed: no reusable list was found. Fire TV years are checked only against the article as a whole.
 - **Phones:** "the famous ones" is a judgement. Nokia, Motorola, Sony Ericsson, Siemens and Ericsson are selections, not complete lines. Palm and Handspring are close to complete, Sidekick is complete per its article's table.
 - **Home computers:** a selection, as asked. MSX is a standard with many makers; six machines stand in for it.
 - **Very new machines** (iPhone Duo, iPhone 18 Pro, Mac mini M6, Surface Laptop Ultra, MacBook Pro with PROLED, and others) come from live pages on the check date. Some were announced and not yet shipping.
@@ -177,7 +203,7 @@ No open dataset of outer dimensions for consoles or old phones was found. One se
 
 ## The machines
 
-### Phase 1: Retro phones and PDAs (214 machines, 171 shapes to build)
+### Phase 1: Retro phones and PDAs (214 machines, 169 shapes to build)
 
 **Apple Newton** (8 machines, 4 shapes)
 
@@ -323,9 +349,9 @@ Timeport L7089 (1999).
 
 V70 (2002).
 
-**Nokia Candybar** (23 machines, 20 shapes)
+**Nokia Candybar** (23 machines, 19 shapes)
 
-Nokia 1011 (1992), Nokia 2110 (1994), Nokia 3110 (1997), Nokia 6110 (1997), Nokia 5110 (1998), Nokia 3210 (1999), Nokia 8210 (1999), Nokia 3310 (2000), Nokia 6210 (2000), Nokia 8250 (2000), Nokia 3330 (2001), Nokia 5210 (2001), Nokia 6310 (2001), Nokia 8310 (2001), Nokia 3510 (2002), Nokia 6310i (2002), Nokia 1100 (2003), Nokia 3650 (2003), Nokia 6230 (2003), Nokia 6600 (2003), Nokia 7610 (2004), Nokia 1110 (2005), Nokia 6300 (2007).
+Nokia 1011 (1992), Nokia 2110 (1994), Nokia 3110 (1997), Nokia 6110 (1997), Nokia 5110 (1998), Nokia 3210 (1999), Nokia 8210 (1999), Nokia 3310 (2000) *built*, Nokia 6210 (2000), Nokia 8250 (2000), Nokia 3330 (2001), Nokia 5210 (2001), Nokia 6310 (2001), Nokia 8310 (2001), Nokia 3510 (2002), Nokia 6310i (2002), Nokia 1100 (2003), Nokia 3650 (2003), Nokia 6230 (2003), Nokia 6600 (2003), Nokia 7610 (2004), Nokia 1110 (2005), Nokia 6300 (2007).
 
 **Nokia Communicator** (5 machines, 5 shapes)
 
@@ -371,9 +397,9 @@ Centro (2007).
 
 LifeDrive (2005).
 
-**Palm III** (5 machines, 2 shapes)
+**Palm III** (5 machines, 1 shapes)
 
-Palm III (1998), Palm IIIe (1999), Palm IIIx (1999), Palm IIIc (2000), Palm IIIxe (2000).
+Palm III (1998) *built*, Palm IIIe (1999), Palm IIIx (1999), Palm IIIc (2000), Palm IIIxe (2000).
 
 **Palm V** (2 machines, 1 shapes)
 
@@ -475,7 +501,7 @@ Sony Ericsson W800 (2005), Sony Ericsson W810 (2006).
 
 Sony Ericsson Xperia X1 (2008), Sony Ericsson Xperia X10 (2010), Sony Ericsson Xperia Play (2011).
 
-### Phase 2: Game consoles (225 machines, 167 shapes to build)
+### Phase 2: Game consoles (227 machines, 163 shapes to build)
 
 **Atari 2600** (5 machines, 4 shapes)
 
@@ -553,9 +579,9 @@ Xbox 360 (original) (2005), Xbox 360 S (2010), Xbox 360 E (2013).
 
 Xbox One (2013), Xbox One S (2016), Xbox One X (2017).
 
-**Microsoft Xbox Series** (2 machines, 2 shapes)
+**Microsoft Xbox Series** (2 machines, 1 shapes)
 
-Xbox Series S (2020), Xbox Series X (2020).
+Xbox Series S (2020), Xbox Series X (2020) *built*.
 
 **Milton Bradley Microvision** (1 machines, 1 shapes)
 
@@ -589,9 +615,9 @@ Nintendo DS (NTR-001) (2004), Nintendo DS Lite (USG-001) (2006), Nintendo DSi (T
 
 Game & Watch Ball (AC-01) (1980), Game & Watch Fire (RC-04) (1980), Game & Watch Flagman (FL-02) (1980), Game & Watch Judge (IP-05) (1980), Game & Watch Vermin (MT-03) (1980), Game & Watch Chef (FP-24) (1981), Game & Watch Egg (EG-26) (1981), Game & Watch Fire (FR-27) (1981), Game & Watch Helmet (CN-07) (1981), Game & Watch Lion (LN-08) (1981), Game & Watch Manhole (MH-06) (1981), Game & Watch Mickey Mouse (MC-25) (1981), Game & Watch Octopus (OC-22) (1981), Game & Watch Parachute (PR-21) (1981), Game & Watch Popeye (PP-23) (1981), Game & Watch Donkey Kong (DK-52) (1982), Game & Watch Donkey Kong Jr. (DJ-101) (1982), Game & Watch Fire Attack (ID-29) (1982), Game & Watch Green House (GH-54) (1982), Game & Watch Mickey & Donald (DM-53) (1982), Game & Watch Oil Panic (OP-51) (1982), Game & Watch Snoopy Tennis (SP-30) (1982), Game & Watch Turtle Bridge (TL-28) (1982), Game & Watch Donkey Kong II (JR-55) (1983), Game & Watch Donkey Kong Jr. (CJ-71) (1983), Game & Watch Donkey Kong Jr. (CJ-93) (1983), Game & Watch Lifeboat (TC-58) (1983), Game & Watch Manhole (NH-103) (1983), Game & Watch Mario Bros. (MW-56) (1983), Game & Watch Mario's Bombs Away (TB-94) (1983), Game & Watch Mario's Cement Factory (CM-72) (1983), Game & Watch Mario's Cement Factory (ML-102) (1983), Game & Watch Pinball (PB-59) (1983), Game & Watch Popeye (PG-74) (1983), Game & Watch Popeye (PG-92) (1983), Game & Watch Rain Shower (LP-57) (1983), Game & Watch Snoopy (SM-73) (1983), Game & Watch Snoopy (SM-91) (1983), Game & Watch Boxing (BX-301) (1984), Game & Watch Crab Grab (UD-202) (1984), Game & Watch Donkey Kong 3 (AK-302) (1984), Game & Watch Donkey Kong Circus (MK-96) (1984), Game & Watch Donkey Kong Hockey (HK-303) (1984), Game & Watch Mickey Mouse (DC-95) (1984), Game & Watch Spitball Sparky (BU-201) (1984), Game & Watch Black Jack (BJ-60) (1985), Game & Watch Tropical Fish (TF-104) (1985), Game & Watch Balloon Fight (BF-803) (1986), Game & Watch Climber (DR-802) (1986), Game & Watch Squish (MG-61) (1986), Game & Watch Super Mario Bros. (YM-801) (1986), Game & Watch Bomb Sweeper (BD-62) (1987), Game & Watch Super Mario Bros. (YM-901-S) (1987), Game & Watch Balloon Fight (BF-107) (1988), Game & Watch Climber (DR-106) (1988), Game & Watch Gold Cliff (MV-64) (1988), Game & Watch Safebuster (JB-63) (1988), Game & Watch Super Mario Bros. (YM-105) (1988), Game & Watch Tetris Jr. (TR-66) (1989), Game & Watch Zelda (ZL-65) (1989), Game & Watch Mario the Juggler (MB-108) (1991), Game & Watch: Super Mario Bros. 35th Anniversary Edition (2020), Game & Watch: The Legend of Zelda 35th Anniversary Edition (2021).
 
-**Nintendo Game Boy** (4 machines, 4 shapes)
+**Nintendo Game Boy** (4 machines, 3 shapes)
 
-Game Boy (DMG-01) (1989), Game Boy Pocket (MGB-001) (1996), Game Boy Color (CGB-001) (1998), Game Boy Light (MGB-101) (1998).
+Game Boy (DMG-01) (1989) *built*, Game Boy Pocket (MGB-001) (1996), Game Boy Color (CGB-001) (1998), Game Boy Light (MGB-101) (1998).
 
 **Nintendo Game Boy Advance** (4 machines, 3 shapes)
 
@@ -629,9 +655,9 @@ Nintendo Switch 2 (2025).
 
 Virtual Boy (1995).
 
-**Nintendo Wii** (3 machines, 3 shapes)
+**Nintendo Wii** (3 machines, 2 shapes)
 
-Wii (RVL-001) (2006), Wii Family Edition (RVL-101) (2011), Wii Mini (RVL-201) (2012).
+Wii (RVL-001) (2006) *built*, Wii Family Edition (RVL-101) (2011), Wii Mini (RVL-201) (2012).
 
 **Nintendo Wii U** (1 machines, 1 shapes)
 
@@ -657,9 +683,9 @@ Neo Geo Pocket (1998), Neo Geo Pocket Color (1999).
 
 32X (1994).
 
-**Sega Dreamcast** (1 machines, 1 shapes)
+**Sega Dreamcast** (1 machines, 0 shapes)
 
-Dreamcast (1998).
+Dreamcast (1998) *built*.
 
 **Sega Game Gear** (1 machines, 1 shapes)
 
@@ -701,9 +727,9 @@ PSP (PSP-1000) (2004), PSP Slim & Lite (PSP-2000) (2007), PSP-3000 (2008), PSP G
 
 PlayStation (SCPH-1000) (1994), PocketStation (1999), PS one (SCPH-100) (2000), PlayStation Classic (2018).
 
-**Sony PlayStation 2** (3 machines, 3 shapes)
+**Sony PlayStation 2** (3 machines, 2 shapes)
 
-PlayStation 2 (fat) (2000), PSX (DESR) (2003), PlayStation 2 Slim (2004).
+PlayStation 2 (fat) (2000) *built*, PSX (DESR) (2003), PlayStation 2 Slim (2004).
 
 **Sony PlayStation 3** (3 machines, 3 shapes)
 
@@ -721,11 +747,15 @@ PlayStation 5 (2020), PlayStation 5 Digital Edition (2020), PlayStation 5 Slim (
 
 PlayStation Vita (PCH-1000) (2011), PlayStation TV (Vita TV) (2013), PlayStation Vita (PCH-2000) (2013).
 
+**Valve Steam Deck** (2 machines, 1 shapes)
+
+Steam Deck (LCD) (2022), Steam Deck (OLED) (2023).
+
 **iQue Nintendo 64** (1 machines, 1 shapes)
 
 iQue Player (2003).
 
-### Phase 3: Retro home computers (61 machines, 56 shapes to build)
+### Phase 3: Retro home computers (61 machines, 54 shapes to build)
 
 **Acorn Archimedes** (1 machines, 1 shapes)
 
@@ -771,9 +801,9 @@ Atari 520ST (1985), Atari 1040ST (1986), Atari Falcon030 (1992).
 
 Commodore VIC-20 (1980), Commodore 64 (1982), Commodore 16 (1984), Commodore Plus/4 (1984), Commodore SX-64 (1984), Commodore 128 (1985), Commodore 64C (1986), Commodore 65 (prototype) (1990).
 
-**Commodore Amiga** (10 machines, 9 shapes)
+**Commodore Amiga** (10 machines, 8 shapes)
 
-Amiga 1000 (1985), Amiga 2000 (1987), Amiga 500 (1987), Amiga 3000 (1990), Amiga 500 Plus (1991), CDTV (1991), Amiga 1200 (1992), Amiga 4000 (1992), Amiga 600 (1992), Amiga CD32 (1993).
+Amiga 1000 (1985), Amiga 2000 (1987), Amiga 500 (1987) *built*, Amiga 3000 (1990), Amiga 500 Plus (1991), CDTV (1991), Amiga 1200 (1992), Amiga 4000 (1992), Amiga 600 (1992), Amiga CD32 (1993).
 
 **Commodore PET** (1 machines, 1 shapes)
 
@@ -803,9 +833,9 @@ Sinclair QL (1984).
 
 ZX80 (1980), ZX81 (1981).
 
-**Sinclair ZX Spectrum** (3 machines, 3 shapes)
+**Sinclair ZX Spectrum** (3 machines, 2 shapes)
 
-ZX Spectrum 16K/48K (1982), ZX Spectrum+ (1984), ZX Spectrum 128 (1985).
+ZX Spectrum 16K/48K (1982) *built*, ZX Spectrum+ (1984), ZX Spectrum 128 (1985).
 
 **Sony MSX** (1 machines, 1 shapes)
 
@@ -823,15 +853,19 @@ TI-99/4A (1981).
 
 Yamaha CX5M (1984).
 
-### Phase 4: Apple (838 machines, 271 shapes to build)
+### Phase 4: Apple (874 machines, 297 shapes to build)
 
-**AirPods** (7 machines, 4 shapes)
+**AirPods** (12 machines, 5 shapes)
 
-AirPods (1st generation) (2016), AirPods (2nd generation) (2019), AirPods Pro (1st generation) (2019), AirPods Max (2020), AirPods (3rd generation) (2021), AirPods Pro (2nd generation) (2022), AirPods 4 (2024).
+AirPods (1st generation) (2016), AirPods (2nd generation) (2019), AirPods Pro (1st generation) (2019), AirPods Max (2020), AirPods (3rd generation) (2021), AirPods Pro (2nd generation) (2022), AirPods Pro (2nd generation, USB-C) (2023), AirPods 4 (2024), AirPods Max (USB-C) (2024), AirPods Pro 3 (2025), AirPods (5th generation) (2026), AirPods Max (2nd generation) (2026).
 
 **AirPort** (13 machines, 5 shapes)
 
 AirPort Base Station (Graphite) (1999), AirPort Base Station (Dual Ethernet) (2001), AirPort Extreme Base Station (Modem and PoE/UL2043 models) (2003), AirPort Extreme Base Station (no modem) (2003), AirPort Express (2004), AirPort Extreme 802.11n (1st Generation) (2007), AirPort Express 802.11n (1st Generation) (2008), AirPort Extreme 802.11n (2nd Generation) (2009), AirPort Extreme 802.11n (3rd Generation) (2009), AirPort Extreme 802.11n (4th Generation) (2009), AirPort Extreme 802.11n (5th Generation) (2011), AirPort Express 802.11n (2nd Generation) (2012), AirPort Extreme 802.11ac (2013).
+
+**AirTag** (2 machines, 1 shapes)
+
+AirTag (1st generation) (2021), AirTag (2nd generation) (2026).
 
 **Apple TV** (7 machines, 4 shapes)
 
@@ -841,13 +875,17 @@ Apple TV (1st generation) (2007), Apple TV (2nd generation) (2010), Apple TV (3r
 
 Apple Watch (1st generation) (38 mm) (2015), Apple Watch (1st generation) (42 mm) (2015), Apple Watch Series 1 (38 mm) (2016), Apple Watch Series 1 (42 mm) (2016), Apple Watch Series 2 (38 mm) (2016), Apple Watch Series 2 (42 mm) (2016), Apple Watch Series 3 (38 mm) (2017), Apple Watch Series 3 (42 mm) (2017), Apple Watch Series 4 (40 mm) (2018), Apple Watch Series 4 (44 mm) (2018), Apple Watch Series 5 (40 mm) (2019), Apple Watch Series 5 (44 mm) (2019), Apple Watch SE (40 mm) (2020), Apple Watch SE (44 mm) (2020), Apple Watch Series 6 (40 mm) (2020), Apple Watch Series 6 (44 mm) (2020), Apple Watch Series 7 (41 mm) (2021), Apple Watch Series 7 (45 mm) (2021), Apple Watch SE 2 (40 mm) (2022), Apple Watch SE 2 (44 mm) (2022), Apple Watch Series 8 (41 mm) (2022), Apple Watch Series 8 (45 mm) (2022), Apple Watch Ultra (49 mm) (2022), Apple Watch Series 9 (41 mm) (2023), Apple Watch Series 9 (45 mm) (2023), Apple Watch Ultra 2 (49 mm) (2023), Apple Watch Series 10 (42 mm) (2024), Apple Watch Series 10 (46 mm) (2024), Apple Watch SE 3 (40 mm) (2025), Apple Watch SE 3 (44 mm) (2025), Apple Watch Series 11 (42 mm) (2025), Apple Watch Series 11 (46 mm) (2025), Apple Watch Ultra 3 (49 mm) (2025), Apple Watch Series 12 (42 mm) (2026), Apple Watch Series 12 (46 mm) (2026), Apple Watch Ultra 4 (49 mm) (2026).
 
+**Camera** (5 machines, 3 shapes)
+
+QuickTake 150 (1995), QuickTake 200 (1996), iSight (external) (2003), QuickTake 100, QuickTake 100 Plus.
+
 **Centris** (3 machines, 2 shapes)
 
 Macintosh Centris 610 (1993), Macintosh Centris 660AV (1993), Centris 650 (1994).
 
-**Compact Mac** (16 machines, 5 shapes)
+**Compact Mac** (16 machines, 4 shapes)
 
-Apple Lisa (1983), Apple Lisa 2 (1984), Macintosh 128K (1984), Macintosh 128K (revised) (1984), Macintosh 512K (1984), Macintosh XL (1985), Macintosh 512Ke (1986), Macintosh Plus (1986), Macintosh Plus (Platinum) (1987), Macintosh SE (1987), Macintosh SE FDHD (1989), Macintosh SE/30 (1989), Macintosh Classic (1990), Macintosh Classic II (1991), Macintosh Color Classic (1993), Macintosh Color Classic II (1993).
+Apple Lisa (1983), Apple Lisa 2 (1984), Macintosh 128K (1984) *built*, Macintosh 128K (revised) (1984), Macintosh 512K (1984), Macintosh XL (1985), Macintosh 512Ke (1986), Macintosh Plus (1986), Macintosh Plus (Platinum) (1987), Macintosh SE (1987), Macintosh SE FDHD (1989), Macintosh SE/30 (1989), Macintosh Classic (1990), Macintosh Classic II (1991), Macintosh Color Classic (1993), Macintosh Color Classic II (1993).
 
 **Display** (38 machines, 37 shapes)
 
@@ -893,9 +931,17 @@ MacBook Pro (15-inch Glossy) (2006), MacBook Pro (17-inch) (2006), MacBook Pro (
 
 Macintosh II (1987), Macintosh IIx (1988), Macintosh IIci (1989), Macintosh IIcx (1989), Macintosh IIfx (1990), Macintosh IIsi (1990), Macintosh IIvi (1992), Macintosh IIvx (1992).
 
+**Mouse** (14 machines, 12 shapes)
+
+Lisa Mouse (1983), Apple Mouse II (1984), Apple Mouse (A2M4015) (1985), Apple Desktop Bus Mouse (1986), Apple Mouse IIe (1986), Apple USB Mouse (1998), Apple Pro Mouse (2000), Apple Mighty Mouse (2005), Magic Mouse (1st generation) (2009), Magic Mouse (2nd generation) (2015), Magic Mouse (3rd generation) (2024), Apple Desktop Bus Mouse II, Apple Mouse IIc, Macintosh Mouse.
+
 **Network Server** (3 machines, 1 shapes)
 
 Network Server 500/132 (1996), Network Server 700/150 (1996), Network Server 700/200 (1996).
+
+**Pencil** (4 machines, 4 shapes)
+
+Apple Pencil (1st generation) (2015), Apple Pencil (2nd generation) (2018), Apple Pencil (USB-C) (2023), Apple Pencil Pro (2024).
 
 **Performa** (71 machines, 9 shapes)
 
@@ -915,15 +961,27 @@ Macintosh PowerBook 100 (1991), Macintosh PowerBook 140 (1991), Macintosh PowerB
 
 **Printer** (26 machines, 16 shapes)
 
-Silentype (1979), Apple Dot Matrix Printer (1982), ImageWriter (1983), ImageWriter II (1985), LaserWriter (1985), LaserWriter Plus (1986), ImageWriter LQ (1987), LaserWriter IINT (1988), LaserWriter IINTX (1988), LaserWriter IISC (1988), LaserWriter IIf (1991), LaserWriter IIg (1991), Personal LaserWriter NTR (1992), Portable StyleWriter (1993), Color StyleWriter Pro (1994), LaserWriter 8500 (1997), Color StyleWriter 1500, Color StyleWriter 2200, Color StyleWriter 2400, Color StyleWriter 2500, Color StyleWriter 4100, Color StyleWriter 4500, Color StyleWriter 6500, StyleWriter, StyleWriter 1200, StyleWriter II.
+Silentype (1979), Apple Dot Matrix Printer (1982), ImageWriter (1983), ImageWriter II (1985), LaserWriter (1985), LaserWriter Plus (1986), ImageWriter LQ (1987), LaserWriter IINT (1988), LaserWriter IINTX (1988), LaserWriter IISC (1988), LaserWriter IIf (1991), LaserWriter IIg (1991), StyleWriter (1991), Personal LaserWriter NTR (1992), Portable StyleWriter (1993), StyleWriter II (1993), Color StyleWriter 2400 (1994), Color StyleWriter Pro (1994), Color StyleWriter 2200 (1995), StyleWriter 1200 (1995), Color StyleWriter 1500 (1996), Color StyleWriter 2500 (1996), Color StyleWriter 4100 (1997), Color StyleWriter 4500 (1997), Color StyleWriter 6500 (1997), LaserWriter 8500 (1997).
 
 **Quadra** (11 machines, 7 shapes)
 
 Macintosh Quadra 700 (1991), Macintosh Quadra 900 (1991), Macintosh Quadra 950 (1992), Macintosh Quadra 605 (1993), Macintosh Quadra 610 (1993), Macintosh Quadra 650 (1993), Macintosh Quadra 660AV (1993), Macintosh Quadra 800 (1993), Macintosh Quadra 840AV (1993), Macintosh Quadra 610 DOS Compatible (1994), Macintosh Quadra 630 (1994).
 
+**Remote** (2 machines, 2 shapes)
+
+Apple Remote (1st generation) (2005), Apple Remote (2nd generation) (2009).
+
+**Scanner** (1 machines, 1 shapes)
+
+Apple Scanner (1988).
+
 **Time Capsule** (5 machines, 2 shapes)
 
 AirPort Time Capsule 802.11n (1st Generation) (2008), AirPort Time Capsule 802.11n (2nd Generation) (2009), AirPort Time Capsule 802.11n (3rd Generation) (2009), AirPort Time Capsule 802.11n (4th Generation) (2011), AirPort Time Capsule 802.11ac (2013).
+
+**Trackpad** (3 machines, 3 shapes)
+
+Magic Trackpad (1st generation) (2010), Magic Trackpad (2nd generation) (2015), Magic Trackpad (3rd generation) (2024).
 
 **Vision Pro** (1 machines, 1 shapes)
 
@@ -1069,7 +1127,7 @@ Raspberry Pi 1 B+ *built*, Raspberry Pi 2 B *built*, Raspberry Pi 3 *built*, Ras
 
 Five-bay NAS *built*, Four-bay NAS *built*, One-bay NAS *built*, Rack NAS *built*, Two-bay NAS *built*.
 
-### Phase 7: Raspberry Pi (19 machines, 16 shapes to build)
+### Phase 7: Raspberry Pi (19 machines, 11 shapes to build)
 
 **Compute Module** (6 machines, 3 shapes)
 
@@ -1079,14 +1137,74 @@ Compute Module 1 (2014), Compute Module 3 (2017), Compute Module 3+ (2019), Comp
 
 Raspberry Pi 500+ (2025).
 
-**Model A and B** (4 machines, 4 shapes)
+**Model A and B** (4 machines, 3 shapes)
 
-Raspberry Pi 1 Model B (2012), Raspberry Pi 1 Model A (2013), Raspberry Pi 1 Model A+ (2014), Raspberry Pi 2 Model B v1.2 (2016).
+Raspberry Pi 1 Model B (2012), Raspberry Pi 1 Model A (2013), Raspberry Pi 1 Model A+ (2014), Raspberry Pi 2 Model B v1.2 (2016) *built*.
 
 **Pico** (4 machines, 4 shapes)
 
 Raspberry Pi Pico (2021), Raspberry Pi Pico W (2022), Raspberry Pi Pico 2 (2024), Raspberry Pi Pico 2 W.
 
-**Zero** (4 machines, 4 shapes)
+**Zero** (4 machines, 0 shapes)
 
-Raspberry Pi Zero (2015), Raspberry Pi Zero v1.3 (2016), Raspberry Pi Zero WH (2018), Raspberry Pi Zero 2 WH.
+Raspberry Pi Zero (2015) *built*, Raspberry Pi Zero v1.3 (2016) *built*, Raspberry Pi Zero WH (2018) *built*, Raspberry Pi Zero 2 WH *built*.
+
+### Phase 8: TV sticks and boxes (78 machines, 78 shapes to build)
+
+**Amazon Fire TV** (12 machines, 12 shapes)
+
+Fire TV (1st generation) (2014), Fire TV Stick (1st generation) (2014), Fire TV (2nd generation) (2015), Fire TV Stick (2nd generation) (2016), Fire TV (3rd generation) (2017), Fire TV Cube (1st generation) (2018), Fire TV Stick 4K (2018), Fire TV Cube (2nd generation) (2019), Fire TV Stick (3rd generation) (2020), Fire TV Stick Lite (2020), Fire TV Stick 4K Max (2021), Fire TV Cube (3rd generation) (2022).
+
+**Google Chromecast** (7 machines, 7 shapes)
+
+Chromecast (1st generation) (2013), Chromecast (2nd generation) (2015), Chromecast Audio (2015), Chromecast Ultra (2016), Chromecast (3rd generation) (2018), Chromecast with Google TV (4K) (4th generation) (2020), Chromecast with Google TV (HD) (4th generation) (2022).
+
+**Nvidia Shield TV** (5 machines, 5 shapes)
+
+Shield TV (2015), Shield TV Pro (2015), Shield TV (2017), Shield TV (2019), Shield TV Pro (2019).
+
+**Roku players** (54 machines, 54 shapes)
+
+Roku DVP (N1000) (2008), Roku HD (N1100) (2009), Roku HD-XR (N1101) (2009), Roku SD (N1050) (2009), Roku HD (2000) (2010), Roku XD (2050) (2010), Roku XDS (2100) (2010), Roku 2 HD (3000) (2011), Roku 2 XD (3050) (2011), Roku 2 XS (3100) (2011), Roku LT (2400) (2011), Roku HD (2500) (2012), Roku LT (2450) (2012), Roku Streaming Stick, MHL (3400, 3420) (2012), Roku 1, SE (2710) (2013), Roku 2 (2720) (2013), Roku 3 (4200) (2013), Roku LT (2700) (2013), Roku Streaming Stick, HDMI (3500) (2014), Roku 2 (4210) (2015), Roku 3 (4230) (2015), Roku 4 (4400) (2015), Roku Express (3700) (2016), Roku Express+ (3710) (2016), Roku Premiere (4620) (2016), Roku Premiere+ (4630) (2016), Roku Streaming Stick (3600) (2016), Roku Ultra (4640) (2016), Roku Express (3900) (2017), Roku Express+ (3910) (2017), Roku Streaming Stick (3800) (2017), Roku Streaming Stick+ (3810) (2017), Roku Ultra (4660) (2017), Roku Premiere (3920) (2018), Roku Premiere+ (3921) (2018), Roku Ultra (4661) (2018), Roku Express+ (3931) (2019), Roku Express, SE, LE (3930) (2019), Roku Ultra (4670) (2019), Roku Ultra LT (4662) (2019), Roku Streambar (9102) (2020), Roku Ultra (4800) (2020), Roku Express 4K (3940) (2021), Roku Express 4K+ (3941) (2021), Roku Streambar Pro (9101) (2021), Roku Streaming Stick 4K (3820) (2021), Roku Streaming Stick 4K+ (3821) (2021), Roku Ultra LT (4801) (2021), Roku Express (3960) (2022), Roku Ultra (4802) (2022), Roku Streambar SE (9104) (2024), Roku Ultra (4850) (2024), Roku Streaming Stick HD (3840) (2025), Roku Streaming Stick Plus (3830) (2025).
+
+### Phase 9: Android phones and tablets (71 machines, 71 shapes to build)
+
+**Google Nexus** (12 machines, 12 shapes)
+
+Nexus One (2010), Nexus S (2010), Galaxy Nexus (2011), Nexus 10 (2012), Nexus 4 (2012), Nexus 7 (2012), Nexus 5 (2013), Nexus 7 (2013), Nexus 6 (2014), Nexus 9 (2014), Nexus 5X (2015), Nexus 6P (2015).
+
+**Google Pixel** (39 machines, 39 shapes)
+
+Pixel (2016), Pixel XL (2016), Pixel 2 (2017), Pixel 2 XL (2017), Pixel 3 (2018), Pixel 3 XL (2018), Pixel 3a (2019), Pixel 3a XL (2019), Pixel 4 (2019), Pixel 4 XL (2019), Pixel 4a (2020), Pixel 4a (5G) (2020), Pixel 5 (2020), Pixel 5a (2021), Pixel 6 (2021), Pixel 6 Pro (2021), Pixel 6a (2022), Pixel 7 (2022), Pixel 7 Pro (2022), Pixel 7a (2023), Pixel 8 (2023), Pixel 8 Pro (2023), Pixel Fold (2023), Pixel Tablet (2023), Pixel 8a (2024), Pixel 9 (2024), Pixel 9 Pro (2024), Pixel 9 Pro Fold (2024), Pixel 9 Pro XL (2024), Pixel 10 (2025), Pixel 10 Pro (2025), Pixel 10 Pro Fold (2025), Pixel 10 Pro XL (2025), Pixel 9a (2025), Pixel 10a (2026), Pixel 11 (2026), Pixel 11 Pro (2026), Pixel 11 Pro Fold (2026), Pixel 11 Pro XL (2026).
+
+**Samsung Galaxy Tab** (20 machines, 20 shapes)
+
+Galaxy Tab 7.0 (2010), Galaxy Tab 10.1 (2011), Galaxy Tab 7.0 Plus (2011), Galaxy Tab 7.7 (2011), Galaxy Tab 8.9 (2011), Galaxy Tab 2 10.1 (2012), Galaxy Tab 2 7.0 (2012), Galaxy Tab 3 10.1 (2013), Galaxy Tab 3 7.0 (2013), Galaxy Tab 3 8.0 (2013), Galaxy Tab 3 Lite 7.0 (2014), Galaxy Tab 4 10.1/Tab 4 Education (2014), Galaxy Tab 4 7.0 (2014), Galaxy Tab 4 8.0 (2014), Galaxy Tab Pro 10.1 (2014), Galaxy Tab Pro 12.2 (2014), Galaxy Tab Pro 8.4 (2014), Galaxy Tab 3 V (2015), Galaxy Tab 3 VE (2015), Galaxy TabPro S (2016).
+
+### Phase 10: Other small boards (49 machines, 49 shapes to build)
+
+**Arduino Uno** (4 machines, 4 shapes)
+
+Arduino Uno Q, Arduino Uno R3, Arduino Uno R4 Minima, Arduino Uno R4 WiFi.
+
+**Banana Pi** (20 machines, 20 shapes)
+
+Banana Pi BPI-D1, Banana Pi BPI-F2, Banana Pi BPI-G1, Banana Pi BPI-M1, Banana Pi BPI-M2, Banana Pi BPI-M2 Berry, Banana Pi BPI-M2 Magic, Banana Pi BPI-M2 Ultra, Banana Pi BPI-M2 Zero, Banana Pi BPI-M3, Banana Pi BPI-M4, Banana Pi BPI-M5, Banana Pi BPI-M5 Pro, Banana Pi BPI-M6, Banana Pi BPI-P2 Zero, Banana Pi BPI-R1, Banana Pi BPI-R2, Banana Pi BPI-R64, Banana Pi BPI-S64 core, Banana Pi BPI-W2.
+
+**BeagleBoard.org BeagleBoard** (10 machines, 10 shapes)
+
+BeagleBoard (2008), BeagleBoard-xM (2010), BeagleBone (2011), BeagleBone Black (2013), BeagleBoard-X15 (2016), PocketBeagle (2017), BeagleBone AI (2019), BeagleBone AI-64 (2022), BeaglePlay (2023), BeagleV-Ahead (2023).
+
+**Nvidia Jetson** (10 machines, 10 shapes)
+
+Jetson TK1 (2014), Jetson TX1 (2015), Jetson TX2 (2017), Jetson AGX Xavier (2018), Jetson Nano (2019), Jetson Xavier NX (2020), Jetson AGX Orin (2023), Jetson Orin NX (2023), Jetson Orin Nano{{cite web | url=https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/ | title= Jetson Orin Modules and Developer Kits (2023), Jetson AGX Thor (2025).
+
+**Orange Pi** (5 machines, 5 shapes)
+
+Orange Pi 5 Ultra, Orange Pi AIpro (20T), Orange Pi Prime, Orange Pi R1, Orange Pi RV.
+
+### Phase 11: Mini PCs (21 machines, 9 shapes to build)
+
+**NUC** (21 machines, 9 shapes)
+
+NUC D34010WYK (2013), NUC D34010WYKH (2013), NUC D54250WYK (2013), NUC D54250WYKH (2013), NUC DCCP847DYE (2013), NUC6CAYH (2015), NUC6CAYS (2015), NUC7CJYH (2017), NUC7PJYH (2017), NUC8CCHKR (2018), NUC5CPYH (2020), NUC5PGYH (2020), NUC5PPYH (2020), NUC11ATKC2 (2060), NUC11ATKC4 (2060), NUC11ATKPE (2060), NUC DC3217BY, NUC DC3217IYE, NUC DC53427HYE, NUC DE3815TYKHE, NUC DN2820FYKH.

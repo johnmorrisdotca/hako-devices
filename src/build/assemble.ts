@@ -5,6 +5,7 @@ import * as drawCases from "../draw/cases.ts";
 import { Drawing } from "../draw/drawing.ts";
 import * as drawClients from "../draw/clients.ts";
 import * as drawHats from "../draw/hats.ts";
+import * as drawMachines from "../draw/machines.ts";
 import * as drawMacs from "../draw/macs.ts";
 import * as drawNas from "../draw/nas.ts";
 import * as drawPc from "../draw/pc.ts";
@@ -18,6 +19,7 @@ import * as clients from "./clients.ts";
 import { type Glb, toGlb } from "./glb.ts";
 import { Box, extent, moved, rbox, turnY, type Vec3 } from "./kit.ts";
 import * as laptops from "./laptops.ts";
+import { MACHINES, machine } from "./machines.ts";
 import * as macs from "./macs.ts";
 import * as nas from "./nas.ts";
 import * as pc from "./pc.ts";
@@ -133,6 +135,7 @@ const BASE_ART: Record<string, BaseArt> = {
   "client-android-phone": { mesh: (m, { stand }) => void clients.clientAndroidPhone(m, stand), draw: (d, m) => void drawClients.clientAndroidPhone(d, m) },
   "client-computer": plain(clients.clientComputer, drawClients.clientComputer),
   "client-browser": plain(clients.clientBrowser, drawClients.clientBrowser),
+  ...Object.fromEntries(Object.entries(MACHINES).map(([key, spec]) => [key, plain((m) => machine(m, spec), (d) => drawMachines.machine(d, spec))])),
 };
 
 /** The keys a whole-device base can be. */

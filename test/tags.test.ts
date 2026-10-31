@@ -54,6 +54,21 @@ test("a count is what picking that value would show, and a facet's own picks do 
   assert.ok((counts.maker.get("Nintendo") ?? 0) > 0, "another brand stays on offer");
 });
 
+test("a machine carries the rest of its facts where a source gives them", () => {
+  const mac = catalogue().find((entry) => entry.name === "Macintosh XL");
+  assert.ok(mac && tagsOf(mac.key).weight?.length);
+  assert.deepEqual(tagsOf("iphone-4").os, ["iOS"]);
+  const third = catalogue().find((entry) => entry.name === "AirPods (3rd generation)");
+  assert.ok(third);
+  assert.deepEqual(tagsOf(third.key).generation, ["3"]);
+});
+
+test("the other makers' lines are on the list, each with a type", () => {
+  for (const key of ["fire-tv-stick-4k", "pixel-7", "nexus-5", "jetson-nano"]) assert.ok(keys.includes(key) || keys.some((k) => k.endsWith(key)), key);
+  const stick = keys.find((k) => k.endsWith("fire-tv-stick-4k"));
+  assert.deepEqual(tagsOf(stick ?? "").type, ["Streaming device"]);
+});
+
 test("values read in a sensible order", () => {
   const counts = facetCounts(keys, {});
   const ram = facetOrder("ram", counts.ram);
@@ -63,6 +78,8 @@ test("values read in a sensible order", () => {
   assert.ok(decades.indexOf("1980s") < decades.indexOf("2020s"));
   const cores = facetOrder("cores", counts.cores);
   assert.ok(cores.indexOf("2") < cores.indexOf("12"));
+  const weights = facetOrder("weight", counts.weight);
+  assert.ok(weights.indexOf("Under 1 kg") < weights.indexOf("Over 10 kg"));
   const brands = facetOrder("maker", counts.maker);
   assert.equal(brands[0], "Apple");
 });

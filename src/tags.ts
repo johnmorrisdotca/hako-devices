@@ -11,8 +11,12 @@ export const FACETS = [
   { id: "cpu", title: "CPU" },
   { id: "cores", title: "Cores" },
   { id: "ram", title: "Memory" },
+  { id: "os", title: "Operating system" },
   { id: "screen", title: "Screen" },
   { id: "ports", title: "Ports" },
+  { id: "wireless", title: "Wireless" },
+  { id: "weight", title: "Weight" },
+  { id: "generation", title: "Generation" },
   { id: "parts", title: "Parts" },
 ] as const;
 
@@ -60,6 +64,7 @@ export function facetCounts(keys: readonly string[], picks: Picks): Record<Facet
   return counts;
 }
 
+const WEIGHTS: readonly string[] = ["Under 1 kg", "1 to 3 kg", "3 to 10 kg", "Over 10 kg"];
 const BYTES: Readonly<Record<string, number>> = { KB: 1e3, MB: 1e6, GB: 1e9, TB: 1e12 };
 const sizeOf = (value: string): number => {
   const [amount, unit] = value.split(" ");
@@ -70,6 +75,7 @@ const sizeOf = (value: string): number => {
 export function facetOrder(facet: FacetId, counts: ReadonlyMap<string, number>): string[] {
   const values = [...counts.keys()];
   if (facet === "ram") return values.sort((a, b) => sizeOf(a) - sizeOf(b));
-  if (facet === "decade" || facet === "cores" || facet === "screen") return values.sort((a, b) => parseFloat(a) - parseFloat(b));
+  if (facet === "weight") return values.sort((a, b) => WEIGHTS.indexOf(a) - WEIGHTS.indexOf(b));
+  if (facet === "decade" || facet === "cores" || facet === "screen" || facet === "generation") return values.sort((a, b) => parseFloat(a) - parseFloat(b));
   return values.sort((a, b) => (counts.get(b) ?? 0) - (counts.get(a) ?? 0) || a.localeCompare(b, "en", { numeric: true }));
 }

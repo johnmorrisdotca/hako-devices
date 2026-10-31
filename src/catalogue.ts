@@ -3,7 +3,7 @@
 import { type BaseInfo, checkWith, type Description, type FitReport } from "./fit.ts";
 import type { Size } from "./parts.ts";
 
-export type FamilyId = "pi-boards" | "pi-dressed" | "desktops" | "laptops" | "tablets-phones" | "pcs" | "nas" | "other" | "clients";
+export type FamilyId = "pi-boards" | "pi-dressed" | "desktops" | "laptops" | "tablets-phones" | "pcs" | "nas" | "classics" | "other" | "clients";
 
 export const FAMILIES: readonly { id: FamilyId; title: string }[] = [
   { id: "pi-boards", title: "Single-board computers" },
@@ -13,6 +13,7 @@ export const FAMILIES: readonly { id: FamilyId; title: string }[] = [
   { id: "tablets-phones", title: "Tablets and phones" },
   { id: "pcs", title: "Small PCs and towers" },
   { id: "nas", title: "NAS boxes" },
+  { id: "classics", title: "Classics" },
   { id: "other", title: "Other" },
   { id: "clients", title: "Things that connect" },
 ];
@@ -112,6 +113,17 @@ export const DEVICES: readonly Device[] = [
   whole("nas-4bay", "Four-bay NAS", "nas", [190, 223, 166], ports({ "usb-a": 3, ethernet: 2, esata: 1, power: 1 })),
   whole("nas-5bay", "Five-bay NAS", "nas", [226, 223, 166], ports({ "usb-a": 3, ethernet: 2, esata: 1, power: 1 })),
   whole("nas-rack", "Rack NAS", "nas", [482, 460, 44], ports({ "usb-a": 2, ethernet: 4, power: 2 })),
+
+  whole("macintosh-128k", "Macintosh 128K", "classics", [243.8, 276.9, 345.4], ports({ power: 1 })),
+  whole("game-boy-dmg-01", "Game Boy (DMG-01)", "classics", [90, 32, 148], ports({ audio: 1 })),
+  whole("nokia-3310", "Nokia 3310", "classics", [48, 22, 113], []),
+  whole("palm-iii", "Palm III", "classics", [81, 18, 119], []),
+  whole("wii-rvl-001", "Wii (RVL-001)", "classics", [157, 197, 60], ports({ "usb-a": 2, power: 1 })),
+  whole("xbox-series-x", "Xbox Series X", "classics", [151, 151, 301], ports({ "usb-a": 3, hdmi: 1, ethernet: 1, power: 1 })),
+  whole("playstation-2-fat", "PlayStation 2 (fat)", "classics", [302.3, 182.9, 78.7], ports({ "usb-a": 2, power: 1 })),
+  whole("amiga-500", "Amiga 500", "classics", [474, 330, 62], ports({ power: 1 })),
+  whole("zx-spectrum-16k-48k", "ZX Spectrum 16K/48K", "classics", [233, 144, 30], ports({ audio: 2, power: 1 })),
+  whole("dreamcast", "Dreamcast", "classics", [190, 195.8, 75.5], ports({ audio: 1, power: 1 })),
 
   whole("unknown", "A computer", "other", null, ports({ "usb-a": 2, power: 1 })),
 
