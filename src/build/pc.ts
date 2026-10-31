@@ -71,44 +71,6 @@ export function unknownBox(m: Box) {
   return m;
 }
 
-/** A palm-sized PC: 117 by 112 mm, 54 tall with its 2.5-inch bay or 37 slim. A black body, a dotted lid, the power button with its light, two USB-A, USB-C and
- * the sound jack in front; two HDMI, two USB-C, the network and two USB-A and the power socket behind. */
-function nuc12(m: Box, H: number) {
-  const W = 117;
-  const D = 112;
-  const F = D / 2;
-  m.add("plastic-black", slab(roundedSquare(W, D, 6, 8), H - 2.4, 1.6, { curve: 8, bevelSeg: 3 }), [0, 2.4, 0]);
-  m.add("rubber", slab(roundedSquare(W - 10, D - 10, 4, 6), 2.6, 0.6), [0, 0, 0]);
-  perforation(m, "lid", [0, H + 0.05, 0], [-90, 0, 0], W - 14, D - 14, 40, 38, 44, "plastic-char");
-  m.printFace("lid", [0, H + 0.08, 0], [-90, 0, 0], 70, 14);
-  const y = H * 0.48;
-  m.add("plastic-gloss", cyl(4.2, 1, 32), [-45, y, F + 0.2], [90, 0, 0]);
-  m.add("led-white", ring(4.2, 4.8, 32), [-45, y, F + 0.06]);
-  for (const x of [-22, -4]) {
-    mouth(m, F, x, y, 13.4, 5.8, 0.4);
-    m.add("usb-blue", rbox(11.4, 2, 0.6, 0.2, 1), [x, y - 0.8, F - 0.2]);
-  }
-  mouth(m, F, 14, y, 8.6, 3.1);
-  m.add("hole", disc(1.9, 20), [32, y, F + 0.05]);
-  const b = -F;
-  const seen = (x: number) => -x;
-  const by = Math.max(14, H * 0.42);
-  m.add("plastic-black", cyl(4.6, 1.4, 24), [seen(-46), by, b - 0.5], [90, 0, 0]);
-  m.add("hole", disc(2.6, 20), [seen(-46), by, b - 1.25], [0, 180, 0]);
-  mouth(m, b, seen(-28), by, 15, 5.6, 1.2);
-  mouth(m, b, seen(-10), by, 15, 5.6, 1.2);
-  mouth(m, b, seen(5), by, 8.6, 3.1);
-  mouth(m, b, seen(16), by, 8.6, 3.1);
-  mouth(m, b, seen(31), by, 12.4, 10, 0.6);
-  mouth(m, b, seen(48), by + 3.5, 13.4, 5.8, 0.4);
-  mouth(m, b, seen(48), by - 3.5, 13.4, 5.8, 0.4);
-  perforation(m, "left", [-W / 2 - 0.04, H / 2 + 1, 0], [0, -90, 0], 86, H - 16, 36, Math.round((H - 16) / 2.4), 56, "plastic-char");
-  perforation(m, "right", [W / 2 + 0.04, H / 2 + 1, 0], [0, 90, 0], 86, H - 16, 36, Math.round((H - 16) / 2.4), 56, "plastic-char");
-  return m;
-}
-export const nuc12Tall = (m: Box) => nuc12(m, 54);
-export const nuc12Slim = (m: Box) => nuc12(m, 37);
-
 /** A mini PC of no particular make: 128 by 128 by 48 mm, a dark metal body with soft corners, a black vented top, a glossy strip with its sockets in front. */
 export function miniPc(m: Box) {
   const W = 128;

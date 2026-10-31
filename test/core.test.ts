@@ -67,7 +67,12 @@ test("an identifier gives its desktop or laptop", () => {
   assert.equal(macKey(""), "mac-mini");
   assert.equal(pcKey("NUC12WSHi7"), "nuc-12-tall");
   assert.equal(pcKey("NUC12WSKi5"), "nuc-12-slim");
-  assert.equal(pcKey("NUC8i5BEH"), "nuc");
+  assert.equal(pcKey("NUC8i5BEH"), "nuc-bean-canyon-tall");
+  assert.equal(pcKey("RNUC12WSHI70000"), "nuc-12-tall");
+  assert.equal(pcKey("NUC6i7KYK"), "nuc-skull-canyon");
+  assert.equal(pcKey("NUC14RVHU5"), "nuc-revel-canyon-tall");
+  assert.equal(pcKey("D54250WYK"), "nuc-wilson-canyon-slim");
+  assert.equal(pcKey("NUC99ZZZ"), "nuc");
   assert.equal(pcKey("Dell"), "unknown");
 });
 
