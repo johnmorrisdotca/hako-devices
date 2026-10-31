@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2494 machines. 1032 distinct shapes still to build. 1130 entries are already built: the 338 devices in this package, plus the real models those meshes cover. 1469 entries have a sourced size; the other 1025 are `null` on purpose.**
+**2515 machines. 1053 distinct shapes still to build. 1130 entries are already built: the 338 devices in this package, plus the real models those meshes cover. 1471 entries have a sourced size; the other 1044 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -59,14 +59,14 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Analogue | 1 | 1 | 0 |
 |  | Entex | 1 | 1 | 0 |
 |  | Tapwave | 1 | 1 | 0 |
-| **3** | **Retro home computers** | **69** | **62** | **12** |
+| **3** | **Retro home computers** | **70** | **63** | **12** |
 |  | Commodore | 19 | 17 | 8 |
 |  | Apple | 8 | 6 | 1 |
 |  | Acorn | 6 | 4 | 1 |
 |  | Atari | 6 | 6 | 0 |
 |  | Sinclair | 6 | 5 | 2 |
 |  | Amstrad | 4 | 4 | 0 |
-|  | IBM | 3 | 3 | 0 |
+|  | IBM | 4 | 4 | 0 |
 |  | Panasonic | 2 | 2 | 0 |
 |  | Philips | 2 | 2 | 0 |
 |  | Sony | 2 | 2 | 0 |
@@ -220,9 +220,16 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-| **13** | **Calculators** | **16** | **16** | **0** |
+| **13** | **Calculators** | **32** | **32** | **0** |
+|  | Voyager | 6 | 6 | 0 |
+|  | TI-83 | 3 | 3 | 0 |
+|  | Curta | 2 | 2 | 0 |
+|  | fx-82 | 2 | 2 | 0 |
 |  | TI graphing | 2 | 2 | 0 |
 |  | TI-Nspire | 2 | 2 | 0 |
+|  | HP-35 | 1 | 1 | 0 |
+|  | 48 | 1 | 1 | 0 |
+|  | EL-8 | 1 | 1 | 0 |
 |  | fx graphing | 1 | 1 | 0 |
 |  | Calculator watch | 1 | 1 | 0 |
 |  | Executive | 1 | 1 | 0 |
@@ -235,10 +242,11 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | HP-45 | 1 | 1 | 0 |
 |  | TI SR | 1 | 1 | 0 |
 |  | HP-25 | 1 | 1 | 0 |
-| **14** | **Personal music** | **12** | **12** | **0** |
+| **14** | **Personal music** | **13** | **13** | **0** |
 |  | Walkman | 4 | 4 | 0 |
 |  | Discman | 2 | 2 | 0 |
 |  | MiniDisc | 2 | 2 | 0 |
+|  | Rio | 1 | 1 | 0 |
 |  | Nomad | 1 | 1 | 0 |
 |  | ZEN | 1 | 1 | 0 |
 |  | H300 | 1 | 1 | 0 |
@@ -253,13 +261,15 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | XPS | 1 | 1 | 0 |
 |  | Pixelbook | 1 | 1 | 0 |
 |  | Chromebook Pixel | 1 | 1 | 0 |
-| **16** | **Headsets** | **1** | **1** | **0** |
+| **16** | **Headsets** | **2** | **2** | **0** |
+|  | Rift | 1 | 1 | 0 |
 |  | Quest | 1 | 1 | 0 |
 | **17** | **Other gadgets** | **2** | **2** | **0** |
 |  | Tamagotchi | 1 | 1 | 0 |
 |  | Echo | 1 | 1 | 0 |
-| **18** | **E-readers** | **4** | **4** | **0** |
+| **18** | **E-readers** | **6** | **6** | **2** |
 |  | Kindle | 3 | 3 | 0 |
+|  | Nook | 2 | 2 | 2 |
 |  | eReader | 1 | 1 | 0 |
 | **19** | **NAS** | **54** | **54** | **25** |
 |  | TS series | 25 | 25 | 0 |
@@ -267,7 +277,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2494** | **1032** | **1469** |
+|  | **Total** | **2515** | **1053** | **1471** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -935,7 +945,7 @@ Steam Deck (LCD) (2022), Steam Deck (OLED) (2023).
 
 iQue Player (2003).
 
-### Phase 3: Retro home computers (69 machines, 62 shapes to build)
+### Phase 3: Retro home computers (70 machines, 63 shapes to build)
 
 **Acorn Archimedes** (1 machines, 1 shapes)
 
@@ -989,9 +999,9 @@ Amiga 1000 (1985), Amiga 2000 (1987), Amiga 500 (1987) *built*, Amiga 3000 (1990
 
 Commodore PET 2001 (1977).
 
-**IBM PC** (3 machines, 3 shapes)
+**IBM PC** (4 machines, 4 shapes)
 
-IBM Personal Computer XT 5160 (1983), IBM PCjr (1984), IBM Personal Computer AT 5170 (1984).
+IBM Personal Computer 5150 (1981), IBM Personal Computer XT 5160 (1983), IBM PCjr (1984), IBM Personal Computer AT 5170 (1984).
 
 **IMSAI** (1 machines, 1 shapes)
 
@@ -1615,7 +1625,7 @@ NeXT Keyboard, NeXT Mouse.
 
 NeXT Laser Printer (1988), NeXT Color Printer.
 
-### Phase 13: Calculators (16 machines, 16 shapes to build)
+### Phase 13: Calculators (32 machines, 32 shapes to build)
 
 **Bowmar Brain** (1 machines, 1 shapes)
 
@@ -1637,6 +1647,18 @@ Casio CA-53W (1988).
 
 Casio fx-7000G (1985).
 
+**Casio fx-82** (2 machines, 2 shapes)
+
+Casio fx-82 (1982), Casio fx-82A (1985).
+
+**Contina Curta** (2 machines, 2 shapes)
+
+Curta Type II (1954), Curta Type I.
+
+**Hewlett-Packard 48** (1 machines, 1 shapes)
+
+HP 48GX (1993).
+
 **Hewlett-Packard HP 9100** (1 machines, 1 shapes)
 
 HP 9100A (1968).
@@ -1644,6 +1666,10 @@ HP 9100A (1968).
 **Hewlett-Packard HP-25** (1 machines, 1 shapes)
 
 HP-25 (1975).
+
+**Hewlett-Packard HP-35** (1 machines, 1 shapes)
+
+HP-35 (1972).
 
 **Hewlett-Packard HP-41** (1 machines, 1 shapes)
 
@@ -1657,6 +1683,14 @@ HP-45 (1973).
 
 HP-65 (1974).
 
+**Hewlett-Packard Voyager** (6 machines, 6 shapes)
+
+HP-11C (1981), HP-12C (1981), HP-10C (1982), HP-15C (1982), HP-16C (1982), HP 12c Platinum (2003).
+
+**Sharp EL-8** (1 machines, 1 shapes)
+
+Sharp EL-8 (1971).
+
 **Sinclair Executive** (1 machines, 1 shapes)
 
 Sinclair Executive (1972).
@@ -1669,11 +1703,15 @@ TI SR-50 (1974).
 
 TI-81 (1990), TI-89 (1998).
 
+**Texas Instruments TI-83** (3 machines, 3 shapes)
+
+TI-83 (1996), TI-83 Plus (1999), TI-83 Plus Silver Edition (2001).
+
 **Texas Instruments TI-Nspire** (2 machines, 2 shapes)
 
 TI-Nspire, TI-Nspire CX.
 
-### Phase 14: Personal music (12 machines, 12 shapes to build)
+### Phase 14: Personal music (13 machines, 13 shapes to build)
 
 **Creative Nomad** (1 machines, 1 shapes)
 
@@ -1682,6 +1720,10 @@ Creative Nomad Jukebox.
 **Creative ZEN** (1 machines, 1 shapes)
 
 Creative ZEN Micro.
+
+**Diamond Multimedia Rio** (1 machines, 1 shapes)
+
+Rio PMP300 (1998).
 
 **SanDisk Sansa** (1 machines, 1 shapes)
 
@@ -1745,7 +1787,11 @@ Sony VAIO PCG-505 (1997).
 
 Toshiba T1100 (1985).
 
-### Phase 16: Headsets (1 machines, 1 shapes to build)
+### Phase 16: Headsets (2 machines, 2 shapes to build)
+
+**Oculus VR Rift** (1 machines, 1 shapes)
+
+Oculus Rift CV1 (2016).
 
 **Oculus Quest** (1 machines, 1 shapes)
 
@@ -1761,11 +1807,15 @@ Amazon Echo (1st generation) (2014).
 
 Tamagotchi (1996).
 
-### Phase 18: E-readers (4 machines, 4 shapes to build)
+### Phase 18: E-readers (6 machines, 6 shapes to build)
 
 **Amazon Kindle** (3 machines, 3 shapes)
 
 Kindle (1st generation) (2007), Kindle Paperwhite (2012), Kindle Oasis (2017).
+
+**Barnes & Noble Nook** (2 machines, 2 shapes)
+
+Nook 1st Edition (2009), Nook 1st Edition Wi-Fi (2010).
 
 **Kobo eReader** (1 machines, 1 shapes)
 

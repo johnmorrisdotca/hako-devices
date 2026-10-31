@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Calculators, personal music, e-readers and headsets, as shelves. The first rows are machines whose pages were opened again: the HP-35, the Voyager models, the HP 48GX, both Curtas, the TI-83 family, the fx-82 and fx-82A, the Sharp EL-8, the Rio PMP300, both Nook 1st Edition models, the Oculus Rift CV1, and the IBM 5150. A size with no named axes is left blank.
+
 ## [0.16.0] - 2026-11-03
 
 ### Fixed
