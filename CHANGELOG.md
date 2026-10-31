@@ -8,6 +8,7 @@ All notable changes to this project are written here. The format follows
 
 ### Added
 
+- Embeds: an embed page for a site that cannot run script, and `embedCode` for the element, an iframe, a module, the SVG and a data address, so a drawing can go on another site.
 - [Building machines](docs/building-machines.md): how to add a machine to the same standard, with prompts for a coding agent.
 
 ## [0.4.0] - 2026-10-31

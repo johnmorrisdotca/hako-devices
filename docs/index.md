@@ -4,6 +4,7 @@ Line drawings and 3D views of computers, that you drop into a page and assemble 
 
 - [Build from parts](parts.md): the description, every part, every fit rule, presets.
 - [The element](element.md): `<hako-device>`, its attributes, events and live screen, and the React wrapper.
+- [Put one on your site](embed.md): the embed page and `embedCode`.
 - [To scale](scale.md): real size, `<hako-lineup>`, the ruler, and what a drawing records.
 - [Styles](styles.md): `thin`, `thick`, and how to add one.
 - [Assets](assets.md): the shipped files and how to use them on their own.

@@ -10,7 +10,7 @@ Boards, hats, cases, NAS boxes, desktops, laptops, tablets, game consoles, old p
   <img alt="TypeScript" src="https://img.shields.io/badge/types-TypeScript-3178c6">
 </p>
 
-<p align="center"><a href="https://johnmorrisdotca.github.io/hako-devices/"><strong>Open the demo →</strong></a> · <a href="./docs/parts.md">Build from parts</a> · <a href="./docs/element.md">The element</a> · <a href="./docs/scale.md">To scale</a> · <a href="./docs/styles.md">Styles</a></p>
+<p align="center"><a href="https://johnmorrisdotca.github.io/hako-devices/"><strong>Open the demo →</strong></a> · <a href="./docs/parts.md">Build from parts</a> · <a href="./docs/element.md">The element</a> · <a href="./docs/embed.md">Use one on your site</a> · <a href="./docs/scale.md">To scale</a> · <a href="./docs/styles.md">Styles</a></p>
 
 <p align="center"><img alt="A gallery on a night-blue page: groups of line drawings such as single-board computers, desktops, laptops and classic machines, each a bunch of its machines." src="https://raw.githubusercontent.com/johnmorrisdotca/hako-devices/main/docs/images/gallery.jpg" width="820"></p>
 
@@ -32,6 +32,24 @@ npm install @johnmorrisdotca/hako-devices three
 ```
 
 That is all a page needs with a bundler. The drawing shows at once; when the element comes on screen and the browser can draw WebGL, the 3D view takes over without a jump. Drag to turn it, or use the arrow keys. With no WebGL, under Save-Data, or on any failure, the drawing stays.
+
+## Put one on your own site
+
+These drawings are yours to use on a page of your own. The demo copies the code for the machine on the screen: the element, an iframe of the embed page when a site cannot run script, a module, the SVG, and a data address for an image. [docs/embed.md](docs/embed.md) has each one.
+
+`embedCode` lives on `@johnmorrisdotca/hako-devices/embed`, because the SVG is made with three.js. Reading the attributes does not need it.
+
+```ts
+import { attributesFromOptions, deviceFromParams, deviceToParams, embedCode } from "@johnmorrisdotca/hako-devices/embed";
+
+const options = { key: "pi4", drawingStyle: "thick", fireflies: true };
+const attributes = attributesFromOptions(options);
+attributes.key; // "pi4"
+attributes.fireflies; // ""
+deviceFromParams(deviceToParams(options)).drawingStyle; // "thick"
+embedCode(options, "iframe").includes("embed.html"); // true
+embedCode(options, "element").includes("fireflies"); // true
+```
 
 Build one from a script, in Node or a browser:
 
@@ -62,6 +80,7 @@ report.issues[0].message; // "Faceted metal case (Argon ONE style) closes over t
 | `.../tags` | `FACETS`, `tagsOf(key)`, `matchesPicks(key, picks)`, `facetCounts(keys, picks)`: filter machines by what they are. Its own entry because the table is large | Nothing |
 | `.../build` | `build(description)`, `buildDevice(key)`, `buildPart(id)`: one mesh and one drawing. `toGlb`, `Drawing`, `Box` | `three` |
 | `.../element` | `<hako-device>` and `<hako-lineup>`: load `three` only when a 3D view is wanted | `three` for 3D |
+| `.../embed` | `embedCode`: the element, an iframe, a module, the SVG or a data address | `three` for the SVG |
 | `.../react` | A thin `<HakoDevice>` wrapper | `react` |
 | `.../assets/*` | Ready files: `pi4.glb`, `pi4.svg`, `pi4.thick.svg`, `parts/armor.glb`, `coming-soon.svg` | Nothing |
 

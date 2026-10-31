@@ -432,6 +432,27 @@ test("a planned key shows the one placeholder, a covered key its mesh; style= na
   await expect(page.locator("#by-style img")).toHaveAttribute("src", /pi4\.thick\.svg$/);
 });
 
+test("the copy panel matches the device on screen, and the embed page draws its address", async ({ page, context, browserName }) => {
+  if (browserName === "chromium") await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  const problems = watch(page);
+  await page.goto(URL);
+  const code = page.locator('[data-testid="embed-code"]');
+  await expect(code).toContainText("hako-device");
+  await expect(code).toContainText('key="pi4-pitft"');
+  await page.locator("#hero-chips button").nth(2).click();
+  await expect(code).toContainText('key="pi-zero"');
+  await page.locator('[data-testid="tab-iframe"]').click();
+  await expect(code).toContainText("embed.html");
+  await expect(code).toContainText("pi-zero");
+  await page.locator('[data-testid="embed-copy"]').click();
+  await expect(page.locator("#embed-status")).toHaveText("Copied");
+  await page.goto(`${URL}embed.html?key=mac-studio&drawing-style=thick&spin=off`);
+  await expect(page.locator("html")).toHaveAttribute("data-ready", "true");
+  await expect(page.locator('[data-testid="device"]')).toHaveAttribute("key", "mac-studio");
+  await expect(page.locator('[data-testid="device"]')).toHaveAttribute("drawing-style", "thick");
+  expect(problems).toEqual([]);
+});
+
 test("the React wrapper draws the element", async ({ page }) => {
   const problems = watch(page);
   await page.goto(`${URL}react-check.html`);
