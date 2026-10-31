@@ -1,5 +1,5 @@
 // Well-known machines, each one body with marks on its front and top: one description for its mesh and its drawing, placed from its published size. Plain geometry: no mark or logo.
-import { type Box, box, cyl, type Material, rbox } from "./kit.ts";
+import { type Box, box, cyl, type Material, rbox, tube, type Vec3 } from "./kit.ts";
 
 export type MarkKind = "screen" | "lcd" | "dark" | "panel" | "slot" | "key" | "light";
 
@@ -25,6 +25,19 @@ export interface MachineSpec {
   body: Material;
   corner: number;
   marks: readonly Mark[];
+  /** Not one block: its own shape, in its size. */
+  shape?: "headphones" | "headset";
+}
+
+/** Points along the band over the head of a pair of headphones, or round the back of a headset. */
+export function bandPoints(shape: "headphones" | "headset", w: number, d: number, h: number): Vec3[] {
+  const points: Vec3[] = [];
+  for (let i = 0; i <= 16; i++) {
+    const t = (Math.PI * i) / 16;
+    if (shape === "headphones") points.push([(w / 2 - 17) * Math.cos(t), 100 + (h - 100 - 6) * Math.sin(t), 0]);
+    else points.push([(w / 2 - 6) * Math.cos(t), h / 2, -d / 6 - (d / 3 + d / 6 - 6) * Math.sin(t)]);
+  }
+  return points;
 }
 
 const front = (kind: MarkKind, x: number, y: number, w: number, h: number, more: Partial<Mark> = {}): Mark => ({ face: "front", kind, x, y, w, h, ...more });
@@ -108,6 +121,20 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     corner: 3,
     marks: [top("key", 0, 22, 16, 14, { cols: 10, rows: 4, gap: 6 }), top("dark", 0, -52, 214, 4)],
   },
+  "airpods-1": {
+    size: [44.3, 21.3, 53.5],
+    body: "plastic-white",
+    corner: 8,
+    marks: [front("dark", 0, 38, 44, 0.6), front("light", 0, 26, 2, 2, { round: true })],
+  },
+  "airpods-pro-1": {
+    size: [60.6, 21.7, 45.2],
+    body: "plastic-white",
+    corner: 9,
+    marks: [front("dark", 0, 30, 60, 0.6), front("light", 0, 18, 2, 2, { round: true })],
+  },
+  "airpods-max": { size: [168.6, 83.4, 187.3], body: "alu", corner: 16, marks: [], shape: "headphones" },
+  "apple-vision-pro": { size: [190, 120, 110], body: "alu", corner: 26, marks: [], shape: "headset" },
   dreamcast: {
     size: [190, 195.8, 75.5],
     body: "plastic-white",
@@ -134,6 +161,20 @@ export function eachMark(mark: Mark, each: (x: number, y: number) => void) {
 
 export function machine(m: Box, spec: MachineSpec) {
   const [w, d, h] = spec.size;
+  if (spec.shape === "headphones") {
+    for (const side of [-1, 1]) {
+      m.add(spec.body, rbox(34, 110, d, spec.corner, 4), [side * (w / 2 - 17), 55, 0]);
+      m.add("plastic-char", rbox(8, 92, d - 12, 12, 3), [side * (w / 2 - 38), 55, 0]);
+    }
+    m.add("plastic-char", tube(bandPoints("headphones", w, d, h), 6, 32, 8));
+    return m;
+  }
+  if (spec.shape === "headset") {
+    m.add(spec.body, rbox(w, h, d / 2, spec.corner, 4), [0, h / 2, d / 4]);
+    m.add("black-glass", rbox(w - 10, h - 10, 2, spec.corner - 4, 3), [0, h / 2, d / 2 - 0.9]);
+    m.add("plastic-grey", tube(bandPoints("headset", w, d, h), 6, 32, 8));
+    return m;
+  }
   m.add(spec.body, rbox(w, h, d, Math.min(spec.corner, Math.min(w, d, h) / 2 - 0.1), 4), [0, h / 2, 0]);
   const thin = 0.5;
   for (const mark of spec.marks) {

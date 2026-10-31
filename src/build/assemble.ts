@@ -49,6 +49,7 @@ const BOARD_ART: Record<BoardId, BoardArt> = {
   "pi3a-plus": { mesh: boards.pi3aPlus, draw: drawBoards.pi3aPlus },
   "pi-zero-2w": { mesh: boards.piZero2w, draw: drawBoards.piZero2w },
   "pi-zero-w": { mesh: boards.piZeroW, draw: drawBoards.piZeroW },
+  "pi-zero-1": { mesh: boards.piZero1, draw: drawBoards.piZero1 },
   "cm4-io": { mesh: boards.cm4Io, draw: drawBoards.cm4Io },
 };
 
@@ -105,6 +106,10 @@ const BASE_ART: Record<string, BaseArt> = {
   "macbook-air-13": plain(laptops.macbookAir13, drawMacs.macbookAir13),
   "macbook-pro-14": plain(laptops.macbookPro14, drawMacs.macbookPro14),
   "macbook-pro-16": plain(laptops.macbookPro16, drawMacs.macbookPro16),
+  "macbook-air-13-silver": plain(laptops.macbookAir13Silver, drawMacs.macbookAir13Silver),
+  "macbook-pro-14-silver": plain(laptops.macbookPro14Silver, drawMacs.macbookPro14Silver),
+  "macbook-pro-16-black": plain(laptops.macbookPro16Black, drawMacs.macbookPro16Black),
+  "macbook-pro-17-inch": plain(laptops.macbookPro17, drawMacs.macbookPro17),
   "ipad-mini": slabArt(tablets.ipadMini, drawTablets.ipadMini),
   ipad: slabArt(tablets.ipadPlain, drawTablets.ipadPlain),
   "ipad-air": slabArt(tablets.ipadAir, drawTablets.ipadAir),

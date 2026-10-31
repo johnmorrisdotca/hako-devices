@@ -221,7 +221,8 @@ export function macbookNotch(m: Box, { w, d, h, shell, pro, screen, radius, lid 
   const below = 10;
   litScreen(m, [0, -0.8, L - below - sh / 2 + 3], [90, 0, 0], sw, sh, { frame, radius: 5 });
   m.lidScreen = { w: sw, h: sh, z: L - below - sh / 2 + 3 };
-  m.add("bezel", rbox(notch, 0.4, 6.4, 2.6, 2), [0, -1, L - 3.2 - 2], [0, 0, 0], { frame });
+  // A notch of 0: an older screen, the camera in the black glass above the picture.
+  if (notch > 0) m.add("bezel", rbox(notch, 0.4, 6.4, 2.6, 2), [0, -1, L - 3.2 - 2], [0, 0, 0], { frame });
   m.add("hole", disc(1.1, 16), [0, -1.25, L - 5], [90, 0, 0], { frame });
   return m;
 }
@@ -266,3 +267,11 @@ export const macbookPro16 = (m: Box) =>
     lid: 6,
     u: 18.8,
   });
+
+/** The same laptops in their other colours. */
+export const macbookAir13Silver = (m: Box) => macbookNotch(m, { w: 304.1, d: 215, h: 11.3, shell: "alu", pro: false, screen: [287, 180], radius: 13, u: 18.6 });
+export const macbookPro14Silver = (m: Box) => macbookNotch(m, { w: 312.6, d: 221.2, h: 15.5, shell: "alu", pro: true, screen: [302, 196], radius: 12, lid: 6, u: 18.3 });
+export const macbookPro16Black = (m: Box) => macbookNotch(m, { w: 355.7, d: 248.1, h: 16.8, shell: "shell-graphite", pro: true, screen: [345, 223], radius: 13, lid: 6, u: 18.8 });
+
+/** The old 17-inch laptop: 392 by 265 by 25.9 mm, silver, no notch. */
+export const macbookPro17 = (m: Box) => macbookNotch(m, { w: 392, d: 265, h: 25.9, shell: "alu", pro: true, screen: [367, 229], radius: 8, lid: 6, u: 18.8, notch: 0 });

@@ -197,7 +197,7 @@ export const iMac24 = (d: Drawing, model: Box) => {
   return d;
 };
 
-export function macbookNotch(d: Drawing, model: Box, { w, dz, h, shell, keysFill, pad }: { w: number; dz: number; h: number; shell: SolidStyle; keysFill: string; pad: [number, number] }) {
+export function macbookNotch(d: Drawing, model: Box, { w, dz, h, shell, keysFill, pad, notch = true }: { notch?: boolean; w: number; dz: number; h: number; shell: SolidStyle; keysFill: string; pad: [number, number] }) {
   const frame = model.lidFrame as THREE.Matrix4;
   const L = model.lidLength as number;
   const { w: sw, h: sh, z: sz } = model.lidScreen as NonNullable<Box["lidScreen"]>;
@@ -229,7 +229,7 @@ export function macbookNotch(d: Drawing, model: Box, { w, dz, h, shell, keysFill
   homePicture(d, (u, v) => pt(-sw / 2 + u * sw, y - 0.1, sz + sh / 2 - v * sh), inward, 5);
   // the notch
   const n = [pt(-14, y - 0.2, L - 2), pt(14, y - 0.2, L - 2), pt(14, y - 0.2, L - 8.4), pt(-14, y - 0.2, L - 8.4)];
-  d.flat(n, inward, { fill: "#05080e", stroke: "#8fa1b8", sw: 0.5 }, 6);
+  if (notch) d.flat(n, inward, { fill: "#05080e", stroke: "#8fa1b8", sw: 0.5 }, 6);
   return d;
 }
 
@@ -260,3 +260,10 @@ export const macbookPro16 = (d: Drawing, model: Box) =>
     keysFill: "#05080e",
     pad: [168, 92],
   });
+
+const SILVER = { top: "url(#top)", front: "url(#metal)", side: "#1b2433" };
+const GRAPHITE = { top: "#141c2a", front: "#111a2a", side: "#0b111c" };
+export const macbookAir13Silver = (d: Drawing, model: Box) => macbookNotch(d, model, { w: 304.1, dz: 215, h: 11.3, shell: SILVER, keysFill: "#0c1320", pad: [134, 82] });
+export const macbookPro14Silver = (d: Drawing, model: Box) => macbookNotch(d, model, { w: 312.6, dz: 221.2, h: 15.5, shell: SILVER, keysFill: "#05080e", pad: [148, 92] });
+export const macbookPro16Black = (d: Drawing, model: Box) => macbookNotch(d, model, { w: 355.7, dz: 248.1, h: 16.8, shell: GRAPHITE, keysFill: "#05080e", pad: [168, 92] });
+export const macbookPro17 = (d: Drawing, model: Box) => macbookNotch(d, model, { w: 392, dz: 265, h: 25.9, shell: SILVER, keysFill: "#05080e", pad: [180, 100], notch: false });

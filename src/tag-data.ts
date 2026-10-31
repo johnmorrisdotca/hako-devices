@@ -1742,4 +1742,7 @@ export const TAG_DATA: Readonly<Record<string, Readonly<Partial<Record<string, r
   "intel-nuc11atkpe": {"maker":["Intel"],"cpu":["Intel Pentium Silver N6005"],"cpuMaker":["Intel"],"type":["Mini PC"],"decade":["2060s"]},
   "intel-nuc11atkc4": {"maker":["Intel"],"cpu":["Intel Celeron N5105"],"cpuMaker":["Intel"],"type":["Mini PC"],"decade":["2060s"]},
   "intel-nuc11atkc2": {"maker":["Intel"],"cpu":["Intel Celeron N4505"],"cpuMaker":["Intel"],"type":["Mini PC"],"decade":["2060s"]},
+  "macbook-air-13-silver": {"maker":["Apple"],"type":["Laptop"],"os":["Mac OS"]},
+  "macbook-pro-14-silver": {"maker":["Apple"],"type":["Laptop"],"os":["Mac OS"]},
+  "macbook-pro-16-black": {"maker":["Apple"],"type":["Laptop"],"os":["Mac OS"]},
 };

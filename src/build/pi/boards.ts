@@ -340,6 +340,19 @@ export function piZero2w(m: Box, { soldered, detail }: BoardContext) {
   ]);
 }
 
+/** The plain Zero: the same board with no radio and no antenna. */
+export function piZero1(m: Box, { soldered, detail }: BoardContext) {
+  const { D, p } = zeroBoard(m, soldered);
+  chip(m, D, 30, 15, 12, 12, 1.3);
+  ribbon(m, D, 63, 15, 17, { body: "plastic-black", latch: "plastic-grey" });
+  m.add("steel", box(12, 1.4, 11), p(7, T + 0.7, 15));
+  m.add("plastic-black", rbox(11, 0.8, 11, 0.3, 1), p(4, T + 1.8, 15));
+  if (detail !== "full") return;
+  m.add("led-power", box(1.6, 0.7, 0.9), p(57.5, T + 0.35, 6.5));
+  silk(m, D, 32.5, D - 1, 52, 0.22);
+  silk(m, D, 32.5, D - 6, 52, 0.22);
+}
+
 /** The Zero W: a bare black system chip, no shield, the radio's chip and its etched antenna. */
 export function piZeroW(m: Box, { soldered, detail }: BoardContext) {
   const { D, W, p } = zeroBoard(m, soldered);

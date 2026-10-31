@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-30.
 
-**1742 machines. 940 distinct shapes still to build. 119 entries are already built: the 65 devices in this package, plus the real models those meshes cover. 873 entries have a sourced size; the other 869 are `null` on purpose.**
+**1745 machines. 933 distinct shapes still to build. 136 entries are already built: the 65 devices in this package, plus the real models those meshes cover. 875 entries have a sourced size; the other 870 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -63,10 +63,10 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **874** | **297** | **618** |
+| **4** | **Apple** | **874** | **290** | **620** |
 |  | Power Mac | 92 | 19 | 88 |
 |  | Performa | 71 | 9 | 71 |
-|  | MacBook Pro | 69 | 14 | 64 |
+|  | MacBook Pro | 69 | 13 | 64 |
 |  | PowerBook | 61 | 15 | 60 |
 |  | iMac | 61 | 14 | 35 |
 |  | iPhone | 55 | 36 | 55 |
@@ -85,7 +85,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | AirPort | 13 | 5 | 4 |
 |  | MacBook | 13 | 4 | 13 |
 |  | LC | 12 | 3 | 12 |
-|  | AirPods | 12 | 5 | 7 |
+|  | AirPods | 12 | 0 | 9 |
 |  | Quadra | 11 | 7 | 11 |
 |  | Xserve | 11 | 2 | 0 |
 |  | Mac Pro | 10 | 3 | 8 |
@@ -103,7 +103,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Portable | 2 | 1 | 1 |
 |  | AirTag | 2 | 1 | 2 |
 |  | Remote | 2 | 2 | 0 |
-|  | Vision Pro | 1 | 1 | 0 |
+|  | Vision Pro | 1 | 0 | 0 |
 |  | Scanner | 1 | 1 | 0 |
 | **5** | **Microsoft** | **73** | **39** | **46** |
 |  | Surface Laptop | 17 | 9 | 5 |
@@ -120,10 +120,10 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Surface table | 2 | 2 | 0 |
 |  | Surface Laptop SE | 1 | 1 | 0 |
 |  | Surface Neo | 1 | 1 | 0 |
-| **6** | **What is built today** | **55** | **0** | **13** |
+| **6** | **What is built today** | **58** | **0** | **13** |
 |  | Raspberry Pi | 20 | 0 | 0 |
+|  | Generic | 9 | 0 | 4 |
 |  | Clients | 8 | 0 | 0 |
-|  | Generic | 6 | 0 | 4 |
 |  | Mac | 5 | 0 | 3 |
 |  | iPad | 5 | 0 | 5 |
 |  | Small PC | 5 | 0 | 0 |
@@ -152,7 +152,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Arduino Uno | 4 | 4 | 0 |
 | **11** | **Mini PCs** | **21** | **9** | **0** |
 |  | NUC | 21 | 9 | 0 |
-|  | **Total** | **1742** | **940** | **873** |
+|  | **Total** | **1745** | **933** | **875** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -853,11 +853,11 @@ TI-99/4A (1981).
 
 Yamaha CX5M (1984).
 
-### Phase 4: Apple (874 machines, 297 shapes to build)
+### Phase 4: Apple (874 machines, 290 shapes to build)
 
-**AirPods** (12 machines, 5 shapes)
+**AirPods** (12 machines, 0 shapes)
 
-AirPods (1st generation) (2016), AirPods (2nd generation) (2019), AirPods Pro (1st generation) (2019), AirPods Max (2020), AirPods (3rd generation) (2021), AirPods Pro (2nd generation) (2022), AirPods Pro (2nd generation, USB-C) (2023), AirPods 4 (2024), AirPods Max (USB-C) (2024), AirPods Pro 3 (2025), AirPods (5th generation) (2026), AirPods Max (2nd generation) (2026).
+AirPods (1st generation) (2016) *built*, AirPods (2nd generation) (2019) *built*, AirPods Pro (1st generation) (2019) *built*, AirPods Max (2020) *built*, AirPods (3rd generation) (2021) *built*, AirPods Pro (2nd generation) (2022) *built*, AirPods Pro (2nd generation, USB-C) (2023) *built*, AirPods 4 (2024) *built*, AirPods Max (USB-C) (2024) *built*, AirPods Pro 3 (2025) *built*, AirPods (5th generation) (2026) *built*, AirPods Max (2nd generation) (2026) *built*.
 
 **AirPort** (13 machines, 5 shapes)
 
@@ -923,9 +923,9 @@ MacBook (13-inch, Late 2006), MacBook (13-inch, Mid 2006), MacBook (13-inch, Lat
 
 MacBook Air (Early 2008), MacBook Air (Late 2008), MacBook Air (Mid 2009), MacBook Air (11-inch, Late 2010), MacBook Air (13-inch, Late 2010), MacBook Air (11-inch, Mid 2011), MacBook Air (13-inch, Mid 2011), MacBook Air (11-inch, Mid 2012), MacBook Air (13-inch, Mid 2012), MacBook Air (11-inch, Mid 2013), MacBook Air (13-inch, Mid 2013), MacBook Air (11-inch, Early 2014), MacBook Air (13-inch, Early 2014), MacBook Air (11-inch, Early 2015), MacBook Air (13-inch, Early 2015), MacBook Air (13-inch, 2017), MacBook Air (Retina, 13-inch, 2018), MacBook Air (Retina, 13-inch, 2019), MacBook Air (M1, 2020), MacBook Air (Retina, 13-inch, 2020), MacBook Air (M2, 2022) *built*, MacBook Air (15-inch, M2, 2023), MacBook Air (13-inch, M3, 2024) *built*, MacBook Air (15-inch, M3, 2024), MacBook Air (13-inch, M4, 2025) *built*, MacBook Air (15-inch, M4, 2025), MacBook Air (13-inch, M5) (2026) *built*, MacBook Air (15-inch, M5) (2026).
 
-**MacBook Pro** (69 machines, 14 shapes)
+**MacBook Pro** (69 machines, 13 shapes)
 
-MacBook Pro (15-inch Glossy) (2006), MacBook Pro (17-inch) (2006), MacBook Pro (Late 2006) (15-inch), MacBook Pro (Late 2006) (17-inch), MacBook Pro (original) (2006), MacBook Pro (Late 2007, 2.4/2.2GHz) (15-inch), MacBook Pro (Late 2007, 2.4/2.2GHz) (17-inch), MacBook Pro (Mid 2007, 2.4/2.2GHz) (15-inch), MacBook Pro (Mid 2007, 2.4/2.2GHz) (17-inch), MacBook Pro (15-inch, Late 2008), MacBook Pro (Early 2008, 15-inch), MacBook Pro (Early 2008, 17-inch), MacBook Pro (13-inch, Mid 2009), MacBook Pro (15-inch, Mid 2009) and (15-inch, 2.53 GHz, Mid 2009), MacBook Pro (17-inch, Early 2009), MacBook Pro (17-inch, Mid 2009), MacBook Pro (13-inch, Mid 2010), MacBook Pro (15-inch, Mid 2010), MacBook Pro (17-inch, Mid 2010), MacBook Pro (13-inch, Early 2011), MacBook Pro (13-inch, Late 2011), MacBook Pro (15-inch, Early 2011), MacBook Pro (15-inch, Late 2011), MacBook Pro (17-inch, Early 2011), MacBook Pro (17-inch, Late 2011), MacBook Pro (13-inch, Mid 2012), MacBook Pro (15-inch, Mid 2012), MacBook Pro (Retina, 13-inch, Late 2012), MacBook Pro (Retina, 15-inch, Mid 2012), MacBook Pro (Retina, 13-inch, Early 2013), MacBook Pro (Retina, 13-inch, Late 2013), MacBook Pro (Retina, 15-inch, Early 2013), MacBook Pro (Retina, 15-inch, Late 2013), MacBook Pro (Retina, 13-inch, Mid 2014), MacBook Pro (Retina, 15-inch, Mid 2014), MacBook Pro (Retina, 13-inch, Early 2015), MacBook Pro (Retina, 15-inch, Mid 2015), MacBook Pro (13-inch, 2016, Four Thunderbolt 3 ports), MacBook Pro (13-inch, 2016, Two Thunderbolt 3 ports), MacBook Pro (15-inch, 2016), MacBook Pro (13-inch, 2017, Four Thunderbolt 3 ports), MacBook Pro (13-inch, 2017, Two Thunderbolt 3 ports), MacBook Pro (15-inch, 2017), MacBook Pro (13-inch, 2018, Four Thunderbolt 3 ports), MacBook Pro (15-inch, 2018), MacBook Pro (13-inch, 2019, Four Thunderbolt 3 ports), MacBook Pro (13-inch, 2019, Two Thunderbolt 3 ports), MacBook Pro (15-inch, 2019), MacBook Pro (16-inch, 2019), MacBook Pro (13-inch, 2020, Four Thunderbolt 3 ports), MacBook Pro (13-inch, 2020, Two Thunderbolt 3 ports), MacBook Pro (13-inch, M1, 2020), MacBook Pro (14-inch, 2021) *built*, MacBook Pro (16-inch, 2021) *built*, MacBook Pro (13-inch, M2, 2022), MacBook Pro (14-inch, 2023) *built*, MacBook Pro (14-inch, M3 Pro or M3 Max, Nov 2023) *built*, MacBook Pro (14-inch, M3, Nov 2023) *built*, MacBook Pro (16-inch, 2023) *built*, MacBook Pro (16-inch, Nov 2023) *built*, MacBook Pro (14-inch, M4 Pro or M4 Max, 2024) *built*, MacBook Pro (14-inch, M4, 2024) *built*, MacBook Pro (16-inch, 2024) *built*, MacBook Pro (14-inch, M5) (2025) *built*, MacBook Pro (14-inch, M5 Pro or M5 Max) (2026) *built*, MacBook Pro (14-inch, M6) (2026) *built*, MacBook Pro (16-inch, M5 Pro or M5 Max) (2026) *built*, MacBook Pro with PROLED XDR Display (14-inch) (2026), MacBook Pro with PROLED XDR Display (16-inch) (2026).
+MacBook Pro (15-inch Glossy) (2006), MacBook Pro (17-inch) (2006) *built*, MacBook Pro (Late 2006) (15-inch), MacBook Pro (Late 2006) (17-inch), MacBook Pro (original) (2006), MacBook Pro (Late 2007, 2.4/2.2GHz) (15-inch), MacBook Pro (Late 2007, 2.4/2.2GHz) (17-inch), MacBook Pro (Mid 2007, 2.4/2.2GHz) (15-inch), MacBook Pro (Mid 2007, 2.4/2.2GHz) (17-inch), MacBook Pro (15-inch, Late 2008), MacBook Pro (Early 2008, 15-inch), MacBook Pro (Early 2008, 17-inch), MacBook Pro (13-inch, Mid 2009), MacBook Pro (15-inch, Mid 2009) and (15-inch, 2.53 GHz, Mid 2009), MacBook Pro (17-inch, Early 2009), MacBook Pro (17-inch, Mid 2009), MacBook Pro (13-inch, Mid 2010), MacBook Pro (15-inch, Mid 2010), MacBook Pro (17-inch, Mid 2010), MacBook Pro (13-inch, Early 2011), MacBook Pro (13-inch, Late 2011), MacBook Pro (15-inch, Early 2011), MacBook Pro (15-inch, Late 2011), MacBook Pro (17-inch, Early 2011), MacBook Pro (17-inch, Late 2011), MacBook Pro (13-inch, Mid 2012), MacBook Pro (15-inch, Mid 2012), MacBook Pro (Retina, 13-inch, Late 2012), MacBook Pro (Retina, 15-inch, Mid 2012), MacBook Pro (Retina, 13-inch, Early 2013), MacBook Pro (Retina, 13-inch, Late 2013), MacBook Pro (Retina, 15-inch, Early 2013), MacBook Pro (Retina, 15-inch, Late 2013), MacBook Pro (Retina, 13-inch, Mid 2014), MacBook Pro (Retina, 15-inch, Mid 2014), MacBook Pro (Retina, 13-inch, Early 2015), MacBook Pro (Retina, 15-inch, Mid 2015), MacBook Pro (13-inch, 2016, Four Thunderbolt 3 ports), MacBook Pro (13-inch, 2016, Two Thunderbolt 3 ports), MacBook Pro (15-inch, 2016), MacBook Pro (13-inch, 2017, Four Thunderbolt 3 ports), MacBook Pro (13-inch, 2017, Two Thunderbolt 3 ports), MacBook Pro (15-inch, 2017), MacBook Pro (13-inch, 2018, Four Thunderbolt 3 ports), MacBook Pro (15-inch, 2018), MacBook Pro (13-inch, 2019, Four Thunderbolt 3 ports), MacBook Pro (13-inch, 2019, Two Thunderbolt 3 ports), MacBook Pro (15-inch, 2019), MacBook Pro (16-inch, 2019), MacBook Pro (13-inch, 2020, Four Thunderbolt 3 ports), MacBook Pro (13-inch, 2020, Two Thunderbolt 3 ports), MacBook Pro (13-inch, M1, 2020), MacBook Pro (14-inch, 2021) *built*, MacBook Pro (16-inch, 2021) *built*, MacBook Pro (13-inch, M2, 2022), MacBook Pro (14-inch, 2023) *built*, MacBook Pro (14-inch, M3 Pro or M3 Max, Nov 2023) *built*, MacBook Pro (14-inch, M3, Nov 2023) *built*, MacBook Pro (16-inch, 2023) *built*, MacBook Pro (16-inch, Nov 2023) *built*, MacBook Pro (14-inch, M4 Pro or M4 Max, 2024) *built*, MacBook Pro (14-inch, M4, 2024) *built*, MacBook Pro (16-inch, 2024) *built*, MacBook Pro (14-inch, M5) (2025) *built*, MacBook Pro (14-inch, M5 Pro or M5 Max) (2026) *built*, MacBook Pro (14-inch, M6) (2026) *built*, MacBook Pro (16-inch, M5 Pro or M5 Max) (2026) *built*, MacBook Pro with PROLED XDR Display (14-inch) (2026), MacBook Pro with PROLED XDR Display (16-inch) (2026).
 
 **Macintosh II** (8 machines, 4 shapes)
 
@@ -983,9 +983,9 @@ AirPort Time Capsule 802.11n (1st Generation) (2008), AirPort Time Capsule 802.1
 
 Magic Trackpad (1st generation) (2010), Magic Trackpad (2nd generation) (2015), Magic Trackpad (3rd generation) (2024).
 
-**Vision Pro** (1 machines, 1 shapes)
+**Vision Pro** (1 machines, 0 shapes)
 
-Apple Vision Pro (2024).
+Apple Vision Pro (2024) *built*.
 
 **Workgroup Server** (21 machines, 10 shapes)
 
@@ -1081,11 +1081,11 @@ Zune 30 (2006), Zune 4 (2007), Zune 8 (2007), Zune 80 (2007), Zune 120 (2008), Z
 
 Samsung SUR40 (PixelSense) (2011).
 
-### Phase 6: What is built today (55 machines, 0 shapes to build)
+### Phase 6: What is built today (58 machines, 0 shapes to build)
 
-**Generic** (4 machines, 0 shapes)
+**Generic** (7 machines, 0 shapes)
 
-MacBook *built*, MacBook Air 13-inch *built*, MacBook Pro 14-inch *built*, MacBook Pro 16-inch *built*.
+MacBook *built*, MacBook Air 13-inch *built*, MacBook Air 13-inch, silver *built*, MacBook Pro 14-inch *built*, MacBook Pro 14-inch, silver *built*, MacBook Pro 16-inch *built*, MacBook Pro 16-inch, black *built*.
 
 **Mac** (5 machines, 0 shapes)
 

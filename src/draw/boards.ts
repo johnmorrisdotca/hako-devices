@@ -163,6 +163,14 @@ export function piZero2w(d: Drawing, { soldered }: BoardArtContext) {
   d.light(p(57.5, 1.8, 6.5), GREEN, 1.1, 2);
 }
 
+export function piZero1(d: Drawing, { soldered }: BoardArtContext) {
+  const p = board(30);
+  zeroCommon(d, p, soldered);
+  part(d, p, [24, 36], [9, 21], 1.3, { ...BLACK, layer: 1 });
+  for (const [bx, w] of ZERO_FRONT) part(d, p, [bx - w / 2, bx + w / 2], [-1.2, 6], 3, { ...METAL, layer: 1 });
+  d.light(p(57.5, 1.8, 6.5), GREEN, 1.1, 2);
+}
+
 export function piZeroW(d: Drawing, { soldered }: BoardArtContext) {
   const p = board(30);
   zeroCommon(d, p, soldered);

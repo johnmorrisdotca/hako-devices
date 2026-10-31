@@ -36,7 +36,7 @@ test("the page loads clean, every address under the site's own path", async ({ p
   const addresses: string[] = [];
   page.on("request", (request) => addresses.push(request.url()));
   await page.goto(URL);
-  await expect(page.locator('[data-testid="tile"]').first()).toBeVisible();
+  await expect(page.locator('[data-testid="gallery-card"]').first()).toBeVisible();
   await page.waitForTimeout(800);
   expect(problems).toEqual([]);
   expect(addresses.length).toBeGreaterThan(5);
@@ -48,20 +48,27 @@ test("the gallery shows every built device by family, and what is coming", async
   await page.goto(URL);
   const counts = catalogueCounts();
   expect(counts.total).toBeGreaterThan(1000);
-  await expect(page.locator('[data-testid="tile"][data-status="built"]')).toHaveCount(DEVICES.length);
-  await expect(page.locator('[data-testid="gallery-shelf"]')).not.toHaveCount(0);
+  // it opens on the groups, each a bunch of its machines, not on every machine
+  const card = (id: string) => page.locator(`[data-testid="gallery-card"][data-group="${id}"]`);
   await expect(page.locator('[data-testid="gallery-count"]')).toHaveText(`${counts.built} of ${counts.total} built`);
+  await expect(page.locator('[data-testid="tile"]')).toHaveCount(0);
+  for (const family of ["pi-boards", "pi-dressed", "desktops", "laptops", "tablets-phones", "pcs", "nas", "classics", "clients", "parts"]) await expect(card(family)).toBeVisible();
+  expect(await card("pi-boards").locator("img").count()).toBeGreaterThan(1);
+  await card("pi-boards").click();
+  await expect(page.locator('[data-testid="tile"][data-key="rpi-zero"]')).toContainText("Raspberry Pi Zero");
+  await expect(page.locator('[data-testid="tile"][data-key="nas-rack"]')).toHaveCount(0);
+  await page.locator('[data-testid="group-back"]').click();
+  await card("parts").click();
   await expect(page.locator('[data-testid="part-tile"]').first()).toBeVisible();
-  for (const family of ["pi-boards", "pi-dressed", "desktops", "laptops", "tablets-phones", "pcs", "nas", "clients"]) await expect(page.locator(`[data-testid="gallery-group"][data-family="${family}"]`)).toBeVisible();
+  await page.locator('[data-testid="group-back"]').click();
   await page.locator('[data-testid="filter-planned"]').click();
-  await expect(page.locator('[data-testid="tile"][data-status="built"]')).toHaveCount(0);
-  // every machine still to come is on a shelf, and its tiles are made when its family opens
-  const shelved = await page.locator('[data-testid="gallery-shelf"]').evaluateAll((nodes) => nodes.map((node) => Number((node as HTMLElement).dataset.count)));
+  // every machine still to come is on a shelf
+  const shelved = await page.locator('[data-testid="gallery-card"][data-shelf]').evaluateAll((nodes) => nodes.map((node) => Number((node as HTMLElement).dataset.count)));
   expect(shelved.reduce((sum, count) => sum + count, 0)).toBe(counts.planned);
   await expect(page.locator('[data-testid="tile"]')).toHaveCount(0);
   const first = PLANNED.find((entry) => entry.shelf === "consoles" && entry.family === "DS") ?? PLANNED[0];
+  await card(first.shelf).click();
   const shelf = page.locator(`[data-testid="gallery-shelf"][data-shelf="${first.shelf}"]`);
-  await shelf.locator("summary").first().click();
   const family = shelf.locator('[data-testid="gallery-family"]').filter({ hasText: headingOf(first) }).first();
   await family.locator("summary").click();
   await expect(family.locator(`[data-testid="tile"][data-key="${first.key}"]`)).toContainText(first.name);
@@ -72,7 +79,7 @@ test("the gallery shows every built device by family, and what is coming", async
   // what was open stays open across a change of filter
   await page.locator('[data-testid="filter-all"]').click();
   await expect(page.locator(`[data-testid="tile"][data-key="${first.key}"]`)).toBeVisible();
-  await expect(page.locator('[data-testid="tile"][data-status="built"]').first()).toBeVisible();
+  await page.locator('[data-testid="group-back"]').click();
   await page.locator('[data-testid="filter-built"]').click();
   await page.locator('[data-testid="gallery-search"]').fill("rack nas");
   await expect(page.locator('[data-testid="tile"][data-key="nas-rack"]')).toBeVisible();
@@ -84,6 +91,8 @@ test("the gallery shows every built device by family, and what is coming", async
 test("every drawing in the gallery loads, in thin, in thick and in both", async ({ page }) => {
   const problems = watch(page);
   await page.goto(URL);
+  // a blank search narrows to everything: every tile on one page
+  await page.locator('[data-testid="gallery-search"]').fill(" ");
   const loaded = async () =>
     page.evaluate(async () => {
       const images = [...document.querySelectorAll<HTMLImageElement>("#gallery img")];
@@ -342,6 +351,7 @@ test("filters by brand, CPU maker and decade narrow the whole catalogue, and cle
   const problems = watch(page);
   await page.goto(URL);
   await page.locator('[data-testid="filter-all"]').click();
+  await page.locator('[data-testid="gallery-filters"] > summary').click();
   const open = (facet: string) => page.locator(`[data-testid="gallery-facet"][data-facet="${facet}"] summary`).click();
   const chip = (facet: string, value: string) => page.locator(`[data-testid="facet-chip"][data-facet="${facet}"][data-value="${value}"]`);
   await open("maker");
@@ -359,6 +369,7 @@ test("filters by brand, CPU maker and decade narrow the whole catalogue, and cle
   await page.locator('[data-testid="facet-clear"]').click();
   await expect(page.locator('[data-testid="facet-clear"]')).toHaveCount(0);
   await expect(page.locator('[data-testid="gallery-count"]')).toContainText("built");
+  // the filters stay open after a clear
   await open("type");
   await chip("type", "Single-board computer").click();
   await expect(page.locator('[data-testid="tile"][data-key="rpi-zero"]')).toContainText("Raspberry Pi Zero");
@@ -368,6 +379,7 @@ test("filters by brand, CPU maker and decade narrow the whole catalogue, and cle
 test("a tile opens one device large; Close and Back take it away", async ({ page }) => {
   const problems = watch(page);
   await page.goto(URL);
+  await page.locator('[data-testid="gallery-card"][data-group="pi-boards"]').click();
   await page.locator('[data-testid="tile"][data-key="pi4"]').click();
   const dialog = page.locator('[data-testid="device-dialog"]');
   await expect(dialog).toBeVisible();
@@ -375,6 +387,8 @@ test("a tile opens one device large; Close and Back take it away", async ({ page
   await expect(dialog).toContainText("85 by 56 by 17 mm");
   await page.locator('[data-testid="dialog-close"]').click();
   await expect(dialog).toBeHidden();
+  await page.locator('[data-testid="group-back"]').click();
+  await page.locator('[data-testid="gallery-card"][data-group="parts"]').click();
   await page.locator('[data-testid="part-tile"][data-key="armor"]').click();
   await expect(dialog.locator('[data-testid="dialog-device"]')).toHaveAttribute("part", "armor");
   expect(problems).toEqual([]);
@@ -383,7 +397,7 @@ test("a tile opens one device large; Close and Back take it away", async ({ page
 test("no sideways scroll at a phone's width", async ({ page }, info) => {
   test.skip(info.project.name === "chromium-desk");
   await page.goto(URL);
-  await expect(page.locator('[data-testid="tile"]').first()).toBeVisible();
+  await expect(page.locator('[data-testid="gallery-card"]').first()).toBeVisible();
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(0);
 });

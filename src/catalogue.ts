@@ -63,6 +63,9 @@ const whole = (key: string, name: string, family: FamilyId, size: Size | null, p
 export const DEVICES: readonly Device[] = [
   device("pi-zero-bare", "Raspberry Pi Zero 2 W", "pi-boards", [65, 30, 5], ZERO, { board: "pi-zero-2w" }),
   device("pi-zero-w", "Raspberry Pi Zero W", "pi-boards", [65, 30, 5], ZERO, { board: "pi-zero-w" }),
+  device("rpi-zero", "Raspberry Pi Zero", "pi-boards", [65, 30, 5], ZERO, { board: "pi-zero-1" }),
+  device("rpi-zero-wh", "Raspberry Pi Zero WH", "pi-boards", [65, 30, 13], ZERO, { board: "pi-zero-w", solderHeader: true }),
+  device("rpi-zero-2-wh", "Raspberry Pi Zero 2 WH", "pi-boards", [65, 30, 13], ZERO, { board: "pi-zero-2w", solderHeader: true }),
   device("pi1b-plus", "Raspberry Pi 1 B+", "pi-boards", [85, 56, 17], CLASSIC, { board: "pi1b-plus" }),
   device("pi2b", "Raspberry Pi 2 B", "pi-boards", [85, 56, 17], CLASSIC, { board: "pi2b" }),
   device("pi3a-plus", "Raspberry Pi 3 A+", "pi-boards", [65, 56, 11], ports({ "usb-a": 1, hdmi: 1, "usb-micro": 1, audio: 1, "gpio-40": 1, "sd-card": 1 }), { board: "pi3a-plus" }),
@@ -94,6 +97,10 @@ export const DEVICES: readonly Device[] = [
   whole("macbook-air-13", "MacBook Air 13-inch", "laptops", [304, 215, 11], ports({ thunderbolt: 2, power: 1, audio: 1 })),
   whole("macbook-pro-14", "MacBook Pro 14-inch", "laptops", [313, 221, 16], ports({ thunderbolt: 3, hdmi: 1, "sd-card": 1, power: 1, audio: 1 })),
   whole("macbook-pro-16", "MacBook Pro 16-inch", "laptops", [356, 248, 17], ports({ thunderbolt: 3, hdmi: 1, "sd-card": 1, power: 1, audio: 1 })),
+  whole("macbook-air-13-silver", "MacBook Air 13-inch, silver", "laptops", [304, 215, 11], ports({ thunderbolt: 2, power: 1, audio: 1 })),
+  whole("macbook-pro-14-silver", "MacBook Pro 14-inch, silver", "laptops", [313, 221, 16], ports({ thunderbolt: 3, hdmi: 1, "sd-card": 1, power: 1, audio: 1 })),
+  whole("macbook-pro-16-black", "MacBook Pro 16-inch, black", "laptops", [356, 248, 17], ports({ thunderbolt: 3, hdmi: 1, "sd-card": 1, power: 1, audio: 1 })),
+  whole("macbook-pro-17-inch", "MacBook Pro 17-inch", "laptops", [392, 265, 25.9], ports({ "usb-a": 3, power: 1, audio: 1, "sd-card": 1 })),
 
   whole("ipad-mini", "iPad mini", "tablets-phones", [195, 135, 6], ports({ "usb-c": 1 })),
   whole("ipad", "iPad", "tablets-phones", [249, 180, 7], ports({ "usb-c": 1 })),
@@ -125,6 +132,11 @@ export const DEVICES: readonly Device[] = [
   whole("zx-spectrum-16k-48k", "ZX Spectrum 16K/48K", "classics", [233, 144, 30], ports({ audio: 2, power: 1 })),
   whole("dreamcast", "Dreamcast", "classics", [190, 195.8, 75.5], ports({ audio: 1, power: 1 })),
 
+  whole("airpods-1", "AirPods (1st generation), in their case", "classics", [44.3, 21.3, 53.5], []),
+  whole("airpods-pro-1", "AirPods Pro (1st generation), in their case", "classics", [60.6, 21.7, 45.2], []),
+  whole("airpods-max", "AirPods Max", "classics", [168.6, 83.4, 187.3], []),
+  whole("apple-vision-pro", "Apple Vision Pro", "classics", null, []),
+
   whole("unknown", "A computer", "other", null, ports({ "usb-a": 2, power: 1 })),
 
   whole("client-firetv", "Fire TV stick", "clients", [86, 30, 14], ports({ hdmi: 1, "usb-micro": 1 })),
@@ -136,6 +148,22 @@ export const DEVICES: readonly Device[] = [
   whole("client-computer", "Computer", "clients", [540, 170, 426], ports({ hdmi: 1, "usb-c": 1, power: 1 })),
   whole("client-browser", "Browser", "clients", null, []),
 ];
+
+/** The same machine in its other colours: a page can offer them as a choice. Each key is a device of its own. */
+export const FINISHES: Readonly<Record<string, readonly { key: string; finish: string }[]>> = {
+  "macbook-air-13": [
+    { key: "macbook-air-13", finish: "Midnight" },
+    { key: "macbook-air-13-silver", finish: "Silver" },
+  ],
+  "macbook-pro-14": [
+    { key: "macbook-pro-14", finish: "Black" },
+    { key: "macbook-pro-14-silver", finish: "Silver" },
+  ],
+  "macbook-pro-16": [
+    { key: "macbook-pro-16", finish: "Silver" },
+    { key: "macbook-pro-16-black", finish: "Black" },
+  ],
+};
 
 const BY_KEY = new Map(DEVICES.map((entry) => [entry.key, entry]));
 

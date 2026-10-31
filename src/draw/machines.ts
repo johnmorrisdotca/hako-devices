@@ -1,6 +1,6 @@
 // The drawings of the well-known machines, from the one description their meshes use (build/machines.ts).
 import type { Vec3 } from "../build/kit.ts";
-import { eachMark, type MachineSpec, type MarkKind } from "../build/machines.ts";
+import { bandPoints, eachMark, type MachineSpec, type MarkKind } from "../build/machines.ts";
 import { DARK, HOLE } from "./common.ts";
 import { type Drawing, type ShapeStyle, X, Y } from "./drawing.ts";
 
@@ -12,6 +12,18 @@ const STYLE: Readonly<Record<Exclude<MarkKind, "light">, ShapeStyle>> = { screen
 
 export function machine(d: Drawing, spec: MachineSpec) {
   const [w, depth, h] = spec.size;
+  const band: ShapeStyle = { stroke: "#8fa1b8", sw: 3 };
+  if (spec.shape === "headphones") {
+    d.line(bandPoints("headphones", w, depth, h), band, 1);
+    for (const side of [-1, 1]) d.rounded(side * (w / 2 - 17), 0, 34, depth, spec.corner, 0, 110, { layer: 2 }, 5);
+    return d;
+  }
+  if (spec.shape === "headset") {
+    d.line(bandPoints("headset", w, depth, h), band, 0);
+    d.rounded(0, depth / 4, w, depth / 2, spec.corner, 0, h, { layer: 1 }, 5);
+    d.rect([0, h / 2, depth / 2 + 0.2], X, Y, w - 14, h - 14, SCREEN, 2, spec.corner - 6);
+    return d;
+  }
   d.rounded(0, 0, w, depth, Math.min(spec.corner, Math.min(w, depth) / 2 - 0.1), 0, h, { layer: 1 }, 5);
   spec.marks.forEach((mark, i) => {
     const layer = 2 + Math.min(i, 3);

@@ -169,6 +169,7 @@ export const BOARDS = {
   pi4: { id: "pi4", kind: "board", name: "Raspberry Pi 4 Model B", size: [85, 56, 17], shape: "b-usbc", header: HEADER_B, poePins: true, holes: HOLES_B, tall: sockets(45.75, [27, 9]) },
   pi5: { id: "pi5", kind: "board", name: "Raspberry Pi 5", size: [85, 56, 17], shape: "b-pi5", header: HEADER_B, poePins: true, holes: HOLES_B, tall: sockets(10.2, [29.1, 47]) },
   "pi-zero-w": { id: "pi-zero-w", kind: "board", name: "Raspberry Pi Zero W", size: [65, 30, 5], shape: "zero", header: { kind: "pads", bx: 32.5, bz: 26.5 }, poePins: false, holes: HOLES_ZERO, tall: [] },
+  "pi-zero-1": { id: "pi-zero-1", kind: "board", name: "Raspberry Pi Zero", size: [65, 30, 5], shape: "zero", header: { kind: "pads", bx: 32.5, bz: 26.5 }, poePins: false, holes: HOLES_ZERO, tall: [] },
   "pi-zero-2w": { id: "pi-zero-2w", kind: "board", name: "Raspberry Pi Zero 2 W", size: [65, 30, 5], shape: "zero", header: { kind: "pads", bx: 32.5, bz: 26.5 }, poePins: false, holes: HOLES_ZERO, tall: [] },
   "cm4-io": {
     id: "cm4-io",

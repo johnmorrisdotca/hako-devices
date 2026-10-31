@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { catalogue, catalogueCounts, check, DEVICES, deviceByKey, FAMILIES, PLANNED, PRESETS, statusOf } from "../src/index.ts";
+import { catalogue, catalogueCounts, check, DEVICES, deviceByKey, FAMILIES, FINISHES, groupLayout, groupSample, PLANNED, PRESETS, statusOf } from "../src/index.ts";
 import { buildDevice } from "../src/build/index.ts";
 
 test("every device has a unique key, a name, a known family and a known status", () => {
@@ -65,5 +65,22 @@ test("the catalogue says built or planned", () => {
     if (deviceByKey(entry.key)) continue;
     assert.equal(statusOf(entry.key), "planned", entry.key);
     assert.equal(entry.status, "planned");
+  }
+});
+
+test("a group's picture takes up to four, the first in front; a sample shows the range", () => {
+  assert.equal(groupLayout(0).length, 0);
+  assert.equal(groupLayout(1).length, 1);
+  assert.equal(groupLayout(9).length, 4);
+  const [front, ...rest] = groupLayout(4);
+  for (const place of rest) assert.ok(front.order > place.order);
+  assert.deepEqual(groupSample([1, 2, 3, 4, 5, 6, 7]), [1, 3, 5, 7]);
+  assert.deepEqual(groupSample([1, 1, 2]), [1, 2]);
+});
+
+test("every colour of a machine is a device of its own", () => {
+  for (const [key, options] of Object.entries(FINISHES)) {
+    assert.ok(options.some((option) => option.key === key), key);
+    for (const option of options) assert.ok(deviceByKey(option.key), option.key);
   }
 });

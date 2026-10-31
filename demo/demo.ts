@@ -1,5 +1,5 @@
 // The demo page: a device large, the part builder, a lineup to scale, the gallery by family and a live screen. Everything comes from the package's own entries.
-import { catalogue, catalogueCounts, check, type CatalogueEntry, COVERED, deviceByKey, FAMILIES, headingOf, meshOf, PARTS, partsOfKind, PRESETS, SHELVES, STYLE_NAMES, type Description, type Device, type Part, type StyleName } from "../src/index.ts";
+import { catalogue, catalogueCounts, check, type CatalogueEntry, COVERED, deviceByKey, FAMILIES, groupLayout, groupSample, headingOf, meshOf, PARTS, partsOfKind, PRESETS, SHELVES, STYLE_NAMES, type Description, type Device, type Part, type StyleName } from "../src/index.ts";
 import { HakoDevice, setAssetBase } from "../src/element.ts";
 import { facetCounts, FACETS, facetOrder, type FacetId, matchesPicks, type Picks } from "../src/tags.ts";
 
@@ -167,6 +167,12 @@ function togglePick(facet: FacetId, value: string) {
 function renderFacets(keys: readonly string[]) {
   const counts = facetCounts(keys, picks as Picks);
   facetsBox.replaceChildren();
+  const picked = Object.values(picks).reduce((sum, values) => sum + values.length, 0);
+  const all = fold(picked ? `Filters: ${picked} on` : "Filters", FACETS.length, "facets", picked > 0, (body) => renderFacetRows(body, counts));
+  all.dataset.testid = "gallery-filters";
+  facetsBox.append(all);
+}
+function renderFacetRows(facetsBox: HTMLElement, counts: ReturnType<typeof facetCounts>) {
   if (anyPick()) {
     const clear = el("button", { type: "button", className: "facet-clear", textContent: "Clear filters" });
     clear.dataset.testid = "facet-clear";
@@ -294,6 +300,26 @@ function fold(title: string, count: number, id: string, searching: boolean, fill
   });
   return node;
 }
+let openGroup: string | null = null;
+/** One group: a bunch of its machines (groupLayout), its name and how many. */
+function groupCard(id: string, title: string, count: number, pictures: readonly string[], noun = "machine"): HTMLElement {
+  const art = el("span", { className: "group-art" });
+  const chosen = groupSample(pictures);
+  groupLayout(chosen.length).forEach((place, i) => {
+    const img = el("img", { src: chosen[i], alt: "", loading: "lazy", decoding: "async", width: 320, height: 220 });
+    img.style.cssText = `left:${place.x}%;top:${place.y}%;width:${place.width}%;z-index:${place.order};transform:translate(-50%,-50%) rotate(${place.rotate}deg)`;
+    art.append(img);
+  });
+  const node = el("button", { type: "button", className: "group-card" }, art, el("span", { className: "tile-name", textContent: title }), el("span", { className: "tile-size", textContent: `${count} ${noun}${count === 1 ? "" : "s"}` }));
+  node.dataset.testid = "gallery-card";
+  node.dataset.group = id;
+  node.addEventListener("click", () => {
+    openGroup = id;
+    renderGallery();
+    groups.scrollIntoView({ block: "start" });
+  });
+  return node;
+}
 function renderGallery() {
   for (const button of filterRow.querySelectorAll("button")) button.setAttribute("aria-pressed", String(button.dataset.value === filter));
   for (const button of styleRow.querySelectorAll("button")) button.setAttribute("aria-pressed", String(button.dataset.value === galleryStyle));
@@ -306,29 +332,57 @@ function renderGallery() {
   byId("gallery-count").textContent = narrowed ? `${shown.length} of ${counts.total} match` : `${counts.built} of ${counts.total} built`;
   groups.replaceChildren();
   const devices = shown.filter((entry) => !("shelf" in entry));
+  const shelved = (id: string) => shown.filter((entry): entry is Shelved => "shelf" in entry && entry.shelf === id);
+  const parts = filter === "planned" || anyPick() ? [] : Object.values(PARTS).filter((part) => part.kind !== "board" && matches({ key: part.id, name: part.name } as CatalogueEntry, text));
+  const shownFamily = (id: string) => devices.filter((entry) => entry.family === id);
+  // Nothing narrowed and no group chosen: the groups alone, each a bunch of its machines. A list this long is browsed by opening one.
+  if (!narrowed && openGroup === null) {
+    const cards = el("div", { className: "group-cards" });
+    for (const { id, title } of FAMILIES) if (shownFamily(id).length) cards.append(groupCard(id, title, shownFamily(id).length, shownFamily(id).map((entry) => fileOf(entry.key, galleryStyle === "both" ? "thin" : galleryStyle))));
+    for (const { id, title } of SHELVES) {
+      const members = shelved(id);
+      if (!members.length) continue;
+      const drawn = members.map((entry) => meshOf(entry.key)).filter((key): key is string => key !== null);
+      const card = groupCard(id, title, members.length, drawn.length ? drawn.map((key) => fileOf(key, galleryStyle === "both" ? "thin" : galleryStyle)) : ["assets/coming-soon.svg"]);
+      card.dataset.shelf = id;
+      card.dataset.count = String(members.length);
+      cards.append(card);
+    }
+    if (parts.length) cards.append(groupCard("parts", "Parts on their own", parts.length, parts.map((part) => fileOf(part.id, galleryStyle === "both" ? "thin" : galleryStyle, "parts/")), "part"));
+    groups.append(cards);
+    return;
+  }
+  const only = narrowed ? null : openGroup;
+  if (only !== null) {
+    const back = el("button", { type: "button", className: "group-back", textContent: "All groups" });
+    back.dataset.testid = "group-back";
+    back.addEventListener("click", () => {
+      openGroup = null;
+      renderGallery();
+    });
+    groups.append(back);
+  }
+  const wanted = (id: string) => only === null || only === id;
   for (const { id, title } of FAMILIES) {
-    const members = devices.filter((entry) => entry.family === id);
-    if (members.length === 0) continue;
+    const members = shownFamily(id);
+    if (members.length === 0 || !wanted(id)) continue;
     const section = el("section");
     section.dataset.testid = "gallery-group";
     section.dataset.family = id;
     section.append(el("h3", { textContent: title }), el("div", { className: "tiles" }, ...members.map(tile)));
     groups.append(section);
   }
-  if (filter !== "planned" && !anyPick()) {
-    const parts = Object.values(PARTS).filter((part) => part.kind !== "board" && matches({ key: part.id, name: part.name } as CatalogueEntry, text));
-    if (parts.length) {
-      const section = el("section");
-      section.dataset.testid = "gallery-group";
-      section.dataset.family = "parts";
-      section.append(el("h3", { textContent: "Parts on their own" }), el("div", { className: "tiles" }, ...parts.map(partTile)));
-      groups.append(section);
-    }
+  if (parts.length && wanted("parts")) {
+    const section = el("section");
+    section.dataset.testid = "gallery-group";
+    section.dataset.family = "parts";
+    section.append(el("h3", { textContent: "Parts on their own" }), el("div", { className: "tiles" }, ...parts.map(partTile)));
+    groups.append(section);
   }
   for (const { id, title } of SHELVES) {
-    const members = shown.filter((entry): entry is Shelved => "shelf" in entry && entry.shelf === id);
-    if (members.length === 0) continue;
-    const shelf = fold(title, members.length, id, narrowed, (body) => {
+    const members = shelved(id);
+    if (members.length === 0 || !wanted(id)) continue;
+    const shelf = fold(title, members.length, id, narrowed || only === id, (body) => {
       for (const [heading, machines] of byHeading(members)) {
         const family = fold(heading, machines.length, `${id}/${heading}`, narrowed, (tiles) => tiles.append(el("div", { className: "tiles" }, ...machines.map(tile))));
         family.dataset.testid = "gallery-family";

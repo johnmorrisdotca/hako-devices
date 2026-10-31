@@ -1,5 +1,5 @@
 // The pure core: the catalogue, the parts and how they fit, the camera rule, the mapping helpers, the screen pictures, the styles and the scale. No three.js, no DOM.
-export { baseInfo, check, DEVICES, deviceByKey, FAMILIES, PRESETS } from "./catalogue.ts";
+export { baseInfo, check, DEVICES, deviceByKey, FAMILIES, FINISHES, PRESETS } from "./catalogue.ts";
 export type { Device, FamilyId, Port, PortKind } from "./catalogue.ts";
 export { checkWith } from "./fit.ts";
 export type { BaseInfo, BaseLookup, Description, FitCode, FitIssue, FitReport, Print } from "./fit.ts";
@@ -21,5 +21,6 @@ export type { Box4, DrawStep, ScreenContent } from "./screen/picture.ts";
 export { COMING_SOON_SVG } from "./placeholder.ts";
 export { COVERED, PLANNED } from "./wishlist.ts";
 export type { CoveredDevice, PlannedDevice } from "./wishlist.ts";
+export { groupLayout, groupSample, type GroupPlace } from "./group.ts";
 export { catalogue, catalogueCounts, headingOf, meshOf, SHELVES, statusOf } from "./status.ts";
 export type { CatalogueEntry } from "./status.ts";
