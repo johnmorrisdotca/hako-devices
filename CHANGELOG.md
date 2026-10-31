@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- [Building machines](docs/building-machines.md): how to add a machine to the same standard, with prompts for a coding agent.
+
 ## [0.4.0] - 2026-10-31
 
 ### Added
