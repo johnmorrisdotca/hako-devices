@@ -6,6 +6,8 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-31
+
 ### Added
 
 - NeXT, on a shelf of its own: the NeXT Computer and NeXTcube, the NeXTstation and the MegaPixel Display as bodies, and the NeXTcube Turbo and NeXTstation Color, Turbo and Turbo Color they draw.

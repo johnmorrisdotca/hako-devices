@@ -41,7 +41,7 @@ import { catalogueCounts, meshOf, statusOf } from "@johnmorrisdotca/hako-devices
 
 statusOf("pi4"); // "built"
 statusOf("a-machine-nobody-has"); // null
-meshOf("mac-pro-2019"); // "mac-pro"
+meshOf("ipad-pro-11-inch-m4"); // "ipad-pro-11"
 catalogueCounts().total > 1000; // true
 ```
 
@@ -57,7 +57,7 @@ const intelLaptops = catalogue().filter(({ key }) => matchesPicks(key, { type: [
 intelLaptops.length > 0; // true
 ```
 
-A real machine a built mesh covers is built, and `<hako-device key="mac-pro-2019">` draws that mesh. A planned one shows the one "Coming soon" picture.
+A real machine a built mesh covers is built, and `<hako-device key="ipad-pro-11-inch-m4">` draws that mesh. A planned one shows the one "Coming soon" picture.
 
 ## Finding the key for a real machine
 
