@@ -38,37 +38,6 @@ export function unknownBox(d: Drawing) {
 }
 
 
-/** The palm-sized PC: black, dots on its lid, the power ring and sockets in front. */
-function nuc12(d: Drawing, H: number) {
-  const F = 56;
-  d.rounded(0, 0, 117, 112, 6, 0, H, { top: "url(#top)" }, 3);
-  const y = H * 0.48;
-  const dots: [Vec3, Vec3][] = [];
-  for (let z = -48; z <= 48; z += 8)
-    dots.push([
-      [-50, H + 0.1, z],
-      [50, H + 0.1, z],
-    ]);
-  d.lines(dots, { stroke: "#8fa1b8", sw: 1.3, dash: "0 3.6", opacity: 0.55 }, 1, Y);
-  d.circle([-45, y, F + 0.2], X, Y, 4.4, { stroke: "#f4f7ff", sw: 1.4 }, 2);
-  for (const x of [-22, -4]) {
-    d.rect([x, y, F + 0.2], X, Y, 13.4, 5.8, HOLE, 2, 0.4);
-    d.rect([x, y - 0.8, F + 0.3], X, Y, 11, 1.8, { fill: "#2160d8" }, 3);
-  }
-  d.rect([14, y, F + 0.2], X, Y, 8.6, 3.1, HOLE, 2, 1.4);
-  d.circle([32, y, F + 0.2], X, Y, 1.9, HOLE, 2);
-  const vents: [Vec3, Vec3][] = [];
-  for (let z = -40; z <= 40; z += 6)
-    vents.push([
-      [58.6, 8, z],
-      [58.6, H - 8, z],
-    ]);
-  d.lines(vents, { stroke: "#8fa1b8", sw: 0.6, opacity: 0.5 }, 1, X);
-  return d;
-}
-export const nuc12Tall = (d: Drawing) => nuc12(d, 54);
-export const nuc12Slim = (d: Drawing) => nuc12(d, 37);
-
 export const miniPc = (d: Drawing) => {
   const W = 128;
   const H = 48;
