@@ -390,6 +390,116 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     corner: 8,
     marks: [top("dark", 0, -20, 150, 100), top("key", -70, 40, 24, 8), top("key", -30, 40, 24, 8), front("slot", 0, 24, 48, 10)],
   },
+  // A collector's measurement of a four-switch says about 13 5/8 in wide, 9 1/8 in deep and 3 1/2 in tall, rounded up. The list stays blank. The mesh uses 346 by 232 by 89 mm as that stand-in. The wood band has no wood tone, so it is a dark stripe. Places are not measured. No back photograph was opened.
+  "atari-2600-four-switch": {
+    size: [346, 232, 89],
+    body: "plastic-char",
+    corner: 6,
+    marks: [
+      front("dark", 0, 26, 300, 20),
+      top("dark", 0, 40, 300, 100),
+      top("slot", 0, -70, 90, 16),
+      top("key", -120, -55, 8, 16, { cols: 2, rows: 1, gap: 16 }),
+      top("key", 110, -55, 8, 16, { cols: 2, rows: 1, gap: 16 }),
+    ],
+  },
+  // Wikipedia gives 13 by 15 by 4.25 in and names no axes. The mesh uses 381 mm across the silver band, 330 mm front to back and 108 mm tall after the photograph. The silver band is not drawn. Places are not measured.
+  "atari-5200-four-port": {
+    size: [381, 330, 108],
+    body: "plastic-char",
+    corner: 6,
+    marks: [
+      top("slot", 0, -70, 130, 28),
+      top("dark", -150, -30, 40, 70),
+      top("dark", 150, -30, 40, 70),
+      top("key", 145, 80, 32, 14),
+      front("slot", 20, 28, 36, 12),
+      back("dark", 0, 32, 200, 40),
+    ],
+  },
+  // One collector names 11.75 in wide, 9 in deep and 3.5 in tall. The list stays blank. The mesh uses 298 by 229 by 89 mm as that stand-in. The coloured stripe is not drawn. Places are not measured.
+  "atari-7800": {
+    size: [298, 229, 89],
+    body: "plastic-char",
+    corner: 6,
+    marks: [
+      top("slot", 20, -30, 100, 20),
+      top("dark", 0, -90, 200, 12),
+      top("key", -80, 80, 16, 8, { cols: 2, rows: 1, gap: 12 }),
+      top("key", 70, 80, 18, 8, { cols: 2, rows: 1, gap: 10 }),
+      front("slot", -40, 24, 22, 10),
+      front("slot", 40, 24, 22, 10),
+      back("dark", 0, 48, 220, 14),
+      back("slot", -30, 22, 16, 10),
+      back("slot", 40, 22, 10, 10),
+    ],
+  },
+  // The Lynx page gives 273 by 108 by 38 mm and names no axes. The mesh uses 273 mm across, 38 mm thick and 108 mm tall: the photograph is a wide flat handheld, and 38 is the only figure thin enough. The screen figures are used the same way. Places are not measured.
+  "atari-lynx": {
+    size: [273, 38, 108],
+    body: "plastic-char",
+    corner: 16,
+    marks: [
+      front("lcd", 0, 62, 83, 48),
+      front("key", -100, 52, 22, 8),
+      front("key", -100, 52, 8, 22),
+      front("key", 80, 58, 16, 16, { round: true }),
+      front("key", 104, 40, 16, 16, { round: true }),
+      front("dark", 92, 22, 28, 16),
+      back("dark", 0, 62, 150, 48),
+      back("slot", -20, 12, 6, 6, { cols: 4, rows: 1, gap: 14 }),
+    ],
+  },
+  // A fan page names 9.5 in wide, 10 in long and 2.25 in tall, and a 4.25 in dome. Its centimetre line does not match that height, so the mesh uses the inches: 241.3 by 254 by 57.2 mm. The power button is red on the machine and is drawn as a dark key. Places are not measured.
+  "atari-jaguar": {
+    size: [241.3, 254, 57.2],
+    body: "plastic-char",
+    corner: 10,
+    marks: [
+      top("dark", 0, 8, 108, 108, { round: true }),
+      top("slot", 0, -90, 130, 22),
+      top("key", 0, 95, 18, 12, { round: true }),
+      top("dark", -95, -108, 28, 14),
+      top("dark", 95, -108, 28, 14),
+      front("slot", -36, 18, 20, 10),
+      front("slot", 36, 18, 20, 10),
+      back("slot", -95, 20, 8, 8, { round: true }),
+      back("dark", 0, 36, 140, 6),
+      back("slot", -10, 18, 64, 14),
+      back("slot", 78, 18, 12, 10),
+      back("slot", 100, 18, 8, 8, { round: true }),
+    ],
+  },
+  // One collector names 16 in wide, 9 in deep and 3 in tall. A museum page gives 39 by 23 by 7 cm and names no axes, so that triple is not stored. The mesh uses 406 by 229 by 76 mm from the named inches. The wood and the gold have no such tone, so the front band is dark. The side cartridge slot is not drawn. Places are not measured.
+  intellivision: {
+    size: [406, 229, 76],
+    body: "plastic-char",
+    corner: 6,
+    marks: [
+      top("key", -155, 6, 32, 32, { round: true }),
+      top("key", 155, 6, 32, 32, { round: true }),
+      top("key", -70, 6, 9, 7, { cols: 3, rows: 4, gap: 2 }),
+      top("key", 70, 6, 9, 7, { cols: 3, rows: 4, gap: 2 }),
+      top("dark", 0, 6, 40, 22),
+      front("dark", 0, 26, 360, 16),
+      front("key", 90, 12, 48, 8),
+      back("slot", 60, 14, 6, 6),
+    ],
+  },
+  // A Japanese hardware page names 140 mm wide, 135 mm deep and 40.4 mm tall for the PI-TG001. Wikipedia's 14 by 14 by 3.5 cm names no axes and is not the figure used. The side jack is not drawn. No back photograph of this model was opened.
+  "pc-engine": {
+    size: [140, 135, 40.4],
+    body: "plastic-white",
+    corner: 6,
+    marks: [top("slot", 0, 16, 72, 8), front("key", -58, 16, 8, 14)],
+  },
+  // A fan page lists 304.8 by 177.8 by 76.2 mm and names no axes. Those figures are 12 by 7 by 3 inches. The list stays blank. The mesh uses 305 mm across, 178 mm deep and 76 mm tall after the photograph of a long low unit. Places are not measured.
+  "turbografx-16": {
+    size: [305, 178, 76],
+    body: "plastic-char",
+    corner: 6,
+    marks: [top("slot", 70, -8, 80, 26), front("slot", 80, 22, 16, 12), back("slot", -16, 24, 78, 18)],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };

@@ -16,6 +16,7 @@ All notable changes to this project are written here. The format follows
 - The Game Boy Pocket, Game Boy Color, GameCube and the original 3DS. The Pocket, the GameCube and the closed 3DS use sizes already on the list. The Color has no listed size, so its mesh is a stand-in. The 3DS photograph is the open unit, so the screens are not drawn on the closed outside.
 - The Famicom, the NES, the Super Famicom and the North American SNES. The Famicom uses a named size from a collector page. The NES and the Super Famicom use Nintendo's unlabeled sizes as stand-ins, with the axes assigned after the photographs. The North American SNES has no size on the pages opened, so its mesh is a stand-in.
 - The Master System, the Mega Drive, the Game Gear and the Saturn. Sega names the Mega Drive's axes. The Game Gear's page names wide, high and deep. The Saturn manual names width, length and height. The Master System's page gives a size and names no axes, so that list size stays blank.
+- The four-switch Atari 2600, the four-port 5200, the 7800, the Lynx, the Jaguar, the Intellivision, the PC Engine and the TurboGrafx-16. The Jaguar page and a Japanese page name axes. The others stay blank on the list, and the note states the mesh. The 5200's stored triple was cleared because the article names no axes.
 
 ### Fixed
 

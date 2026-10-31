@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2517 machines. 1035 distinct shapes still to build. 1150 entries are already built: the 358 devices in this package, plus the real models those meshes cover. 1473 entries have a sourced size; the other 1044 are `null` on purpose.**
+**2517 machines. 1027 distinct shapes still to build. 1158 entries are already built: the 366 devices in this package, plus the real models those meshes cover. 1473 entries have a sourced size; the other 1044 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -30,12 +30,12 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Atari | 1 | 1 | 0 |
 |  | Hewlett-Packard | 1 | 1 | 0 |
 |  | Casio | 1 | 1 | 0 |
-| **2** | **Game consoles** | **237** | **155** | **73** |
+| **2** | **Game consoles** | **237** | **147** | **73** |
 |  | Nintendo | 111 | 43 | 30 |
 |  | Sony | 27 | 23 | 24 |
 |  | Sega | 22 | 17 | 6 |
-|  | Atari | 14 | 13 | 1 |
-|  | NEC | 13 | 11 | 1 |
+|  | Atari | 14 | 8 | 1 |
+|  | NEC | 13 | 9 | 1 |
 |  | Microsoft | 9 | 8 | 6 |
 |  | SNK | 6 | 6 | 3 |
 |  | Magnavox | 4 | 4 | 0 |
@@ -43,7 +43,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Panasonic | 3 | 3 | 0 |
 |  | Sharp | 3 | 3 | 0 |
 |  | Coleco | 2 | 2 | 0 |
-|  | Mattel | 2 | 2 | 0 |
+|  | Mattel | 2 | 1 | 0 |
 |  | Valve | 2 | 1 | 0 |
 |  | ASUS | 2 | 2 | 0 |
 |  | Tiger Electronics | 2 | 2 | 0 |
@@ -279,7 +279,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2517** | **1035** | **1473** |
+|  | **Total** | **2517** | **1027** | **1473** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -657,7 +657,7 @@ Sony Ericsson W800 (2005), Sony Ericsson W810 (2006).
 
 Sony Ericsson Xperia X1 (2008), Sony Ericsson Xperia X10 (2010), Sony Ericsson Xperia Play (2011).
 
-### Phase 2: Game consoles (237 machines, 155 shapes to build)
+### Phase 2: Game consoles (237 machines, 147 shapes to build)
 
 **ASUS ROG Ally** (2 machines, 2 shapes)
 
@@ -667,25 +667,25 @@ ROG Ally (2023), ROG Ally X (2024).
 
 Analogue Pocket (2021).
 
-**Atari 2600** (5 machines, 4 shapes)
+**Atari 2600** (5 machines, 3 shapes)
 
-Atari 2600 (CX2600 heavy sixer) (1977), Atari 2600 (light sixer) (1978), Atari 2600 (four-switch) (1980), Atari 2600 (Darth Vader) (1982), Atari 2600 Jr. (1986).
+Atari 2600 (CX2600 heavy sixer) (1977), Atari 2600 (light sixer) (1978), Atari 2600 (four-switch) (1980) *built*, Atari 2600 (Darth Vader) (1982), Atari 2600 Jr. (1986).
 
-**Atari 5200** (2 machines, 2 shapes)
+**Atari 5200** (2 machines, 1 shapes)
 
-Atari 5200 (four-port) (1982), Atari 5200 (two-port) (1983).
+Atari 5200 (four-port) (1982) *built*, Atari 5200 (two-port) (1983).
 
-**Atari 7800** (1 machines, 1 shapes)
+**Atari 7800** (1 machines, 0 shapes)
 
-Atari 7800 (1986).
+Atari 7800 (1986) *built*.
 
-**Atari Jaguar** (2 machines, 2 shapes)
+**Atari Jaguar** (2 machines, 1 shapes)
 
-Atari Jaguar (1993), Atari Jaguar CD (1995).
+Atari Jaguar (1993) *built*, Atari Jaguar CD (1995).
 
-**Atari Lynx** (2 machines, 2 shapes)
+**Atari Lynx** (2 machines, 1 shapes)
 
-Atari Lynx (1989), Atari Lynx II (1991).
+Atari Lynx (1989) *built*, Atari Lynx II (1991).
 
 **Atari Pong** (1 machines, 1 shapes)
 
@@ -739,9 +739,9 @@ INTV Super Pro System (Intellivision III) (1985).
 
 Magnavox Odyssey (1972), Odyssey 100 (1975), Odyssey 200 (1975), Magnavox Odyssey² / Philips Videopac G7000 (1978).
 
-**Mattel Intellivision** (2 machines, 2 shapes)
+**Mattel Intellivision** (2 machines, 1 shapes)
 
-Intellivision (1979), Intellivision II (1983).
+Intellivision (1979) *built*, Intellivision II (1983).
 
 **Microsoft Xbox** (1 machines, 1 shapes)
 
@@ -763,9 +763,9 @@ Xbox Series S (2020), Xbox Series X (2020) *built*.
 
 Microvision (1979).
 
-**NEC PC Engine** (12 machines, 10 shapes)
+**NEC PC Engine** (12 machines, 8 shapes)
 
-PC Engine (1987), PC Engine CD-ROM² unit (1988), PC Engine CoreGrafx (1989), PC Engine Shuttle (1989), PC Engine SuperGrafx (1989), TurboGrafx-16 (1989), PC Engine GT / TurboExpress (1990), PC Engine CoreGrafx II (1991), PC Engine Duo / TurboDuo (1991), PC Engine LT (1991), PC Engine Duo-R (1993), PC Engine Duo-RX (1994).
+PC Engine (1987) *built*, PC Engine CD-ROM² unit (1988), PC Engine CoreGrafx (1989), PC Engine Shuttle (1989), PC Engine SuperGrafx (1989), TurboGrafx-16 (1989) *built*, PC Engine GT / TurboExpress (1990), PC Engine CoreGrafx II (1991), PC Engine Duo / TurboDuo (1991), PC Engine LT (1991), PC Engine Duo-R (1993), PC Engine Duo-RX (1994).
 
 **NEC PC-FX** (1 machines, 1 shapes)
 
