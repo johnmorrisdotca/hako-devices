@@ -43,6 +43,8 @@ export interface Mark {
   slats?: number;
   holes?: readonly [number, number, number];
   mat?: Material;
+  /** A round mark's sides, when a field of them must stay small. */
+  seg?: number;
   /** Sits over other marks on its face. */
   over?: number;
 }
@@ -52,7 +54,11 @@ export type Piece =
   | { is: "loft"; mat: Material; rings: readonly Ring[]; fine?: boolean; frame?: THREE.Matrix4 }
   | { is: "side"; mat: Material; points: readonly (readonly [number, number])[]; x?: number; w: number; edge?: number; frame?: THREE.Matrix4 }
   | { is: "turned"; mat: Material; points: readonly (readonly [number, number])[]; x?: number; z?: number; seg?: number; rims?: readonly number[]; frame?: THREE.Matrix4 }
-  | { is: "tube"; mat: Material; points: readonly Vec3[]; r: number; frame?: THREE.Matrix4 }
+  | { is: "tube"; mat: Material; points: readonly Vec3[]; r: number; drawn?: number; frame?: THREE.Matrix4 }
+  /** A strip of colour following a rounded plan's back side, wrapping its corners, `half` either side of the middle. */
+  | { is: "wrap"; mat: Material; w: number; d: number; r: number; half: number; y0: number; y1: number; frame?: THREE.Matrix4 }
+  /** A band of perforations round a foot, the viewer's to paint: [across, down, dot %]. */
+  | { is: "band"; mat: Material; r0: number; r1: number; y0: number; y1: number; holes: readonly [number, number, number]; frame?: THREE.Matrix4 }
   | { is: "screen"; at: Vec3; w: number; h: number; radius?: number; kind?: ScreenKind; frame?: THREE.Matrix4 }
   | ({ is: "mark" } & Mark);
 
@@ -284,6 +290,31 @@ function sideGeometry(points: readonly (readonly [number, number])[], w: number,
   return creased(flat);
 }
 
+/** A strip on the back of a rounded plan, a hair proud of it, from `half` left of the middle round to `half` right of it, following the corners. */
+function wrapStrip(w: number, d: number, r: number, half: number, y0: number, y1: number): THREE.BufferGeometry {
+  const lift = 0.25;
+  const hw = w / 2 - r;
+  const hd = d / 2;
+  const point = (along: number): [number, number] => {
+    const side = Math.sign(along);
+    const reach = Math.abs(along);
+    if (reach <= hw) return [along, -hd - lift];
+    const a = Math.min((reach - hw) / r, Math.PI / 2);
+    return [side * (hw + (r + lift) * Math.sin(a)), -(hd - r) - (r + lift) * Math.cos(a)];
+  };
+  const steps = 24;
+  const out: number[] = [];
+  for (let i = 0; i < steps; i++) {
+    const [x0, z0] = point(-half + (2 * half * i) / steps);
+    const [x1, z1] = point(-half + (2 * half * (i + 1)) / steps);
+    // seen from behind, the strip runs from its right to its left
+    out.push(x0, y0, z0, x0, y1, z0, x1, y1, z1, x0, y0, z0, x1, y1, z1, x1, y0, z1);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(out, 3));
+  return creased(g);
+}
+
 function markMesh(m: Box, mark: Mark) {
   const turn = FACE_TURN[mark.face];
   if (mark.kind === "perf" && mark.holes) {
@@ -302,7 +333,7 @@ function markMesh(m: Box, mark: Mark) {
   }
   eachOfMark(mark, (x, y) => {
     const at = facePoint(mark.face, mark.at, x, y, lift);
-    if (mark.round) m.add(material, disc(mark.w / 2, mark.w > 12 ? 28 : 14), at, turn);
+    if (mark.round) m.add(material, disc(mark.w / 2, mark.seg ?? (mark.w > 12 ? 28 : 14)), at, turn);
     else if (mark.r) {
       const g = new THREE.ShapeGeometry(roundedSquare(mark.w, mark.h, Math.min(mark.r, Math.min(mark.w, mark.h) / 2 - 0.01), 3));
       m.add(material, g, at, turn);
@@ -322,11 +353,23 @@ export function deskMesh(m: Box, spec: DeskSpec) {
       } else if (piece.is === "loft") m.add(piece.mat, ringGeometry(piece.rings));
       else if (piece.is === "side") m.add(piece.mat, sideGeometry(piece.points, piece.w, piece.edge ?? 0), [piece.x ?? 0, 0, 0]);
       else if (piece.is === "turned") {
-        const g = new THREE.LatheGeometry(piece.points.map(([r, y]) => new THREE.Vector2(r, y)), piece.seg ?? 40);
+        // its faces look outward only when the outline climbs on its outer side
+        let area = 0;
+        piece.points.forEach(([r0, y0], i) => {
+          const [r1, y1] = piece.points[(i + 1) % piece.points.length];
+          area += r0 * y1 - r1 * y0;
+        });
+        const climbing = area > 0 ? piece.points : [...piece.points].reverse();
+        const g = new THREE.LatheGeometry(climbing.map(([r, y]) => new THREE.Vector2(r, y)), piece.seg ?? 40);
         g.deleteAttribute("uv");
         m.add(piece.mat, g, [piece.x ?? 0, 0, piece.z ?? 0]);
-      } else if (piece.is === "tube") m.add(piece.mat, tube([...piece.points] as Vec3[], piece.r, Math.max(10, piece.points.length * 5), 8));
-      else if (piece.is === "screen") litScreen(m, piece.at, [0, 0, 0], piece.w, piece.h, { radius: piece.radius ?? 0, kind: piece.kind ?? "desktop" });
+      } else if (piece.is === "tube") m.add(piece.mat, tube([...piece.points] as Vec3[], piece.r, Math.max(8, Math.min(28, piece.points.length * 4)), 7));
+      else if (piece.is === "wrap") m.add(piece.mat, wrapStrip(piece.w, piece.d, piece.r, piece.half, piece.y0, piece.y1));
+      else if (piece.is === "band") {
+        const [across, down, dot] = piece.holes;
+        const node = m.node(`perf-${across}-${down}-${dot}-foot`, [0, (piece.y0 + piece.y1) / 2, 0], { uv: true });
+        m.add(piece.mat, new THREE.CylinderGeometry(piece.r1, piece.r0, piece.y1 - piece.y0, 64, 1, true), [0, 0, 0], [0, 0, 0], { node });
+      } else if (piece.is === "screen") litScreen(m, piece.at, [0, 0, 0], piece.w, piece.h, { radius: piece.radius ?? 0, kind: piece.kind ?? "desktop" });
       else markMesh(m, piece);
     });
   }

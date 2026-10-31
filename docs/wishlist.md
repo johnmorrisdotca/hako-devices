@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-30.
 
-**1759 machines. 906 distinct shapes still to build. 227 entries are already built: the 116 devices in this package, plus the real models those meshes cover. 909 entries have a sourced size; the other 850 are `null` on purpose.**
+**1767 machines. 901 distinct shapes still to build. 258 entries are already built: the 129 devices in this package, plus the real models those meshes cover. 923 entries have a sourced size; the other 844 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -62,8 +62,8 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **876** | **265** | **647** |
-|  | Power Mac | 92 | 18 | 88 |
+| **4** | **Apple** | **884** | **260** | **659** |
+|  | Power Mac | 92 | 18 | 90 |
 |  | Performa | 71 | 9 | 71 |
 |  | MacBook Pro | 69 | 13 | 64 |
 |  | iMac | 63 | 0 | 62 |
@@ -76,23 +76,23 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | MacBook Air | 28 | 5 | 12 |
 |  | Printer | 26 | 16 | 0 |
 |  | Keyboard | 25 | 23 | 0 |
+|  | Mac mini | 21 | 0 | 20 |
 |  | Workgroup Server | 21 | 10 | 16 |
 |  | iBook | 20 | 5 | 2 |
-|  | Mac mini | 19 | 2 | 18 |
 |  | Compact Mac | 16 | 4 | 12 |
 |  | Mouse | 14 | 12 | 3 |
 |  | AirPort | 13 | 5 | 4 |
 |  | MacBook | 13 | 4 | 13 |
 |  | LC | 12 | 3 | 12 |
+|  | Mac Pro | 12 | 0 | 12 |
 |  | AirPods | 12 | 0 | 9 |
 |  | Quadra | 11 | 7 | 11 |
 |  | Xserve | 11 | 2 | 0 |
-|  | Mac Pro | 10 | 3 | 8 |
+|  | Mac Studio | 8 | 0 | 8 |
 |  | Macintosh II | 8 | 4 | 8 |
 |  | Apple TV | 7 | 3 | 5 |
 |  | Time Capsule | 5 | 2 | 1 |
 |  | Camera | 5 | 3 | 0 |
-|  | Mac Studio | 4 | 0 | 4 |
 |  | eMac | 4 | 1 | 3 |
 |  | Pencil | 4 | 4 | 3 |
 |  | Centris | 3 | 2 | 3 |
@@ -119,11 +119,11 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Surface table | 2 | 2 | 0 |
 |  | Surface Laptop SE | 1 | 1 | 0 |
 |  | Surface Neo | 1 | 1 | 0 |
-| **6** | **What is built today** | **58** | **0** | **13** |
+| **6** | **What is built today** | **58** | **0** | **15** |
 |  | Raspberry Pi | 20 | 0 | 0 |
 |  | Generic | 9 | 0 | 4 |
 |  | Clients | 8 | 0 | 0 |
-|  | Mac | 5 | 0 | 3 |
+|  | Mac | 5 | 0 | 5 |
 |  | iPad | 5 | 0 | 5 |
 |  | Small PC | 5 | 0 | 0 |
 |  | NAS | 5 | 0 | 0 |
@@ -157,7 +157,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-|  | **Total** | **1759** | **906** | **909** |
+|  | **Total** | **1767** | **901** | **923** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -854,7 +854,7 @@ TI-99/4A (1981).
 
 Yamaha CX5M (1984).
 
-### Phase 4: Apple (876 machines, 265 shapes to build)
+### Phase 4: Apple (884 machines, 260 shapes to build)
 
 **AirPods** (12 machines, 0 shapes)
 
@@ -904,17 +904,17 @@ Lisa Keyboard (1983), Macintosh Keyboard (1984), Macintosh Numeric Keypad (1984)
 
 Macintosh LC (1990), Macintosh LC II (1992), Macintosh LC 475 (1993), Macintosh LC 520 (1993), Macintosh LC III (1993), Macintosh LC III+ (1993), Macintosh TV (1993), Macintosh LC 475/605 (1994), Macintosh LC 550 (1994), Macintosh LC 575 (1994), Macintosh LC 630 (1994), Macintosh LC 580 (1995).
 
-**Mac Pro** (10 machines, 3 shapes)
+**Mac Pro** (12 machines, 0 shapes)
 
-Mac Pro (Mid 2006), Mac Pro (Early 2008), Mac Pro (Early 2009), Mac Pro (Mid 2010), Mac Pro (Mid 2012), Mac Pro (Late 2013), Mac Pro (2019) *built*, Mac Pro (Rack, 2019), Mac Pro (2023) *built*, Mac Pro (Rack, 2023).
+Mac Pro (Mid 2006) *built*, Mac Pro (Early 2008) *built*, Mac Pro (Early 2009) *built*, Mac Pro (Mid 2010) *built*, Mac Pro Server (Mid 2010) *built*, Mac Pro (Mid 2012) *built*, Mac Pro Server (Mid 2012) *built*, Mac Pro (Late 2013) *built*, Mac Pro (2019) *built*, Mac Pro (Rack, 2019) *built*, Mac Pro (2023) *built*, Mac Pro (Rack, 2023) *built*.
 
-**Mac Studio** (4 machines, 0 shapes)
+**Mac Studio** (8 machines, 0 shapes)
 
-Mac Studio (2022) *built*, Mac Studio (2023) *built*, Mac Studio (2025) *built*, Mac Studio (M5 Max or M5 Ultra) (2026) *built*.
+Mac Studio (2022, M1 Max) *built*, Mac Studio (2022, M1 Ultra) *built*, Mac Studio (2023, M2 Max) *built*, Mac Studio (2023, M2 Ultra) *built*, Mac Studio (2025, M3 Ultra) *built*, Mac Studio (2025, M4 Max) *built*, Mac Studio (M5 Max) (2026) *built*, Mac Studio (M5 Ultra) (2026) *built*.
 
-**Mac mini** (19 machines, 2 shapes)
+**Mac mini** (21 machines, 0 shapes)
 
-Mac mini (original) (2005), Mac mini (Early 2006), Mac mini (Late 2006), Mac mini (Mid 2007), Mac mini (Early 2009), Mac mini (Late 2009), Mac mini (Mid 2010), Mac mini Server (Mid 2010), Mac mini (Mid 2011), Mac mini Server (Mid 2011), Mac mini (Late 2012), Mac mini Server (Late 2012), Mac mini (Late 2014), Mac mini (2018) *built*, Developer Transition Kit (2020) *built*, Mac mini (M1, 2020) *built*, Mac mini (2023) *built*, Mac mini (2024) *built*, Mac mini (M6 or M5 Pro) (2026) *built*.
+Mac mini (2005, PowerPC G4) *built*, Mac mini (Early 2006) *built*, Mac mini (Late 2006) *built*, Mac mini (Mid 2007) *built*, Mac mini (Early 2009) *built*, Mac mini (Late 2009) *built*, Mac mini (Mid 2010) *built*, Mac mini Server (Mid 2010) *built*, Mac mini (Mid 2011) *built*, Mac mini Server (Mid 2011) *built*, Mac mini (Late 2012) *built*, Mac mini Server (Late 2012) *built*, Mac mini (Late 2014) *built*, Mac mini (2018) *built*, Developer Transition Kit (2020) *built*, Mac mini (M1, 2020) *built*, Mac mini (2023, M2 Pro) *built*, Mac mini (2023, M2) *built*, Mac mini (2024) *built*, Mac mini (M5 Pro) (2026) *built*, Mac mini (M6) (2026) *built*.
 
 **MacBook** (13 machines, 4 shapes)
 
@@ -954,7 +954,7 @@ Macintosh Portable (1989), Macintosh Portable (backlit screen) (1991).
 
 **Power Mac** (92 machines, 18 shapes)
 
-Power Macintosh 6100/60 (1994), Power Macintosh 6100/60AV (1994), Power Macintosh 7100/66 (1994), Power Macintosh 7100/66AV (1994), Power Macintosh 8100/110 (1994), Power Macintosh 8100/80 (1994), Power Macintosh 8100/80AV (1994), Power Macintosh 5200/75 LC (1995), Power Macintosh 5300/100 LC (1995), Power Macintosh 6100/66 (1995), Power Macintosh 6100/66 DOS Compatible (1995), Power Macintosh 6100/66AV (1995), Power Macintosh 6200/75 (1995), Power Macintosh 7100/80 (1995), Power Macintosh 7100/80AV (1995), Power Macintosh 7200/75 (1995), Power Macintosh 7200/90 (1995), Power Macintosh 7500/100 (1995), Power Macintosh 8100/100 (1995), Power Macintosh 8100/100AV (1995), Power Macintosh 8115/110 (1995), Power Macintosh 8500/120 (1995), Power Macintosh 9500/120 (1995), Power Macintosh 9500/132 (1995), Power Macintosh 9515/132 (1995), Power Macintosh 4400/160 (1996), Power Macintosh 5260/100 (1996), Power Macintosh 5260/120 (1996), Power Macintosh 5400/120 (1996), Power Macintosh 5400/180 (1996), Power Macintosh 6300/120 (1996), Power Macintosh 6300/160 (1996), Power Macintosh 6400/200 (1996), Power Macintosh 7200/120 (1996), Power Macintosh 7200/120 PC Compatible (1996), Power Macintosh 7215/90 (1996), Power Macintosh 7600/120 (1996), Power Macintosh 7600/132 (1996), Power Macintosh 8200/100 (1996), Power Macintosh 8200/120 (1996), Power Macintosh 8500/132 (1996), Power Macintosh 8500/150 (1996), Power Macintosh 8500/180 (1996), Power Macintosh 8515/120 (1996), Power Macintosh 9500/150 (1996), Power Macintosh 9500/180MP (1996), Power Macintosh 9500/200 (1996), Power Macintosh 4400/200 (1997), Power Macintosh 4400/200 PC Compatible (1997), Power Macintosh 5400/200 (1997), Power Macintosh 5500/225 (1997), Power Macintosh 5500/250 (1997), Power Macintosh 6500/225 (1997), Power Macintosh 6500/250 (1997), Power Macintosh 6500/275 (1997), Power Macintosh 6500/300 (1997), Power Macintosh 7220/200 (1997), Power Macintosh 7220/200 PC Compatible (1997), Power Macintosh 7300/166 (1997), Power Macintosh 7300/180 (1997), Power Macintosh 7300/180 PC Compatible (1997), Power Macintosh 7300/200 (1997), Power Macintosh 7600/200 (1997), Power Macintosh 8600/200 (1997), Power Macintosh 8600/250 (1997), Power Macintosh 8600/300 (1997), Power Macintosh 9600/200 (1997), Power Macintosh 9600/200MP (1997), Power Macintosh 9600/233 (1997), Power Macintosh 9600/300 (1997), Power Macintosh 9600/350 (1997), Power Macintosh G3 Desktop (1997), Power Macintosh G3 Mini Tower (1997), Twentieth Anniversary Macintosh (1997), Power Macintosh G3 All-In-One (1998), Power Mac G4 (AGP Graphics) (1999), Power Mac G4 (PCI Graphics) (1999), Power Macintosh G3 (Blue and White) (1999), Power Mac G4 (Cube) (2000), Power Mac G4 (Gigabit Ethernet) (2000), Power Mac G4 (Digital Audio) (2001), Power Mac G4 (Quicksilver) (2001), Power Mac G4 (Mirrored Drive Doors) (2002), Power Mac G4 (Quicksilver 2002), Power Mac G4 (FW800) (2003), Power Mac G4 (Mirrored Drive Doors 2003), Power Mac G5 (2003) *built*, Power Mac G5 (June 2004) *built*, Power Mac G5 (Late 2004) *built*, Developer Transition Kit (2005), Power Mac G5 (Early 2005), Power Mac G5 (Late 2005).
+Power Macintosh 6100/60 (1994), Power Macintosh 6100/60AV (1994), Power Macintosh 7100/66 (1994), Power Macintosh 7100/66AV (1994), Power Macintosh 8100/110 (1994), Power Macintosh 8100/80 (1994), Power Macintosh 8100/80AV (1994), Power Macintosh 5200/75 LC (1995), Power Macintosh 5300/100 LC (1995), Power Macintosh 6100/66 (1995), Power Macintosh 6100/66 DOS Compatible (1995), Power Macintosh 6100/66AV (1995), Power Macintosh 6200/75 (1995), Power Macintosh 7100/80 (1995), Power Macintosh 7100/80AV (1995), Power Macintosh 7200/75 (1995), Power Macintosh 7200/90 (1995), Power Macintosh 7500/100 (1995), Power Macintosh 8100/100 (1995), Power Macintosh 8100/100AV (1995), Power Macintosh 8115/110 (1995), Power Macintosh 8500/120 (1995), Power Macintosh 9500/120 (1995), Power Macintosh 9500/132 (1995), Power Macintosh 9515/132 (1995), Power Macintosh 4400/160 (1996), Power Macintosh 5260/100 (1996), Power Macintosh 5260/120 (1996), Power Macintosh 5400/120 (1996), Power Macintosh 5400/180 (1996), Power Macintosh 6300/120 (1996), Power Macintosh 6300/160 (1996), Power Macintosh 6400/200 (1996), Power Macintosh 7200/120 (1996), Power Macintosh 7200/120 PC Compatible (1996), Power Macintosh 7215/90 (1996), Power Macintosh 7600/120 (1996), Power Macintosh 7600/132 (1996), Power Macintosh 8200/100 (1996), Power Macintosh 8200/120 (1996), Power Macintosh 8500/132 (1996), Power Macintosh 8500/150 (1996), Power Macintosh 8500/180 (1996), Power Macintosh 8515/120 (1996), Power Macintosh 9500/150 (1996), Power Macintosh 9500/180MP (1996), Power Macintosh 9500/200 (1996), Power Macintosh 4400/200 (1997), Power Macintosh 4400/200 PC Compatible (1997), Power Macintosh 5400/200 (1997), Power Macintosh 5500/225 (1997), Power Macintosh 5500/250 (1997), Power Macintosh 6500/225 (1997), Power Macintosh 6500/250 (1997), Power Macintosh 6500/275 (1997), Power Macintosh 6500/300 (1997), Power Macintosh 7220/200 (1997), Power Macintosh 7220/200 PC Compatible (1997), Power Macintosh 7300/166 (1997), Power Macintosh 7300/180 (1997), Power Macintosh 7300/180 PC Compatible (1997), Power Macintosh 7300/200 (1997), Power Macintosh 7600/200 (1997), Power Macintosh 8600/200 (1997), Power Macintosh 8600/250 (1997), Power Macintosh 8600/300 (1997), Power Macintosh 9600/200 (1997), Power Macintosh 9600/200MP (1997), Power Macintosh 9600/233 (1997), Power Macintosh 9600/300 (1997), Power Macintosh 9600/350 (1997), Power Macintosh G3 Desktop (1997), Power Macintosh G3 Mini Tower (1997), Twentieth Anniversary Macintosh (1997), Power Macintosh G3 All-In-One (1998), Power Mac G4 (AGP Graphics) (1999), Power Mac G4 (PCI Graphics) (1999), Power Macintosh G3 (Blue and White) (1999), Power Mac G4 (Cube) (2000), Power Mac G4 (Gigabit Ethernet) (2000), Power Mac G4 (Digital Audio) (2001), Power Mac G4 (Quicksilver) (2001), Power Mac G4 (Mirrored Drive Doors) (2002), Power Mac G4 (Quicksilver 2002), Power Mac G4 (FW800) (2003), Power Mac G4 (Mirrored Drive Doors 2003), Power Mac G5 (2003) *built*, Power Mac G5 (June 2004) *built*, Power Mac G5 (Late 2004) *built*, Developer Transition Kit (2005), Power Mac G5 (Early 2005) *built*, Power Mac G5 (Late 2005) *built*.
 
 **PowerBook** (61 machines, 15 shapes)
 
@@ -1090,7 +1090,7 @@ MacBook *built*, MacBook Air 13-inch *built*, MacBook Air 13-inch, silver *built
 
 **Mac** (5 machines, 0 shapes)
 
-Mac Pro *built*, Mac Studio *built*, Mac mini *built*, Mac mini (flat, M1 or M2) *built*, iMac 24-inch, four ports: M1, M3 and M4 *built*.
+Mac Pro steel tower, 2023 *built*, Mac Studio: M1, M2, M3, M4 and M5, 2022 to 2026 *built*, Mac mini, flat and silver, two Thunderbolt: M1 and M2, 2020 to 2023 *built*, Mac mini, small: M4, M5 Pro and M6, 2024 on *built*, iMac 24-inch, four ports: M1, M3 and M4 *built*.
 
 **iPad** (5 machines, 0 shapes)
 

@@ -23,4 +23,25 @@ export const DESK_ROWS: readonly (readonly [string, string, "next" | "desktops" 
   ["imac-pro-2017", "iMac Pro, 2017", "desktops", [650, 203, 516], { "usb-a": 4, thunderbolt: 4, ethernet: 1, "sd-card": 1, audio: 1, power: 1 }],
   ["imac-24", "iMac 24-inch, four ports: M1, M3 and M4", "desktops", [547, 147, 461], { thunderbolt: 2, "usb-c": 2, audio: 1, power: 1 }],
   ["imac-24-two-ports", "iMac 24-inch, two ports: M1, M3 and M4", "desktops", [547, 147, 461], { thunderbolt: 2, audio: 1, power: 1 }],
+
+  ["mac-pro-mid-2006", "Mac Pro tower, 2006 to 2012", "desktops", [206, 475, 511], { "usb-a": 5, ethernet: 2, audio: 2, power: 1, pcie: 4 }],
+  ["mac-pro-late-2013", "Mac Pro cylinder, Late 2013", "desktops", [167.6, 167.6, 251.5], { thunderbolt: 6, "usb-a": 4, ethernet: 2, hdmi: 1, audio: 2, power: 1 }],
+  ["mac-pro-2019", "Mac Pro steel tower, 2019", "desktops", [218, 450, 529], { thunderbolt: 4, "usb-a": 2, ethernet: 2, audio: 1, power: 1, pcie: 8 }],
+  ["mac-pro", "Mac Pro steel tower, 2023", "desktops", [218, 450, 529], { thunderbolt: 8, "usb-a": 2, ethernet: 2, hdmi: 2, audio: 1, power: 1, pcie: 6 }],
+  ["mac-pro-rack-2019", "Mac Pro rack, 2019", "desktops", [482, 539.5, 220.2], { thunderbolt: 4, "usb-a": 2, ethernet: 2, audio: 1, power: 1, pcie: 8 }],
+  ["mac-pro-rack-2023", "Mac Pro rack, 2023", "desktops", [482, 539.5, 220.2], { thunderbolt: 8, "usb-a": 2, ethernet: 2, hdmi: 2, audio: 1, power: 1, pcie: 6 }],
+
+  ["mac-studio", "Mac Studio: M1, M2, M3, M4 and M5, 2022 to 2026", "desktops", [197, 197, 95], { thunderbolt: 6, "usb-a": 2, hdmi: 1, ethernet: 1, audio: 1, "sd-card": 1, power: 1 }],
+  ["mac-mini", "Mac mini, small: M4, M5 Pro and M6, 2024 on", "desktops", [127, 127, 50], { thunderbolt: 3, "usb-c": 2, hdmi: 1, ethernet: 1, audio: 1, power: 1 }],
+  ["mac-mini-m1", "Mac mini, flat and silver, two Thunderbolt: M1 and M2, 2020 to 2023", "desktops", [197, 197, 36], { thunderbolt: 2, "usb-a": 2, hdmi: 1, ethernet: 1, audio: 1, power: 1 }],
+  ["mac-mini-2023-m2-pro", "Mac mini, flat and silver, four Thunderbolt: M2 Pro, 2023", "desktops", [197, 197, 36], { thunderbolt: 4, "usb-a": 2, hdmi: 1, ethernet: 1, audio: 1, power: 1 }],
+  ["mac-mini-2018", "Mac mini, flat and dark grey, Intel, 2018", "desktops", [197, 197, 36], { thunderbolt: 4, "usb-a": 2, hdmi: 1, ethernet: 1, audio: 1, power: 1 }],
+  ["mac-mini-late-2014", "Mac mini, flat, Late 2014", "desktops", [197, 197, 36], { thunderbolt: 2, "usb-a": 4, hdmi: 1, ethernet: 1, audio: 2, "sd-card": 1, power: 1 }],
+  ["mac-mini-mid-2011", "Mac mini, flat with no drive, 2011 and 2012", "desktops", [197, 197, 36], { thunderbolt: 1, "usb-a": 4, hdmi: 1, ethernet: 1, audio: 2, "sd-card": 1, power: 1 }],
+  ["mac-mini-mid-2010", "Mac mini, flat with a drive, Mid 2010", "desktops", [197, 197, 36], { "usb-a": 4, hdmi: 1, ethernet: 1, audio: 2, "sd-card": 1, power: 1 }],
+  ["mac-mini-early-2009", "Mac mini, white top, 2009", "desktops", [165.1, 165.1, 50.8], { "usb-a": 5, ethernet: 1, audio: 2, power: 1 }],
+  ["mac-mini-early-2006", "Mac mini, white top, Intel, 2006 and 2007", "desktops", [165.1, 165.1, 50.8], { "usb-a": 4, ethernet: 1, audio: 2, power: 1 }],
+  ["mac-mini-original", "Mac mini, white top, PowerPC G4, 2005", "desktops", [165.1, 165.1, 50.8], { "usb-a": 2, ethernet: 1, audio: 1, power: 1 }],
+
+  ["power-mac-g5-2003", "Power Mac G5, 2003 to 2005", "classic-macs", [206, 475, 511], { "usb-a": 3, audio: 2, ethernet: 1, power: 1, pcie: 3 }],
 ];

@@ -12,6 +12,7 @@ const LOOK: Partial<Record<Material, SolidStyle>> = {
   "shell-silver": { top: "url(#top)", front: "url(#metal)", side: "#1b2433" },
   steel: { top: "url(#metal)", front: "url(#metal)", side: "#1b2433" },
   "alu-dark": { top: "#232e40", front: "#1b2433", side: "#141c2a" },
+  clear: { top: "none", front: "none", side: "none" },
   "shell-space-grey": { top: "#232e40", front: "#1b2433", side: "#141c2a" },
   "plastic-white": { top: "#2c3a50", front: "#243042", side: "#1b2433" },
   "plastic-beige": { top: "#39382f", front: "#2e2d26", side: "#23231d" },
@@ -93,7 +94,7 @@ function drawMark(d: Drawing, mark: Mark, layer: number) {
   }
   const cols = mark.cols ?? 1;
   const rows = mark.rows ?? 1;
-  if (cols * rows > 10) {
+  if (cols * rows > 10 || (mark.round && cols * rows > 3)) {
     // a field of small marks: one dotted line a row, which costs far fewer bytes
     const pitch = mark.w + (mark.gap ?? 0);
     const pitchY = mark.h + (mark.gapY ?? mark.gap ?? 0);
@@ -169,14 +170,19 @@ function drawPiece(d: Drawing, piece: Piece, layer: number) {
       const at = piece.points.reduce((best, p) => (Math.abs(p[1] - y) < Math.abs(best[1] - y) ? p : best));
       d.flat(ring(at[0], y).reverse(), [0, 1, 0], { fill: look.top, stroke: LINE, sw: 1 }, layer + 0.05);
     }
+  } else if (piece.is === "wrap") {
+    // it lies on the back: the drawing looks at the front
+  } else if (piece.is === "band") {
+    const ring = (r: number, y: number): Vec3[] => Array.from({ length: 16 }, (_, k) => [r * Math.cos((k * Math.PI) / 8), y, r * Math.sin((k * Math.PI) / 8)] as Vec3);
+    d.hullOf([...ring(piece.r0, piece.y0), ...ring(piece.r1, piece.y1)], { fill: "#0b111c", stroke: LINE, sw: 1.2 }, layer);
   } else if (piece.is === "tube") {
     const look = lookOf(piece.mat);
     const a = d.at(piece.points[0]);
     const b = d.at([piece.points[0][0] + 1, piece.points[0][1], piece.points[0][2]]);
     const px = Math.max(1.4, 2 * piece.r * Math.hypot(a[0] - b[0], a[1] - b[1]));
     const points = [...piece.points] as Vec3[];
-    d.line(points, { stroke: LINE, sw: Math.max(2.6, px + 1) }, layer);
-    d.line(points, { stroke: look.front === "url(#metal)" ? "#3a475c" : "#1b2433", sw: Math.max(2.6, px) }, layer + 0.05);
+    d.line(points, { stroke: LINE, sw: piece.drawn ?? Math.max(2.6, px + 1) }, layer);
+    d.line(points, { stroke: look.front === "url(#metal)" ? "#3a475c" : "#1b2433", sw: piece.drawn ? piece.drawn * 0.5 : Math.max(2.6, px) }, layer + 0.05);
   } else if (piece.is === "screen") {
     const [cx, cy, z] = piece.at;
     const { w, h } = piece;

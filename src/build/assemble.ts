@@ -100,11 +100,7 @@ const nasArt = (bays: number): BaseArt => ({
 });
 
 const BASE_ART: Record<string, BaseArt> = {
-  "mac-studio": plain(macs.macStudio, drawMacs.macStudio),
-  "mac-mini": plain(macs.macMini, drawMacs.macMini),
   macbook: plain(macs.macbook, drawMacs.macbook),
-  "mac-mini-m1": plain(laptops.macMiniFlat, drawMacs.macMiniFlat),
-  "mac-pro": plain(laptops.macPro, drawMacs.macPro),
   "macbook-air-13": plain(laptops.macbookAir13, drawMacs.macbookAir13),
   "macbook-pro-14": plain(laptops.macbookPro14, drawMacs.macbookPro14),
   "macbook-pro-16": plain(laptops.macbookPro16, drawMacs.macbookPro16),

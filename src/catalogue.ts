@@ -90,10 +90,6 @@ export const DEVICES: readonly Device[] = [
   device("pi4-argon", "Raspberry Pi 4 in a faceted metal case", "pi-dressed", [107, 96, 28], FULL_USBC, { board: "pi4", case: "argon" }),
   device("pi4-armor", "Raspberry Pi 4 in a finned case with fans", "pi-dressed", [89, 60, 27], FULL_USBC, { board: "pi4", case: "armor" }),
 
-  whole("mac-studio", "Mac Studio", "desktops", [197, 197, 95], ports({ thunderbolt: 6, "usb-a": 2, hdmi: 1, ethernet: 1, audio: 1, "sd-card": 1, power: 1 })),
-  whole("mac-mini", "Mac mini (small)", "desktops", [127, 127, 50], ports({ thunderbolt: 3, "usb-c": 2, hdmi: 1, ethernet: 1, audio: 1, power: 1 })),
-  whole("mac-mini-m1", "Mac mini (flat)", "desktops", [197, 197, 36], ports({ thunderbolt: 2, "usb-a": 2, hdmi: 1, ethernet: 1, audio: 1, power: 1 })),
-  whole("mac-pro", "Mac Pro", "desktops", [218, 450, 529], ports({ thunderbolt: 2, "usb-a": 2, ethernet: 2, power: 1, pcie: 8 })),
 
   whole("macbook", "MacBook", "laptops", [304, 215, 11], ports({ "usb-c": 2, audio: 1 })),
   whole("macbook-air-13", "MacBook Air 13-inch", "laptops", [304, 215, 11], ports({ thunderbolt: 2, power: 1, audio: 1 })),
@@ -152,7 +148,6 @@ export const DEVICES: readonly Device[] = [
   whole("apple-tv-4k-1st-generation", "Apple TV 4K", "classics", [98, 98, 35], ports({ hdmi: 1, ethernet: 1, power: 1 })),
   whole("iphone-1st-generation", "iPhone (1st generation)", "classics", [61, 11.6, 115], ports({ audio: 1 })),
   whole("ipod-nano-1st-generation", "iPod nano (1st generation)", "classics", [41, 6.9, 89], ports({ audio: 1 })),
-  whole("power-mac-g5-2003", "Power Mac G5", "classic-macs", [206, 475, 511], ports({ "usb-a": 3, audio: 1, ethernet: 1, power: 1, pcie: 3 })),
   whole("airpods-1", "AirPods (1st generation), in their case", "classics", [44.3, 21.3, 53.5], []),
   whole("airpods-pro-1", "AirPods Pro (1st generation), in their case", "classics", [60.6, 21.7, 45.2], []),
   whole("airpods-max", "AirPods Max", "classics", [168.6, 83.4, 187.3], []),

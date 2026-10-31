@@ -189,12 +189,6 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     corner: 5,
     marks: [front("lcd", 0, 69, 28, 22), front("panel", 0, 30, 30, 30, { round: true }), front("key", 0, 30, 11, 11, { round: true })],
   },
-  "power-mac-g5-2003": {
-    size: [206, 475, 511],
-    body: "alu",
-    corner: 6,
-    marks: [front("dark", 0, 255, 196, 500, {}), front("slot", -20, 470, 130, 2.4), front("key", 72, 450, 8, 8, { round: true }), front("dark", -40, 400, 12, 4, { cols: 3, rows: 1, gap: 6 })],
-  },
   dreamcast: {
     size: [190, 195.8, 75.5],
     body: "plastic-white",
