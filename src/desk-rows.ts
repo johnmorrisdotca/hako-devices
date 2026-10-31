@@ -1,0 +1,26 @@
+// The catalogue's rows for the machines described as data (build/desks/): key, name, family, size in millimetres (width, depth, height) and sockets. Pure data, and no three.js.
+export const DESK_ROWS: readonly (readonly [string, string, "next" | "desktops" | "classic-macs", readonly [number, number, number] | null, Readonly<Record<string, number>>])[] = [
+  ["nextcube", "NeXT Computer and NeXTcube, 1988 to 1993", "next", [305, 305, 305], { power: 1, ethernet: 1, audio: 1 }],
+  ["nextstation", "NeXTstation, 1990 to 1993", "next", [398, 365, 64], { power: 1, ethernet: 1 }],
+  ["next-megapixel-display", "NeXT MegaPixel Display", "next", [408, 354, 440], { audio: 3 }],
+
+  ["imac-1998", "iMac G3, tray-loading, 1998 and 1999", "desktops", [386, 447, 401], { "usb-a": 2, ethernet: 1, audio: 3, power: 1 }],
+  ["imac-slot-loading", "iMac G3, slot-loading, 1999 to 2001", "desktops", [381, 435, 381], { "usb-a": 2, ethernet: 1, audio: 3, power: 1 }],
+  ["imac-flat-panel-15-inch", "iMac G4 15-inch, 2002 and 2003", "desktops", [415, 270, 329], { "usb-a": 3, ethernet: 1, audio: 1, power: 1 }],
+  ["imac-flat-panel-17-inch", "iMac G4 17-inch, 2002 and 2003", "desktops", [449, 270, 331], { "usb-a": 3, ethernet: 1, audio: 1, power: 1 }],
+  ["imac-usb-2-0-20-inch", "iMac G4 20-inch, 2003", "desktops", [514, 270, 354], { "usb-a": 3, ethernet: 1, audio: 1, power: 1 }],
+  ["imac-g5-2004-17-inch", "iMac G5 17-inch, 2004 and 2005, no camera", "desktops", [426, 173, 430], { "usb-a": 3, ethernet: 1, audio: 2, power: 1 }],
+  ["imac-g5-2004-20-inch", "iMac G5 20-inch, 2004 and 2005, no camera", "desktops", [493, 189, 472], { "usb-a": 3, ethernet: 1, audio: 2, power: 1 }],
+  ["imac-g5-isight-17-inch", "iMac 17-inch, white with a camera, G5 and Intel, 2005 and 2006", "desktops", [426, 173, 430], { "usb-a": 3, ethernet: 1, audio: 2, power: 1 }],
+  ["imac-g5-isight-20-inch", "iMac 20-inch, white with a camera, G5 and Intel, 2005 and 2006", "desktops", [493, 189, 472], { "usb-a": 3, ethernet: 1, audio: 2, power: 1 }],
+  ["imac-late-2006-24-inch", "iMac 24-inch, white, Late 2006", "desktops", [574, 207, 523], { "usb-a": 3, ethernet: 1, audio: 2, power: 1 }],
+  ["imac-mid-2007-20-inch", "iMac 20-inch, aluminium, 2007 to 2009", "desktops", [485, 189, 469], { "usb-a": 3, ethernet: 1, audio: 2, power: 1 }],
+  ["imac-mid-2007-24-inch", "iMac 24-inch, aluminium, 2007 to 2009", "desktops", [569, 207, 520], { "usb-a": 3, ethernet: 1, audio: 2, power: 1 }],
+  ["imac-21-5-inch-late-2009", "iMac 21.5-inch, unibody, 2009 to 2011", "desktops", [528, 188.5, 451], { "usb-a": 4, thunderbolt: 1, ethernet: 1, "sd-card": 1, audio: 2, power: 1 }],
+  ["imac-27-inch-late-2009", "iMac 27-inch, unibody, 2009 to 2011", "desktops", [650, 207, 517], { "usb-a": 4, thunderbolt: 1, ethernet: 1, "sd-card": 1, audio: 2, power: 1 }],
+  ["imac-21-5-inch-late-2012", "iMac 21.5-inch, the thin edge, 2012 to 2019", "desktops", [528, 175, 450], { "usb-a": 4, thunderbolt: 2, ethernet: 1, "sd-card": 1, audio: 1, power: 1 }],
+  ["imac-27-inch-late-2012", "iMac 27-inch, the thin edge, 2012 to 2020", "desktops", [650, 203, 516], { "usb-a": 4, thunderbolt: 2, ethernet: 1, "sd-card": 1, audio: 1, power: 1 }],
+  ["imac-pro-2017", "iMac Pro, 2017", "desktops", [650, 203, 516], { "usb-a": 4, thunderbolt: 4, ethernet: 1, "sd-card": 1, audio: 1, power: 1 }],
+  ["imac-24", "iMac 24-inch, four ports: M1, M3 and M4", "desktops", [547, 147, 461], { thunderbolt: 2, "usb-c": 2, audio: 1, power: 1 }],
+  ["imac-24-two-ports", "iMac 24-inch, two ports: M1, M3 and M4", "desktops", [547, 147, 461], { thunderbolt: 2, audio: 1, power: 1 }],
+];

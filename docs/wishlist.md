@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-30.
 
-**1745 machines. 916 distinct shapes still to build. 162 entries are already built: the 95 devices in this package, plus the real models those meshes cover. 875 entries have a sourced size; the other 870 are `null` on purpose.**
+**1759 machines. 906 distinct shapes still to build. 227 entries are already built: the 116 devices in this package, plus the real models those meshes cover. 909 entries have a sourced size; the other 850 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -48,14 +48,13 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | INTV | 1 | 1 | 0 |
 |  | Milton Bradley | 1 | 1 | 0 |
 |  | iQue | 1 | 1 | 0 |
-| **3** | **Retro home computers** | **61** | **54** | **13** |
+| **3** | **Retro home computers** | **59** | **52** | **12** |
 |  | Commodore | 19 | 17 | 8 |
 |  | Apple | 8 | 6 | 1 |
 |  | Acorn | 6 | 4 | 1 |
 |  | Atari | 6 | 6 | 0 |
 |  | Sinclair | 6 | 5 | 2 |
 |  | Amstrad | 4 | 4 | 0 |
-|  | NeXT | 2 | 2 | 1 |
 |  | Panasonic | 2 | 2 | 0 |
 |  | Philips | 2 | 2 | 0 |
 |  | Tandy | 2 | 2 | 0 |
@@ -63,12 +62,12 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **874** | **279** | **620** |
+| **4** | **Apple** | **876** | **265** | **647** |
 |  | Power Mac | 92 | 18 | 88 |
 |  | Performa | 71 | 9 | 71 |
 |  | MacBook Pro | 69 | 13 | 64 |
+|  | iMac | 63 | 0 | 62 |
 |  | PowerBook | 61 | 15 | 60 |
-|  | iMac | 61 | 14 | 35 |
 |  | iPhone | 55 | 35 | 55 |
 |  | iPad | 46 | 10 | 46 |
 |  | Display | 38 | 37 | 28 |
@@ -152,7 +151,13 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Arduino Uno | 4 | 4 | 0 |
 | **11** | **Mini PCs** | **21** | **9** | **0** |
 |  | NUC | 21 | 9 | 0 |
-|  | **Total** | **1745** | **916** | **875** |
+| **12** | **NeXT** | **14** | **6** | **8** |
+|  | NeXT | 7 | 0 | 7 |
+|  | NeXT Displays | 2 | 1 | 1 |
+|  | NeXT Printers | 2 | 2 | 0 |
+|  | NeXT Keyboards | 2 | 2 | 0 |
+|  | NeXT Boards | 1 | 1 | 0 |
+|  | **Total** | **1759** | **906** | **909** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -755,7 +760,7 @@ Steam Deck (LCD) (2022), Steam Deck (OLED) (2023).
 
 iQue Player (2003).
 
-### Phase 3: Retro home computers (61 machines, 54 shapes to build)
+### Phase 3: Retro home computers (59 machines, 52 shapes to build)
 
 **Acorn Archimedes** (1 machines, 1 shapes)
 
@@ -809,10 +814,6 @@ Amiga 1000 (1985), Amiga 2000 (1987), Amiga 500 (1987) *built*, Amiga 3000 (1990
 
 Commodore PET 2001 (1977).
 
-**NeXT** (2 machines, 2 shapes)
-
-NeXTcube (1990), NeXTstation (1990).
-
 **Panasonic MSX** (2 machines, 2 shapes)
 
 Panasonic FS-A1 (1986), Panasonic FS-A1GT (turboR) (1991).
@@ -853,7 +854,7 @@ TI-99/4A (1981).
 
 Yamaha CX5M (1984).
 
-### Phase 4: Apple (874 machines, 279 shapes to build)
+### Phase 4: Apple (876 machines, 265 shapes to build)
 
 **AirPods** (12 machines, 0 shapes)
 
@@ -1003,9 +1004,9 @@ eMac (2002), eMac (ATI Graphics) (2003), eMac (USB 2.0) (2004), eMac (2005).
 
 iBook (1999), iBook (FireWire) (2000), iBook SE (2000), iBook (Dual USB) (2001), iBook (Late 2001), iBook (14.1 LCD) (2002), iBook (16 VRAM), iBook (14.1 LCD 16 VRAM) (12-inch) (2002), iBook (16 VRAM), iBook (14.1 LCD 16 VRAM) (14-inch) (2002), iBook (Opaque 16 VRAM), (32 VRAM), (14.1 LCD 32 VRAM) (12-inch) (2002), iBook (Opaque 16 VRAM), (32 VRAM), (14.1 LCD 32 VRAM) (14-inch) (2002), iBook (800 MHz 32 VRAM), iBook (900 MHz 32 VRAM), iBook (14.1 LCD 900 MHz 32 VRAM) (12-inch) (2003), iBook (800 MHz 32 VRAM), iBook (900 MHz 32 VRAM), iBook (14.1 LCD 900 MHz 32 VRAM) (14-inch) (2003), iBook G4 (2003, 12-inch), iBook G4 (2003, 14-inch), iBook G4 (Early 2004) (12-inch), iBook G4 (Early 2004) (14-inch), iBook G4 (Late 2004) (12-inch), iBook G4 (Late 2004) (14-inch), iBook G4 (Mid 2005) (12-inch), iBook G4 (Mid 2005) (14-inch).
 
-**iMac** (61 machines, 14 shapes)
+**iMac** (63 machines, 0 shapes)
 
-iMac (1998), iMac (266 MHz) (1999), iMac (333 MHz) (1999), iMac (Slot Loading) (1999), iMac (Summer 2000), iMac (Early 2001), iMac (Summer 2001), iMac (Flat Panel) (15-inch) (2002), iMac (Flat Panel) (17-inch) (2002), iMac (17-inch 1Ghz) (2003), iMac (USB 2.0) (15-inch) (2003), iMac (USB 2.0) (17-inch) (2003), iMac (USB 2.0) (20-inch) (2003), iMac G5 (2004, 17-inch), iMac G5 (2004, 20-inch), iMac G5 (Ambient Light Sensor) (17-inch) (2005), iMac G5 (Ambient Light Sensor) (20-inch) (2005), iMac G5 (iSight) (17-inch) (2005), iMac G5 (iSight) (20-inch) (2005), iMac (Early 2006) (17-inch), iMac (Early 2006) (20-inch), iMac (Late 2006) (17-inch), iMac (Late 2006) (20-inch), iMac (Late 2006) (24-inch), iMac (Mid 2007) (20-inch), iMac (Mid 2007) (24-inch), iMac (Early 2008) (20-inch), iMac (Early 2008) (24-inch), iMac (20-inch, Mid 2009), iMac (21.5-inch, Late 2009), iMac (27-inch, Late 2009), iMac (Early 2009) (20-inch), iMac (Early 2009) (24-inch), iMac (21.5-inch, Mid 2010), iMac (27-inch, Mid 2010), iMac (21.5-inch, Late 2011), iMac (21.5-inch, Mid 2011), iMac (27-inch, Mid 2011), iMac (21.5-inch, Late 2012), iMac (27-inch, Late 2012), iMac (21.5-inch, Late 2013), iMac (27-inch, Late 2013), iMac (21.5-inch, Mid 2014), iMac (Retina 5K, 27-inch, Late 2014), iMac (21.5-inch, Late 2015), iMac (Retina 4K, 21.5-inch, Late 2015), iMac (Retina 5K, 27-inch, Late 2015), iMac (Retina 5K, 27-inch, Mid 2015), iMac (21.5-inch, 2017), iMac (Retina 4K, 21.5-inch, 2017), iMac (Retina 5K, 27-inch, 2017), iMac Pro (2017), iMac (Retina 4K, 21.5-inch, 2019), iMac (Retina 5K, 27-inch, 2019), iMac (Retina 5K, 27-inch, 2020), iMac (24-inch, M1, 2021) *built*, iMac (24-inch, 2023, Four ports) *built*, iMac (24-inch, 2023, Two ports) *built*, iMac (24-inch, 2024, Four ports) *built*, iMac (24-inch, 2024, Two ports) *built*, iMac (24-inch, M6) (2026) *built*.
+iMac (1998) *built*, iMac (266 MHz) (1999) *built*, iMac (333 MHz) (1999) *built*, iMac (Slot Loading) (1999) *built*, iMac (Summer 2000) *built*, iMac (Early 2001) *built*, iMac (Summer 2001) *built*, iMac (Flat Panel) (15-inch) (2002) *built*, iMac (Flat Panel) (17-inch) (2002) *built*, iMac (17-inch 1Ghz) (2003) *built*, iMac (USB 2.0) (15-inch) (2003) *built*, iMac (USB 2.0) (17-inch) (2003) *built*, iMac (USB 2.0) (20-inch) (2003) *built*, iMac G5 (2004, 17-inch) *built*, iMac G5 (2004, 20-inch) *built*, iMac G5 (Ambient Light Sensor) (17-inch) (2005) *built*, iMac G5 (Ambient Light Sensor) (20-inch) (2005) *built*, iMac G5 (iSight) (17-inch) (2005) *built*, iMac G5 (iSight) (20-inch) (2005) *built*, iMac (Early 2006) (17-inch) *built*, iMac (Early 2006) (20-inch) *built*, iMac (Late 2006) (17-inch) *built*, iMac (Late 2006) (20-inch) *built*, iMac (Late 2006) (24-inch) *built*, iMac (Mid 2007) (20-inch) *built*, iMac (Mid 2007) (24-inch) *built*, iMac (Early 2008) (20-inch) *built*, iMac (Early 2008) (24-inch) *built*, iMac (20-inch, Mid 2009) *built*, iMac (21.5-inch, Late 2009) *built*, iMac (27-inch, Late 2009) *built*, iMac (Early 2009) (20-inch) *built*, iMac (Early 2009) (24-inch) *built*, iMac (21.5-inch, Mid 2010) *built*, iMac (27-inch, Mid 2010) *built*, iMac (21.5-inch, Late 2011) *built*, iMac (21.5-inch, Mid 2011) *built*, iMac (27-inch, Mid 2011) *built*, iMac (21.5-inch, Late 2012) *built*, iMac (27-inch, Late 2012) *built*, iMac (21.5-inch, Late 2013) *built*, iMac (27-inch, Late 2013) *built*, iMac (21.5-inch, Mid 2014) *built*, iMac (Retina 5K, 27-inch, Late 2014) *built*, iMac (21.5-inch, Late 2015) *built*, iMac (Retina 4K, 21.5-inch, Late 2015) *built*, iMac (Retina 5K, 27-inch, Late 2015) *built*, iMac (Retina 5K, 27-inch, Mid 2015) *built*, iMac (21.5-inch, 2017) *built*, iMac (Retina 4K, 21.5-inch, 2017) *built*, iMac (Retina 5K, 27-inch, 2017) *built*, iMac Pro (2017) *built*, iMac (Retina 4K, 21.5-inch, 2019) *built*, iMac (Retina 5K, 27-inch, 2019) *built*, iMac (Retina 5K, 27-inch, 2020) *built*, iMac (24-inch, M1, 2021, Four ports) *built*, iMac (24-inch, M1, 2021, Two ports) *built*, iMac (24-inch, 2023, Four ports) *built*, iMac (24-inch, 2023, Two ports) *built*, iMac (24-inch, 2024, Four ports) *built*, iMac (24-inch, 2024, Two ports) *built*, iMac (24-inch, M6) (2026) *built*, iMac 24-inch, two ports: M1, M3 and M4 *built*.
 
 **iPad** (46 machines, 10 shapes)
 
@@ -1089,7 +1090,7 @@ MacBook *built*, MacBook Air 13-inch *built*, MacBook Air 13-inch, silver *built
 
 **Mac** (5 machines, 0 shapes)
 
-Mac Pro *built*, Mac Studio *built*, Mac mini *built*, Mac mini (flat, M1 or M2) *built*, iMac 24-inch *built*.
+Mac Pro *built*, Mac Studio *built*, Mac mini *built*, Mac mini (flat, M1 or M2) *built*, iMac 24-inch, four ports: M1, M3 and M4 *built*.
 
 **iPad** (5 machines, 0 shapes)
 
@@ -1208,3 +1209,25 @@ Orange Pi 5 Ultra, Orange Pi AIpro (20T), Orange Pi Prime, Orange Pi R1, Orange 
 **NUC** (21 machines, 9 shapes)
 
 NUC D34010WYK (2013), NUC D34010WYKH (2013), NUC D54250WYK (2013), NUC D54250WYKH (2013), NUC DCCP847DYE (2013), NUC6CAYH (2015), NUC6CAYS (2015), NUC7CJYH (2017), NUC7PJYH (2017), NUC8CCHKR (2018), NUC5CPYH (2020), NUC5PGYH (2020), NUC5PPYH (2020), NUC11ATKC2 (2060), NUC11ATKC4 (2060), NUC11ATKPE (2060), NUC DC3217BY, NUC DC3217IYE, NUC DC53427HYE, NUC DE3815TYKHE, NUC DN2820FYKH.
+
+### Phase 12: NeXT (14 machines, 6 shapes to build)
+
+**NeXT** (7 machines, 0 shapes)
+
+NeXT Computer (1988) *built*, NeXTcube (1990) *built*, NeXTstation (1990) *built*, NeXTstation Color (1990) *built*, NeXTcube Turbo (1992) *built*, NeXTstation Turbo *built*, NeXTstation Turbo Color *built*.
+
+**NeXT Boards** (1 machines, 1 shapes)
+
+NeXTdimension (1991).
+
+**NeXT Displays** (2 machines, 1 shapes)
+
+NeXT MegaPixel Display (1988) *built*, NeXT MegaPixel Color Display.
+
+**NeXT Keyboards** (2 machines, 2 shapes)
+
+NeXT Keyboard, NeXT Mouse.
+
+**NeXT Printers** (2 machines, 2 shapes)
+
+NeXT Laser Printer (1988), NeXT Color Printer.

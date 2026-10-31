@@ -1,14 +1,17 @@
 // The catalogue: every device with its name, family, real size in millimetres, ports and the parts it is assembled from. Names are plain descriptive words; all trademarks belong to
 // their owners, and this project is not affiliated with any of them. Pure data.
+import { DESK_ROWS } from "./desk-rows.ts";
 import { type BaseInfo, checkWith, type Description, type FitReport } from "./fit.ts";
 import type { Size } from "./parts.ts";
 
-export type FamilyId = "pi-boards" | "pi-dressed" | "desktops" | "laptops" | "tablets-phones" | "pcs" | "nas" | "classics" | "other" | "clients";
+export type FamilyId = "pi-boards" | "pi-dressed" | "desktops" | "next" | "classic-macs" | "laptops" | "tablets-phones" | "pcs" | "nas" | "classics" | "other" | "clients";
 
 export const FAMILIES: readonly { id: FamilyId; title: string }[] = [
   { id: "pi-boards", title: "Single-board computers" },
   { id: "pi-dressed", title: "Boards with hats and cases" },
   { id: "desktops", title: "Desktops" },
+  { id: "next", title: "NeXT" },
+  { id: "classic-macs", title: "Classic Macs" },
   { id: "laptops", title: "Laptops" },
   { id: "tablets-phones", title: "Tablets and phones" },
   { id: "pcs", title: "Small PCs and towers" },
@@ -91,7 +94,6 @@ export const DEVICES: readonly Device[] = [
   whole("mac-mini", "Mac mini (small)", "desktops", [127, 127, 50], ports({ thunderbolt: 3, "usb-c": 2, hdmi: 1, ethernet: 1, audio: 1, power: 1 })),
   whole("mac-mini-m1", "Mac mini (flat)", "desktops", [197, 197, 36], ports({ thunderbolt: 2, "usb-a": 2, hdmi: 1, ethernet: 1, audio: 1, power: 1 })),
   whole("mac-pro", "Mac Pro", "desktops", [218, 450, 529], ports({ thunderbolt: 2, "usb-a": 2, ethernet: 2, power: 1, pcie: 8 })),
-  whole("imac-24", "iMac 24-inch", "desktops", [547, 147, 461], ports({ thunderbolt: 2, "usb-c": 2, audio: 1, power: 1 })),
 
   whole("macbook", "MacBook", "laptops", [304, 215, 11], ports({ "usb-c": 2, audio: 1 })),
   whole("macbook-air-13", "MacBook Air 13-inch", "laptops", [304, 215, 11], ports({ thunderbolt: 2, power: 1, audio: 1 })),
@@ -130,7 +132,7 @@ export const DEVICES: readonly Device[] = [
   whole("nas-5bay", "Five-bay NAS", "nas", [226, 223, 166], ports({ "usb-a": 3, ethernet: 2, esata: 1, power: 1 })),
   whole("nas-rack", "Rack NAS", "nas", [482, 460, 44], ports({ "usb-a": 2, ethernet: 4, power: 2 })),
 
-  whole("macintosh-128k", "Macintosh 128K", "classics", [243.8, 276.9, 345.4], ports({ power: 1 })),
+  whole("macintosh-128k", "Macintosh 128K", "classic-macs", [243.8, 276.9, 345.4], ports({ power: 1 })),
   whole("game-boy-dmg-01", "Game Boy (DMG-01)", "classics", [90, 32, 148], ports({ audio: 1 })),
   whole("nokia-3310", "Nokia 3310", "classics", [48, 22, 113], []),
   whole("palm-iii", "Palm III", "classics", [81, 18, 119], []),
@@ -150,11 +152,13 @@ export const DEVICES: readonly Device[] = [
   whole("apple-tv-4k-1st-generation", "Apple TV 4K", "classics", [98, 98, 35], ports({ hdmi: 1, ethernet: 1, power: 1 })),
   whole("iphone-1st-generation", "iPhone (1st generation)", "classics", [61, 11.6, 115], ports({ audio: 1 })),
   whole("ipod-nano-1st-generation", "iPod nano (1st generation)", "classics", [41, 6.9, 89], ports({ audio: 1 })),
-  whole("power-mac-g5-2003", "Power Mac G5", "classics", [206, 475, 511], ports({ "usb-a": 3, audio: 1, ethernet: 1, power: 1, pcie: 3 })),
+  whole("power-mac-g5-2003", "Power Mac G5", "classic-macs", [206, 475, 511], ports({ "usb-a": 3, audio: 1, ethernet: 1, power: 1, pcie: 3 })),
   whole("airpods-1", "AirPods (1st generation), in their case", "classics", [44.3, 21.3, 53.5], []),
   whole("airpods-pro-1", "AirPods Pro (1st generation), in their case", "classics", [60.6, 21.7, 45.2], []),
   whole("airpods-max", "AirPods Max", "classics", [168.6, 83.4, 187.3], []),
   whole("apple-vision-pro", "Apple Vision Pro", "classics", null, []),
+
+  ...DESK_ROWS.map(([key, name, family, size, sockets]) => whole(key, name, family, size ? [...size] : null, ports(sockets))),
 
   whole("unknown", "A computer", "other", null, ports({ "usb-a": 2, power: 1 })),
 

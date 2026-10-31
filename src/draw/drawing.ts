@@ -198,6 +198,13 @@ export class Drawing {
     return this.prism(pts, y0, y1, style);
   }
 
+  /** A solid of any shape seen as its outline: the hull of its points on the picture, filled. */
+  hullOf(points: Vec3[], style: ShapeStyle, layer = 1): this {
+    const centre = points.reduce((s, p) => s.map((v, i) => v + p[i] / points.length) as Vec3, [0, 0, 0] as Vec3);
+    this.push(layer, centre, `<path d="${path(hull(points.map((p) => this.at(p))))}" ${attrs(style)}/>`);
+    return this;
+  }
+
   /** A flat shape on a face: corners in millimetres, `normal` the way the face looks (drawn only when it looks towards the viewer). */
   flat(points: Vec3[], normal: Vec3, style: ShapeStyle, layer = 1): this {
     const centre = points.reduce((s, p) => s.map((v, i) => v + p[i] / points.length) as Vec3, [0, 0, 0] as Vec3);

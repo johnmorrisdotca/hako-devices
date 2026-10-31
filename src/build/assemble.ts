@@ -6,6 +6,7 @@ import { Drawing } from "../draw/drawing.ts";
 import * as drawClients from "../draw/clients.ts";
 import * as drawHats from "../draw/hats.ts";
 import * as drawMachines from "../draw/machines.ts";
+import { deskDrawing } from "../draw/desk.ts";
 import * as drawMacs from "../draw/macs.ts";
 import * as drawNas from "../draw/nas.ts";
 import * as drawPc from "../draw/pc.ts";
@@ -16,6 +17,8 @@ import { BOARDS, CASES, HATS, HAT_STACK, PARTS, type BoardId, type DriveId, type
 import { DEFAULT_STYLE, STYLES, type StyleName } from "../styles.ts";
 import { hdd35, ssd25 } from "./parts-extra.ts";
 import * as clients from "./clients.ts";
+import { deskMesh } from "./desk.ts";
+import { DESKS } from "./desks/index.ts";
 import { type Glb, toGlb } from "./glb.ts";
 import { Box, extent, moved, rbox, turnY, type Vec3 } from "./kit.ts";
 import * as laptops from "./laptops.ts";
@@ -102,7 +105,6 @@ const BASE_ART: Record<string, BaseArt> = {
   macbook: plain(macs.macbook, drawMacs.macbook),
   "mac-mini-m1": plain(laptops.macMiniFlat, drawMacs.macMiniFlat),
   "mac-pro": plain(laptops.macPro, drawMacs.macPro),
-  "imac-24": plain(laptops.iMac24, drawMacs.iMac24),
   "macbook-air-13": plain(laptops.macbookAir13, drawMacs.macbookAir13),
   "macbook-pro-14": plain(laptops.macbookPro14, drawMacs.macbookPro14),
   "macbook-pro-16": plain(laptops.macbookPro16, drawMacs.macbookPro16),
@@ -150,6 +152,7 @@ const BASE_ART: Record<string, BaseArt> = {
   "client-computer": plain(clients.clientComputer, drawClients.clientComputer),
   "client-browser": plain(clients.clientBrowser, drawClients.clientBrowser),
   ...Object.fromEntries(Object.entries(MACHINES).map(([key, spec]) => [key, plain((m) => machine(m, spec), (d) => drawMachines.machine(d, spec))])),
+  ...Object.fromEntries(Object.entries(DESKS).map(([key, spec]) => [key, plain((m) => deskMesh(m, spec), (d) => deskDrawing(d, spec))])),
 };
 
 /** The keys a whole-device base can be. */

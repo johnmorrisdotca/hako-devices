@@ -7,6 +7,7 @@ export type CatalogueEntry = Device | CoveredDevice | PlannedDevice;
 /** The list's shelves, in the order the gallery shows them. Each holds families, named by `headingOf`. */
 export const SHELVES: readonly { id: string; title: string }[] = [
   { id: "apple", title: "Apple" },
+  { id: "next", title: "NeXT: every model" },
   { id: "microsoft", title: "Microsoft" },
   { id: "raspberry-pi", title: "Raspberry Pi" },
   { id: "android", title: "Android phones and tablets" },
@@ -20,7 +21,7 @@ export const SHELVES: readonly { id: string; title: string }[] = [
 
 /** A family's name on its shelf: "Nintendo DS", "Ericsson T series". A shelf with one maker, or a family that names its maker, needs no more. */
 export function headingOf({ shelf, maker, family }: CoveredDevice | PlannedDevice): string {
-  return shelf === "apple" || shelf === "microsoft" || shelf === "raspberry-pi" || family.includes(maker) ? family : `${maker} ${family}`;
+  return shelf === "apple" || shelf === "next" || shelf === "microsoft" || shelf === "raspberry-pi" || family.includes(maker) ? family : `${maker} ${family}`;
 }
 
 /** Every machine: the built ones, the real machines they cover, then those still to come. */
