@@ -20,7 +20,7 @@ try {
   });
   page.on("pageerror", (e) => errors.push(String(e)));
   await page.goto(url);
-  await page.waitForSelector('[data-testid="tile"]');
+  await page.waitForSelector('[data-testid="gallery-card"]');
   await page.locator('hako-device#hero[data-view="3d"]').waitFor({ timeout: 60_000 });
   await page.waitForTimeout(1800);
   await page.screenshot({ path: join(out, "hero.jpg"), type: "jpeg", quality: 82 });
