@@ -16,8 +16,6 @@ Boards, hats, cases, NAS boxes, desktops, laptops, tablets, game consoles, old p
 
 <p align="center"><img alt="The part builder: a small computer in a finned case with a touch screen hat, in 3D, beside its choices and the code to copy." src="https://raw.githubusercontent.com/johnmorrisdotca/hako-devices/main/docs/images/builder.jpg" width="820"></p>
 
-> **Not on npm yet.** The install line below works once the first version is published. Until then, the [demo](https://johnmorrisdotca.github.io/hako-devices/) shows everything.
-
 ## One minute
 
 ```sh
