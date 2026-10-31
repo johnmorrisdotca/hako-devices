@@ -77,7 +77,7 @@ test("a year is a real year on the whole list, and its decade tag follows it", (
   const thisYear = new Date().getFullYear();
   for (const entry of list()) {
     if (entry.year === null) continue;
-    assert.ok(entry.year >= 1950 && entry.year <= thisYear + 1, `${entry.key}: ${entry.year}`);
+    assert.ok(entry.year >= 1900 && entry.year <= thisYear + 1, `${entry.key}: ${entry.year}`);
     const decade = entry.tags?.decade;
     if (decade) assert.ok(decade.includes(`${Math.floor(entry.year / 10) * 10}s`), `${entry.key}: ${entry.year} ${decade.join()}`);
   }

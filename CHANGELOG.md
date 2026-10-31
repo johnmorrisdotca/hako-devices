@@ -11,6 +11,10 @@ All notable changes to this project are written here. The format follows
 - Calculators, personal music, e-readers and headsets, as shelves. The first rows are machines whose pages were opened again: the HP-35, the Voyager models, the HP 48GX, both Curtas, the TI-83 family, the fx-82 and fx-82A, the Sharp EL-8, the Rio PMP300, both Nook 1st Edition models, the Oculus Rift CV1, and the IBM 5150. A size with no named axes is left blank.
 - The HP-12C, as a flat body. Its size on the list stays blank: the Voyager page's 128 by 79 by 15 mm names no axes, and the mesh uses that triple as a stand-in after a photograph. The underside is plain.
 
+### Fixed
+
+- A year on the list is rejected only when it is before 1900 or still in the future. The Curta Type I keeps 1948.
+
 ## [0.16.0] - 2026-11-03
 
 ### Fixed

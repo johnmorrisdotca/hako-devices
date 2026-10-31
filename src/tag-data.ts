@@ -2336,7 +2336,7 @@ export const TAG_DATA: Readonly<Record<string, Readonly<Partial<Record<string, r
   "hp-11c": {"maker":["Hewlett-Packard"],"type":["Calculator"],"decade":["1980s"]},
   "hp-12c-platinum": {"maker":["Hewlett-Packard"],"type":["Calculator"],"decade":["2000s"]},
   "hp-48gx": {"maker":["Hewlett-Packard"],"type":["Calculator"],"decade":["1990s"]},
-  "curta-type-i": {"maker":["Contina"],"type":["Calculator"]},
+  "curta-type-i": {"maker":["Contina"],"type":["Calculator"],"decade":["1940s"]},
   "curta-type-ii": {"maker":["Contina"],"type":["Calculator"],"decade":["1950s"]},
   "ti-83": {"maker":["Texas Instruments"],"type":["Calculator"],"decade":["1990s"]},
   "ti-83-plus": {"maker":["Texas Instruments"],"type":["Calculator"],"decade":["1990s"]},
@@ -4671,6 +4671,7 @@ export const YEAR_DATA: Readonly<Record<string, number>> = {
   "hp-11c": 1981,
   "hp-12c-platinum": 2003,
   "hp-48gx": 1993,
+  "curta-type-i": 1948,
   "curta-type-ii": 1954,
   "ti-83": 1996,
   "ti-83-plus": 1999,
@@ -5108,4 +5109,5 @@ export const LINE_DATA: Readonly<Record<string, string>> = {
   "nuc-king-county": "NUC",
   "nuc-bishop-county": "NUC",
   "nuc-p14e": "NUC",
+  "hp-12c": "Voyager",
 };

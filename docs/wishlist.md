@@ -1653,7 +1653,7 @@ Casio fx-82 (1982), Casio fx-82A (1985).
 
 **Contina Curta** (2 machines, 2 shapes)
 
-Curta Type II (1954), Curta Type I.
+Curta Type I (1948), Curta Type II (1954).
 
 **Hewlett-Packard 48** (1 machines, 1 shapes)
 
