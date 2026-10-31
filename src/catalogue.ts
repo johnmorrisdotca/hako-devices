@@ -3,6 +3,7 @@
 import { DESK_ROWS } from "./desk-rows.ts";
 import { type BaseInfo, checkWith, type Description, type FitReport } from "./fit.ts";
 import type { Size } from "./parts.ts";
+import { SLAB_ROWS } from "./slab-rows.ts";
 
 export type FamilyId = "pi-boards" | "pi-dressed" | "desktops" | "next" | "classic-macs" | "laptops" | "tablets-phones" | "pcs" | "nas" | "classics" | "other" | "clients";
 
@@ -38,7 +39,9 @@ export type PortKind =
   | "pcie"
   | "displayport"
   | "vga"
-  | "serial";
+  | "serial"
+  | "lightning"
+  | "dock-30";
 
 export interface Port {
   kind: PortKind;
@@ -118,6 +121,7 @@ export const DEVICES: readonly Device[] = [
   whole("ipad-pro-12-9-inch-4th-generation", "iPad Pro 12.9-inch (4th generation), 2020", "tablets-phones", [280.6, 214.9, 5.9], ports({ "usb-c": 1 })),
   whole("ipad-pro-12-9-inch-5th-generation", "iPad Pro 12.9-inch (5th and 6th generation), 2021 and 2022", "tablets-phones", [280.6, 214.9, 6.4], ports({ thunderbolt: 1 })),
   whole("iphone", "iPhone", "tablets-phones", [71, 147, 8], ports({ "usb-c": 1 })),
+  ...SLAB_ROWS.map(([key, name, size, sockets]) => whole(key, name, "tablets-phones", [...size], ports(sockets))),
 
   whole("nuc", "Small PC", "pcs", [117, 112, 54], ports({ "usb-c": 3, "usb-a": 4, hdmi: 2, ethernet: 1, audio: 1, power: 1 })),
   whole("mini-pc", "Mini PC", "pcs", [128, 128, 48], ports({ "usb-a": 4, "usb-c": 1, hdmi: 2, ethernet: 1, audio: 1, power: 1 })),
@@ -224,7 +228,6 @@ export const DEVICES: readonly Device[] = [
   whole("playstation-4-original", "PlayStation 4 (original)", "classics", [304.8, 274.3, 53.1], ports({ "usb-a": 2, hdmi: 1, ethernet: 1, power: 1 })),
   whole("playstation-5", "PlayStation 5", "classics", [104, 260, 390], ports({ "usb-c": 1, "usb-a": 3, hdmi: 1, ethernet: 1, power: 1 })),
   whole("apple-tv-4k-1st-generation", "Apple TV 4K", "classics", [98, 98, 35], ports({ hdmi: 1, ethernet: 1, power: 1 })),
-  whole("iphone-1st-generation", "iPhone (1st generation)", "classics", [61, 11.6, 115], ports({ audio: 1 })),
   whole("ipod-nano-1st-generation", "iPod nano (1st generation)", "classics", [41, 6.9, 89], ports({ audio: 1 })),
   whole("airpods-1", "AirPods (1st generation), in their case", "classics", [44.3, 21.3, 53.5], []),
   whole("airpods-pro-1", "AirPods Pro (1st generation), in their case", "classics", [60.6, 21.7, 45.2], []),
@@ -266,7 +269,7 @@ const BY_KEY = new Map(DEVICES.map((entry) => [entry.key, entry]));
 /** A built device by its key. */
 export const deviceByKey = (key: string): Device | undefined => BY_KEY.get(key);
 
-const SLAB_WIDTHS: Readonly<Record<string, number>> = {
+const SLAB_WIDTHS: Record<string, number> = {
   "ipad-mini": 195.4,
   ipad: 248.6,
   "ipad-air": 247.6,
@@ -287,6 +290,7 @@ const SLAB_WIDTHS: Readonly<Record<string, number>> = {
   "client-android-tablet": 254,
   "client-android-phone": 75,
 };
+for (const [key, , [across]] of SLAB_ROWS) SLAB_WIDTHS[key] = across;
 const BAYS: Readonly<Record<string, number>> = { "nas-1bay": 1, "nas-2bay": 2, "nas-4bay": 4, "nas-5bay": 5, "nas-rack": 4 };
 
 /** What the fit check needs to know of a whole device. */

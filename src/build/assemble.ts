@@ -11,7 +11,11 @@ import * as drawMacs from "../draw/macs.ts";
 import * as drawNas from "../draw/nas.ts";
 import { nucBody as drawNucBody } from "../draw/nuc.ts";
 import * as drawPc from "../draw/pc.ts";
+import { drawSlabBody } from "../draw/slab-body.ts";
 import * as drawTablets from "../draw/tablets.ts";
+import { SLAB_ROWS } from "../slab-rows.ts";
+import { SLAB_BODIES } from "./bodies.ts";
+import { slabOptions, type SlabBody } from "./slab-body.ts";
 import { check } from "../catalogue.ts";
 import type { Description, FitReport } from "../fit.ts";
 import { BOARDS, CASES, HATS, HAT_STACK, PARTS, type BoardId, type DriveId, type CaseId, type HatId, type Part, type ScreenId } from "../parts.ts";
@@ -102,6 +106,13 @@ const nasArt = (bays: number): BaseArt => ({
   },
 });
 
+/** A phone or tablet that is a row of numbers: its size from the catalogue, its mesh and drawing from the row. */
+const bodyArt = (body: SlabBody): BaseArt => {
+  const device = SLAB_ROWS.find(([key]) => key === body.key);
+  if (!device) throw new Error(`no catalogue row for the body ${body.key}`);
+  return slabArt(slabOptions(body, device[2], body.landscape ? "desktop" : "phone"), (d, m) => drawSlabBody(d, m, body));
+};
+
 const BASE_ART: Record<string, BaseArt> = {
   macbook: plain(macs.macbook, drawMacs.macbook),
   "macbook-air-13": plain(laptops.macbookAir13, drawMacs.macbookAir13),
@@ -142,6 +153,7 @@ const BASE_ART: Record<string, BaseArt> = {
   pi500: plain(pi500, drawBoards.pi500),
   "client-firetv": plain(clients.clientFireTv, drawClients.clientFireTv),
   "client-androidtv": plain(clients.clientAndroidTv, drawClients.clientAndroidTv),
+  ...Object.fromEntries(SLAB_BODIES.map((body) => [body.key, bodyArt(body)])),
   "client-ipad": slabArt(tablets.ipadPlain, drawTablets.ipadPlain),
   "client-iphone": { mesh: (m, { stand }) => void tablets.iphone(m, stand), draw: (d, m) => void drawTablets.iphone(d, m) },
   "client-android-tablet": slabArt(clients.androidTablet, drawClients.clientAndroidTablet),

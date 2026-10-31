@@ -10,6 +10,8 @@ All notable changes to this project are written here. The format follows
 
 - The list has every Galaxy Tab released so far: 68 more models, in the families Galaxy Tab A, E, S and Active, 88 in all. A row of the phones and tablets also gives `released`, `discontinued`, `lastUpdate`, `weightG`, `colours` and the pages in `factsSources`, each only where a page says so.
 
+- Every iPhone: 50 bodies, from the first to the iPhone 18 Pro Max and the Duo (closed), each a row of numbers read from Apple's dimensional drawings, with its front, cameras, plateau, buttons, sockets and holes. New port kinds `lightning` and `dock-30`.
+
 ### Fixed
 
 - Sizes in the list now follow Apple's own figures to the hundredth, the iPad (3rd and 4th generation) outline among them. A Galaxy Tab's height is its longer side. The generic `iphone` row no longer copies the first iPhone's size.

@@ -171,12 +171,6 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     corner: 12,
     marks: [front("light", 40, 12, 2, 2, { round: true })],
   },
-  "iphone-1st-generation": {
-    size: [61, 11.6, 115],
-    body: "alu",
-    corner: 8,
-    marks: [front("panel", 0, 57.5, 58, 110), front("screen", 0, 58, 50, 75), front("key", 0, 11, 9, 9, { round: true }), front("dark", 0, 104, 10, 1.4)],
-  },
   "ipod-nano-1st-generation": {
     size: [41, 6.9, 89],
     body: "plastic-white",

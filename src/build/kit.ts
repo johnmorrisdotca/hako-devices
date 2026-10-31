@@ -69,6 +69,11 @@ export const MATERIALS = {
   "plastic-bondi": { color: "#2f7d8c", metal: 0.1, rough: 0.28 },
   "plastic-blue": { color: "#3f6fb0", metal: 0.1, rough: 0.3 },
   "shell-space-grey": { color: "#4a4b50", metal: 0.9, rough: 0.42 },
+  "shell-titanium": { color: "#8c8a85", metal: 0.9, rough: 0.42 },
+  "shell-midnight-green": { color: "#3c4a44", metal: 0.85, rough: 0.42 },
+  "shell-orange": { color: "#c9652c", metal: 0.85, rough: 0.42 },
+  "shell-orange-panel": { color: "#d4835a", metal: 0.1, rough: 0.5 },
+  "front-glass": { color: "#030406", metal: 0, rough: 0.62 },
   "pale-glass": { color: "#d6d8da", metal: 0, rough: 0.14 },
   "epaper-white": { color: "#efefe9", metal: 0, rough: 0.6 },
   "fpc-orange": { color: "#c98a2b", metal: 0.1, rough: 0.5 },
@@ -130,7 +135,7 @@ export class Box {
   lidScreen?: { w: number; h: number; z: number };
   panelFrame?: THREE.Matrix4;
   panelSize?: { W: number; H: number; T: number; chin: number };
-  slabFacts?: { w: number; h: number; t: number; r: number; screen: [number, number]; frame: THREE.Matrix4; foot: number; stand: boolean };
+  slabFacts?: { w: number; h: number; t: number; r: number; screen: [number, number]; frame: THREE.Matrix4; foot: number; stand: boolean; screenAt?: [number, number] };
   tvFacts?: { W: number; H: number; y0: number };
   windowSize?: { W: number; H: number; y0: number; bar: number };
   private frame = new THREE.Matrix4();

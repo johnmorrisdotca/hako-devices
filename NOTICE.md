@@ -2,7 +2,7 @@
 
 The code, the meshes and the drawings of this package are under the MIT licence (see [LICENSE](LICENSE) and [LICENSES/MIT.txt](LICENSES/MIT.txt)).
 
-**Every mesh and drawing is drawn by this package's own code** from plain geometry: boxes, cylinders, extruded outlines and flat shapes, placed by published sizes. Photographs were looked at for where parts sit; nothing was traced or copied from them, no third-party 3D file or icon set is included, and no photograph is shipped. No mesh or drawing carries a logo, a mark or brand printing.
+**Every mesh and drawing is drawn by this package's own code** from plain geometry: boxes, cylinders, extruded outlines and flat shapes, placed by published sizes. Photographs were looked at for where parts sit, and some positions and sizes on the phones and tablets were read as individual measurements from the makers' published dimensional drawings. Nothing was traced or copied from a photograph or a drawing, no third-party 3D file or icon set is included, and no photograph or drawing, or part of one, is shipped or kept in this repository. No mesh or drawing carries a logo, a mark or brand printing.
 
 Product names appear only as plain descriptive words, in the catalogue, the part table, the mapping helpers and the docs. All trademarks belong to their owners, and this project is not affiliated with, sponsored by or endorsed by any of them.
 

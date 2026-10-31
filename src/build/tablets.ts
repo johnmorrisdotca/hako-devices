@@ -20,6 +20,12 @@ export interface SlabOptions {
   lean?: number;
   glassR?: number;
   back?: SlabBack;
+  /** The glass around the picture; left out, the dark of the older slabs. */
+  front?: Material;
+  /** How far the back edge is rounded; left out, a little. */
+  edge?: number;
+  /** The middle of the picture on the slab, when it is not the middle of the slab: across from the middle, up from the bottom. */
+  screenAt?: [number, number];
 }
 
 /** The desk stand: a low rail along the desk with a lip, and a leg behind. */
@@ -35,16 +41,17 @@ export function deskStand(m: Box, w: number, h: number, lean: number, foot: numb
  * A slab on a stand, or with `stand` false lying flat on its back. w across, h up the screen; glass with the picture `screen` [w, h]; `back` draws what is on its back.
  * The drawing reads m.slabFacts for the same numbers.
  */
-export function standing(m: Box, { w, h, t, r, shell, screen, kind = "desktop", lean = 15, glassR, back }: SlabOptions, stand = true) {
+export function standing(m: Box, { w, h, t, r, shell, screen, kind = "desktop", lean = 15, glassR, back, edge, screenAt, front = "bezel" }: SlabOptions, stand = true) {
   const foot = stand ? 5 : 0;
   const frame = stand
     ? new THREE.Matrix4().makeTranslation(0, foot, 6).multiply(new THREE.Matrix4().makeRotationX((-lean * Math.PI) / 180))
     : new THREE.Matrix4().makeTranslation(0, t, h / 2).multiply(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
-  m.slabFacts = { w, h, t, r, screen, frame, foot, stand };
+  const [screenX, screenY] = screenAt ?? [0, h / 2];
+  m.slabFacts = { w, h, t, r, screen, frame, foot, stand, screenAt: [screenX, screenY] };
   const add: SlabAdd = (material, geometry, at, turn = [0, 0, 0]) => m.add(material, geometry, at, turn, { frame });
-  add(shell, slab(roundedSquare(w, h, r, 10), t - 0.5, Math.min(1, t / 3), { curve: 10, bevelSeg: 3 }), [0, h / 2, -t], upright);
-  add("bezel", slab(roundedSquare(w - 0.8, h - 0.8, r - 0.4, 10), 0.5, 0.1, { curve: 10, bevelSeg: 1 }), [0, h / 2, -0.5], upright);
-  litScreen(m, [0, h / 2, 0.14], [0, 0, 0], screen[0], screen[1], { frame, radius: glassR ?? Math.max(2, r - 5), kind });
+  add(shell, slab(roundedSquare(w, h, r, 10), t - 0.5, edge ?? Math.min(1, t / 3), { curve: 10, bevelSeg: edge ? 5 : 3 }), [0, h / 2, -t], upright);
+  add(front, slab(roundedSquare(w - 0.8, h - 0.8, r - 0.4, 10), 0.5, 0.1, { curve: 10, bevelSeg: 1 }), [0, h / 2, -0.5], upright);
+  litScreen(m, [screenX, screenY, 0.14], [0, 0, 0], screen[0], screen[1], { frame, radius: glassR ?? Math.max(2, r - 5), kind });
   if (back) back(add, { w, h, t }, m, frame);
   if (stand) deskStand(m, w, h, lean, foot);
   return m;

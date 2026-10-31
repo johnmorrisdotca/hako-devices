@@ -24,7 +24,7 @@ export function roundedOn(frame: THREE.Matrix4, w: number, h: number, r: number,
 
 /** A slab on its stand with its picture. `picture(d, at, out, layer)` draws on the screen. */
 export function slabOnStand(d: Drawing, model: Box, { shell = "#232e40", sw = 2, picture = homePicture, standSw = 1.2, edge = "#8fa1b8" }: { shell?: string; sw?: number; picture?: typeof homePicture; standSw?: number; edge?: string } = {}) {
-  const { w, h, t, r, screen, frame, foot, stand: onStand } = model.slabFacts as NonNullable<Box["slabFacts"]>;
+  const { w, h, t, r, screen, frame, foot, stand: onStand, screenAt = [0, h / 2] } = model.slabFacts as NonNullable<Box["slabFacts"]>;
   const out: Vec3 = new THREE.Vector3(0, 0, 1).transformDirection(frame).toArray();
   const stand = Math.min(w * 0.46, 120);
   if (onStand) {
@@ -35,7 +35,7 @@ export function slabOnStand(d: Drawing, model: Box, { shell = "#232e40", sw = 2,
   d.flat(roundedOn(frame, w, h, r, -t), out, { fill: shell, stroke: "#8fa1b8", sw }, 1);
   d.flat(roundedOn(frame, w, h, r, 0), out, { fill: "#0b111c", stroke: edge, sw }, 2);
   const [sx, sy] = screen;
-  const at = (u: number, v: number): Vec3 => new THREE.Vector3(-sx / 2 + u * sx, h / 2 + sy / 2 - v * sy, 0.2).applyMatrix4(frame).toArray();
+  const at = (u: number, v: number): Vec3 => new THREE.Vector3(screenAt[0] - sx / 2 + u * sx, screenAt[1] + sy / 2 - v * sy, 0.2).applyMatrix4(frame).toArray();
   picture(d, at, out, 4);
   return d;
 }

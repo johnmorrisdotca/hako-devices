@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2328 machines. 931 distinct shapes still to build. 1003 entries are already built: the 238 devices in this package, plus the real models those meshes cover. 1382 entries have a sourced size; the other 946 are `null` on purpose.**
+**2328 machines. 896 distinct shapes still to build. 1057 entries are already built: the 287 devices in this package, plus the real models those meshes cover. 1382 entries have a sourced size; the other 946 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -62,13 +62,13 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **889** | **230** | **659** |
+| **4** | **Apple** | **889** | **195** | **659** |
 |  | Power Mac | 92 | 0 | 90 |
 |  | Performa | 71 | 0 | 71 |
 |  | MacBook Pro | 69 | 13 | 64 |
 |  | iMac | 68 | 0 | 62 |
 |  | PowerBook | 61 | 15 | 60 |
-|  | iPhone | 55 | 35 | 55 |
+|  | iPhone | 55 | 0 | 55 |
 |  | iPad | 46 | 10 | 46 |
 |  | Display | 38 | 37 | 28 |
 |  | iPod | 37 | 20 | 20 |
@@ -191,7 +191,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-|  | **Total** | **2328** | **931** | **1382** |
+|  | **Total** | **2328** | **896** | **1382** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -888,7 +888,7 @@ TI-99/4A (1981).
 
 Yamaha CX5M (1984).
 
-### Phase 4: Apple (889 machines, 230 shapes to build)
+### Phase 4: Apple (889 machines, 195 shapes to build)
 
 **AirPods** (12 machines, 0 shapes)
 
@@ -1046,9 +1046,9 @@ iMac (1998) *built*, iMac (266 MHz) (1999) *built*, iMac (333 MHz) (1999) *built
 
 iPad (1st generation) (2010), iPad 2 (2011), iPad (3rd generation) (2012), iPad (4th generation) (2012), iPad mini (1st generation) (2012), iPad Air (1st generation) (2013), iPad mini 2 (2013), iPad Air 2 (2014), iPad mini 3 (2014), iPad Pro (12.9-inch) (2015) *built*, iPad mini 4 (2015), iPad Pro (9.7-inch) (2016) *built*, iPad (5th generation) (2017), iPad Pro (10.5-inch) (2017) *built*, iPad Pro 12.9-inch (2nd generation) (2017) *built*, iPad (6th generation) (2018), iPad Pro 11-inch (2018) *built*, iPad Pro 12.9-inch (3rd generation) (2018) *built*, iPad (7th generation) (2019), iPad Air (3rd generation) (2019), iPad mini (5th generation) (2019), iPad (8th generation) (2020), iPad Air (4th generation) (2020) *built*, iPad Pro 11-inch (2nd generation) (2020) *built*, iPad Pro 12.9-inch (4th generation) (2020) *built*, iPad (9th generation) (2021), iPad Pro 11-inch (3rd generation) (2021) *built*, iPad Pro 12.9-inch (5th generation) (2021) *built*, iPad mini (6th generation) (2021) *built*, iPad (10th generation) (2022) *built*, iPad Air (5th generation) (2022) *built*, iPad Pro 11-inch (4th generation) (2022) *built*, iPad Pro 12.9-inch (6th generation) (2022) *built*, iPad Air 11-inch (M2) (2024) *built*, iPad Air 13-inch (M2) (2024), iPad Pro 11-inch (M4) (2024) *built*, iPad Pro 13-inch (M4) (2024) *built*, iPad mini (A17 Pro) (2024) *built*, iPad (A16) (2025) *built*, iPad Air 11-inch (M3) (2025) *built*, iPad Air 13-inch (M3) (2025), iPad Pro 11-inch (M5) (2025) *built*, iPad Pro 13-inch (M5) (2025) *built*, iPad Air 11‑inch (M4) (2026) *built*, iPad Air 13‑inch (M4) (2026), iPad mini (A20 Pro) (2026).
 
-**iPhone** (55 machines, 35 shapes)
+**iPhone** (55 machines, 0 shapes)
 
-iPhone (1st generation) (2007) *built*, iPhone 3G (2008), iPhone 3GS (2009), iPhone 4 (2010), iPhone 4s (2011), iPhone 5 (2012), iPhone 5c (2013), iPhone 5s (2013), iPhone 6 (2014), iPhone 6 Plus (2014), iPhone 6s (2015), iPhone 6s Plus (2015), iPhone 7 (2016), iPhone 7 Plus (2016), iPhone SE (1st generation) (2016), iPhone 8 (2017), iPhone 8 Plus (2017), iPhone X (2017), iPhone XR (2018), iPhone XS (2018), iPhone XS Max (2018), iPhone 11 (2019), iPhone 11 Pro (2019), iPhone 11 Pro Max (2019), iPhone 12 (2020), iPhone 12 Pro (2020), iPhone 12 Pro Max (2020), iPhone 12 mini (2020), iPhone SE (2nd generation) (2020), iPhone 13 (2021), iPhone 13 Pro (2021), iPhone 13 Pro Max (2021), iPhone 13 mini (2021), iPhone 14 (2022), iPhone 14 Plus (2022), iPhone 14 Pro (2022), iPhone 14 Pro Max (2022), iPhone SE (3rd generation) (2022), iPhone 15 (2023), iPhone 15 Plus (2023), iPhone 15 Pro (2023), iPhone 15 Pro Max (2023), iPhone 16 (2024), iPhone 16 Plus (2024), iPhone 16 Pro (2024), iPhone 16 Pro Max (2024), iPhone 16e (2025), iPhone 17 (2025), iPhone 17 Pro (2025), iPhone 17 Pro Max (2025), iPhone Air (2025), iPhone 17e (2026), iPhone 18 Pro (2026), iPhone 18 Pro Max (2026), iPhone Duo (2026).
+iPhone (1st generation) (2007) *built*, iPhone 3G (2008) *built*, iPhone 3GS (2009) *built*, iPhone 4 (2010) *built*, iPhone 4s (2011) *built*, iPhone 5 (2012) *built*, iPhone 5c (2013) *built*, iPhone 5s (2013) *built*, iPhone 6 (2014) *built*, iPhone 6 Plus (2014) *built*, iPhone 6s (2015) *built*, iPhone 6s Plus (2015) *built*, iPhone 7 (2016) *built*, iPhone 7 Plus (2016) *built*, iPhone SE (1st generation) (2016) *built*, iPhone 8 (2017) *built*, iPhone 8 Plus (2017) *built*, iPhone X (2017) *built*, iPhone XR (2018) *built*, iPhone XS (2018) *built*, iPhone XS Max (2018) *built*, iPhone 11 (2019) *built*, iPhone 11 Pro (2019) *built*, iPhone 11 Pro Max (2019) *built*, iPhone 12 (2020) *built*, iPhone 12 Pro (2020) *built*, iPhone 12 Pro Max (2020) *built*, iPhone 12 mini (2020) *built*, iPhone SE (2nd generation) (2020) *built*, iPhone 13 (2021) *built*, iPhone 13 Pro (2021) *built*, iPhone 13 Pro Max (2021) *built*, iPhone 13 mini (2021) *built*, iPhone 14 (2022) *built*, iPhone 14 Plus (2022) *built*, iPhone 14 Pro (2022) *built*, iPhone 14 Pro Max (2022) *built*, iPhone SE (3rd generation) (2022) *built*, iPhone 15 (2023) *built*, iPhone 15 Plus (2023) *built*, iPhone 15 Pro (2023) *built*, iPhone 15 Pro Max (2023) *built*, iPhone 16 (2024) *built*, iPhone 16 Plus (2024) *built*, iPhone 16 Pro (2024) *built*, iPhone 16 Pro Max (2024) *built*, iPhone 16e (2025) *built*, iPhone 17 (2025) *built*, iPhone 17 Pro (2025) *built*, iPhone 17 Pro Max (2025) *built*, iPhone Air (2025) *built*, iPhone 17e (2026) *built*, iPhone 18 Pro (2026) *built*, iPhone 18 Pro Max (2026) *built*, iPhone Duo (2026) *built*.
 
 **iPod** (37 machines, 20 shapes)
 

@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { DEVICES } from "../src/catalogue.ts";
 import { buildDevice } from "../src/build/index.ts";
+import { SLAB_BODIES } from "../src/build/bodies.ts";
 import { PRO_CAMERAS } from "../src/build/tablets.ts";
 
 test("everything in an iPad Pro's square of cameras sits inside the square", () => {
@@ -47,4 +48,23 @@ test("a date in the list is a whole date, in order", () => {
     if (released && discontinued) assert.ok(released <= discontinued, key);
     if (released && lastUpdate) assert.ok(released <= lastUpdate, key);
   }
+});
+
+test("every part of a phone's row sits on its body", () => {
+  for (const body of SLAB_BODIES) {
+    const device = DEVICES.find(({ key }) => key === body.key);
+    assert.ok(device?.size, body.key);
+    const [width, height] = device.size;
+    for (const [x, y, r] of [...body.back.lenses, ...(body.back.flash ?? []), ...(body.back.mics ?? []), ...(body.back.lidar ? [body.back.lidar] : [])]) {
+      assert.ok(x - r >= 0 && x + r <= width && y - r >= 0 && y + r <= height, `${body.key}: ${x}, ${y}`);
+    }
+    for (const [, at] of [...(body.left ?? []), ...(body.right ?? [])]) assert.ok(at > 0 && at < height, `${body.key}: ${at}`);
+    for (const [, at] of [...(body.top ?? []), ...(body.bottom ?? [])]) assert.ok(at > 0 && at < width, `${body.key}: ${at}`);
+    const [sw, sh, top] = body.screen;
+    assert.ok(sw < width && top + sh < height, `${body.key}: its picture`);
+  }
+});
+
+test("every iPhone in the list is drawn", () => {
+  for (const entry of list().filter(({ family }) => family === "iPhone")) assert.ok((entry as unknown as { status: string }).status === "built", entry.key);
 });
