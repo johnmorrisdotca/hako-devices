@@ -47,6 +47,7 @@ export const MATERIALS = {
   smd: { color: "#9b7a4e", metal: 0, rough: 0.5 },
   "usb-blue": { color: "#2160d8", metal: 0, rough: 0.42 },
   "usb-amber": { color: "#d9a21f", metal: 0, rough: 0.42 },
+  "lid-red": { color: "#9d2428", metal: 0, rough: 0.4 },
   key: { color: "#131417", metal: 0, rough: 0.55 },
   // a keyboard computer's pale deck
   "deck-white": { color: "#ebe9e4", metal: 0, rough: 0.5 },

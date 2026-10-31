@@ -13,7 +13,7 @@ const SOLIDS: Partial<Record<Material, SolidStyle>> = {
   "plastic-grey": { top: "#1b2433", front: "#1b2433", side: "#141c2a" },
   "plastic-white": { top: "#46536a", front: "#3a475c", side: "#2c3648" },
   "plastic-gloss": { top: "#0a111d", front: "#0c1320", side: "#0b111c" },
-  "shell-blue": { top: "#2a4670", front: "#1d3457", side: "#172a47" },
+  "lid-red": { top: "#7a2028", front: "#5c1a22", side: "#4a151c" },
   "shell-silver": { top: "url(#top)", front: "url(#metal)", side: "#1b2433" },
   "epaper-white": { top: "#46536a", front: "#3a475c", side: "#2c3648" },
 };
@@ -72,7 +72,7 @@ function box(d: Drawing, b: NucBox) {
       );
     } else d.rounded(0, 0, w, dz, Math.max(0.5, rr), ya, yb, style, 3);
   };
-  if (stand) d.box(-W / 2 - 28, W / 2 + 28, 0, 3, -D * 0.26, D * 0.26, { top: "#141c2a", front: "#111a2a", side: "#0b111c", sw: 1.2, layer: -1 });
+  if (stand) d.box(-W / 2 - 5, W / 2 + 5, 0, 3, -D * 0.28, D * 0.28, { top: "#141c2a", front: "#111a2a", side: "#0b111c", sw: 1.2, layer: -1 });
   solid(W, D, r, y0, top - lidH - finH, { ...solidOf(shell), layer: 0 });
   if (lid) solid(W - (lid.inset ?? 0) * 2, D - (lid.inset ?? 0) * 2, r - (lid.inset ?? 0), top - lidH, top, { ...solidOf(lid.m), layer: 0.5, sw: 1.4 });
   if (fins) {
@@ -153,7 +153,8 @@ function board(d: Drawing, b: BoardBody) {
       for (const s of list) socket(d, s);
     });
   }
-  if (b.blower > 0) d.cylinder(W * 0.12, D * 0.08, W * 0.2, deck, deck + 7, { top: "#141c2a", front: "#111a2a", side: "#0b111c", sw: 1.2, layer: 1 }, 14);
+  if (b.tray) d.box(-W * 0.07, W * 0.23, deck, H, -D * 0.33, -D * 0.07, { top: "#3a475c", front: "#3a475c", side: "#2c3648", sw: 1, layer: 1 });
+  if (b.blower > 0) d.cylinder(W * 0.12, D * 0.08, W * 0.2, deck, H, { top: "#141c2a", front: "#111a2a", side: "#0b111c", sw: 1.2, layer: 1 }, 14);
   d.box(-W * 0.39, W * 0.23, deck, deck + 5, D * 0.39, D * 0.45, { top: "#141c2a", front: "#111a2a", side: "#0b111c", sw: 1, layer: 1 });
   d.circle([-W * 0.3, deck + 0.1, -D * 0.02], X, [0, 0, -1], 5, { stroke: LINE, sw: 1 }, 1.5);
 }

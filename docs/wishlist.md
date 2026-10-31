@@ -1,8 +1,8 @@
 # Wishlist of machines
 
-Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-30.
+Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**1745 machines. 922 distinct shapes still to build. 150 entries are already built: the 86 devices in this package, plus the real models those meshes cover. 875 entries have a sourced size; the other 870 are `null` on purpose.**
+**2233 machines. 914 distinct shapes still to build. 656 entries are already built: the 162 devices in this package, plus the real models those meshes cover. 1257 entries have a sourced size; the other 976 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -120,13 +120,13 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Surface table | 2 | 2 | 0 |
 |  | Surface Laptop SE | 1 | 1 | 0 |
 |  | Surface Neo | 1 | 1 | 0 |
-| **6** | **What is built today** | **58** | **0** | **13** |
+| **6** | **What is built today** | **58** | **0** | **15** |
 |  | Raspberry Pi | 20 | 0 | 0 |
 |  | Generic | 9 | 0 | 4 |
 |  | Clients | 8 | 0 | 0 |
 |  | Mac | 5 | 0 | 3 |
 |  | iPad | 5 | 0 | 5 |
-|  | Small PC | 5 | 0 | 0 |
+|  | Small PC | 5 | 0 | 2 |
 |  | NAS | 5 | 0 | 0 |
 |  | iPhone | 1 | 0 | 1 |
 | **7** | **Raspberry Pi** | **19** | **11** | **3** |
@@ -150,9 +150,38 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | BeagleBoard | 10 | 10 | 0 |
 |  | Orange Pi | 5 | 5 | 0 |
 |  | Arduino Uno | 4 | 4 | 0 |
-| **11** | **Mini PCs** | **21** | **9** | **0** |
-|  | NUC | 21 | 9 | 0 |
-|  | **Total** | **1745** | **922** | **875** |
+| **11** | **Mini PCs** | **509** | **1** | **380** |
+|  | NUC 11 | 82 | 0 | 61 |
+|  | NUC 12 | 61 | 0 | 43 |
+|  | NUC 8 | 57 | 0 | 45 |
+|  | NUC 13 | 54 | 0 | 46 |
+|  | NUC 7 | 41 | 0 | 20 |
+|  | NUC | 39 | 0 | 30 |
+|  | NUC 10 | 32 | 0 | 29 |
+|  | NUC 5 | 24 | 0 | 11 |
+|  | NUC 6 | 14 | 0 | 7 |
+|  | NUC 9 | 12 | 0 | 10 |
+|  | NUC 2 | 8 | 0 | 5 |
+|  | NUC 4 | 8 | 0 | 2 |
+|  | NUC 14 | 8 | 0 | 8 |
+|  | NUC 13 Pro | 8 | 0 | 8 |
+|  | NUC 16 | 7 | 0 | 7 |
+|  | NUC 3 | 6 | 0 | 4 |
+|  | ROG NUC | 6 | 0 | 6 |
+|  | NUC 14 Essential | 5 | 0 | 5 |
+|  | NUC 14 Pro | 5 | 0 | 5 |
+|  | NUC 15 Pro | 5 | 0 | 5 |
+|  | NUC 1 | 4 | 0 | 3 |
+|  | NUC 15 | 4 | 0 | 4 |
+|  | NUC 13 Rugged | 4 | 0 | 4 |
+|  | NUC 14 Pro AI | 3 | 0 | 3 |
+|  | NUC 16 Pro | 3 | 0 | 3 |
+|  | NUC 7 fanless | 3 | 1 | 0 |
+|  | NUC 14 Pro+ | 2 | 0 | 2 |
+|  | NUC 15 Pro+ | 2 | 0 | 2 |
+|  | NUC 14 Performance | 1 | 0 | 1 |
+|  | NUC 15 Performance | 1 | 0 | 1 |
+|  | **Total** | **2233** | **914** | **1257** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -1113,7 +1142,7 @@ Mini PC *built*, Small PC *built*, Small tower PC *built*.
 
 **Small PC** (2 machines, 0 shapes)
 
-Intel NUC 12 Pro (slim) *built*, Intel NUC 12 Pro (tall) *built*.
+Intel NUC 12 Pro (slim) (2022) *built*, Intel NUC 12 Pro (tall) (2022) *built*.
 
 **Generic** (1 machines, 0 shapes)
 
@@ -1203,8 +1232,132 @@ Jetson TK1 (2014), Jetson TX1 (2015), Jetson TX2 (2017), Jetson AGX Xavier (2018
 
 Orange Pi 5 Ultra, Orange Pi AIpro (20T), Orange Pi Prime, Orange Pi R1, Orange Pi RV.
 
-### Phase 11: Mini PCs (21 machines, 9 shapes to build)
+### Phase 11: Mini PCs (509 machines, 1 shapes to build)
 
-**NUC** (21 machines, 9 shapes)
+**NUC 12** (3 machines, 0 shapes)
 
-NUC D34010WYK (2013), NUC D34010WYKH (2013), NUC D54250WYK (2013), NUC D54250WYKH (2013), NUC DCCP847DYE (2013), NUC6CAYH (2015), NUC6CAYS (2015), NUC7CJYH (2017), NUC7PJYH (2017), NUC8CCHKR (2018), NUC5CPYH (2020), NUC5PGYH (2020), NUC5PPYH (2020), NUC11ATKC2 (2060), NUC11ATKC4 (2060), NUC11ATKPE (2060), NUC DC3217BY, NUC DC3217IYE, NUC DC53427HYE, NUC DE3815TYKHE, NUC DN2820FYKH.
+ASUS NUC 12 Compute Element BELM12HBCE04W (2024) *built*, ASUS NUC 12 Compute Element BELM12HBI508W (2024) *built*, ASUS NUC 12 Compute Element BELM12HBI516W (2024) *built*.
+
+**NUC 13** (6 machines, 0 shapes)
+
+ASUS NUC 13 Compute Element BELM13IBI308W (2024) *built*, ASUS NUC 13 Compute Element BELM13IBI516W (2024) *built*, ASUS NUC 13 Compute Element BELM13IBIP08W (2024) *built*, ASUS NUC 13 Compute Element BELM13IBV516W (2024) *built*, NUC 13 Rugged (Bravo Canyon) (2024) *built*, NUC 13 Rugged with its heatsink outside (Bravo Canyon) (2024) *built*.
+
+**NUC 13 Pro** (8 machines, 0 shapes)
+
+ASUS NUC 13 Pro NUC13ANB Board (2023) *built*, ASUS NUC 13 Pro NUC13ANH Kit (2023) *built*, ASUS NUC 13 Pro NUC13ANH Mini PC (2023) *built*, ASUS NUC 13 Pro NUC13ANK Kit (2023) *built*, ASUS NUC 13 Pro NUC13ANK Mini PC (2023) *built*, ASUS NUC 13 Pro NUC13LCB Board (2023) *built*, ASUS NUC 13 Pro NUC13LCH Kit (2023) *built*, ASUS NUC 13 Pro NUC13LCK Kit (2023) *built*.
+
+**NUC 13 Rugged** (4 machines, 0 shapes)
+
+ASUS NUC 13 Rugged NUC13BRB Board (2024) *built*, ASUS NUC 13 Rugged NUC13BRF (2024) *built*, ASUS NUC 13 Rugged NUC13BRFN (2024) *built*, ASUS NUC 13 Rugged NUC13BRK (2024) *built*.
+
+**NUC 14** (8 machines, 0 shapes)
+
+NUC 14 Pro AI (Lunar Canyon) (2024) *built*, NUC 14 Pro AI+ (Lunar Canyon) (2024) *built*, NUC 14 Pro+ (Revel Canyon) (2024) *built*, NUC 14 Pro, slim (Revel Canyon) (2024) *built*, NUC 14 Pro, tall (Revel Canyon) (2024) *built*, ROG NUC or NUC 14 Performance (Scorpion Canyon) (2024) *built*, NUC 14 Essential (Mill Canyon) (2025) *built*, NUC 14 Essential Fanless (2026) *built*.
+
+**NUC 14 Essential** (5 machines, 0 shapes)
+
+ASUS NUC 14 Essential NUC14MNB Board (2025) *built*, ASUS NUC 14 Essential NUC14MNK Mini PC (2025) *built*, ASUS NUC 14 Essential NUC14MNK-B Kit (2025) *built*, ASUS NUC 14 Essential Fanless Kit (2026) *built*, ASUS NUC 14 Essential Fanless Mini PC (2026) *built*.
+
+**NUC 14 Performance** (1 machines, 0 shapes)
+
+ASUS NUC 14 Performance NUC14SRK Kit (2024) *built*.
+
+**NUC 14 Pro** (5 machines, 0 shapes)
+
+ASUS NUC 14 Pro NUC14RVB Board (2024) *built*, ASUS NUC 14 Pro NUC14RVH Mini PC (2024) *built*, ASUS NUC 14 Pro NUC14RVH-B Kit (2024) *built*, ASUS NUC 14 Pro NUC14RVK Mini PC (2024) *built*, ASUS NUC 14 Pro NUC14RVK-B Kit (2024) *built*.
+
+**NUC 14 Pro AI** (3 machines, 0 shapes)
+
+ASUS NUC 14 Pro AI NUC14LNK Kit (2024) *built*, ASUS NUC 14 Pro AI NUC14LNK Mini PC (2024) *built*, ASUS NUC 14 Pro AI+ NUC14LNS Mini PC (2024) *built*.
+
+**NUC 14 Pro+** (2 machines, 0 shapes)
+
+ASUS NUC 14 Pro+ NUC14RVS Mini PC (2024) *built*, ASUS NUC 14 Pro+ NUC14RVS-B Kit (2024) *built*.
+
+**NUC 15** (4 machines, 0 shapes)
+
+NUC 15 Pro+ (Cyber Canyon) (2025) *built*, NUC 15 Pro, slim (Cyber Canyon) (2025) *built*, NUC 15 Pro, tall (Cyber Canyon) (2025) *built*, ROG NUC 2025 or NUC 15 Performance (Jean Canyon) *built*.
+
+**NUC 15 Performance** (1 machines, 0 shapes)
+
+ASUS NUC 15 Performance NUC15JNK Kit (2025) *built*.
+
+**NUC 15 Pro** (5 machines, 0 shapes)
+
+ASUS NUC 15 Pro NUC15CRB Board (2025) *built*, ASUS NUC 15 Pro NUC15CRH Mini PC (2025) *built*, ASUS NUC 15 Pro NUC15CRH-B Kit (2025) *built*, ASUS NUC 15 Pro NUC15CRK Mini PC (2025) *built*, ASUS NUC 15 Pro NUC15CRK-B Kit (2025) *built*.
+
+**NUC 15 Pro+** (2 machines, 0 shapes)
+
+ASUS NUC 15 Pro+ NUC15CRS Mini PC (2025) *built*, ASUS NUC 15 Pro+ NUC15CRS-B Kit (2025) *built*.
+
+**NUC 16** (7 machines, 0 shapes)
+
+ASUS NUC 16 Board (2026) *built*, ASUS NUC 16 Kit (2026) *built*, ASUS NUC 16 Mini PC (2026) *built*, ASUS NUC 16 for Windows 365 (2026) *built*, NUC 16 (2026) *built*, NUC 16 Pro (Grand Canyon) (2026) *built*, ROG NUC 16 (2026) *built*.
+
+**NUC 16 Pro** (3 machines, 0 shapes)
+
+ASUS NUC 16 Pro NUC16GDB Board (2026) *built*, ASUS NUC 16 Pro NUC16GDK Mini PC (2026) *built*, ASUS NUC 16 Pro NUC16GDK-B Kit (2026) *built*.
+
+**ROG NUC** (6 machines, 0 shapes)
+
+ROG NUC (2024) *built*, ROG GR70 (listed among ASUS's NUCs; AMD inside) (2025) *built*, ROG NUC 2025 (NUC15JNK) *built*, ROG NUC 16 (NUC16JNK) (2026) *built*, ROG NUC 16 Edition 20 (2026) *built*, ROG NUC 16 x Phantom Blade Zero (2026) *built*.
+
+**NUC** (39 machines, 0 shapes)
+
+NUC 9 Extreme Laptop Kit (Queens County) (2019) *built*, NUC 9 Extreme Laptop Kit LAPQC71A (2019) *built*, NUC 9 Extreme Laptop Kit LAPQC71B (2019) *built*, NUC 9 Extreme Laptop Kit LAPQC71C (2019) *built*, NUC 9 Extreme Laptop Kit LAPQC71D (2019) *built*, NUC Assembly Element (2019) *built*, NUC Assembly Element CMA1BB (2019) *built*, NUC Board Element (2019) *built*, NUC Board Element CMB1BB (2019) *built*, NUC Rugged Board Element CMB1ABA (2019) *built*, NUC Rugged Board Element CMB1ABB (2019) *built*, NUC Rugged Chassis Element (2019) *built*, NUC Rugged Chassis Element CMCR1ABA (2019) *built*, NUC Rugged Chassis Element CMCR1ABB (2019) *built*, NUC Board Element BBWC1B1 (2020) *built*, NUC M15 Laptop Kit (Bishop County, Rooks County) (2020) *built*, NUC Pro Chassis Element (2020) *built*, NUC Pro Chassis Element CMCM2FB (2020) *built*, NUC Pro Chassis Element CMCM2FBAV (2020) *built*, NUC Rugged Board Element CMB1ABC (2020) *built*, NUC Rugged Chassis Element CMCR1ABC (2020) *built*, NUC m15 Laptop Kit LAPBC510 (2020) *built*, NUC m15 Laptop Kit LAPBC710 (2020) *built*, NUC Assembly Element CMA2GB (2021) *built*, NUC Board Element BBMC1B1 (2021) *built*, NUC Board Element CMB2GB (2021) *built*, NUC P14E Laptop Element (2021) *built*, NUC X15 Laptop Kit (King County, Alder County) (2021) *built*, NUC p14e Laptop Element CMCN1CC (2021) *built*, NUC x15 Laptop Kit LAPKC51E (2021) *built*, NUC x15 Laptop Kit LAPKC71E (2021) *built*, NUC x15 Laptop Kit LAPKC71F (2021) *built*, NUC Board Element BBMC1B2 (2022) *built*, NUC m15 Laptop Kit LAPRC510 (2022) *built*, NUC m15 Laptop Kit LAPRC710 (2022) *built*, NUC m15 Laptop Kit evo LAPRC510 (Evo) (2022) *built*, NUC m15 Laptop Kit evo LAPRC710 (Evo) (2022) *built*, NUC x15 Laptop Kit LAPAC71G (2022) *built*, NUC x15 Laptop Kit LAPAC71H (2022) *built*.
+
+**NUC 1** (4 machines, 0 shapes)
+
+NUC board, 4 by 4 inches (2012) *built*, NUC with Celeron or Core i3 (Deep Canyon, Ice Canyon) (2012) *built*, NUC Board DCP847SKE (2013) *built*, NUC Kit DCCP847DYE (2013) *built*.
+
+**NUC 10** (32 machines, 0 shapes)
+
+NUC 10 Performance Kit NUC10i3FNH (2019) *built*, NUC 10 Performance Kit NUC10i3FNHF (2019) *built*, NUC 10 Performance Kit NUC10i3FNK (2019) *built*, NUC 10 Performance Kit NUC10i5FNH (2019) *built*, NUC 10 Performance Kit NUC10i5FNHF (2019) *built*, NUC 10 Performance Kit NUC10i5FNHJ (2019) *built*, NUC 10 Performance Kit NUC10i5FNK (2019) *built*, NUC 10 Performance Kit NUC10i5FNKP (2019) *built*, NUC 10 Performance Kit NUC10i7FNH (2019) *built*, NUC 10 Performance Kit NUC10i7FNHC (2019) *built*, NUC 10 Performance Kit NUC10i7FNK (2019) *built*, NUC 10 Performance Kit NUC10i7FNKP (2019) *built*, NUC 10 Performance Mini PC NUC10i3FNHFA (2019) *built*, NUC 10 Performance Mini PC NUC10i3FNHJA (2019) *built*, NUC 10 Performance Mini PC NUC10i5FNHCA (2019) *built*, NUC 10 Performance Mini PC NUC10i5FNHJA (2019) *built*, NUC 10 Performance Mini PC NUC10i5FNKPA (2019) *built*, NUC 10 Performance Mini PC NUC10i7FNHAA (2019) *built*, NUC 10 Performance Mini PC NUC10i7FNHJA (2019) *built*, NUC 10 Performance Mini PC NUC10i7FNKPA (2019) *built*, NUC 10 Performance, slim (Frost Canyon) (2019) *built*, NUC 10 Performance, tall (Frost Canyon) (2019) *built*, NUC Board NUC10i3FNB (2019) *built*, NUC Board NUC10i5FNB (2019) *built*, NUC Board NUC10i7FNB (2019) *built*, NUC 10 Performance Kit NUC10i3FNHN (2021) *built*, NUC 10 Performance Kit NUC10i3FNKN (2021) *built*, NUC 10 Performance Kit NUC10i5FNHN (2021) *built*, NUC 10 Performance Kit NUC10i5FNKN (2021) *built*, NUC 10 Performance Kit NUC10i7FNHN (2021) *built*, NUC 10 Performance Kit NUC10i7FNKN (2021) *built*, NUC 10 Performance Mini PC NUC10i5FNHWA (2023) *built*.
+
+**NUC 11** (82 machines, 0 shapes)
+
+NUC 11 Compute Element CM11EBC4W (2021) *built*, NUC 11 Compute Element CM11EBi38W (2021) *built*, NUC 11 Compute Element CM11EBi58W (2021) *built*, NUC 11 Compute Element CM11EBi716W (2021) *built*, NUC 11 Compute Element CM11EBv58W (2021) *built*, NUC 11 Compute Element CM11EBv716W (2021) *built*, NUC 11 Enthusiast (Phantom Canyon) (2021) *built*, NUC 11 Enthusiast Kit NUC11PHKi7C (2021) *built*, NUC 11 Enthusiast Mini PC NUC11PHKi7CAA (2021) *built*, NUC 11 Extreme Compute Element NUC11DBBi7 (2021) *built*, NUC 11 Extreme Compute Element NUC11DBBi9 (2021) *built*, NUC 11 Extreme Kit NUC11BTMi5 (2021) *built*, NUC 11 Extreme Kit NUC11BTMi7 (2021) *built*, NUC 11 Extreme Kit NUC11BTMi9 (2021) *built*, NUC 11 Performance Kit NUC11PAHi3 (2021) *built*, NUC 11 Performance Kit NUC11PAHi5 (2021) *built*, NUC 11 Performance Kit NUC11PAHi7 (2021) *built*, NUC 11 Performance Kit NUC11PAKi3 (2021) *built*, NUC 11 Performance Kit NUC11PAKi5 (2021) *built*, NUC 11 Performance Kit NUC11PAKi7 (2021) *built*, NUC 11 Performance Kit NUC11PAQi5 (2021) *built*, NUC 11 Performance Kit NUC11PAQi7 (2021) *built*, NUC 11 Performance Mini PC NUC11PAQi30WA (2021) *built*, NUC 11 Performance Mini PC NUC11PAQi50WA (2021) *built*, NUC 11 Performance Mini PC NUC11PAQi70QA (2021) *built*, NUC 11 Performance with a charging lid (Panther Canyon) (2021) *built*, NUC 11 Performance, slim (Panther Canyon) (2021) *built*, NUC 11 Performance, tall (Panther Canyon) (2021) *built*, NUC 11 Pro Board NUC11TNBi3 (2021) *built*, NUC 11 Pro Board NUC11TNBi5 (2021) *built*, NUC 11 Pro Board NUC11TNBi7 (2021) *built*, NUC 11 Pro Board NUC11TNBv5 (2021) *built*, NUC 11 Pro Board NUC11TNBv7 (2021) *built*, NUC 11 Pro Kit NUC11TNHi3 (2021) *built*, NUC 11 Pro Kit NUC11TNHi30L (2021) *built*, NUC 11 Pro Kit NUC11TNHi30P (2021) *built*, NUC 11 Pro Kit NUC11TNHi5 (2021) *built*, NUC 11 Pro Kit NUC11TNHi50L (2021) *built*, NUC 11 Pro Kit NUC11TNHi50W (2021) *built*, NUC 11 Pro Kit NUC11TNHi7 (2021) *built*, NUC 11 Pro Kit NUC11TNHi70L (2021) *built*, NUC 11 Pro Kit NUC11TNHi70Q (2021) *built*, NUC 11 Pro Kit NUC11TNHv5 (2021) *built*, NUC 11 Pro Kit NUC11TNHv50L (2021) *built*, NUC 11 Pro Kit NUC11TNHv7 (2021) *built*, NUC 11 Pro Kit NUC11TNHv70L (2021) *built*, NUC 11 Pro Kit NUC11TNKi3 (2021) *built*, NUC 11 Pro Kit NUC11TNKi5 (2021) *built*, NUC 11 Pro Kit NUC11TNKi7 (2021) *built*, NUC 11 Pro Kit NUC11TNKv5 (2021) *built*, NUC 11 Pro Kit NUC11TNKv7 (2021) *built*, NUC 11 Pro Mini PC NUC11TNKv5 (2021) *built*, NUC 11 Pro Mini PC NUC11TNKv7 (2021) *built*, NUC 11 Pro with a second network socket (Tiger Canyon) (2021) *built*, NUC 11 Pro, slim (Tiger Canyon) (2021) *built*, NUC 11 Pro, tall (Tiger Canyon) (2021) *built*, NUC 11 or 12 Extreme (Beast Canyon, Dragon Canyon) (2021) *built*, NUC Board NUC11PABi3 (2021) *built*, NUC Board NUC11PABi5 (2021) *built*, NUC Board NUC11PABi7 (2021) *built*, NUC Board NUC11PHBi7 (2021) *built*, NUC 11 Enterprise Edge Compute NUC11TNHv50L (2022) *built*, NUC 11 Enterprise Edge Compute NUC11TNHv70L (2022) *built*, NUC 11 Essential (Atlas Canyon) (2022) *built*, NUC 11 Essential Board NUC11ATBC4 (2022) *built*, NUC 11 Essential Kit NUC11ATKC2 (2022) *built*, NUC 11 Essential Kit NUC11ATKC4 (2022) *built*, NUC 11 Essential Kit NUC11ATKPE (2022) *built*, NUC 11 Essential Mini PC NUC11ATKC2 (2022) *built*, NUC 11 Performance Kit NUC11PAHi30Z (2022) *built*, NUC 11 Performance Kit NUC11PAHi50Z (2022) *built*, NUC 11 Performance Kit NUC11PAHi70Z (2022) *built*, NUC 11 Pro Board NUC11TNBi30Z (2022) *built*, NUC 11 Pro Board NUC11TNBi50Z (2022) *built*, NUC 11 Pro Board NUC11TNBi70Z (2022) *built*, NUC 11 Pro Kit NUC11TNHi30Z (2022) *built*, NUC 11 Pro Kit NUC11TNHi50Z (2022) *built*, NUC 11 Pro Kit NUC11TNHi70Z (2022) *built*, NUC 11 Pro Kit NUC11TNKi30Z (2022) *built*, NUC 11 Pro Kit NUC11TNKi50Z (2022) *built*, NUC 11 Pro Kit NUC11TNKi70Z (2022) *built*, NUC 11 Pro Kit NUC11TNKv50Z (2022) *built*.
+
+**NUC 12** (58 machines, 0 shapes)
+
+NUC 12 Compute Element ELM12HBC (2022) *built*, NUC 12 Compute Element ELM12HBi3 (2022) *built*, NUC 12 Compute Element ELM12HBi5 (2022) *built*, NUC 12 Compute Element ELM12HBi7 (2022) *built*, NUC 12 Compute Element ELM12HBv5 (2022) *built*, NUC 12 Compute Element ELM12HBv7 (2022) *built*, NUC 12 Enthusiast (Serpent Canyon) (2022) *built*, NUC 12 Enthusiast Kit NUC12SNKi72 (2022) *built*, NUC 12 Enthusiast Mini PC NUC12SNKi72VA (2022) *built*, NUC 12 Extreme Compute Element NUC12EDBi7 (2022) *built*, NUC 12 Extreme Compute Element NUC12EDBi9 (2022) *built*, NUC 12 Extreme Kit NUC12DCMi7 (2022) *built*, NUC 12 Extreme Kit NUC12DCMi9 (2022) *built*, NUC 12 Pro Board NUC12WSBi3 (2022) *built*, NUC 12 Pro Board NUC12WSBi30Z (2022) *built*, NUC 12 Pro Board NUC12WSBi5 (2022) *built*, NUC 12 Pro Board NUC12WSBi50Z (2022) *built*, NUC 12 Pro Board NUC12WSBi7 (2022) *built*, NUC 12 Pro Board NUC12WSBi70Z (2022) *built*, NUC 12 Pro Board NUC12WSBv5 (2022) *built*, NUC 12 Pro Board NUC12WSBv7 (2022) *built*, NUC 12 Pro Kit NUC12WSHi3 (2022) *built*, NUC 12 Pro Kit NUC12WSHi30L (2022) *built*, NUC 12 Pro Kit NUC12WSHi30Z (2022) *built*, NUC 12 Pro Kit NUC12WSHi5 (2022) *built*, NUC 12 Pro Kit NUC12WSHi50Z (2022) *built*, NUC 12 Pro Kit NUC12WSHi7 (2022) *built*, NUC 12 Pro Kit NUC12WSHi70Z (2022) *built*, NUC 12 Pro Kit NUC12WSHv5 (2022) *built*, NUC 12 Pro Kit NUC12WSHv50L (2022) *built*, NUC 12 Pro Kit NUC12WSHv50Z (2022) *built*, NUC 12 Pro Kit NUC12WSHv7 (2022) *built*, NUC 12 Pro Kit NUC12WSHv70L (2022) *built*, NUC 12 Pro Kit NUC12WSHv70Z (2022) *built*, NUC 12 Pro Kit NUC12WSKi3 (2022) *built*, NUC 12 Pro Kit NUC12WSKi30Z (2022) *built*, NUC 12 Pro Kit NUC12WSKi5 (2022) *built*, NUC 12 Pro Kit NUC12WSKi50Z (2022) *built*, NUC 12 Pro Kit NUC12WSKi7 (2022) *built*, NUC 12 Pro Kit NUC12WSKi70Z (2022) *built*, NUC 12 Pro Kit NUC12WSKv5 (2022) *built*, NUC 12 Pro Kit NUC12WSKv50Z (2022) *built*, NUC 12 Pro Kit NUC12WSKv7 (2022) *built*, NUC 12 Pro Kit NUC12WSKv70Z (2022) *built*, NUC 12 Pro Mini PC NUC12WSHi3 (2022) *built*, NUC 12 Pro Mini PC NUC12WSHi5 (2022) *built*, NUC 12 Pro Mini PC NUC12WSHi7 (2022) *built*, NUC 12 Pro Mini PC NUC12WSKi3 (2022) *built*, NUC 12 Pro Mini PC NUC12WSKi5 (2022) *built*, NUC 12 Pro Mini PC NUC12WSKi7 (2022) *built*, NUC 12 Pro Mini PC for zoom rooms NUC12WSHi50UD (2022) *built*, NUC 12 Pro X Compute Element NUC12EDBv7 (2022) *built*, NUC 12 Pro X Compute Element NUC12EDBv9 (2022) *built*, NUC 12 Pro with a second network socket (Wall Street Canyon) (2022) *built*, NUC 12 Pro x Kit NUC12DCMv7 (2022) *built*, NUC 12 Pro x Kit NUC12DCMv9 (2022) *built*, NUC 12 Pro Mini PC NUC12WSKi50PA (2023) *built*, NUC 12 Pro Mini PC NUC12WSKi70QA (2023) *built*.
+
+**NUC 13** (48 machines, 0 shapes)
+
+NUC 13 Extreme (Raptor Canyon) (2022) *built*, NUC 13 Extreme Compute Element (2022) *built*, NUC 13 Extreme Compute Element NUC13SBBi5 (2022) *built*, NUC 13 Extreme Compute Element NUC13SBBi5F (2022) *built*, NUC 13 Extreme Compute Element NUC13SBBi7F (2022) *built*, NUC 13 Extreme Compute Element NUC13SBBi9 (2022) *built*, NUC 13 Extreme Compute Element NUC13SBBi9F (2022) *built*, NUC 13 Extreme Kit NUC13RNGi5 (2022) *built*, NUC 13 Extreme Kit NUC13RNGi7 (2022) *built*, NUC 13 Extreme Kit NUC13RNGi9 (2022) *built*, NUC 13 Pro Board NUC13ANBi3 (2023) *built*, NUC 13 Pro Board NUC13ANBi5 (2023) *built*, NUC 13 Pro Board NUC13ANBv5 (2023) *built*, NUC 13 Pro Board NUC13L5Bi3 (2023) *built*, NUC 13 Pro Board NUC13L5Bi5 (2023) *built*, NUC 13 Pro Desk Edition (Vivid Canyon) (2023) *built*, NUC 13 Pro Kit NUC13ANHi5 (2023) *built*, NUC 13 Pro Kit NUC13ANHi7 (2023) *built*, NUC 13 Pro Kit NUC13ANHv5 (2023) *built*, NUC 13 Pro Kit NUC13ANKi3 (2023) *built*, NUC 13 Pro Kit NUC13ANKi5 (2023) *built*, NUC 13 Pro Kit NUC13ANKi7 (2023) *built*, NUC 13 Pro Kit NUC13ANKv5 (2023) *built*, NUC 13 Pro Kit NUC13ANKv7 (2023) *built*, NUC 13 Pro Kit NUC13L3Hi3 (2023) *built*, NUC 13 Pro Kit NUC13L3Hi7 (2023) *built*, NUC 13 Pro Kit NUC13L3Hv5 (2023) *built*, NUC 13 Pro Kit NUC13L3Hv7 (2023) *built*, NUC 13 Pro Kit NUC13L3Ki7 (2023) *built*, NUC 13 Pro Kit NUC13L3Kv7 (2023) *built*, NUC 13 Pro Kit NUC13L5Ki3 (2023) *built*, NUC 13 Pro Mini PC NUC13ANHi30WA (2023) *built*, NUC 13 Pro Mini PC NUC13ANHi50WA (2023) *built*, NUC 13 Pro Mini PC NUC13ANHi70QA (2023) *built*, NUC 13 Pro Mini PC NUC13ANKi30WC (2023) *built*, NUC 13 Pro Mini PC NUC13ANKi50WC (2023) *built*, NUC 13 Pro Mini PC NUC13ANKi70QC (2023) *built*, NUC 13 Pro desk edition Kit NUC13VYKi5 (2023) *built*, NUC 13 Pro desk edition Kit NUC13VYKi7 (2023) *built*, NUC 13 Pro desk edition Mini PC NUC13VYKi50WA (2023) *built*, NUC 13 Pro desk edition Mini PC NUC13VYKi50WC (2023) *built*, NUC 13 Pro desk edition Mini PC NUC13VYKi70QA (2023) *built*, NUC 13 Pro desk edition Mini PC NUC13VYKi70QC (2023) *built*, NUC 13 Pro, slim (Arena Canyon) (2023) *built*, NUC 13 Pro, tall (Arena Canyon) (2023) *built*, NUC 13 Pro Board NUC13ANBi7 *built*, NUC 13 Pro Board NUC13L5Bv5 *built*, NUC 13 Pro Board NUC13L5Bv7 *built*.
+
+**NUC 2** (8 machines, 0 shapes)
+
+NUC Board D33217CK (2012) *built*, NUC Board D33217GK (2012) *built*, NUC Kit DC3217BY (2012) *built*, NUC Kit DC3217IYE (2012) *built*, NUC with Thunderbolt and a red lid (Box Canyon) (2012) *built*, NUC Kit DC53427HYE (2013) *built*, NUC with Core i5 (Horse Canyon) (2013) *built*, NUC Board D53427RKE *built*.
+
+**NUC 3** (6 machines, 0 shapes)
+
+NUC Board DN2820FYB (2013) *built*, NUC Kit DN2820FYKH (2013) *built*, NUC with Celeron (Forest Canyon) (2013) *built*, Fanless NUC with Atom (Thin Canyon) (2014) *built*, NUC Board DE3815TYBE (2014) *built*, NUC Kit DE3815TYKHE (2014) *built*.
+
+**NUC 4** (8 machines, 0 shapes)
+
+NUC Board D34010WYB (2013) *built*, NUC Board D54250WYB (2013) *built*, NUC Kit D34010WYK (2013) *built*, NUC Kit D34010WYKH (2013) *built*, NUC Kit D54250WYK (2013) *built*, NUC Kit D54250WYKH (2013) *built*, NUC, 4th generation, slim (Wilson Canyon) (2013) *built*, NUC, 4th generation, tall (Wilson Canyon) (2013) *built*.
+
+**NUC 5** (24 machines, 0 shapes)
+
+NUC Board NUC5CPYB (2015) *built*, NUC Board NUC5PPYB (2015) *built*, NUC Board NUC5i3MYBE (2015) *built*, NUC Board NUC5i3RYB (2015) *built*, NUC Board NUC5i5MYBE (2015) *built*, NUC Board NUC5i5RYB (2015) *built*, NUC Board NUC5i7RYB (2015) *built*, NUC Kit NUC5CPYH (2015) *built*, NUC Kit NUC5PGYH (2015) *built*, NUC Kit NUC5PPYH (2015) *built*, NUC Kit NUC5i3MYHE (2015) *built*, NUC Kit NUC5i3RYH (2015) *built*, NUC Kit NUC5i3RYK (2015) *built*, NUC Kit NUC5i5MYHE (2015) *built*, NUC Kit NUC5i5RYH (2015) *built*, NUC Kit NUC5i5RYK (2015) *built*, NUC Kit NUC5i7RYH (2015) *built*, NUC with Celeron or Pentium, 5th generation (Pinnacle Canyon, Grass Canyon) (2015) *built*, NUC, 5th generation, slim (Rock Canyon) (2015) *built*, NUC, 5th generation, tall (Rock Canyon) (2015) *built*, NUC, 5th generation, two Mini DisplayPorts (Maple Canyon) (2015) *built*, NUC Kit NUC5i3RYHS (2018) *built*, NUC Kit NUC5i3RYHSN (2018) *built*, NUC Kit NUC5i5RYHS (2019) *built*.
+
+**NUC 6** (14 machines, 0 shapes)
+
+NUC Board NUC6i3SYB (2015) *built*, NUC Board NUC6i5SYB (2015) *built*, NUC Kit NUC6i3SYH (2015) *built*, NUC Kit NUC6i3SYK (2015) *built*, NUC Kit NUC6i5SYH (2015) *built*, NUC Kit NUC6i5SYK (2015) *built*, NUC, 6th generation, slim (Swift Canyon) (2015) *built*, NUC, 6th generation, tall (Swift Canyon) (2015) *built*, NUC 6 long and flat (Skull Canyon) (2016) *built*, NUC Board NUC6CAYB (2016) *built*, NUC Kit NUC6CAYH (2016) *built*, NUC Kit NUC6CAYS (2016) *built*, NUC Kit NUC6i7KYK (2016) *built*, NUC with Celeron, 6th generation (Arches Canyon) (2016) *built*.
+
+**NUC 7** (41 machines, 0 shapes)
+
+NUC 7 Enthusiast Mini PC NUC7i7BNHXG (2017) *built*, NUC 7 Enthusiast Mini PC NUC7i7BNKQ (2017) *built*, NUC 7 Home Mini PC NUC7i3BNHXF (2017) *built*, NUC 7 Home Mini PC NUC7i5BNHXF (2017) *built*, NUC 7 Home Mini PC NUC7i5BNKP (2017) *built*, NUC 7 for business, slim (Dawson Canyon) (2017) *built*, NUC 7 for business, tall (Dawson Canyon) (2017) *built*, NUC 7, slim (Baby Canyon) (2017) *built*, NUC 7, tall (Baby Canyon) (2017) *built*, NUC Board NUC7i3BNB (2017) *built*, NUC Board NUC7i3DNBE (2017) *built*, NUC Board NUC7i5BNB (2017) *built*, NUC Board NUC7i5DNBE (2017) *built*, NUC Board NUC7i7BNB (2017) *built*, NUC Kit NUC7i3BNH (2017) *built*, NUC Kit NUC7i3BNHX1 (2017) *built*, NUC Kit NUC7i3BNK (2017) *built*, NUC Kit NUC7i3DNHE (2017) *built*, NUC Kit NUC7i3DNKE (2017) *built*, NUC Kit NUC7i5BNH (2017) *built*, NUC Kit NUC7i5BNHX1 (2017) *built*, NUC Kit NUC7i5BNK (2017) *built*, NUC Kit NUC7i5DNHE (2017) *built*, NUC Kit NUC7i5DNKE (2017) *built*, NUC Kit NUC7i7BNH (2017) *built*, NUC Kit NUC7i7BNHX1 (2017) *built*, NUC 7 Business Mini PC NUC7i3DNHNC (2018) *built*, NUC 7 Business Mini PC NUC7i3DNKTC (2018) *built*, NUC 7 Business Mini PC NUC7i5DNKPC (2018) *built*, NUC 7 Business Mini PC for unite NUC7i5DNKPU (2018) *built*, NUC 7 Essential (June Canyon) (2018) *built*, NUC 7 Essential Mini PC NUC7CJYSAL (2018) *built*, NUC Board NUC7PJYB (2018) *built*, NUC Board NUC7i7DNBE (2018) *built*, NUC Kit NUC7CJYH (2018) *built*, NUC Kit NUC7PJYH (2018) *built*, NUC Kit NUC7i7DNHE (2018) *built*, NUC Kit NUC7i7DNKE (2018) *built*, NUC 7 Essential Mini PC NUC7CJYSAMN (2021) *built*, NUC Kit NUC7CJYHN (2021) *built*, NUC Kit NUC7PJYHN (2021) *built*.
+
+**NUC 8** (57 machines, 0 shapes)
+
+NUC 8 Business Mini PC NUC8i7HNKQC (2018) *built*, NUC 8 Enthusiast Mini PC NUC8i7HVKVA (2018) *built*, NUC 8 Enthusiast Mini PC NUC8i7HVKVAW (2018) *built*, NUC 8 Home (Crimson Canyon) (2018) *built*, NUC 8 Home Mini PC NUC8i3CYSM (2018) *built*, NUC 8 Home Mini PC NUC8i3CYSN (2018) *built*, NUC 8 Home Mini PC NUC8i5BEKPA (2018) *built*, NUC 8 long and flat (Hades Canyon) (2018) *built*, NUC 8, slim (Bean Canyon) (2018) *built*, NUC 8, tall (Bean Canyon) (2018) *built*, NUC Kit NUC8i3BEH (2018) *built*, NUC Kit NUC8i3BEK (2018) *built*, NUC Kit NUC8i5BEH (2018) *built*, NUC Kit NUC8i5BEK (2018) *built*, NUC Kit NUC8i7BEH (2018) *built*, NUC Kit NUC8i7HNK (2018) *built*, NUC Kit NUC8i7HVK (2018) *built*, NUC 8 Compute Element CM8CCB (2019) *built*, NUC 8 Compute Element CM8PCB (2019) *built*, NUC 8 Compute Element CM8i3CB (2019) *built*, NUC 8 Compute Element CM8i5CB (2019) *built*, NUC 8 Compute Element CM8i7CB (2019) *built*, NUC 8 Compute Element CM8v5CB (2019) *built*, NUC 8 Compute Element CM8v7CB (2019) *built*, NUC 8 Enthusiast Mini PC NUC8i7BEHGA (2019) *built*, NUC 8 Enthusiast Mini PC NUC8i7BEKQA (2019) *built*, NUC 8 Home Mini PC NUC8i3BEHFA (2019) *built*, NUC 8 Home Mini PC NUC8i5BEHFA (2019) *built*, NUC 8 Mainstream G Kit NUC8i5INH (2019) *built*, NUC 8 Mainstream G Kit NUC8i7INH (2019) *built*, NUC 8 Mainstream G Mini PC NUC8i5INH (2019) *built*, NUC 8 Mainstream G Mini PC NUC8i7INH (2019) *built*, NUC 8 Mainstream-G (Islay Canyon) (2019) *built*, NUC 8 Pro Board NUC8I3PNB (2019) *built*, NUC 8 Rugged (Chaco Canyon) (2019) *built*, NUC 8 Rugged Kit NUC8CCHKR (2019) *built*, NUC Board NUC8CCHB (2019) *built*, NUC Compute Element, U series (2019) *built*, NUC Kit NUC8i7BEK (2019) *built*, NUC board, 146 by 102 mm (2019) *built*, NUC 8 Pro Board NUC8v5PNB (2020) *built*, NUC 8 Pro Board NUC8v7PNB (2020) *built*, NUC 8 Pro Kit NUC8i3PNH (2020) *built*, NUC 8 Pro Kit NUC8i3PNK (2020) *built*, NUC 8 Pro Kit NUC8v5PNH (2020) *built*, NUC 8 Pro Kit NUC8v5PNK (2020) *built*, NUC 8 Pro Kit NUC8v7PNH (2020) *built*, NUC 8 Pro Kit NUC8v7PNK (2020) *built*, NUC 8 Pro Mini PC NUC8i3PNK (2020) *built*, NUC 8 Pro Mini PC NUC8v5PNK (2020) *built*, NUC 8 Pro Mini PC NUC8v7PNK (2020) *built*, NUC 8 Pro, slim (Provo Canyon) (2020) *built*, NUC 8 Pro, tall (Provo Canyon) (2020) *built*, NUC Kit NUC8i3BEHS (2020) *built*, NUC Kit NUC8i5BEHS (2020) *built*, NUC 8 Rugged Board NUC8CCHBN (2021) *built*, NUC 8 Rugged Kit NUC8CCHKRN (2021) *built*.
+
+**NUC 9** (12 machines, 0 shapes)
+
+NUC 9 Extreme Compute Element NUC9i5QNB (2020) *built*, NUC 9 Extreme Compute Element NUC9i7QNB (2020) *built*, NUC 9 Extreme Compute Element NUC9i9QNB (2020) *built*, NUC 9 Extreme Kit NUC9i5QNX (2020) *built*, NUC 9 Extreme Kit NUC9i7QNX (2020) *built*, NUC 9 Extreme Kit NUC9i9QNX (2020) *built*, NUC 9 Extreme or Pro (Ghost Canyon, Quartz Canyon) (2020) *built*, NUC 9 Pro Compute Element NUC9V7QNB (2020) *built*, NUC 9 Pro Compute Element NUC9VXQNB (2020) *built*, NUC 9 Pro Kit NUC9V7QNX (2020) *built*, NUC Compute Element, on a card (2020) *built*, NUC 9 Pro Kit NUC9VXQNX *built*.
+
+**NUC 7 fanless** (3 machines, 1 shapes)
+
+NUC7i3DNFE fanless (Porcoolpine) (2018), NUC7i5DNFE fanless (Porcoolpine) (2018), NUC7i7DNFE fanless (Porcoolpine) (2018).

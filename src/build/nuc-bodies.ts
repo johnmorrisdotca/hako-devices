@@ -95,6 +95,8 @@ export interface BoardBody {
   pcb?: Material;
   /** The fan's height over the board; 0 for none. */
   blower: number;
+  /** On a steel tray, with a heat plate up to its full height. */
+  tray?: boolean;
   sockets: Faces<Socket>;
 }
 
@@ -257,7 +259,7 @@ export const NUC_BODIES: Readonly<Record<string, NucBody>> = {
       ["usb-a", -28, 16],
       ["led", 40, 16],
     ],
-    "shell-blue",
+    "lid-red",
   ),
   "nuc-horse-canyon": first(
     [
@@ -484,6 +486,7 @@ export const NUC_BODIES: Readonly<Record<string, NucBody>> = {
     form: "board",
     size: [117, 147, 25],
     blower: 2,
+    tray: true,
     sockets: {
       front: [
         ["dc", -46, 14],
@@ -767,8 +770,8 @@ export const NUC_BODIES: Readonly<Record<string, NucBody>> = {
       back: [teeth(29, 18, 100)],
     },
   }),
-  "nuc-bravo-canyon-fins": finned(174, 108, 35.8, { n: 22, h: 9, along: "z", inset: 3 }, bravo()),
-  "nuc-bravo-canyon": finned(174, 108, 25.9, { n: 2, h: 0.8, along: "x", inset: 8 }, bravo()),
+  "nuc-bravo-canyon-fins": finned(174, 108, 39.2, { n: 22, h: 9, along: "z", inset: 3 }, bravo()),
+  "nuc-bravo-canyon": finned(174, 108, 29.3, { n: 2, h: 0.8, along: "x", inset: 8 }, bravo()),
   // the ASUS years
   "nuc-revel-canyon-slim": small(117, 112, 37, "plastic-black", { h: 3, m: "plastic-black", edge: 0.8, inset: 1.6 }, asusSockets(15, tigerBack(15)), asusLook(37)),
   "nuc-revel-canyon-tall": small(117, 112, 54, "plastic-black", { h: 3, m: "plastic-black", edge: 0.8, inset: 1.6 }, asusSockets(19, tigerBack(19)), asusLook(54)),
@@ -801,7 +804,7 @@ export const NUC_BODIES: Readonly<Record<string, NucBody>> = {
       ["audio", 12, 7],
     ],
   }),
-  "nuc-board-sbc": board4(146, 101.7, 24.6, {
+  "nuc-board-sbc": board4(146, 101.7, 17.39, {
     back: [
       ["dc", -62, 9],
       ["usb-a", -44, 8],

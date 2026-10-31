@@ -118,7 +118,7 @@ function nucBox(m: Box, b: NucBox) {
   const top = H + (stand ? stand.h : 0);
   m.add(shell, slab(plan(W, D, r), top - y0 - lidH - finsH + (lid ? 0.6 : 0), edge, { curve: 6, bevelSeg: 2 }), [0, y0, 0]);
   if (stand) {
-    m.add("plastic-black", rbox(W + 56, 3, D * 0.52, 1.2, 1), [0, 1.5, 0]);
+    m.add("plastic-black", rbox(W + 10, 3, D * 0.56, 1.2, 1), [0, 1.5, 0]);
     m.add("plastic-black", slab(roundedSquare(W + 8, D * 0.4, 3, 3), stand.h - 2, 0.6, { curve: 3, bevelSeg: 1 }), [0, 2, 0]);
   } else if (foot > 0) feetOf(m, W, D, foot + 0.4);
   if (lid) {
@@ -198,10 +198,16 @@ function nucBoard(m: Box, b: BoardBody) {
       }
     });
   }
+  if (b.tray) {
+    m.add("steel", box(W, 1, D), [0, 0.5, 0]);
+    m.add("gold", box(W * 0.3, H - deck, D * 0.26), [W * 0.08, (H + deck) / 2, -D * 0.2]);
+  }
+  // its memory hangs under the board
+  m.add("plastic-black", box(W * 0.62, deck - T, D * 0.5), [-W * 0.08, (deck - T) / 2, -D * 0.1]);
   // the air's way: a low heatsink and a blower
   if (b.blower > 0) {
-    m.add("plastic-black", cyl(W * 0.2, 7, 22), [W * 0.12, deck + 3.5, D * 0.08]);
-    m.add("plastic-grey", cyl(W * 0.07, 0.6, 14), [W * 0.12, deck + 7.2, D * 0.08]);
+    m.add("plastic-black", cyl(W * 0.2, H - deck, 22), [W * 0.12, (H + deck) / 2, D * 0.08]);
+    m.add("plastic-grey", cyl(W * 0.07, 0.6, 14), [W * 0.12, H + 0.1, D * 0.08]);
     m.add("alu", box(W * 0.3, b.blower + 4, D * 0.14), [W * 0.1, deck + (b.blower + 4) / 2, -D * 0.19]);
   }
   m.add("plastic-black", box(W * 0.62, 5, 6), [-W * 0.08, deck + 2.5, D * 0.42]);

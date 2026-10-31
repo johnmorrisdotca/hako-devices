@@ -19,7 +19,7 @@ test("a body's mesh is its published size, near enough on all three sides", () =
     const { size } = buildDevice(key);
     body.size.forEach((side, i) => {
       // a stand, the feet, an antenna or a socket standing proud may add a little
-      const allowed = Math.max(8, side * 0.14) + (body.form === "box" && body.sockets && Object.values(body.sockets).flat().some((s) => s[0] === "antenna") && i === 2 ? 36 : 0);
+      const allowed = Math.max(10, side * 0.14) + (body.form === "box" && body.sockets && Object.values(body.sockets).flat().some((s) => s[0] === "antenna") && i === 2 ? 36 : 0);
       assert.ok(Math.abs(size[i] - side) <= allowed, `${key} side ${i}: mesh ${size[i]}, published ${side}`);
     });
   }

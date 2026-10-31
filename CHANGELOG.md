@@ -6,6 +6,19 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- **The whole NUC line**: every Intel and ASUS model we could find from 2012 to 2026, kits, mini PCs, boards, compute elements and laptop kits, on the list with its year, size and source, and 76 new bodies with a mesh and a drawing each, from the first black boxes to the ROG NUC 16. Models that share a body draw that body. `pcKey` now finds a NUC's own body from its product code.
+- The ports `displayport`, `vga` and `serial`.
+
+### Changed
+
+- `nuc-12-tall` and `nuc-12-slim` are drawn from the same table now: the front has two USB-A and a sound jack, as Intel's page says, not a USB-C.
+
+### Fixed
+
+- The years of NUC models on the list: some read 2060 or 2020 from a misread table, and now come from Intel's launch dates. A test holds every year on the list to a real year, and its decade tag to it.
+
 ## [0.1.1] - 2026-10-30
 
 ### Changed
