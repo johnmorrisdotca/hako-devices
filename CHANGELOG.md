@@ -6,6 +6,8 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-11-01
+
 ### Fixed
 
 - The Rock Canyon slim NUC's height is settled at 34.5 mm by Intel's own NUC5i5RYK product brief (a retailer's 32.7 mm is not Intel's). The brief is now its source, and the NUC5i5RYK row carries the size.
