@@ -13,6 +13,7 @@ mkdirSync(site, { recursive: true });
 cpSync(join(root, "demo", "index.html"), join(site, "index.html"));
 cpSync(join(root, "demo", "demo.css"), join(site, "demo.css"));
 cpSync(join(root, "dist", "assets"), join(site, "assets"), { recursive: true });
+cpSync(join(root, "dist", "machines.json"), join(site, "machines.json"));
 await build({
   entryPoints: { demo: join(root, "demo", "demo.ts"), "react-check": join(root, "demo", "react-check.ts"), "element-check": join(root, "demo", "element-check.ts") },
   outdir: join(site, "js"),

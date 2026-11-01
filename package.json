@@ -116,6 +116,7 @@
       "import": "./dist/react.js",
       "default": "./dist/react.js"
     },
+    "./machines.json": "./dist/machines.json",
     "./assets/*": "./dist/assets/*",
     "./package.json": "./package.json"
   },
@@ -131,7 +132,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "build": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig.json && node scripts/make-assets.ts",
+    "build": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig.json && node scripts/make-assets.ts && node -e \"require('node:fs').copyFileSync('data/machines.json', 'dist/machines.json')\"",
     "assets": "node scripts/make-assets.ts",
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.check.json && tsc -p tsconfig.tools.json && tsc -p tsconfig.demo.json",
@@ -145,7 +146,8 @@
     "dev": "pnpm site && node scripts/dev.ts",
     "test:demo": "pnpm site && playwright test",
     "screenshots": "pnpm site && node scripts/screenshots.ts",
-    "wishlist": "node scripts/make-wishlist.ts"
+    "wishlist": "node scripts/make-wishlist.ts",
+    "machines": "node scripts/make-machines.ts"
   },
   "peerDependencies": {
     "react": ">=18",

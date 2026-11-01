@@ -6,6 +6,14 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- The machine list as static JSON: `@johnmorrisdotca/hako-devices/machines.json` and `machines.json` on the demo site. Each of the 2,328 machines has its key, name, maker, family, status, mesh and tags, and a drawn device its size in millimetres and its ports. It is made from the catalogue by `pnpm machines` and documented in [docs/machines.md](docs/machines.md). When machines are added it is regenerated and published with them, and `pnpm check` fails if it is stale.
+
+### Fixed
+
+- The Jetson Orin Nano's name and key held a stray piece of Wikipedia markup; the key is now `nvidia-jetson-orin-nano`.
+
 ## [0.5.0] - 2026-10-31
 
 ### Added

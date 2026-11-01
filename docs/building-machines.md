@@ -38,9 +38,9 @@ Be careful with other sites' files even for reference. "Creative Commons" comes 
 2. **Research.** For each model, gather the year, the dates, the size, what is on its front and back, and a source for each. Find a picture of each side of that exact model.
 3. **Sort models into bodies.** Models that truly share a body share a mesh. Mark the others `Covered by the built mesh <key>` in their notes, with status `built`.
 4. **Write a body as data.** Keep what differs between models in a table of numbers, with a comment saying where they came from. `PRO_CAMERAS` in `src/build/tablets.ts` and the specs in `src/build/machines.ts` are the pattern. A new shape of code is the exception.
-5. **Add the device.** A `whole(...)` line in `src/catalogue.ts`, an entry in `src/build/assemble.ts`, and its wishlist row. Run `pnpm wishlist`.
+5. **Add the device.** A `whole(...)` line in `src/catalogue.ts`, an entry in `src/build/assemble.ts`, and its wishlist row. Run `pnpm wishlist`, then `pnpm machines`: the [machine list as JSON](machines.md) is regenerated and published with every new machine, and `pnpm check` fails until you have run it.
 6. **Look at it beside the real thing.** Run `pnpm site`, then `PORT=<a free port> node scripts/dev.ts`, and show it with `<hako-device key="your-key" spin="off" flipped>` to see the back. Compare the front, the back and the sides with your pictures. Fix what is off, and do this for every body, not a sample.
-7. **Check it.** `pnpm verify` runs everything. A mesh stays under 300 KB.
+7. **Check it.** `pnpm verify` runs everything. A mesh stays under 300 KB. Commit `data/machines.json` with the machine: it fails the check if it is stale.
 8. **Send it.** One line per pull request, with a line in `CHANGELOG.md`, the sources, and pictures of what you built. Name anything you drew from thin evidence.
 
 Finish fewer machines properly rather than many roughly, and say what is left.

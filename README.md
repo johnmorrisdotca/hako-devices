@@ -63,6 +63,7 @@ report.issues[0].message; // "Faceted metal case (Argon ONE style) closes over t
 | `.../build` | `build(description)`, `buildDevice(key)`, `buildPart(id)`: one mesh and one drawing. `toGlb`, `Drawing`, `Box` | `three` |
 | `.../element` | `<hako-device>` and `<hako-lineup>`: load `three` only when a 3D view is wanted | `three` for 3D |
 | `.../react` | A thin `<HakoDevice>` wrapper | `react` |
+| `.../machines.json` | The machine list as static JSON: key, name, maker, family, status, tags and, for drawn devices, size and ports | Nothing |
 | `.../assets/*` | Ready files: `pi4.glb`, `pi4.svg`, `pi4.thick.svg`, `parts/armor.glb`, `coming-soon.svg` | Nothing |
 
 ## Build computers from parts
@@ -142,6 +143,12 @@ import { matchesPicks } from "@johnmorrisdotca/hako-devices/tags";
 
 const intelLaptops = catalogue().filter(({ key }) => matchesPicks(key, { type: ["Laptop"], cpuMaker: ["Intel"] }));
 ```
+
+## The machine list as JSON
+
+Every machine is also one static file, for a page or a script that wants the list and no code: `@johnmorrisdotca/hako-devices/machines.json`, and https://johnmorrisdotca.github.io/hako-devices/machines.json on the demo site (it allows other sites to read it). Each machine has its `key`, `name`, `maker`, `family`, `status`, `mesh`, `tags` and, for a drawn device, `size` in millimetres and `ports`. [docs/machines.md](docs/machines.md) has every field, and what is left out and why.
+
+**When machines are added, the list is regenerated and published with them.** Run `pnpm wishlist` and then `pnpm machines`, and commit `data/machines.json` with the machine. `pnpm check` fails when the file is out of date, so a machine cannot go in without it; the build ships the file in the package and every push to `main` puts it on the demo site.
 
 ## Groups and colours
 

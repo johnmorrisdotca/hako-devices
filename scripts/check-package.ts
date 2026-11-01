@@ -7,7 +7,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
-import { DEVICES, PARTS, STYLE_NAMES, drawingFile } from "../src/index.ts";
+import { catalogue, DEVICES, PARTS, STYLE_NAMES, drawingFile } from "../src/index.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const pkg = JSON.parse(readFileSync(join(root, "package.json"), "utf8")) as { name: string; version: string; main: string; types: string; files: string[]; dependencies?: Record<string, string>; exports: Record<string, string | Record<string, string>> };
@@ -75,6 +75,7 @@ import { build } from ${JSON.stringify(`${pkg.name}/build`)};
 import { HakoDevice } from ${JSON.stringify(`${pkg.name}/element`)};
 import { HakoDevice as ReactDevice } from ${JSON.stringify(`${pkg.name}/react`)};
 import { createRequire } from "node:module";
+import { readFileSync } from "node:fs";
 if (!check({ board: "pi4" }).ok || DEVICES.length !== ${DEVICES.length}) throw new Error("the catalogue");
 if (typeof HakoDevice !== "function" || typeof ReactDevice !== "function") throw new Error("the element");
 const machine = build({ board: "pi4", case: "armor", hat: "pitft-28" });
@@ -83,6 +84,8 @@ if (machine.glb().bytes.length !== ${machine.glb().bytes.length}) throw new Erro
 const require = createRequire(import.meta.url);
 const asset = require.resolve(${JSON.stringify(`${pkg.name}/assets/pi4.glb`)});
 if (!asset.endsWith("pi4.glb")) throw new Error("the asset's address");
+const listed = JSON.parse(readFileSync(require.resolve(${JSON.stringify(`${pkg.name}/machines.json`)}), "utf8"));
+if (listed.version !== ${JSON.stringify(pkg.version)} || listed.machines.length !== ${catalogue().length}) throw new Error("the installed machine list");
 console.log("ok");
 `,
 );
