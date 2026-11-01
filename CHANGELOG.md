@@ -6,6 +6,8 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-11-01
+
 ### Added
 
 - Aliases: every machine can go by other names. 1,754 of the 2,328 machines have 3,072 of them: `trash-can`, `trashcan-mac-pro` and `mac-pro-2013` for the Late 2013 Mac Pro, `raspberry-pi-zero` for `rpi-zero`, `lampshade-imac`, `toilet-seat-ibook`, `wallstreet`, `ps2`, `gba`, `nuc5i5ryk`, `jetson-nano`. They are rules (a maker's prefix swapped, a model number, a year form) and a hand pass for well-known nicknames, written in the `aliases` field of `data/wishlist.json`.
