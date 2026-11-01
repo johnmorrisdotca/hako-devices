@@ -6,6 +6,13 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- The Rock Canyon slim NUC's height is settled at 34.5 mm by Intel's own NUC5i5RYK product brief (a retailer's 32.7 mm is not Intel's). The brief is now its source, and the NUC5i5RYK row carries the size.
+- The NUC Compute Element body (NUC 9, 11 and 12 Extreme and Pro) is 39 x 202 x 131 mm, from Intel's "Chassis Dimensions", not an estimate of 42 x 238 x 134 mm.
+- The NUC Board Element body is Intel's CMB1BB: 110 x 80 x 16.21 mm from its product specification, not 101.6 x 147 x 20 mm (a 3.5-inch drive's size). The other boards listed under it say in their notes that their own boards differ.
+- The Maple Canyon NUC's notes say what Intel does and does not publish: no chassis size was found, so its 115 x 111 x 49 mm mesh stays an estimate and its listed size stays blank.
+
 ## [0.6.0] - 2026-11-01
 
 ### Added

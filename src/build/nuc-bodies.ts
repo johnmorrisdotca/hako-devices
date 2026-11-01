@@ -547,7 +547,7 @@ export const NUC_BODIES: Readonly<Record<string, NucBody>> = {
   }, 4.8),
   "nuc-compute-element-h": {
     form: "blade",
-    size: [42, 238, 134],
+    size: [39, 202, 131],
     sockets: [
       ["usb-blue", 0, 110],
       ["usb-blue", 0, 92],
@@ -816,7 +816,7 @@ export const NUC_BODIES: Readonly<Record<string, NucBody>> = {
       ["hdmi", 64, 7],
     ],
   }, 0),
-  "nuc-board-element": board4(101.6, 147, 20, {
+  "nuc-board-element": board4(110, 80, 16.21, {
     front: [
       ["dc", -40, 9],
       ["usb-blue", -22, 11],

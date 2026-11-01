@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2328 machines. 896 distinct shapes still to build. 1057 entries are already built: the 287 devices in this package, plus the real models those meshes cover. 1382 entries have a sourced size; the other 946 are `null` on purpose.**
+**2328 machines. 896 distinct shapes still to build. 1057 entries are already built: the 287 devices in this package, plus the real models those meshes cover. 1386 entries have a sourced size; the other 942 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -154,17 +154,17 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | BeagleBoard | 10 | 10 | 0 |
 |  | Orange Pi | 5 | 5 | 0 |
 |  | Arduino Uno | 4 | 4 | 0 |
-| **11** | **Mini PCs** | **509** | **1** | **380** |
+| **11** | **Mini PCs** | **509** | **1** | **384** |
 |  | NUC 11 | 82 | 0 | 61 |
 |  | NUC 12 | 61 | 0 | 43 |
 |  | NUC 8 | 57 | 0 | 45 |
 |  | NUC 13 | 54 | 0 | 46 |
 |  | NUC 7 | 41 | 0 | 20 |
-|  | NUC | 39 | 0 | 30 |
+|  | NUC | 39 | 0 | 32 |
 |  | NUC 10 | 32 | 0 | 29 |
-|  | NUC 5 | 24 | 0 | 11 |
+|  | NUC 5 | 24 | 0 | 12 |
 |  | NUC 6 | 14 | 0 | 7 |
-|  | NUC 9 | 12 | 0 | 10 |
+|  | NUC 9 | 12 | 0 | 11 |
 |  | NUC 2 | 8 | 0 | 5 |
 |  | NUC 4 | 8 | 0 | 2 |
 |  | NUC 14 | 8 | 0 | 8 |
@@ -191,7 +191,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-|  | **Total** | **2328** | **896** | **1382** |
+|  | **Total** | **2328** | **896** | **1386** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
