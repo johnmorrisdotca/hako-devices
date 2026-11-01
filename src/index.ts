@@ -23,4 +23,5 @@ export { COVERED, PLANNED } from "./wishlist.ts";
 export type { CoveredDevice, PlannedDevice } from "./wishlist.ts";
 export { groupLayout, groupSample, type GroupPlace } from "./group.ts";
 export { catalogue, catalogueCounts, headingOf, meshOf, SHELVES, statusOf } from "./status.ts";
+export { aliasesOf, findMachine } from "./find.ts";
 export type { CatalogueEntry } from "./status.ts";

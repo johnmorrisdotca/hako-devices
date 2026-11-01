@@ -1,5 +1,5 @@
 // The demo page: a device large, the part builder, a lineup to scale, the gallery by family and a live screen. Everything comes from the package's own entries.
-import { catalogue, catalogueCounts, check, type CatalogueEntry, COVERED, deviceByKey, FAMILIES, groupLayout, groupSample, headingOf, meshOf, PARTS, partsOfKind, PRESETS, SHELVES, STYLE_NAMES, type Description, type Device, type Part, type StyleName } from "../src/index.ts";
+import { aliasesOf, catalogue, catalogueCounts, check, type CatalogueEntry, COVERED, deviceByKey, FAMILIES, groupLayout, groupSample, headingOf, meshOf, PARTS, partsOfKind, PRESETS, SHELVES, STYLE_NAMES, type Description, type Device, type Part, type StyleName } from "../src/index.ts";
 import { HakoDevice, setAssetBase } from "../src/element.ts";
 import { facetCounts, FACETS, facetOrder, type FacetId, matchesPicks, type Picks } from "../src/tags.ts";
 
@@ -273,7 +273,7 @@ function partTile(part: Part): HTMLElement {
   return node;
 }
 function matches(entry: CatalogueEntry, text: string): boolean {
-  const hay = `${entry.name} ${entry.key}`.toLowerCase();
+  const hay = `${entry.name} ${entry.key} ${aliasesOf(entry.key).join(" ")}`.toLowerCase();
   return text.toLowerCase().split(/\s+/).filter(Boolean).every((word) => hay.includes(word));
 }
 type Shelved = Exclude<CatalogueEntry, Device>;

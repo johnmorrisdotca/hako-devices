@@ -83,6 +83,8 @@ test("the gallery shows every built device by family, and what is coming", async
   await page.locator('[data-testid="filter-built"]').click();
   await page.locator('[data-testid="gallery-search"]').fill("rack nas");
   await expect(page.locator('[data-testid="tile"][data-key="nas-rack"]')).toBeVisible();
+  await page.locator('[data-testid="gallery-search"]').fill("trash-can");
+  await expect(page.locator('[data-testid="tile"][data-key="mac-pro-late-2013"]')).toBeVisible();
   await page.locator('[data-testid="gallery-search"]').fill("nothing has this name");
   await expect(page.locator('[data-testid="tile"]')).toHaveCount(0);
   expect(problems).toEqual([]);

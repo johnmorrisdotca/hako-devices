@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { DEVICES } from "../src/catalogue.ts";
-import { readTags, readWishlist } from "./wishlist-read.ts";
+import { aliasProblems, readAliases, readTags, readWishlist } from "./wishlist-read.ts";
 
 interface Raw {
   key: string;
@@ -19,6 +19,8 @@ interface Raw {
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const data = JSON.parse(readFileSync(join(root, "data", "wishlist.json"), "utf8")) as Raw[];
+const problems = aliasProblems(data as { key: string; aliases?: string[] }[]);
+if (problems.length) throw new Error(`aliases in data/wishlist.json:\n${problems.join("\n")}`);
 const { planned, covered } = readWishlist(data, new Set(DEVICES.map((device) => device.key)));
 const lines = (list: readonly unknown[]) => list.map((entry) => `  ${JSON.stringify(entry)},`).join("\n");
 writeFileSync(
@@ -60,6 +62,15 @@ writeFileSync(
   `// Every machine's tags, from data/wishlist.json by scripts/make-wishlist.ts. Do not edit: run \`pnpm wishlist\`.
 export const TAG_DATA: Readonly<Record<string, Readonly<Partial<Record<string, readonly string[]>>>>> = {
 ${Object.entries(readTags(data)).map(([key, tags]) => `  ${JSON.stringify(key)}: ${JSON.stringify(tags)},`).join("\n")}
+};
+`,
+);
+
+writeFileSync(
+  join(root, "src", "alias-data.ts"),
+  `// Every machine's aliases, from data/wishlist.json by scripts/make-wishlist.ts. Do not edit: run \`pnpm wishlist\`.
+export const ALIAS_DATA: Readonly<Record<string, readonly string[]>> = {
+${Object.entries(readAliases(data)).map(([key, aliases]) => `  ${JSON.stringify(key)}: ${JSON.stringify(aliases)},`).join("\n")}
 };
 `,
 );

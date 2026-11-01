@@ -58,7 +58,7 @@ report.issues[0].message; // "Faceted metal case (Argon ONE style) closes over t
 
 | Entry | What | Needs |
 | --- | --- | --- |
-| `@johnmorrisdotca/hako-devices` | The catalogue (`DEVICES`, `catalogue()`, `statusOf`), the parts (`PARTS`), the fit check (`check`), the camera rule (`frameFor`), mapping helpers (`piKey`, `macKey`, `nasKey`, `pcKey`, `deviceKeyOf`), styles, scale helpers, screen pictures | Nothing |
+| `@johnmorrisdotca/hako-devices` | The catalogue (`DEVICES`, `catalogue()`, `statusOf`), the parts (`PARTS`), the fit check (`check`), the camera rule (`frameFor`), `findMachine(keyOrAlias)`, mapping helpers (`piKey`, `macKey`, `nasKey`, `pcKey`, `deviceKeyOf`), styles, scale helpers, screen pictures | Nothing |
 | `.../tags` | `FACETS`, `tagsOf(key)`, `matchesPicks(key, picks)`, `facetCounts(keys, picks)`: filter machines by what they are. Its own entry because the table is large | Nothing |
 | `.../build` | `build(description)`, `buildDevice(key)`, `buildPart(id)`: one mesh and one drawing. `toGlb`, `Drawing`, `Box` | `three` |
 | `.../element` | `<hako-device>` and `<hako-lineup>`: load `three` only when a 3D view is wanted | `three` for 3D |
@@ -144,9 +144,22 @@ import { matchesPicks } from "@johnmorrisdotca/hako-devices/tags";
 const intelLaptops = catalogue().filter(({ key }) => matchesPicks(key, { type: ["Laptop"], cpuMaker: ["Intel"] }));
 ```
 
+## Find a machine by a nickname
+
+Every machine has a key and can have aliases: other names it goes by. `findMachine` takes either.
+
+```ts
+import { findMachine } from "@johnmorrisdotca/hako-devices";
+
+findMachine("trash-can")?.key; // "mac-pro-late-2013"
+findMachine("raspberry-pi-zero")?.key; // "rpi-zero"
+```
+
+[docs/machines.md](docs/machines.md#aliases) has the rules. The aliases are in the machine list as JSON, below, and the demo's search matches them.
+
 ## The machine list as JSON
 
-Every machine is also one static file, for a page or a script that wants the list and no code: `@johnmorrisdotca/hako-devices/machines.json`, and https://johnmorrisdotca.github.io/hako-devices/machines.json on the demo site (it allows other sites to read it). Each machine has its `key`, `name`, `maker`, `family`, `status`, `mesh`, `tags` and, for a drawn device, `size` in millimetres and `ports`. [docs/machines.md](docs/machines.md) has every field, and what is left out and why.
+Every machine is also one static file, for a page or a script that wants the list and no code: `@johnmorrisdotca/hako-devices/machines.json`, and https://johnmorrisdotca.github.io/hako-devices/machines.json on the demo site (it allows other sites to read it). Each machine has its `key`, `name`, `aliases`, `maker`, `family`, `status`, `mesh`, `tags` and, for a drawn device, `size` in millimetres and `ports`. [docs/machines.md](docs/machines.md) has every field, and what is left out and why.
 
 **When machines are added, the list is regenerated and published with them.** Run `pnpm wishlist` and then `pnpm machines`, and commit `data/machines.json` with the machine. `pnpm check` fails when the file is out of date, so a machine cannot go in without it; the build ships the file in the package and every push to `main` puts it on the demo site.
 

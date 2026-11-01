@@ -3,10 +3,12 @@
 import { catalogue, type Device } from "../src/index.ts";
 import { FACETS, tagsOf, type FacetId } from "../src/tags.ts";
 import { meshOf } from "../src/status.ts";
+import { aliasesOf } from "../src/find.ts";
 
 export interface Machine {
   key: string;
   name: string;
+  aliases: readonly string[];
   maker: string | null;
   family: string;
   status: "built" | "planned";
@@ -36,6 +38,7 @@ export function machineList(rows: readonly { key: string; family: string }[], pk
     return {
       key: entry.key,
       name: entry.name,
+      aliases: aliasesOf(entry.key),
       maker: tags.maker?.[0] ?? null,
       family,
       status: entry.status,

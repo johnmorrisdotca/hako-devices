@@ -6,6 +6,13 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Aliases: every machine can go by other names. 1,754 of the 2,328 machines have 3,072 of them: `trash-can`, `trashcan-mac-pro` and `mac-pro-2013` for the Late 2013 Mac Pro, `raspberry-pi-zero` for `rpi-zero`, `lampshade-imac`, `toilet-seat-ibook`, `wallstreet`, `ps2`, `gba`, `nuc5i5ryk`, `jetson-nano`. They are rules (a maker's prefix swapped, a model number, a year form) and a hand pass for well-known nicknames, written in the `aliases` field of `data/wishlist.json`.
+- `findMachine(keyOrAlias)` gives the machine a key or an alias names, and `aliasesOf(key)` its aliases. Both are in the root entry and documented in [docs/machines.md](docs/machines.md#aliases).
+- `aliases` in every machine of `machines.json`, and the demo's search matches them.
+- A test fails on an alias that is not lowercase kebab-case ASCII, that two machines share, or that is another machine's key; `pnpm wishlist` refuses one too.
+
 ## [0.6.1] - 2026-11-01
 
 ### Fixed

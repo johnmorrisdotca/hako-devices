@@ -21,6 +21,7 @@ Thank you for helping. Bug reports, ideas and pull requests are all welcome. Bug
 
 The list is `data/wishlist.json`, one machine per line. An issue with the machine, the fact and a link is all we need. To send a pull request instead, change that line and run `pnpm wishlist` and then `pnpm machines`, which write the files made from it, the machine list as JSON among them. Commit them with your change: `pnpm check` fails when they are stale.
 
+- **Aliases are well-known names, one machine each.** A row's `aliases` lists the other names people use for it: lowercase kebab-case ASCII, never another machine's key or alias. `pnpm wishlist` and `pnpm test` fail on a clash. [docs/machines.md](docs/machines.md#aliases) has the rules.
 - **A blank is fine, a guess is not.** Leave out what you cannot source. A wrong fact is worse than a missing one.
 - **Name the page.** A size goes with its `dimensionsSource`, and tags with their `tagsSource`. The maker's own page is best, then a reference such as Wikipedia, then a review.
 - **Facts only.** Copy no pictures, 3D files or passages of text from those pages.

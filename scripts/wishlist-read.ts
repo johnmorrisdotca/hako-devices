@@ -30,6 +30,32 @@ export function readTags(data: unknown): Record<string, Record<string, readonly 
   return tags;
 }
 
+/** The aliases of every machine that has any, for src/alias-data.ts. */
+export function readAliases(data: unknown): Record<string, readonly string[]> {
+  const aliases: Record<string, readonly string[]> = {};
+  for (const raw of data as { key: string; aliases?: readonly string[] }[]) if (raw.aliases?.length) aliases[raw.key] = raw.aliases;
+  return aliases;
+}
+
+const ALIAS_FORMAT = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
+/** What is wrong with the aliases of the list, one line each: an alias that is not lowercase kebab-case ASCII, one that is another machine's key, one that two machines share, or one repeated on a machine. */
+export function aliasProblems(data: readonly { key: string; aliases?: readonly string[] }[]): string[] {
+  const keys = new Set(data.map((raw) => raw.key));
+  const owner = new Map<string, string>();
+  const problems: string[] = [];
+  for (const { key, aliases = [] } of data) {
+    for (const alias of aliases) {
+      if (!ALIAS_FORMAT.test(alias)) problems.push(`${key}: "${alias}" is not lowercase kebab-case ASCII`);
+      else if (alias === key) problems.push(`${key}: "${alias}" is its own key`);
+      else if (keys.has(alias)) problems.push(`${key}: "${alias}" is the key of another machine`);
+      else if (owner.has(alias)) problems.push(`${key}: "${alias}" is also an alias of ${owner.get(alias)}`);
+      else owner.set(alias, key);
+    }
+  }
+  return problems;
+}
+
 interface RawEntry {
   key: string;
   name: string;

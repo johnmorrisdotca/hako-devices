@@ -34,6 +34,7 @@ Each machine:
 | --- | --- |
 | `key` | Its identifier, the same as `<hako-device key="...">` and `catalogue()` |
 | `name` | Its name, as plain descriptive words |
+| `aliases` | Other names it goes by, in lowercase kebab-case ASCII, such as `trash-can` for `mac-pro-late-2013`. Empty when it has none. See [aliases](#aliases) |
 | `maker` | Its brand, or `null` |
 | `family` | Its product line, such as `Power Mac` or `Galaxy Tab S` |
 | `status` | `built` when a mesh and drawings draw it, `planned` when it has a name and no shape yet |
@@ -41,6 +42,28 @@ Each machine:
 | `size` | Width, depth and height in millimetres, as `[w, d, h]`, for a drawn device whose size is published. `null` otherwise |
 | `ports` | A drawn device's ports as `{ "kind", "count" }`. Empty when it has none or is not drawn |
 | `tags` | What the machine is, as lists of values by facet: `maker`, `type`, `decade`, `cpuMaker`, `cpu`, `cores`, `ram`, `os`, `screen`, `ports`, `wireless`, `weight`, `generation`, `parts`. A fact with no source is absent, never guessed |
+
+## Aliases
+
+A machine can have other names: a nickname (`trash-can`), a maker's prefix swapped (`raspberry-pi-zero` for `rpi-zero`), a model number (`nuc5i5ryk`), a short form (`ps2`, `gba`) or a year form (`mac-pro-2013`). They are the `aliases` field of the machine in `data/wishlist.json`, and the rules are:
+
+- **Lowercase kebab-case ASCII**: letters, digits and single hyphens, such as `mac-pro-2013`.
+- **One machine each.** An alias never belongs to two machines, and never equals any machine's `key`. A nickname that fits several machines (the cheese grater Mac Pros) goes to the first one, and the others get the year: `cheese-grater-mac-pro-2008`.
+- **Well known names only.** An alias that is a guess is left out, as a wrong fact is.
+
+`findMachine` takes a key or an alias and gives back the machine, so a page does not need to know which it was given. `aliasesOf` gives a machine's aliases.
+
+```js
+import { aliasesOf, findMachine } from "@johnmorrisdotca/hako-devices";
+
+findMachine("trash-can")?.key; // "mac-pro-late-2013"
+findMachine("Trash Can")?.key; // "mac-pro-late-2013": case, spaces and underscores are forgiven
+findMachine("rpi-zero")?.name; // "Raspberry Pi Zero": a key finds its machine too
+aliasesOf("mac-pro-late-2013"); // ["trash-can", "trashcan-mac-pro", ..., "mac-pro-2013"]
+findMachine("no-such-machine"); // undefined
+```
+
+A test fails on a malformed alias, on an alias two machines share and on one that is another machine's key. The demo's search matches aliases too.
 
 ## What is not in it
 
