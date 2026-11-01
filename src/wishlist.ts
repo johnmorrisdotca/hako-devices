@@ -2020,7 +2020,7 @@ export const PLANNED: readonly PlannedDevice[] = [
   {"key":"nvidia-jetson-agx-xavier","name":"Jetson AGX Xavier","family":"Jetson","shelf":"boards","maker":"Nvidia","status":"planned"},
   {"key":"nvidia-jetson-nano","name":"Jetson Nano","family":"Jetson","shelf":"boards","maker":"Nvidia","status":"planned"},
   {"key":"nvidia-jetson-xavier-nx","name":"Jetson Xavier NX","family":"Jetson","shelf":"boards","maker":"Nvidia","status":"planned"},
-  {"key":"nvidia-jetson-orin-nano-cite-web-url-https-www-nvidia-com-en-us-autonomous-machines-embedded-systems-jetson-orin-title-jetson-orin-modules-and-developer-kits","name":"Jetson Orin Nano{{cite web | url=https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/ | title= Jetson Orin Modules and Developer Kits","family":"Jetson","shelf":"boards","maker":"Nvidia","status":"planned"},
+  {"key":"nvidia-jetson-orin-nano","name":"Jetson Orin Nano","family":"Jetson","shelf":"boards","maker":"Nvidia","status":"planned"},
   {"key":"nvidia-jetson-orin-nx","name":"Jetson Orin NX","family":"Jetson","shelf":"boards","maker":"Nvidia","status":"planned"},
   {"key":"nvidia-jetson-agx-orin","name":"Jetson AGX Orin","family":"Jetson","shelf":"boards","maker":"Nvidia","status":"planned"},
   {"key":"nvidia-jetson-agx-thor","name":"Jetson AGX Thor","family":"Jetson","shelf":"boards","maker":"Nvidia","status":"planned"},

@@ -1252,7 +1252,7 @@ BeagleBoard (2008), BeagleBoard-xM (2010), BeagleBone (2011), BeagleBone Black (
 
 **Nvidia Jetson** (10 machines, 10 shapes)
 
-Jetson TK1 (2014), Jetson TX1 (2015), Jetson TX2 (2017), Jetson AGX Xavier (2018), Jetson Nano (2019), Jetson Xavier NX (2020), Jetson AGX Orin (2023), Jetson Orin NX (2023), Jetson Orin Nano{{cite web | url=https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/ | title= Jetson Orin Modules and Developer Kits (2023), Jetson AGX Thor (2025).
+Jetson TK1 (2014), Jetson TX1 (2015), Jetson TX2 (2017), Jetson AGX Xavier (2018), Jetson Nano (2019), Jetson Xavier NX (2020), Jetson AGX Orin (2023), Jetson Orin NX (2023), Jetson Orin Nano (2023), Jetson AGX Thor (2025).
 
 **Orange Pi** (5 machines, 5 shapes)
 

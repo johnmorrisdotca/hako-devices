@@ -1773,7 +1773,7 @@ export const TAG_DATA: Readonly<Record<string, Readonly<Partial<Record<string, r
   "nvidia-jetson-agx-xavier": {"maker":["Nvidia"],"type":["Single-board computer"],"decade":["2010s"]},
   "nvidia-jetson-nano": {"maker":["Nvidia"],"type":["Single-board computer"],"decade":["2010s"]},
   "nvidia-jetson-xavier-nx": {"maker":["Nvidia"],"type":["Single-board computer"],"decade":["2020s"]},
-  "nvidia-jetson-orin-nano-cite-web-url-https-www-nvidia-com-en-us-autonomous-machines-embedded-systems-jetson-orin-title-jetson-orin-modules-and-developer-kits": {"maker":["Nvidia"],"type":["Single-board computer"],"decade":["2020s"]},
+  "nvidia-jetson-orin-nano": {"maker":["Nvidia"],"type":["Single-board computer"],"decade":["2020s"]},
   "nvidia-jetson-orin-nx": {"maker":["Nvidia"],"type":["Single-board computer"],"decade":["2020s"]},
   "nvidia-jetson-agx-orin": {"maker":["Nvidia"],"type":["Single-board computer"],"decade":["2020s"]},
   "nvidia-jetson-agx-thor": {"maker":["Nvidia"],"type":["Single-board computer"],"decade":["2020s"]},
