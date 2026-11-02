@@ -6,6 +6,8 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-11-01
+
 ### Added
 
 - Tags: **discontinued** (the year a maker stopped selling a machine) and **colour** (the finishes the maker gives it) are new kinds, offered in the demo's filters and in `tagsOf`, `FACETS` and `machines.json`. 280 machines have a discontinued year and 167 a colour.
