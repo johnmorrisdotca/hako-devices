@@ -33,11 +33,15 @@ export interface SlabBody {
   edge?: number;
   /** Stands long side down: the top of the slab as it is held is on the left, seen from the front. */
   landscape?: boolean;
+  /** The plate in front of the picture, when it is not black glass: the plastic of an iPod's face. */
+  face?: Material;
   /** The picture: width, height, from the top of the slab to its top edge, its corner radius, and how far right of the middle it sits when it is not centred. */
   screen: readonly [w: number, h: number, top: number, r: number, across?: number];
   front: {
     /** A round home button: its middle from the top, its radius. */
     home?: readonly [y: number, r: number];
+    /** An iPod's wheel: its middle from the top, its radius, the radius of the button in its middle and its material. */
+    wheel?: readonly [y: number, r: number, button: number, material?: Material];
     /** The dark cut in the top of the picture: its width, how far down it comes, its corner radius. */
     notch?: readonly [w: number, h: number, r: number];
     /** The dark island in the picture: its width, height and middle from the top. */
@@ -88,7 +92,14 @@ const roundedFace = (w: number, h: number, r: number, seg = 6) => new THREE.Shap
 function drawFront(add: SlabAdd, body: SlabBody, W: number, H: number) {
   const at = placer(body, W, H);
   const across = (w: number, h: number): [number, number] => (body.landscape ? [h, w] : [w, h]);
-  const { home, notch, island, camera, receiver } = body.front;
+  const { home, wheel, notch, island, camera, receiver } = body.front;
+  if (wheel) {
+    const [x, y] = at(W / 2, wheel[0]);
+    add("alu-dark", disc(wheel[1] + 0.35, 48), [x, y, 0.15]);
+    add(wheel[3] ?? "plastic-white", disc(wheel[1], 48), [x, y, 0.16]);
+    add("alu-dark", disc(wheel[2] + 0.35, 32), [x, y, 0.18]);
+    add(wheel[3] ?? "plastic-white", disc(wheel[2], 32), [x, y, 0.2]);
+  }
   if (home) {
     const [x, y] = at(W / 2, home[0]);
     add("steel", disc(home[1], 28), [x, y, 0.16]);
@@ -239,7 +250,7 @@ export function slabOptions(body: SlabBody, standing: readonly [number, number, 
     screen: size,
     screenAt: at,
     glassR: body.screen[3],
-    front: "front-glass",
+    front: body.face ?? "front-glass",
     kind,
     ...(kind === "phone" ? { lean: 16 } : {}),
     back: (add, _facts, m, frame) => {

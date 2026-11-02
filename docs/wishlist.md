@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2328 machines. 888 distinct shapes still to build. 1074 entries are already built: the 301 devices in this package, plus the real models those meshes cover. 1386 entries have a sourced size; the other 942 are `null` on purpose.**
+**2328 machines. 874 distinct shapes still to build. 1096 entries are already built: the 317 devices in this package, plus the real models those meshes cover. 1393 entries have a sourced size; the other 935 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -62,7 +62,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **889** | **187** | **659** |
+| **4** | **Apple** | **889** | **173** | **666** |
 |  | Power Mac | 92 | 0 | 90 |
 |  | Performa | 71 | 0 | 71 |
 |  | MacBook Pro | 69 | 13 | 64 |
@@ -71,7 +71,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | iPhone | 55 | 0 | 55 |
 |  | iPad | 46 | 2 | 46 |
 |  | Display | 38 | 37 | 28 |
-|  | iPod | 37 | 20 | 20 |
+|  | iPod | 37 | 6 | 27 |
 |  | Apple Watch | 36 | 8 | 0 |
 |  | MacBook Air | 28 | 5 | 12 |
 |  | Printer | 26 | 16 | 0 |
@@ -191,7 +191,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-|  | **Total** | **2328** | **888** | **1386** |
+|  | **Total** | **2328** | **874** | **1393** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -889,7 +889,7 @@ TI-99/4A (1981).
 
 Yamaha CX5M (1984).
 
-### Phase 4: Apple (889 machines, 187 shapes to build)
+### Phase 4: Apple (889 machines, 173 shapes to build)
 
 **AirPods** (12 machines, 0 shapes)
 
@@ -1051,9 +1051,9 @@ iPad (1st generation) (2010) *built*, iPad 2 (2011) *built*, iPad (3rd generatio
 
 iPhone (1st generation) (2007) *built*, iPhone 3G (2008) *built*, iPhone 3GS (2009) *built*, iPhone 4 (2010) *built*, iPhone 4s (2011) *built*, iPhone 5 (2012) *built*, iPhone 5c (2013) *built*, iPhone 5s (2013) *built*, iPhone 6 (2014) *built*, iPhone 6 Plus (2014) *built*, iPhone 6s (2015) *built*, iPhone 6s Plus (2015) *built*, iPhone 7 (2016) *built*, iPhone 7 Plus (2016) *built*, iPhone SE (1st generation) (2016) *built*, iPhone 8 (2017) *built*, iPhone 8 Plus (2017) *built*, iPhone X (2017) *built*, iPhone XR (2018) *built*, iPhone XS (2018) *built*, iPhone XS Max (2018) *built*, iPhone 11 (2019) *built*, iPhone 11 Pro (2019) *built*, iPhone 11 Pro Max (2019) *built*, iPhone 12 (2020) *built*, iPhone 12 Pro (2020) *built*, iPhone 12 Pro Max (2020) *built*, iPhone 12 mini (2020) *built*, iPhone SE (2nd generation) (2020) *built*, iPhone 13 (2021) *built*, iPhone 13 Pro (2021) *built*, iPhone 13 Pro Max (2021) *built*, iPhone 13 mini (2021) *built*, iPhone 14 (2022) *built*, iPhone 14 Plus (2022) *built*, iPhone 14 Pro (2022) *built*, iPhone 14 Pro Max (2022) *built*, iPhone SE (3rd generation) (2022) *built*, iPhone 15 (2023) *built*, iPhone 15 Plus (2023) *built*, iPhone 15 Pro (2023) *built*, iPhone 15 Pro Max (2023) *built*, iPhone 16 (2024) *built*, iPhone 16 Plus (2024) *built*, iPhone 16 Pro (2024) *built*, iPhone 16 Pro Max (2024) *built*, iPhone 16e (2025) *built*, iPhone 17 (2025) *built*, iPhone 17 Pro (2025) *built*, iPhone 17 Pro Max (2025) *built*, iPhone Air (2025) *built*, iPhone 17e (2026) *built*, iPhone 18 Pro (2026) *built*, iPhone 18 Pro Max (2026) *built*, iPhone Duo (2026) *built*.
 
-**iPod** (37 machines, 20 shapes)
+**iPod** (37 machines, 6 shapes)
 
-iPod (Scroll Wheel) (2001), iPod (Touch Wheel) (2002), iPod (Dock Connector) (2003), iPod (Click Wheel) (2004), iPod Special Edition U2 (2004), iPod mini (1st generation) (2004), iPod photo (2004), iPod (5th generation) (2005), iPod mini (2nd generation) (2005), iPod nano (1st generation) (2005) *built*, iPod shuffle (1st generation) (2005), iPod with color display (2005), iPod (5th generation, Late 2006), iPod nano (2nd generation) (2006) *built*, iPod shuffle (2nd generation) (2006), iPod classic (2007), iPod nano (3rd generation) (2007), iPod touch (1st generation) (2007), iPod classic (120 GB) (2008), iPod nano (4th generation) (2008), iPod touch (2nd generation) (2008), iPod classic 160 GB (Late 2009), iPod nano (5th generation) (2009), iPod shuffle (3rd generation Late 2009), iPod shuffle (3rd generation) (2009), iPod touch (3rd generation) (2009), iPod nano (6th generation) (2010), iPod shuffle (4th generation) (2010), iPod touch (4th generation) (2010), iPod nano (7th generation) (2012), iPod shuffle (4th generation Late 2012), iPod touch (5th generation) (2012), iPod touch (5th generation 16 GB, Mid 2013), iPod nano (7th generation Mid 2015), iPod shuffle (4th generation Mid 2015), iPod touch (6th generation) (2015), iPod touch (7th generation) (2019).
+iPod (Scroll Wheel) (2001), iPod (Touch Wheel) (2002), iPod (Dock Connector) (2003) *built*, iPod (Click Wheel) (2004) *built*, iPod Special Edition U2 (2004) *built*, iPod mini (1st generation) (2004) *built*, iPod photo (2004) *built*, iPod (5th generation) (2005), iPod mini (2nd generation) (2005) *built*, iPod nano (1st generation) (2005) *built*, iPod shuffle (1st generation) (2005), iPod with color display (2005) *built*, iPod (5th generation, Late 2006), iPod nano (2nd generation) (2006) *built*, iPod shuffle (2nd generation) (2006), iPod classic (2007) *built*, iPod nano (3rd generation) (2007) *built*, iPod touch (1st generation) (2007) *built*, iPod classic (120 GB) (2008) *built*, iPod nano (4th generation) (2008) *built*, iPod touch (2nd generation) (2008) *built*, iPod classic 160 GB (Late 2009) *built*, iPod nano (5th generation) (2009) *built*, iPod shuffle (3rd generation Late 2009), iPod shuffle (3rd generation) (2009), iPod touch (3rd generation) (2009) *built*, iPod nano (6th generation) (2010) *built*, iPod shuffle (4th generation) (2010), iPod touch (4th generation) (2010) *built*, iPod nano (7th generation) (2012) *built*, iPod shuffle (4th generation Late 2012), iPod touch (5th generation) (2012) *built*, iPod touch (5th generation 16 GB, Mid 2013), iPod nano (7th generation Mid 2015), iPod shuffle (4th generation Mid 2015), iPod touch (6th generation) (2015) *built*, iPod touch (7th generation) (2019) *built*.
 
 ### Phase 5: Microsoft (73 machines, 39 shapes to build)
 

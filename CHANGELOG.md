@@ -6,6 +6,11 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- iPods: the iPod touch (1st to 7th generation), the iPod nano (3rd to 7th generation), the iPod classic, the iPod (3rd and 4th generation), the iPod photo and the iPod mini, 22 models on 16 bodies, each a row of numbers read from Apple's dimensional drawing of that model: picture, click wheel or home button, cameras, buttons, jack, dock or Lightning socket. A row can now have a click wheel (`front.wheel`) and a plate of its own in front of the picture (`face`). Sizes of the rows that had none, or only a family's article, now come from Apple's drawing of that model or its own spec page.
+- Not drawn yet: the iPod (5th generation), whose two thicknesses the list does not tell apart, the four iPod shuffles (a body with no picture, with a clip), the 3rd generation's row of four buttons and the touch's antenna window.
+
 ## [0.9.0] - 2026-11-02
 
 ### Added

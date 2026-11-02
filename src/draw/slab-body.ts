@@ -17,7 +17,7 @@ export function drawSlabBody(d: Drawing, model: Box, body: SlabBody) {
   const out: Vec3 = new THREE.Vector3(0, 0, 1).transformDirection(frame).toArray();
   const at = placer(body, W, H);
   const lift = (x: number, y: number): Vec3 => new THREE.Vector3(x, y, 0.3).applyMatrix4(frame).toArray();
-  const pill = (cu: number, cv: number, pw: number, ph: number, r: number, layer: number) => {
+  const pill = (cu: number, cv: number, pw: number, ph: number, r: number, layer: number, fill = "#05080e") => {
     const [cx, cy] = at(cu, cv);
     const [a, b] = portrait ? [pw, ph] : [ph, pw];
     const pts: Vec3[] = [];
@@ -27,9 +27,13 @@ export function drawSlabBody(d: Drawing, model: Box, body: SlabBody) {
         const angle = ((a0 + 30 * k) * Math.PI) / 180;
         pts.push(lift(cx + sx * (a / 2 - round) + round * Math.cos(angle), cy + sy * (b / 2 - round) + round * Math.sin(angle)));
       }
-    d.flat(pts, out, { fill: "#05080e", stroke: "#8fa1b8", sw: 0.6 }, layer);
+    d.flat(pts, out, { fill, stroke: "#8fa1b8", sw: 0.6 }, layer);
   };
-  const { home, notch, island, receiver } = body.front;
+  const { home, wheel, notch, island, receiver } = body.front;
+  if (wheel) {
+    pill(W / 2, wheel[0], wheel[1] * 2, wheel[1] * 2, wheel[1], 5, "#c9ced6");
+    pill(W / 2, wheel[0], wheel[2] * 2, wheel[2] * 2, wheel[2], 6, "#aab1bc");
+  }
   if (home) pill(W / 2, home[0], home[1] * 2, home[1] * 2, home[1], 5);
   if (notch) pill(W / 2, body.screen[2] + notch[1] / 2 - 1, notch[0], notch[1] + 2, notch[2], 5);
   if (island) pill(W / 2, island[2], island[0], island[1], island[1] / 2, 5);
