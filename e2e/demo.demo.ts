@@ -1,7 +1,8 @@
 // The demo in a real browser: no console or policy error, the gallery, the styles, the builder, the lineup, the live screen, and every device reaching its 3D view.
 import { expect, type Page, test } from "@playwright/test";
+import { allItems, drawingKey, itemById } from "../demo/gallery-model.ts";
 import { DEVICES } from "../src/catalogue.ts";
-import { catalogue, catalogueCounts, COVERED, headingOf, PLANNED } from "../src/index.ts";
+import { catalogue, catalogueCounts, COVERED, PLANNED } from "../src/index.ts";
 import { matchesPicks, type Picks } from "../src/tags.ts";
 
 const URL = "/hako-devices/";
@@ -43,67 +44,140 @@ test("the page loads clean, every address under the site's own path", async ({ p
   for (const address of addresses) expect(new globalThis.URL(address).pathname.startsWith("/hako-devices/")).toBe(true);
 });
 
-test("the gallery shows every built device by family, and what is coming", async ({ page }) => {
+const kindRow = (page: Page, id: string) => page.locator(`[data-testid="gallery-card"][data-group="${id}"]`);
+const tileOf = (page: Page, key: string) => page.locator(`[data-testid="tile"][data-key="${key}"]`);
+const count = (page: Page) => page.locator('[data-testid="gallery-count"]');
+/** A small PC, and the family it sits in. */
+const PC = allItems().filter((item) => item.kind === "pcs" && item.family !== null)[3] as { key: string; family: string };
+
+test("the gallery opens on a few machines beside the kinds, one click from any kind's machines", async ({ page }) => {
   const problems = watch(page);
   await page.goto(URL);
   const counts = catalogueCounts();
   expect(counts.total).toBeGreaterThan(1000);
-  // it opens on the groups, each a bunch of its machines, not on every machine
-  const card = (id: string) => page.locator(`[data-testid="gallery-card"][data-group="${id}"]`);
-  await expect(page.locator('[data-testid="gallery-count"]')).toHaveText(`${counts.built} of ${counts.total} built`);
-  await expect(page.locator('[data-testid="tile"]')).toHaveCount(0);
-  for (const family of ["pi-boards", "pi-dressed", "desktops", "laptops", "tablets-phones", "pcs", "nas", "classics", "clients", "parts"]) await expect(card(family)).toBeVisible();
-  expect(await card("pi-boards").locator("img").count()).toBeGreaterThan(1);
-  await card("pi-boards").click();
-  await expect(page.locator('[data-testid="tile"][data-key="rpi-zero"]')).toContainText("Raspberry Pi Zero");
-  await expect(page.locator('[data-testid="tile"][data-key="nas-rack"]')).toHaveCount(0);
-  await page.locator('[data-testid="group-back"]').click();
-  await card("parts").click();
+  await expect(count(page)).toHaveText(`${counts.built} of ${counts.total} built`);
+  await expect(page.locator('[data-testid="tile"]')).toHaveCount(10);
+  for (const family of ["pi-boards", "pi-dressed", "desktops", "laptops", "tablets-phones", "pcs", "nas", "classics", "clients", "parts"]) await expect(kindRow(page, family)).toBeAttached();
+  expect(await kindRow(page, "pi-boards").locator("img").count()).toBeGreaterThan(1);
+  await kindRow(page, "pi-boards").click();
+  await expect(tileOf(page, "rpi-zero")).toContainText("Raspberry Pi Zero");
+  await expect(tileOf(page, "nas-rack")).toHaveCount(0);
+  await kindRow(page, "parts").click();
   await expect(page.locator('[data-testid="part-tile"]').first()).toBeVisible();
-  await page.locator('[data-testid="group-back"]').click();
-  await page.locator('[data-testid="filter-planned"]').click();
   // every machine still to come is on a shelf
-  const shelved = await page.locator('[data-testid="gallery-card"][data-shelf]').evaluateAll((nodes) => nodes.map((node) => Number((node as HTMLElement).dataset.count)));
-  expect(shelved.reduce((sum, count) => sum + count, 0)).toBe(counts.planned);
-  await expect(page.locator('[data-testid="tile"]')).toHaveCount(0);
+  await page.locator('[data-testid="filter-planned"]').click();
+  const shelved = await page.locator('[data-testid="gallery-card"][data-shelf]').evaluateAll((nodes) => nodes.filter((node) => !(node as HTMLElement).hidden).map((node) => Number((node as HTMLElement).dataset.count)));
+  expect(shelved.reduce((sum, one) => sum + one, 0)).toBe(counts.planned);
   const first = PLANNED.find((entry) => entry.shelf === "consoles" && entry.family === "DS") ?? PLANNED[0];
-  await card(first.shelf).click();
-  const shelf = page.locator(`[data-testid="gallery-shelf"][data-shelf="${first.shelf}"]`);
-  const family = shelf.locator('[data-testid="gallery-family"]').filter({ hasText: headingOf(first) }).first();
-  await family.locator("summary").click();
-  await expect(family.locator(`[data-testid="tile"][data-key="${first.key}"]`)).toContainText(first.name);
-  await expect(family.locator(`[data-testid="tile"][data-key="${first.key}"]`)).toContainText("Coming soon");
+  const item = itemById(first.key);
+  await kindRow(page, first.shelf).click();
+  await page.locator(`[data-testid="gallery-family"][data-family="${item?.family}"]`).click();
+  await expect(tileOf(page, first.key)).toContainText(first.name);
+  await expect(tileOf(page, first.key)).toContainText("Coming soon");
   // one picture for every machine still to come
   const sources = await page.evaluate(() => new Set([...document.querySelectorAll<HTMLImageElement>('[data-status="planned"] img')].map((image) => image.getAttribute("src"))).size);
   expect(sources).toBe(1);
-  // what was open stays open across a change of filter
-  await page.locator('[data-testid="filter-all"]').click();
-  await expect(page.locator(`[data-testid="tile"][data-key="${first.key}"]`)).toBeVisible();
-  await page.locator('[data-testid="group-back"]').click();
+  // and a machine with no shape yet still opens, as that one picture under its own name
+  await tileOf(page, first.key).click();
+  await expect(page.locator("hako-device#hero")).toHaveAttribute("data-view", "planned");
+  await expect(page.locator('[data-testid="device-name"]')).toHaveText(first.name);
+  await expect(page.locator('[data-testid="device-status"]')).toHaveText("Coming soon");
   await page.locator('[data-testid="filter-built"]').click();
+  // the search looks through everything, under its other names too
   await page.locator('[data-testid="gallery-search"]').fill("rack nas");
-  await expect(page.locator('[data-testid="tile"][data-key="nas-rack"]')).toBeVisible();
+  await expect(tileOf(page, "nas-rack")).toBeVisible();
   await page.locator('[data-testid="gallery-search"]').fill("trash-can");
-  await expect(page.locator('[data-testid="tile"][data-key="mac-pro-late-2013"]')).toBeVisible();
+  await expect(tileOf(page, "mac-pro-late-2013")).toBeVisible();
   await page.locator('[data-testid="gallery-search"]').fill("nothing has this name");
   await expect(page.locator('[data-testid="tile"]')).toHaveCount(0);
+  await expect(page.locator('[data-testid="gallery-models"]')).toContainText("Nothing matches.");
   expect(problems).toEqual([]);
 });
 
-test("every drawing in the gallery loads, in thin, in thick and in both", async ({ page }) => {
+test("every machine and part can be reached: a kind, a family, a machine", async ({ page }, info) => {
+  test.skip(info.project.name !== "chromium-desk", "one browser is enough for this long walk");
+  test.setTimeout(240_000);
+  const problems = watch(page);
+  await page.goto(`${URL}?show=all`);
+  // walked in the page itself, because there are hundreds of families: real clicks on the real buttons, and a real scroll for the machines drawn only when scrolled to
+  const reached = await page.evaluate(async () => {
+    const all = <T extends HTMLElement>(selector: string) => [...document.querySelectorAll<T>(selector)];
+    const seen: { key: string; part: boolean; kind: string; family: string }[] = [];
+    const collect = async (kind: string, family: string) => {
+      const scroller = document.querySelector('[data-testid="gallery-models"]') as HTMLElement;
+      const total = Number(scroller.dataset.total);
+      for (let round = 0; round < 200 && all("#gallery-tiles button").length < total; round++) {
+        scroller.scrollTo(0, scroller.scrollHeight);
+        await new Promise((done) => setTimeout(done, 30));
+      }
+      for (const tile of all("#gallery-tiles button")) seen.push({ key: tile.dataset.key ?? "", part: tile.dataset.testid === "part-tile", kind, family });
+    };
+    for (const row of all('[data-testid="gallery-card"]')) {
+      const kind = row.dataset.group ?? "";
+      if (kind === "start") continue;
+      row.click();
+      const families = all('[data-testid="gallery-family"]').map((chip) => chip.dataset.family ?? "");
+      if (families.length === 0) await collect(kind, "");
+      for (const family of families) {
+        document.querySelector<HTMLElement>(`[data-testid="gallery-family"][data-family="${CSS.escape(family)}"]`)?.click();
+        await collect(kind, family);
+      }
+    }
+    return seen;
+  });
+  const key = (one: { key: string; part: boolean }) => `${one.part ? "part:" : ""}${one.key}`;
+  // each exactly once, under the kind and family it belongs to
+  expect(reached.map(key).sort()).toEqual(allItems().map((item) => item.id).sort());
+  for (const one of reached) {
+    const item = itemById(key(one));
+    expect(one.family, item?.id).toBe(item?.family ?? "");
+  }
+  expect(problems).toEqual([]);
+});
+
+test("a PC takes three clicks, and it and its options are on the screen together", async ({ page }) => {
   const problems = watch(page);
   await page.goto(URL);
-  // a blank search narrows to everything: every tile on one page
-  await page.locator('[data-testid="gallery-search"]').fill(" ");
+  await kindRow(page, "pcs").click();
+  await page.locator(`[data-testid="gallery-family"][data-family="${PC.family}"]`).click();
+  const tower = page.locator(`[data-testid="tile"][data-key="${PC.key}"]`);
+  const key = PC.key;
+  await tower.click();
+  await expect(page.locator("hako-device#hero")).toHaveAttribute("key", key);
+  await expect(page.locator('[data-testid="device-facts"]')).toContainText(key);
+  await expect(page.locator('[data-testid="embed-code"]')).toContainText(`key="${key}"`);
+  expect(problems).toEqual([]);
+});
+
+test("every drawing the gallery can ask for loads, in thin and in thick, and the tiles change with the choice", async ({ page }) => {
+  const problems = watch(page);
+  await page.goto(URL);
+  // each drawing once: a tile is drawn only when it is scrolled to, so asking for them is the whole check
+  const files = [...new Set(allItems().flatMap((item) => (drawingKey(item) ? [`assets/${item.part ? "parts/" : ""}${drawingKey(item)}.svg`, `assets/${item.part ? "parts/" : ""}${drawingKey(item)}.thick.svg`] : [])))];
+  expect(files.length).toBeGreaterThan(300);
+  const bad = await page.evaluate(async (list) => {
+    const failed: string[] = [];
+    for (let at = 0; at < list.length; at += 40) {
+      await Promise.all(
+        list.slice(at, at + 40).map(async (file) => {
+          if (!(await fetch(file)).ok) failed.push(file);
+        }),
+      );
+    }
+    return failed;
+  }, files);
+  expect(bad).toEqual([]);
   const loaded = async () =>
     page.evaluate(async () => {
-      const images = [...document.querySelectorAll<HTMLImageElement>("#gallery img")];
+      const images = [...document.querySelectorAll<HTMLImageElement>("#gallery-tiles img")];
       for (const image of images) image.loading = "eager";
       await Promise.all(images.map((image) => image.decode().catch(() => null)));
       return { total: images.length, bad: images.filter((image) => image.naturalWidth === 0).map((image) => image.src), thick: images.filter((image) => image.src.endsWith(".thick.svg")).length };
     });
+  await kindRow(page, "desktops").click();
   const thin = await loaded();
   expect(thin.bad).toEqual([]);
+  expect(thin.total).toBeGreaterThan(5);
   expect(thin.thick).toBe(0);
   await page.locator('[data-testid="style-thick"]').click();
   const thick = await loaded();
@@ -113,6 +187,206 @@ test("every drawing in the gallery loads, in thin, in thick and in both", async 
   const both = await loaded();
   expect(both.bad).toEqual([]);
   expect(both.total).toBe(thin.total * 2);
+  expect(problems).toEqual([]);
+});
+
+test.describe("on a desk", () => {
+  test.use({ viewport: { width: 1440, height: 900 } });
+
+  test("the page stays inside the window, whatever is open, and nothing folds", async ({ page }, info) => {
+    test.skip(info.project.name !== "chromium-desk");
+    const problems = watch(page);
+    await page.goto(URL);
+    const fits = async (where: string) => {
+      const sizes = await page.evaluate(() => ({ page: document.documentElement.scrollHeight, window: innerHeight, sideways: document.documentElement.scrollWidth - innerWidth, folds: document.querySelectorAll("details, summary").length }));
+      expect(sizes.page, where).toBeLessThanOrEqual(sizes.window);
+      expect(sizes.sideways, where).toBeLessThanOrEqual(0);
+      expect(sizes.folds, where).toBe(0);
+    };
+    const onScreen = async (selector: string, where: string) => {
+      const box = await page.locator(selector).boundingBox();
+      expect(box, where).not.toBeNull();
+      if (box) expect(box.y + box.height, `${where}: ${selector}`).toBeLessThanOrEqual(900);
+    };
+    await fits("the first screen");
+    // the longest lists there are: the longest kind, every machine, and each filter
+    await kindRow(page, "mini-pcs").click();
+    await fits("the longest kind");
+    await page.locator('[data-testid="filter-all"]').click();
+    await kindRow(page, "phones").click();
+    await fits("the most families");
+    await page.locator('[data-testid="tile"]').first().click();
+    await fits("a machine chosen");
+    await page.locator('[data-testid="filter-built"]').click();
+    await kindRow(page, "laptops").click();
+    await tileOf(page, "macbook-pro-14").click();
+    for (const part of ["hako-device#hero", '[data-testid="view-bar"]', '[data-testid="device-options"]', '[data-testid="device-facts"]', '[data-testid="embed-copy"]', '[data-testid="tile"][aria-pressed="true"]']) await onScreen(part, "a machine and its options");
+    await page.locator('[data-testid="gallery-filters"]').click();
+    await fits("the filters");
+    for (const facet of ["maker", "cpu", "ram", "generation"]) {
+      await page.locator(`[data-testid="gallery-facet"][data-facet="${facet}"]`).click();
+      await fits(`the filter ${facet}`);
+    }
+    await page.locator('[data-testid="gallery-kinds"]').click();
+    for (const view of ["builder", "lineup", "screen"]) {
+      await page.locator(`.links a[data-view="${view}"]`).click();
+      await expect(page.locator(`#${view}`)).toBeVisible();
+      await fits(`the view ${view}`);
+    }
+    expect(problems).toEqual([]);
+  });
+});
+
+test("only the one device on show is a live view: tiles and rows are drawings", async ({ page }) => {
+  const problems = watch(page);
+  await page.goto(URL);
+  await kindRow(page, "tablets-phones").click();
+  const live = () => page.evaluate(() => ({ devices: document.querySelectorAll("hako-device").length, canvases: document.querySelectorAll("canvas").length, hero: document.getElementById("hero")?.shadowRoot?.querySelectorAll("canvas").length ?? 0 }));
+  expect(await live()).toMatchObject({ devices: 1, canvases: 0 });
+  // leaving the gallery gives the other views' devices a place, and coming back takes them away
+  await page.locator('.links a[data-view="builder"]').click();
+  await expect(page.locator('[data-testid="builder-device"]')).toBeAttached();
+  await page.locator('.links a[data-view="screen"]').click();
+  await expect(page.locator('[data-testid="builder-device"]')).toHaveCount(0);
+  await expect(page.locator('[data-testid="screen-device"]')).toBeAttached();
+  await page.locator('.links a[data-view="gallery"]').click();
+  expect(await live()).toMatchObject({ devices: 1, canvases: 0 });
+  expect(problems).toEqual([]);
+});
+
+test("the address keeps the choice: reload and Back do what you expect", async ({ page }) => {
+  const problems = watch(page);
+  await page.goto(URL);
+  await kindRow(page, "pcs").click();
+  await page.locator(`[data-testid="gallery-family"][data-family="${PC.family}"]`).click();
+  const key = PC.key;
+  await page.locator(`[data-testid="tile"][data-key="${key}"]`).click();
+  await expect(page).toHaveURL(new RegExp(`kind=pcs.*family=.*#${key}$`));
+  const pressed = (node: string) => expect(page.locator(node)).toHaveAttribute("aria-pressed", "true");
+  const hero = page.locator("hako-device#hero");
+  await page.reload();
+  await expect(hero).toHaveAttribute("key", key);
+  await pressed(`[data-testid="tile"][data-key="${key}"]`);
+  await pressed('[data-testid="gallery-card"][data-group="pcs"]');
+  await pressed(`[data-testid="gallery-family"][data-family="${PC.family}"]`);
+  // a step along the row is a step back
+  await page.goBack();
+  await expect(hero).not.toHaveAttribute("key", key);
+  await pressed(`[data-testid="gallery-family"][data-family="${PC.family}"]`);
+  await page.goBack();
+  await pressed('[data-testid="gallery-family-all"]');
+  await page.goBack();
+  await pressed('[data-testid="gallery-card"][data-group="start"]');
+  await page.goForward();
+  await pressed('[data-testid="gallery-card"][data-group="pcs"]');
+  // a machine's own address finds its kind and family by itself
+  await page.goto(`${URL}#macbook-pro-14`);
+  await pressed('[data-testid="gallery-card"][data-group="laptops"]');
+  await pressed('[data-testid="tile"][data-key="macbook-pro-14"]');
+  // a search, the filters and the styles stay too, without an entry for each: the address is written a moment after the last change
+  await page.goto(URL);
+  await page.locator('[data-testid="filter-all"]').click();
+  await page.locator('[data-testid="style-thick"]').click();
+  await page.locator('[data-testid="gallery-search"]').fill("nintendo");
+  await page.locator('[data-testid="gallery-filters"]').click();
+  await page.locator('[data-testid="gallery-facet"][data-facet="type"]').click();
+  await page.locator('[data-testid="facet-chip"][data-value="Home console"]').click();
+  await expect(page).toHaveURL(/show=all/);
+  await expect(page).toHaveURL(/style=thick/);
+  await expect(page).toHaveURL(/q=nintendo/);
+  await expect(page).toHaveURL(/f-type=Home/);
+  const before = await count(page).textContent();
+  await page.reload();
+  await expect(page.locator('[data-testid="gallery-search"]')).toHaveValue("nintendo");
+  await expect(count(page)).toHaveText(before ?? "");
+  await pressed('[data-testid="facet-chip"][data-value="Home console"]');
+  await pressed('[data-testid="style-thick"]');
+  // the sections have addresses of their own
+  await page.goto(`${URL}#lineup`);
+  await expect(page.locator('[data-testid="lineup"]')).toBeVisible();
+  await expect(page.locator("#gallery")).toBeHidden();
+  expect(problems).toEqual([]);
+});
+
+test("the keyboard walks each row with the arrows, and each row is one Tab stop", async ({ page }, info) => {
+  test.skip(info.project.name !== "chromium-desk");
+  const problems = watch(page);
+  await page.goto(URL);
+  const active = () => page.evaluate(() => { const node = document.activeElement as HTMLElement; return { group: node.dataset.group, key: node.dataset.key, family: node.dataset.family, testid: node.dataset.testid }; });
+  await kindRow(page, "start").focus();
+  await page.keyboard.press("ArrowDown");
+  expect((await active()).group).toBe("pi-boards");
+  await page.keyboard.press("End");
+  expect((await active()).group).toBe("parts");
+  await page.keyboard.press("Home");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  expect((await active()).group).toBe("desktops");
+  await page.keyboard.press("Enter");
+  await expect(kindRow(page, "desktops")).toHaveAttribute("aria-pressed", "true");
+  // one Tab from the row of kinds lands in the families, and one more in the machines
+  await page.keyboard.press("Tab");
+  expect((await active()).testid).toMatch(/^gallery-family/);
+  await page.keyboard.press("Tab");
+  const first = await active();
+  expect(first.testid).toBe("tile");
+  const firstKey = first.key;
+  await page.keyboard.press("ArrowRight");
+  expect((await active()).key).not.toBe(firstKey);
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press(" ");
+  const shown = (await active()).key ?? "";
+  await expect(page.locator("hako-device#hero")).toHaveAttribute("key", shown);
+  expect(problems).toEqual([]);
+});
+
+/** A phone widens its layout to fit what overflows, so the page's own width says nothing: this measures against the screen. */
+const sideways = (page: Page) => page.evaluate(() => ({ layout: innerWidth - visualViewport!.width, page: document.documentElement.scrollWidth - visualViewport!.width }));
+
+test("a finger reaches a machine, and nothing scrolls the page sideways", async ({ page }, info) => {
+  test.skip(info.project.name === "chromium-desk");
+  const problems = watch(page);
+  await page.goto(URL);
+  // on a phone each row scrolls sideways inside itself
+  const row = kindRow(page, "laptops");
+  await row.scrollIntoViewIfNeeded();
+  await row.tap();
+  await tileOf(page, "macbook-pro-14").tap();
+  await expect(page.locator("hako-device#hero")).toHaveAttribute("key", "macbook-pro-14");
+  await expect(page.locator("hako-device#hero")).toBeInViewport();
+  // the longest rows there are, each in turn
+  for (const address of ["", "?kind=phones&show=all", "?kind=apple", "?pane=filters&facet=cpu", "#macbook-pro-14", "#builder", "#lineup", "#screen"]) {
+    await page.goto(`${URL}${address}`);
+    await expect(page.locator(".links")).toBeVisible();
+    await page.waitForTimeout(300);
+    expect(await sideways(page), address).toEqual({ layout: 0, page: 0 });
+  }
+  // the first screen holds the device, the search, the kinds and the first machines
+  await page.goto(URL);
+  for (const part of ['[data-testid="hero-device"]', '[data-testid="gallery-search"]', '[data-testid="gallery-card"][data-group="start"]', '[data-testid="tile"]']) await expect(page.locator(part).first()).toBeInViewport();
+  expect(problems).toEqual([]);
+});
+
+test("the options change the device and the code to copy", async ({ page }) => {
+  const problems = watch(page);
+  await page.goto(`${URL}#pi5`);
+  const hero = page.locator("hako-device#hero");
+  const code = page.locator('[data-testid="embed-code"]');
+  await page.locator('[data-testid="option-look-drawing"]').click();
+  await expect(hero).toHaveAttribute("mode", "drawing");
+  await expect(code).toContainText('mode="drawing"');
+  await page.locator('[data-testid="option-ground-off"]').click();
+  await expect(hero).toHaveAttribute("no-ground", "");
+  await expect(code).toContainText("no-ground");
+  await page.locator('[data-testid="style-thick"]').click();
+  await expect(hero).toHaveAttribute("drawing-style", "thick");
+  await expect(code).toContainText('drawing-style="thick"');
+  // a covered machine's drawing is its mesh's
+  await page.goto(`${URL}#${COVERED[0].key}`);
+  await page.locator('[data-testid="tab-svg"]').click();
+  await expect(code).toContainText("<svg");
+  await expect(code).not.toContainText("Coming soon");
   expect(problems).toEqual([]);
 });
 
@@ -239,33 +513,31 @@ test("a device opened by its old address still opens, and the view in the addres
   test.skip(!is3d(browserName) || info.project.name !== "chromium-desk");
   test.setTimeout(240_000);
   const problems = watch(page);
-  const dialog = page.locator('[data-testid="device-dialog"]');
+  const hero = page.locator("hako-device#hero");
   for (const [address, attribute, value] of [
     ["#pi4", "key", "pi4"],
     ["#part:armor", "part", "armor"],
     ["?yaw=30&tilt=8&zoom=2#pi4", "key", "pi4"],
   ] as const) {
     await page.goto(`${URL}${address}`, { waitUntil: "domcontentloaded" });
-    await expect(dialog).toBeVisible({ timeout: 60_000 });
-    await expect(dialog.locator('[data-testid="dialog-device"]')).toHaveAttribute(attribute, value);
-    // the dialog has its own view controls, and they drive its device
-    await expect(dialog.locator('[data-testid="dialog-view-bar"]')).toBeVisible();
-    await expect(dialog.locator('[data-testid="dialog-device"]')).toHaveAttribute("data-driven", "true");
+    await expect(hero).toHaveAttribute(attribute, value, { timeout: 60_000 });
+    await expect(page.locator('[data-testid="view-bar"]')).toBeVisible();
+    await expect(hero).toHaveAttribute("data-driven", "true");
   }
-  // the page's own bar opened at what the address said, and closing the dialog keeps it
+  // the bar opened at what the address said, and another machine keeps it
   const bar = page.locator('[data-testid="view-bar"]');
   await expect.poll(() => bar.evaluate((node) => (node as Bar).state.yaw)).toBeCloseTo(30, 0);
   expect(await bar.evaluate((node) => (node as Bar).state.zoom)).toBeCloseTo(2, 1);
-  await page.locator('[data-testid="dialog-close"]').click();
-  await expect(dialog).toBeHidden();
-  await expect.poll(() => page.url()).not.toContain("#");
+  await kindRow(page, "start").click();
+  await tileOf(page, "pi5").click();
+  await expect(hero).toHaveAttribute("key", "pi5");
   expect(page.url()).toMatch(/\?.*yaw=30/);
   expect(problems).toEqual([]);
 });
 
 test("the builder checks the fit and writes the code", async ({ page }) => {
   const problems = watch(page);
-  await page.goto(URL);
+  await page.goto(`${URL}#builder`);
   const issues = page.locator('[data-testid="builder-issues"]');
   await expect(issues).toContainText("It all fits.");
   await page.locator('[data-testid="pick-case"]').selectOption("argon");
@@ -288,7 +560,7 @@ test("the builder checks the fit and writes the code", async ({ page }) => {
 
 test("a hostile print stays text, in the drawing and on the page", async ({ page }) => {
   const problems = watch(page);
-  await page.goto(URL);
+  await page.goto(`${URL}#builder`);
   await page.locator('[data-testid="pick-case"]').selectOption("");
   await page.locator('[data-testid="pick-hat"]').selectOption("pitft-28");
   await page.locator('[data-testid="pick-print"]').fill('<img src=x onerror=alert(1)>');
@@ -301,7 +573,7 @@ test("a hostile print stays text, in the drawing and on the page", async ({ page
 
 test("the lineup is to scale, on one baseline, its lines one width", async ({ page }) => {
   const problems = watch(page);
-  await page.goto(URL);
+  await page.goto(`${URL}#lineup`);
   const measured = async () =>
     page.evaluate(async () => {
       const host = document.querySelector('[data-testid="lineup"]') as HTMLElement;
@@ -408,7 +680,7 @@ test("a real-scale 3D view takes the mesh's millimetres", async ({ page, browser
 test("a live screen takes words and a canvas", async ({ page, browserName }, info) => {
   test.skip(!is3d(browserName) || info.project.name !== "chromium-desk");
   const problems = watch(page);
-  await page.goto(URL);
+  await page.goto(`${URL}#screen`);
   const device = page.locator('[data-testid="screen-device"]');
   await device.scrollIntoViewIfNeeded();
   await expect(device).toHaveAttribute("data-view", "3d", { timeout: 30_000 });
@@ -429,8 +701,8 @@ test("filters by brand, CPU maker and decade narrow the whole catalogue, and cle
   const problems = watch(page);
   await page.goto(URL);
   await page.locator('[data-testid="filter-all"]').click();
-  await page.locator('[data-testid="gallery-filters"] > summary').click();
-  const open = (facet: string) => page.locator(`[data-testid="gallery-facet"][data-facet="${facet}"] summary`).click();
+  await page.locator('[data-testid="gallery-filters"]').click();
+  const open = (facet: string) => page.locator(`[data-testid="gallery-facet"][data-facet="${facet}"]`).click();
   const chip = (facet: string, value: string) => page.locator(`[data-testid="facet-chip"][data-facet="${facet}"][data-value="${value}"]`);
   await open("maker");
   await chip("maker", "Apple").click();
@@ -439,14 +711,15 @@ test("filters by brand, CPU maker and decade narrow the whole catalogue, and cle
   const picks = { maker: ["Apple"], cpuMaker: ["Motorola"] };
   const expected = catalogue().filter((entry) => matchesPicks(entry.key, picks));
   expect(expected.length).toBeGreaterThan(10);
-  await expect(page.locator('[data-testid="gallery-count"]')).toContainText(`${expected.length} of`);
-  await expect(page.locator('[data-testid="tile"]')).toHaveCount(expected.length);
+  await expect(count(page)).toContainText(`${expected.length} of`);
+  await expect(page.locator('[data-testid="gallery-models"]')).toHaveAttribute("data-total", String(expected.length));
+  await open("maker");
   await expect(chip("maker", "Apple")).toHaveAttribute("aria-pressed", "true");
-  // another brand stays on offer, so a second can be added
+  // another brand stays on offer only when it would show something
   await expect(chip("maker", "Raspberry Pi")).toHaveCount(0);
   await page.locator('[data-testid="facet-clear"]').click();
   await expect(page.locator('[data-testid="facet-clear"]')).toHaveCount(0);
-  await expect(page.locator('[data-testid="gallery-count"]')).toContainText("built");
+  await expect(count(page)).toContainText("built");
   // the filters stay open after a clear
   await open("type");
   await chip("type", "Single-board computer").click();
@@ -458,38 +731,38 @@ test("the filters offer operating system, wireless, weight, colour and discontin
   const problems = watch(page);
   await page.goto(URL);
   await page.locator('[data-testid="filter-all"]').click();
-  await page.locator('[data-testid="gallery-filters"] > summary').click();
+  await page.locator('[data-testid="gallery-filters"]').click();
   const picks: Picks = { os: ["Mac OS X"], wireless: ["Wi-Fi"], weight: ["3 to 10 kg"], colour: ["Black"], discontinued: ["2014"] };
   for (const [facet, values] of Object.entries(picks)) {
     await expect(page.locator(`[data-testid="gallery-facet"][data-facet="${facet}"]`)).toHaveCount(1);
-    await page.locator(`[data-testid="gallery-facet"][data-facet="${facet}"] summary`).click();
+    await page.locator(`[data-testid="gallery-facet"][data-facet="${facet}"]`).click();
     for (const value of values) await expect(page.locator(`[data-testid="facet-chip"][data-facet="${facet}"][data-value="${value}"]`)).toHaveCount(1);
   }
   for (const facet of ["os", "wireless"] as const) {
     const value = picks[facet]?.[0] ?? "";
+    await page.locator(`[data-testid="gallery-facet"][data-facet="${facet}"]`).click();
     await page.locator(`[data-testid="facet-chip"][data-facet="${facet}"][data-value="${value}"]`).click();
   }
   const expected = catalogue().filter((entry) => matchesPicks(entry.key, { os: picks.os, wireless: picks.wireless }));
   expect(expected.length).toBeGreaterThan(5);
-  await expect(page.locator('[data-testid="gallery-count"]')).toContainText(`${expected.length} of`);
+  await expect(count(page)).toContainText(`${expected.length} of`);
   expect(problems).toEqual([]);
 });
 
-test("a tile opens one device large; Close and Back take it away", async ({ page }) => {
+test("a tile opens one device large beside its facts; a part too", async ({ page }) => {
   const problems = watch(page);
   await page.goto(URL);
-  await page.locator('[data-testid="gallery-card"][data-group="pi-boards"]').click();
-  await page.locator('[data-testid="tile"][data-key="pi4"]').click();
-  const dialog = page.locator('[data-testid="device-dialog"]');
-  await expect(dialog).toBeVisible({ timeout: 20_000 });
-  await expect(dialog.locator('[data-testid="dialog-device"]')).toHaveAttribute("key", "pi4");
-  await expect(dialog).toContainText("85 by 56 by 17 mm");
-  await page.locator('[data-testid="dialog-close"]').click();
-  await expect(dialog).toBeHidden();
-  await page.locator('[data-testid="group-back"]').click();
-  await page.locator('[data-testid="gallery-card"][data-group="parts"]').click();
+  await kindRow(page, "pi-boards").click();
+  await tileOf(page, "pi4").click();
+  const hero = page.locator("hako-device#hero");
+  await expect(hero).toHaveAttribute("key", "pi4");
+  await expect(page.locator('[data-testid="device-facts"]')).toContainText("85 by 56 by 17 mm");
+  await kindRow(page, "parts").click();
   await page.locator('[data-testid="part-tile"][data-key="armor"]').click();
-  await expect(dialog.locator('[data-testid="dialog-device"]')).toHaveAttribute("part", "armor");
+  await expect(hero).toHaveAttribute("part", "armor");
+  await expect(hero).not.toHaveAttribute("key", /./);
+  await expect(page.locator('[data-testid="embed-code"]')).toContainText('part="armor"');
+  await expect(page).toHaveURL(/#part%3Aarmor$/);
   expect(problems).toEqual([]);
 });
 
@@ -497,8 +770,7 @@ test("no sideways scroll at a phone's width", async ({ page }, info) => {
   test.skip(info.project.name === "chromium-desk");
   await page.goto(URL);
   await expect(page.locator('[data-testid="gallery-card"]').first()).toBeVisible();
-  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-  expect(overflow).toBeLessThanOrEqual(0);
+  expect(await sideways(page)).toEqual({ layout: 0, page: 0 });
 });
 
 test("the docs open at their relative address", async ({ page }) => {
@@ -538,7 +810,7 @@ test("the copy panel matches the device on screen, and the embed page draws its 
   const code = page.locator('[data-testid="embed-code"]');
   await expect(code).toContainText("hako-device");
   await expect(code).toContainText('key="pi4-pitft"');
-  await page.locator("#hero-chips button").nth(2).click();
+  await page.locator('[data-testid="tile"]').nth(2).click();
   await expect(code).toContainText('key="pi-zero"');
   await page.locator('[data-testid="tab-iframe"]').click();
   await expect(code).toContainText("embed.html");
@@ -562,11 +834,10 @@ test("the React wrapper draws the element", async ({ page }) => {
 });
 
 test("a machine's colours: a drawn colour switches, one with none says so and tints the body or does nothing", async ({ page }) => {
-  await page.goto("/hako-devices/");
+  const problems = watch(page);
+  await page.goto(`${URL}#macbook-pro-14`);
   const hero = page.getByTestId("hero-device");
-  await expect(page.locator("#hero-colours").getByTestId("colour-note")).toContainText("nobody has checked");
-  await page.locator('#hero-chips button[data-key="macbook-pro-14"]').click();
-  const row = page.locator("#hero-colours").getByTestId("colour-row");
+  const row = page.getByTestId("device-colours").getByTestId("colour-row");
   const chip = (name: string) => row.locator(`[data-colour="${name}"]`);
   await expect(chip("Space Black")).toHaveAttribute("aria-pressed", "true");
   await expect(chip("Space Gray")).toContainText("no drawing");
@@ -577,6 +848,8 @@ test("a machine's colours: a drawn colour switches, one with none says so and ti
   await expect(hero).not.toHaveAttribute("body-colour");
   await expect(row.getByTestId("colour-note")).toContainText("has a drawing of its own");
   await expect(row.getByRole("link", { name: "Where this comes from" })).toHaveAttribute("href", /support\.apple\.com/);
+  // the code to copy is for what is on the screen
+  await expect(page.locator('[data-testid="embed-code"]')).toContainText('key="macbook-pro-14-silver"');
 
   await chip("Space Gray").click();
   await expect(hero).toHaveAttribute("key", "macbook-pro-14");
@@ -584,18 +857,33 @@ test("a machine's colours: a drawn colour switches, one with none says so and ti
   await expect(row.getByTestId("colour-note")).toContainText("no drawing of its own");
   await expect(row.getByTestId("colour-note")).toContainText("not the maker's paint");
 
-  await page.locator('#hero-chips button[data-key="pi5"]').click();
+  // another machine starts plain, and one nobody has checked says so
+  await page.goto(`${URL}#pi5`);
   await expect(hero).not.toHaveAttribute("body-colour");
-  await expect(page.locator("#hero-colours").getByTestId("colour-note")).toContainText("nobody has checked");
+  await expect(page.getByTestId("device-colours").getByTestId("colour-note")).toContainText("nobody has checked");
+  // a part has no row at all
+  await page.goto(`${URL}#part:armor`);
+  await expect(hero).toHaveAttribute("part", "armor");
+  await expect(page.getByTestId("device-colours")).toBeHidden();
+  expect(problems).toEqual([]);
 });
 
 test("a colour with no value says only its name, and a covered machine switches to its finish's mesh", async ({ page }) => {
-  await page.goto("/hako-devices/#macbook-air-m2-2022");
-  const box = page.locator("#dialog-colours");
+  const problems = watch(page);
+  await page.goto(`${URL}#macbook-air-m2-2022`);
+  const box = page.getByTestId("device-colours");
   await expect(box.locator('[data-colour="Midnight"]')).toHaveAttribute("aria-pressed", "true");
   await box.locator('[data-colour="Starlight"]').click();
   await expect(box.getByTestId("colour-note")).toContainText("only its name");
-  await expect(page.getByTestId("dialog-device")).not.toHaveAttribute("body-colour");
+  await expect(page.getByTestId("hero-device")).not.toHaveAttribute("body-colour");
   await box.locator('[data-colour="Silver"]').click();
-  await expect(page.getByTestId("dialog-device")).toHaveAttribute("key", "macbook-air-13-silver");
+  await expect(page.getByTestId("hero-device")).toHaveAttribute("key", "macbook-air-13-silver");
+  expect(problems).toEqual([]);
+});
+
+test("the colours stay in the side panel, one row of them, with no scroll of the page", async ({ page }, info) => {
+  test.skip(info.project.name !== "chromium-desk");
+  await page.goto(`${URL}#macbook-pro-14`);
+  await expect(page.getByTestId("colour-row")).toHaveCount(1);
+  expect(await page.evaluate(() => document.documentElement.scrollHeight - innerHeight)).toBeLessThanOrEqual(0);
 });

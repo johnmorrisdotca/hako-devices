@@ -24,7 +24,7 @@ DEVICES.length > 50; // true
 
 ## Group pictures and colours
 
-`groupLayout(count)` says where each of a group's pictures goes, so they sit in a bunch with the first in front, and `groupSample(items)` picks a few that show the group's range. The demo's gallery opens on groups drawn this way. `FINISHES` lists a machine's other colours that have a drawing; each one is a device with its own key. Every colour a machine came in, drawn or not, is `coloursOf`.
+`groupLayout(count)` says where each of a group's pictures goes, so they sit in a bunch with the first in front, and `groupSample(items)` picks a few that show the group's range. The demo's list of kinds draws each one this way. `FINISHES` lists a machine's other colours that have a drawing; each one is a device with its own key. Every colour a machine came in, drawn or not, is `coloursOf`.
 
 ```ts
 import { FINISHES, groupLayout, groupSample } from "@johnmorrisdotca/hako-devices";

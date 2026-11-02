@@ -32,10 +32,13 @@ try {
     if (!box) throw new Error(`no ${selector}`);
     await page.screenshot({ path: join(out, name), type: "jpeg", quality: 82, fullPage: true, clip: { x: box.x, y: box.y + (await page.evaluate(() => scrollY)), width: box.width, height: Math.min(box.height, tallest) } });
   };
+  await page.locator('.links a[data-view="builder"]').click();
   await page.locator('hako-device[data-testid="builder-device"][data-view="3d"]').waitFor({ timeout: 60_000 }).catch(() => {});
   await page.waitForTimeout(1800);
   await shoot("#builder", "builder.jpg");
+  await page.locator('.links a[data-view="lineup"]').click();
   await shoot("#lineup", "lineup.jpg");
+  await page.locator('.links a[data-view="gallery"]').click();
   const eager = () =>
     page.evaluate(async () => {
       const images = [...document.querySelectorAll<HTMLImageElement>("#gallery img")];

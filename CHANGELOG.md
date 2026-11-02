@@ -11,7 +11,11 @@ All notable changes to this project are written here. The format follows
 - What colours a machine came in: `coloursOf(key)` and `colouredKeys()` in the new entry point `@johnmorrisdotca/hako-devices/colours`. Each colour is the maker's word, the pages that say so, a swatch that says how it is known and the key of its drawing, or null. A colour with no drawing is still listed, and an empty list means nobody has checked. `FINISHES` is unchanged. The facts are in `data/colours.json`, 200 more machines read from their pages, beside the 167 whose colours were already tags. See [docs/assets.md](docs/assets.md#what-colours-a-machine-came-in).
 - `data/machines.json` has `colours` on every machine, and the `colour` filter covers the new machines.
 - `<hako-device body-colour="#rrggbb">` shows a colour on the body of the mesh in the 3D view, for a colour with no drawing of its own.
-- The demo shows a machine's colours beside the view: a colour with a drawing switches to it, and one with none says so.
+- The demo shows a machine's colours beside its options: a colour with a drawing switches to it, and one with none says so.
+
+### Changed
+
+- The demo is one screen at a time, and the gallery no longer folds. On a desk the page is the size of the window: pick a kind, then a family, then a machine, each list scrolling inside itself, and the machine stands large beside its colours, options, facts and the code to copy. Each machine with no shape yet opens as the one "Coming soon" picture. Filters are the same three steps: a fact, its values, the machines. Build, To scale and Live screen are views of their own, and only the device on show draws in 3D. Choices are kept in the address, and a step along the row is a step for Back; old addresses (`#pi4`, `#part:armor`, `#builder`) still go where they went. It works by mouse, touch and keyboard, and at a phone's width each row scrolls sideways inside itself.
 
 ## [0.14.0] - 2026-11-02
 
