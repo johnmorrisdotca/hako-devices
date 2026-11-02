@@ -74,10 +74,13 @@ function listItems(): readonly Item[] {
   const shelved = (entries.filter((entry) => "shelf" in entry) as Shelved[])
     .map((entry) => ({ entry, family: headingOf(entry) }))
     .sort((a, b) => a.family.localeCompare(b.family, "en", { numeric: true }));
+  // a shelf under one heading has no step to take, like a drawn family no fact splits
+  const headings = new Map<string, Set<string>>();
+  for (const { entry, family } of shelved) headings.set(entry.shelf, (headings.get(entry.shelf) ?? new Set()).add(family));
   const parts = Object.values(PARTS).filter((part) => part.kind !== "board");
   return [
     ...devices.map((entry): Item => ({ id: entry.key, key: entry.key, name: entry.name, status: "built", kind: entry.family, family: drawn.get(entry.key) ?? null, entry, part: null, hay: hayOf(entry.name, entry.key) })),
-    ...shelved.map(({ entry, family }): Item => ({ id: entry.key, key: entry.key, name: entry.name, status: entry.status, kind: shelfKind(entry.shelf), family, entry, part: null, hay: hayOf(entry.name, entry.key) })),
+    ...shelved.map(({ entry, family }): Item => ({ id: entry.key, key: entry.key, name: entry.name, status: entry.status, kind: shelfKind(entry.shelf), family: headings.get(entry.shelf)?.size === 1 ? null : family, entry, part: null, hay: hayOf(entry.name, entry.key) })),
     ...parts.map((part): Item => ({ id: `part:${part.id}`, key: part.id, name: part.name, status: "built", kind: PARTS_KIND, family: partWord(part), entry: null, part, hay: hayOf(part.name, part.id) })),
   ];
 }
