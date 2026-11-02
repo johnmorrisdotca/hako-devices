@@ -6,6 +6,14 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.12.2] - 2026-11-02
+
+### Fixed
+
+- The 3D view could hang a page. Its frame loop asked for the next frame twice whenever the camera's own change event had already asked (`controls.update` fires `change`, `change` wakes the loop, and the end of the frame asked again), so callbacks waiting for a frame piled up while the view turned, up to 31 within 24 seconds in a measured page, and drew more than once a frame. One frame is asked for, never two. `e2e/freeze.demo.ts` fails on 0.12.1 and earlier for it.
+- The 3D canvas had no pixel budget: on a 5120 x 2880 screen at a ratio of 2 the large device was a 24 million pixel canvas and a second one 15 million, every frame. It is held to 6 million pixels, 4096 on a side and a ratio of 2 (`pixelRatioFor`, `MAX_PIXELS`, `MAX_SIDE` and `MAX_RATIO` in the root entry), and the test checks it on a 5K screen.
+- A device's 3D view gives back the model's own pictures (not only its map) and the studio environment's geometries when it is let go; nothing out of sight or in a hidden tab draws, as before, and a test holds it.
+
 ## [0.12.1] - 2026-11-02
 
 ### Fixed
