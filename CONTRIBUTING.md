@@ -23,7 +23,8 @@ The list is `data/wishlist.json`, one machine per line. An issue with the machin
 
 - **Aliases are well-known names, one machine each.** A row's `aliases` lists the other names people use for it: lowercase kebab-case ASCII, never another machine's key or alias. `pnpm wishlist` and `pnpm test` fail on a clash. [docs/machines.md](docs/machines.md#aliases) has the rules.
 - **A blank is fine, a guess is not.** Leave out what you cannot source. A wrong fact is worse than a missing one.
-- **Name the page.** A size goes with its `dimensionsSource`, and tags with their `tagsSource`. The maker's own page is best, then a reference such as Wikipedia, then a review.
+- **Name the page.** A size goes with its `dimensionsSource`, and tags with their `tagsSource` (CPU, cores, memory) or `tagSources` (any kind, `{ "os": ["https://..."] }`; operating system, wireless, weight, colour and discontinued year need it). The maker's own page is best, then a reference such as Wikipedia, then a review. `pnpm wishlist` and `pnpm test` fail on a tag with no page and on a kind the package does not know.
+- **A family's page is not a model's.** Give a model a fact only from a page about that model (its own article or spec page). A series article does not say what a later revision has, and that mistake has been made here before.
 - **Facts only.** Copy no pictures, 3D files or passages of text from those pages.
 
 ## Pull requests

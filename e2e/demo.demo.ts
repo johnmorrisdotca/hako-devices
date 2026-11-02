@@ -2,7 +2,7 @@
 import { expect, type Page, test } from "@playwright/test";
 import { DEVICES } from "../src/catalogue.ts";
 import { catalogue, catalogueCounts, COVERED, headingOf, PLANNED } from "../src/index.ts";
-import { matchesPicks } from "../src/tags.ts";
+import { matchesPicks, type Picks } from "../src/tags.ts";
 
 const URL = "/hako-devices/";
 
@@ -375,6 +375,27 @@ test("filters by brand, CPU maker and decade narrow the whole catalogue, and cle
   await open("type");
   await chip("type", "Single-board computer").click();
   await expect(page.locator('[data-testid="tile"][data-key="rpi-zero"]')).toContainText("Raspberry Pi Zero");
+  expect(problems).toEqual([]);
+});
+
+test("the filters offer operating system, wireless, weight, colour and discontinued year", async ({ page }) => {
+  const problems = watch(page);
+  await page.goto(URL);
+  await page.locator('[data-testid="filter-all"]').click();
+  await page.locator('[data-testid="gallery-filters"] > summary').click();
+  const picks: Picks = { os: ["Mac OS X"], wireless: ["Wi-Fi"], weight: ["3 to 10 kg"], colour: ["Black"], discontinued: ["2014"] };
+  for (const [facet, values] of Object.entries(picks)) {
+    await expect(page.locator(`[data-testid="gallery-facet"][data-facet="${facet}"]`)).toHaveCount(1);
+    await page.locator(`[data-testid="gallery-facet"][data-facet="${facet}"] summary`).click();
+    for (const value of values) await expect(page.locator(`[data-testid="facet-chip"][data-facet="${facet}"][data-value="${value}"]`)).toHaveCount(1);
+  }
+  for (const facet of ["os", "wireless"] as const) {
+    const value = picks[facet]?.[0] ?? "";
+    await page.locator(`[data-testid="facet-chip"][data-facet="${facet}"][data-value="${value}"]`).click();
+  }
+  const expected = catalogue().filter((entry) => matchesPicks(entry.key, { os: picks.os, wireless: picks.wireless }));
+  expect(expected.length).toBeGreaterThan(5);
+  await expect(page.locator('[data-testid="gallery-count"]')).toContainText(`${expected.length} of`);
   expect(problems).toEqual([]);
 });
 

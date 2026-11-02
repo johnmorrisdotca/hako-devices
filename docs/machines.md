@@ -41,7 +41,27 @@ Each machine:
 | `mesh` | The `key` of the device that draws it: its own for a drawn device, another for a model that device covers, `null` when `planned` |
 | `size` | Width, depth and height in millimetres, as `[w, d, h]`, for a drawn device whose size is published. `null` otherwise |
 | `ports` | A drawn device's ports as `{ "kind", "count" }`. Empty when it has none or is not drawn |
-| `tags` | What the machine is, as lists of values by facet: `maker`, `type`, `decade`, `cpuMaker`, `cpu`, `cores`, `ram`, `os`, `screen`, `ports`, `wireless`, `weight`, `generation`, `parts`. A fact with no source is absent, never guessed |
+| `tags` | What the machine is, as lists of values by facet: `maker`, `type`, `decade`, `discontinued`, `cpuMaker`, `cpu`, `cores`, `ram`, `os`, `screen`, `ports`, `wireless`, `weight`, `colour`, `generation`, `parts`. A fact with no source is absent, never guessed. See [tags](#tags) |
+
+## Tags
+
+`tags` says what a machine is, by kind. A value is there only when a page says so; a missing kind means nobody has sourced it, not that the machine lacks it. The pages stay in `data/wishlist.json` (`tagSources`) and are not published.
+
+| Kind | Values |
+| --- | --- |
+| `maker`, `type`, `decade` | The brand, the shape of the machine and the decade of its year. Worked out from the list itself |
+| `discontinued` | The year the maker stopped selling it, such as `2014`. Left out where a page gives several years for one machine |
+| `cpuMaker`, `cpu`, `cores`, `ram` | As the source words them |
+| `os` | The system it shipped with, as the source names it: `Mac OS` (System 1 to Mac OS 9), `Mac OS X`, `OS X`, `macOS`, `iOS`, `Android`, `Palm OS`... For a bare NUC kit, which ships with none, the systems Intel lists as supported |
+| `screen`, `generation` | Read from the machine's own name, or a page |
+| `ports`, `parts` | A drawn device's own ports and parts, or the ports a page lists |
+| `wireless` | `Wi-Fi`, `Bluetooth` or `Cellular`: every radio a page names for the machine, including a version with a SIM. An optional card is not counted |
+| `weight` | `Under 1 kg`, `1 to 3 kg`, `3 to 10 kg` or `Over 10 kg`; a page that gives several weights in different bands is left out |
+| `colour` | The finishes the maker gives it, in the maker's words: `Space Gray`, `Pink Gold`. Only for iPhones, iPads and Galaxy Tabs so far |
+
+**Every tag has a page.** In `data/wishlist.json` a machine's `tagSources` gives the pages for each kind, `{ "os": ["https://..."] }`. Brand, type and decade need none. A generation or a screen size may be read from the name (`iPad (3rd generation)`, `MacBook Pro (13-inch)`). CPU, cores, memory, ports, screen and generation without `tagSources` rest on the machine's `tagsSource` or `dimensionsSource`. Operating system, wireless, weight, colour and discontinued year always need their own `tagSources`. `pnpm wishlist` and `pnpm test` fail on a tag with no source, on a source that is not a page address and on a kind the package does not know.
+
+**A family's page is not a model's.** A page gives a machine a tag only when the page is about that machine: its title is the machine's name (an article for the Wii U, Apple's own page for one Mac). The Atari 2600 article says nothing about the Atari 2600 Jr., and a later revision may have another chip, weight or end date, so it gets nothing from it. A fact stays empty until a page of its own gives it.
 
 ## Aliases
 

@@ -6,6 +6,21 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Tags: **discontinued** (the year a maker stopped selling a machine) and **colour** (the finishes the maker gives it) are new kinds, offered in the demo's filters and in `tagsOf`, `FACETS` and `machines.json`. 280 machines have a discontinued year and 167 a colour.
+- More **operating system**, **wireless** and **weight** tags, each from a page about that machine: Apple's spec page for a Mac, iPod or Apple TV (the system it shipped with, Wi-Fi and Bluetooth, weight, the "Discontinued" date), Intel's Ark page for a NUC (Wi-Fi, Bluetooth, supported systems), the maker's product brief for a Raspberry Pi 3A+, 3B+, 4, 400, 5, Zero 2 W and Pico W (Wi-Fi and Bluetooth, CPU, cores, memory), the pages behind the iPhones, iPads and Galaxy Tabs, and the machine's own Wikipedia article. Coverage of 2,328 machines: operating system 832, wireless 549 (Wi-Fi, Bluetooth, Cellular), weight 674, discontinued 280, colour 167, generation 572.
+- Every tag now names its page. `tagSources` in `data/wishlist.json` gives the pages by kind, and `pnpm wishlist` and `pnpm test` fail on a tag with no source, on a source that is not a page address and on a tag kind the package does not know ([docs/machines.md](docs/machines.md#tags)).
+
+### Changed
+
+- The operating system of a Mac is named as Apple names it: `Mac OS` (System 1 to Mac OS 9), `Mac OS X`, `OS X` or `macOS`, where it was one `Mac OS` for all.
+- Weight bands are read from the page: 3 kg is in "1 to 3 kg".
+
+### Fixed
+
+- Tags that rested on a family's page, or on nothing, are gone, so a filter no longer reads a later revision as the first (the Atari 2600 Jr. gets nothing from the Atari 2600 article). 706 operating system tags (the family's, not a measured fact), 167 wireless and 117 weight tags that no page backs, and 67 CPUs, 52 memory sizes, 37 core counts, 58 port lists and 8 screen sizes with no page were removed; a value that is missing means no page gives it, not that the machine lacks it. The Raspberry Pi 4 now lists its 3 GB version from Raspberry Pi's product brief. The "13-inch" screen of the Pi with a 2.13-inch e-paper hat is gone.
+
 ## [0.7.0] - 2026-11-01
 
 ### Added

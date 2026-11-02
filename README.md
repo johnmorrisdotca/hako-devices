@@ -59,7 +59,7 @@ report.issues[0].message; // "Faceted metal case (Argon ONE style) closes over t
 | Entry | What | Needs |
 | --- | --- | --- |
 | `@johnmorrisdotca/hako-devices` | The catalogue (`DEVICES`, `catalogue()`, `statusOf`), the parts (`PARTS`), the fit check (`check`), the camera rule (`frameFor`), `findMachine(keyOrAlias)`, mapping helpers (`piKey`, `macKey`, `nasKey`, `pcKey`, `deviceKeyOf`), styles, scale helpers, screen pictures | Nothing |
-| `.../tags` | `FACETS`, `tagsOf(key)`, `matchesPicks(key, picks)`, `facetCounts(keys, picks)`: filter machines by what they are. Its own entry because the table is large | Nothing |
+| `.../tags` | `FACETS`, `tagsOf(key)`, `matchesPicks(key, picks)`, `facetCounts(keys, picks)`: filter machines by what they are (brand, type, decade, discontinued year, CPU, memory, operating system, wireless, weight, colour...). Its own entry because the table is large | Nothing |
 | `.../build` | `build(description)`, `buildDevice(key)`, `buildPart(id)`: one mesh and one drawing. `toGlb`, `Drawing`, `Box` | `three` |
 | `.../element` | `<hako-device>` and `<hako-lineup>`: load `three` only when a 3D view is wanted | `three` for 3D |
 | `.../react` | A thin `<HakoDevice>` wrapper | `react` |
@@ -135,13 +135,14 @@ Product names appear only as plain descriptive words in the catalogue and the do
 
 ## Filter by what a machine is
 
-Every machine on the list has a brand and a type, and most a decade. Where a source gives them, it also has its CPU and CPU maker, cores, memory, operating system, screen, ports, wireless, weight, generation and parts. A fact with no source is left out, never guessed, so a filter by CPU leaves out machines nobody has sourced yet.
+Every machine on the list has a brand and a type, and most a decade. Where a page gives them, it also has the year it was discontinued, its CPU and CPU maker, cores, memory, operating system, screen, ports, wireless (Wi-Fi, Bluetooth, cellular), weight, colour, generation and parts. Every tag names the page it came from, and a test fails on one that does not. A fact with no source is left out, never guessed, so a filter by operating system or colour leaves out machines nobody has sourced yet, and a page about a family is never applied to its models. [docs/machines.md](docs/machines.md#tags) has the kinds and the rules.
 
 ```ts
 import { catalogue } from "@johnmorrisdotca/hako-devices";
 import { matchesPicks } from "@johnmorrisdotca/hako-devices/tags";
 
 const intelLaptops = catalogue().filter(({ key }) => matchesPicks(key, { type: ["Laptop"], cpuMaker: ["Intel"] }));
+const wifiMacsOfThe2000s = catalogue().filter(({ key }) => matchesPicks(key, { maker: ["Apple"], decade: ["2000s"], wireless: ["Wi-Fi"], os: ["Mac OS X"] }));
 ```
 
 ## Find a machine by a nickname

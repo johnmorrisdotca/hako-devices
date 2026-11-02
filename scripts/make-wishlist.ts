@@ -3,6 +3,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { DEVICES } from "../src/catalogue.ts";
+import { tagProblems, type TagRow } from "./tag-rules.ts";
 import { aliasProblems, readAliases, readTags, readWishlist } from "./wishlist-read.ts";
 
 interface Raw {
@@ -21,6 +22,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const data = JSON.parse(readFileSync(join(root, "data", "wishlist.json"), "utf8")) as Raw[];
 const problems = aliasProblems(data as { key: string; aliases?: string[] }[]);
 if (problems.length) throw new Error(`aliases in data/wishlist.json:\n${problems.join("\n")}`);
+const tagIssues = tagProblems(data as unknown as TagRow[]);
+if (tagIssues.length) throw new Error(`tags in data/wishlist.json:\n${tagIssues.slice(0, 40).join("\n")}${tagIssues.length > 40 ? `\n... and ${tagIssues.length - 40} more` : ""}`);
 const { planned, covered } = readWishlist(data, new Set(DEVICES.map((device) => device.key)));
 const lines = (list: readonly unknown[]) => list.map((entry) => `  ${JSON.stringify(entry)},`).join("\n");
 writeFileSync(

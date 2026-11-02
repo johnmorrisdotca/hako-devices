@@ -7,6 +7,7 @@ export const FACETS = [
   { id: "maker", title: "Brand" },
   { id: "type", title: "Type" },
   { id: "decade", title: "Decade" },
+  { id: "discontinued", title: "Discontinued" },
   { id: "cpuMaker", title: "CPU maker" },
   { id: "cpu", title: "CPU" },
   { id: "cores", title: "Cores" },
@@ -16,6 +17,7 @@ export const FACETS = [
   { id: "ports", title: "Ports" },
   { id: "wireless", title: "Wireless" },
   { id: "weight", title: "Weight" },
+  { id: "colour", title: "Colour" },
   { id: "generation", title: "Generation" },
   { id: "parts", title: "Parts" },
 ] as const;
@@ -76,6 +78,6 @@ export function facetOrder(facet: FacetId, counts: ReadonlyMap<string, number>):
   const values = [...counts.keys()];
   if (facet === "ram") return values.sort((a, b) => sizeOf(a) - sizeOf(b));
   if (facet === "weight") return values.sort((a, b) => WEIGHTS.indexOf(a) - WEIGHTS.indexOf(b));
-  if (facet === "decade" || facet === "cores" || facet === "screen" || facet === "generation") return values.sort((a, b) => parseFloat(a) - parseFloat(b));
+  if (facet === "decade" || facet === "discontinued" || facet === "cores" || facet === "screen" || facet === "generation") return values.sort((a, b) => parseFloat(a) - parseFloat(b));
   return values.sort((a, b) => (counts.get(b) ?? 0) - (counts.get(a) ?? 0) || a.localeCompare(b, "en", { numeric: true }));
 }
