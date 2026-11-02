@@ -33,6 +33,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { FOV_DEG, frameFor } from "../framing.ts";
+import { pixelRatioFor } from "../pixels.ts";
 import { desktopPicture, oledPicture, panelPicture, paperPicture, phonePicture, type ScreenContent } from "../screen/picture.ts";
 import { canvas, paintBitmap, paintGlow, paintHalo, paintPanel, paintPerforation, paintPrint, paintSteps } from "./paint.ts";
 
@@ -108,7 +109,6 @@ export class DeviceViewer {
     this.holder = holder;
     this.options = options;
     this.renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: "low-power" });
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     this.renderer.outputColorSpace = SRGBColorSpace;
     this.renderer.toneMapping = ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.05;
@@ -127,7 +127,9 @@ export class DeviceViewer {
     holder.appendChild(this.canvas);
 
     const pmrem = new PMREMGenerator(this.renderer);
-    this.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    const room = new RoomEnvironment();
+    this.environment = pmrem.fromScene(room, 0.04).texture;
+    room.dispose();
     pmrem.dispose();
     this.scene.environment = this.environment;
     this.scene.environmentIntensity = 0.85;
@@ -257,11 +259,12 @@ export class DeviceViewer {
     document.removeEventListener("visibilitychange", this.onVisibility);
     this.resize.disconnect();
     this.controls.dispose();
-    this.root.traverse((node) => {
-      if (node instanceof Mesh || node instanceof Sprite) {
-        node.geometry.dispose();
-        const material = node.material as MeshStandardMaterial;
-        material.map?.dispose();
+    // everything the graphics card holds for the device: geometries, materials and every picture a material has (the model's own, not only the map)
+    this.scene.traverse((node) => {
+      if (!(node instanceof Mesh || node instanceof Sprite)) return;
+      node.geometry.dispose();
+      for (const material of Array.isArray(node.material) ? node.material : [node.material]) {
+        for (const value of Object.values(material)) if (value && (value as Texture).isTexture) (value as Texture).dispose();
         material.dispose();
       }
     });
@@ -486,12 +489,14 @@ export class DeviceViewer {
       this.canvas.dataset.frames = String(this.frames);
       this.canvas.dataset.azimuth = this.controls.getAzimuthalAngle().toFixed(3);
     }
-    if (ambient || changed || this.tween || this.needsDraw || Math.abs(dA) > 1e-5) this.frame = requestAnimationFrame(this.tick);
+    // the controls' own change event may already have asked for the next frame (wake): one frame is asked for, never two, or each frame would add another to the line
+    if (!this.frame && (ambient || changed || this.tween || this.needsDraw || Math.abs(dA) > 1e-5)) this.frame = requestAnimationFrame(this.tick);
   };
 
   private fit(): void {
     const w = Math.max(1, this.holder.clientWidth);
     const h = Math.max(1, this.holder.clientHeight);
+    this.renderer.setPixelRatio(pixelRatioFor(w, h, window.devicePixelRatio));
     this.renderer.setSize(w, h, false);
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();

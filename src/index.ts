@@ -7,6 +7,7 @@ export { BOARDS, CASES, COOLERS, DRIVES, FIT_TOLERANCE, HATS, HAT_STACK, MAX_RIS
 export type { BoardId, BoardPart, BoardShape, CaseId, CasePart, CoolerId, CoolerPart, DriveId, DrivePart, HatId, HatPart, Part, Rect, ScreenId, ScreenInfo, ScreenPart, Size, StandId, StandPart, TallZone } from "./parts.ts";
 export { FOV_DEG, frameFor } from "./framing.ts";
 export type { Framing, Vec3 } from "./framing.ts";
+export { MAX_PIXELS, MAX_RATIO, MAX_SIDE, pixelRatioFor } from "./pixels.ts";
 export { CROSSFADE_MS, DRAWING_HOLD_MS, REDUCED_FADE_MS, revealDelay } from "./crossfade.ts";
 export { tiltMode, tiltTurn } from "./tilt.ts";
 export type { Reading, TiltMode } from "./tilt.ts";

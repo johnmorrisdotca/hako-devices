@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { cleanPanelFace, cleanStyle, CROSSFADE_MS, DEFAULT_STYLE, deviceKeyOf, DEVICES, deviceByKey, drawingFile, DRAWING_HOLD_MS, frameFor, inStyle, macKey, nasKey, pcKey, piBoard, piKey, REDUCED_FADE_MS, revealDelay, STYLE_NAMES, STYLES, tiltMode, tiltTurn, withHeavierLine } from "../src/index.ts";
+import { cleanPanelFace, cleanStyle, CROSSFADE_MS, DEFAULT_STYLE, deviceKeyOf, DEVICES, deviceByKey, drawingFile, DRAWING_HOLD_MS, frameFor, inStyle, macKey, MAX_PIXELS, MAX_SIDE, nasKey, pcKey, piBoard, piKey, pixelRatioFor, REDUCED_FADE_MS, revealDelay, STYLE_NAMES, STYLES, tiltMode, tiltTurn, withHeavierLine } from "../src/index.ts";
 import { buildDevice } from "../src/build/index.ts";
 
 test("the camera: a tall device from the front, a flat board from higher up, a screen looked at", () => {
@@ -30,6 +30,21 @@ test("tilt: asked for only where it must be, off under reduced motion or a mouse
   assert.equal(tiltTurn({ beta: null, gamma: 0 }, { beta: 0, gamma: 0 }), null);
   const turn = tiltTurn({ beta: 10, gamma: 100 }, { beta: 0, gamma: 0 });
   assert.equal(turn?.azimuth, 25);
+});
+
+test("the canvas is held to a pixel budget, whatever the screen", () => {
+  assert.equal(pixelRatioFor(620, 827, 2), 2);
+  assert.equal(pixelRatioFor(620, 827, 1), 1);
+  assert.equal(pixelRatioFor(620, 827, 3), 2);
+  for (const [w, h, ratio] of [[2560, 1440, 2], [5120, 2880, 2], [1, 10000, 2], [10000, 10000, 2], [800, 600, Number.NaN], [800, 600, 0], [0, 0, 2], [-5, 20, 2]] as const) {
+    const r = pixelRatioFor(w, h, ratio);
+    assert.ok(r >= 0.25 && r <= 2, `${w}x${h} at ${ratio}: ${r}`);
+    if (w > 0 && h > 0 && r > 0.25) {
+      assert.ok(w * r * (h * r) <= MAX_PIXELS * 1.0001, `${w}x${h} at ${ratio}: ${r}`);
+      assert.ok(Math.max(w, h) * r <= MAX_SIDE * 1.0001, `${w}x${h} at ${ratio}: ${r}`);
+    }
+  }
+  assert.equal(pixelRatioFor(800, 600, Number.NaN), 1);
 });
 
 test("a board's model line gives its key", () => {

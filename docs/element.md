@@ -39,7 +39,7 @@ The parts you can style are `frame`, `figure`, `drawing`, `canvas`, `tilt` and `
 
 ## Keys and touch
 
-Drag turns it and a finger still scrolls the page up and down. Once it has the focus the wheel and a pinch zoom. Arrow keys turn it, `+` and `-` zoom, Home, `0` or a double-click put it back. On a phone leaning it turns the view a little; where a browser must ask first, a "Tilt to turn" button asks. Under `prefers-reduced-motion` nothing turns by itself and the crossfade is a short fade.
+Drag turns it and a finger still scrolls the page up and down. Once it has the focus the wheel and a pinch zoom. Arrow keys turn it, `+` and `-` zoom, Home, `0` or a double-click put it back. On a phone leaning it turns the view a little; where a browser must ask first, a "Tilt to turn" button asks. Under `prefers-reduced-motion` nothing turns by itself and the crossfade is a short fade. The 3D canvas is held to a pixel budget (`pixelRatioFor`: a ratio of 2 at most, 4096 pixels on a side and 6 million in all), and it draws only while something moves, never out of sight or in a hidden tab.
 
 ## A live screen
 
