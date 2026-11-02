@@ -44,7 +44,7 @@ Drag turns it and a finger still scrolls the page up and down. These are the ele
 
 ## The family's view controls
 
-`<kazoku-view-controls>` from [`@johnmorrisdotca/kazoku-ui`](https://www.npmjs.com/package/@johnmorrisdotca/kazoku-ui) is one set of controls for every project in the family: angle and tilt, Auto-turn, zoom with Fit, move, and the same drag, pinch, wheel (with Ctrl or Command) and keys everywhere. It never draws; it tells the page what was chosen, and the page hands that to the element with `drive()`. This package does not import it, so it adds nothing to your bundle unless your page uses it. The demo does, as a devDependency.
+`<kazoku-view-controls>` from [`@johnmorrisdotca/kazoku-ui`](https://www.npmjs.com/package/@johnmorrisdotca/kazoku-ui) is one set of controls for every project in the family: the angle, Auto-turn, zoom with its number and Fit, and behind More (or `controls="advanced"`) the tilt, Front and moving the view, with the same drag, pinch, wheel (with Ctrl or Command) and keys everywhere. It never draws; it tells the page what was chosen, and the page hands that to the element with `drive()`. This package does not import it, so it adds nothing to your bundle unless your page uses it. The demo does, as a devDependency.
 
 ```html
 <hako-device id="device" key="pi4"></hako-device>

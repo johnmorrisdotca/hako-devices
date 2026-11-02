@@ -484,9 +484,50 @@ test("the family's view controls turn, tip, zoom and move the device, and anothe
     .toBe(true);
   expect(await canvas("zoom")).toBe("2.50");
   expect(await bar.evaluate((node) => (node as Bar).state.yaw)).toBeCloseTo(60, 0);
-  // Front puts the turn back
-  await bar.locator("button", { hasText: /^Front$/ }).click();
+  // Front puts the turn back; it is behind More
+  await bar.locator('[data-b="more"]').click();
+  await bar.locator('[data-b="front"]').click();
   await expect.poll(() => bar.evaluate((node) => (node as Bar).state.yaw)).toBeCloseTo(0, 0);
+  expect(problems).toEqual([]);
+});
+
+test("the bar shows one true zoom number, and More holds tilt, Front and moving it", async ({ page }) => {
+  const problems = watch(page);
+  await page.goto(URL);
+  const bar = page.locator('[data-testid="view-bar"]');
+  const number = bar.locator('[data-b="level"]');
+  const zoom = () => bar.evaluate((node) => (node as Bar).state.zoom);
+  await expect(number).toHaveText("1×");
+  // no preset that reads like a second number
+  await expect(bar.locator('[data-b="two"]')).toHaveCount(0);
+  await expect(bar.locator('[data-b="in"]')).toBeVisible();
+  // the number follows the buttons, the page's own call and the address
+  await bar.locator('[data-b="in"]').click();
+  await expect.poll(zoom).toBeGreaterThan(1);
+  await expect(number).toHaveText(`${Math.round((await zoom()) * 10) / 10}×`);
+  await bar.evaluate((node) => (node as Bar).set({ zoom: 2.5 }));
+  await expect(number).toHaveText("2.5×");
+  await expect.poll(() => page.url()).toMatch(/zoom=2\.5/);
+  await page.reload();
+  await expect(number).toHaveText("2.5×");
+  // pressing it goes back to the whole device
+  await number.click();
+  await expect(number).toHaveText("1×");
+  // the rest is one press away, and the angle is there without it
+  const angle = bar.locator("#yaw");
+  const tilt = bar.locator("#tilt");
+  const front = bar.locator('[data-b="front"]');
+  await expect(angle).toBeVisible();
+  await expect(tilt).toBeHidden();
+  await expect(front).toBeHidden();
+  await bar.locator('[data-b="more"]').click();
+  await expect(tilt).toBeVisible();
+  await expect(front).toBeVisible();
+  // the buttons that move it come once there is room to move it
+  await bar.evaluate((node) => (node as Bar).set({ zoom: 2 }));
+  await expect(bar.locator('[data-b="left"]')).toBeVisible();
+  await bar.locator('[data-b="more"]').click();
+  await expect(tilt).toBeHidden();
   expect(problems).toEqual([]);
 });
 
