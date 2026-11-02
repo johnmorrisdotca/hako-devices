@@ -1,6 +1,6 @@
 {
   "name": "@johnmorrisdotca/hako-devices",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Hako Devices 箱: line drawings and 3D views of Raspberry Pis, Macs, PCs, phones, tablets, game consoles, NAS boxes and classic machines, as a web component, with tags to filter 2,200+ machines by CPU, brand and more, and a typed way to assemble machines from parts. No logos. three.js is a peer dependency.",
   "keywords": [
     "devices",
