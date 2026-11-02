@@ -1,8 +1,9 @@
 // The demo's picker, with no page: every machine has one place, the kinds are the list's own and a search finds what the old one found.
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { allItems, countByKind, familiesOf, FEATURED, isNarrowed, itemById, KINDS, offeredItems, PARTS_KIND, pickedItems, readPicks, shelfKind } from "../demo/gallery-model.ts";
+import { allItems, countByKind, familiesOf, FEATURED, filtersOn, isNarrowed, itemById, KINDS, offeredItems, PARTS_KIND, pickedItems, readPicks, readYear, readYears, shelfKind, YEAR_FROM, YEAR_TO, yearHints, yearItems, yearsSet } from "../demo/gallery-model.ts";
 import { catalogue, PARTS } from "../src/index.ts";
+import { inYears, yearOf, yearSpan } from "../src/tags.ts";
 
 test("every machine and every loose part is one row, in a kind that exists", () => {
   const items = allItems();
@@ -65,4 +66,56 @@ test("a filter leaves the loose parts out, and the counts add up", () => {
 test("filters read from the address", () => {
   const params: Record<string, string> = { "f-maker": "Apple|Sony", "f-decade": "1990s" };
   assert.deepEqual(readPicks((name) => params[name] ?? null), { maker: ["Apple", "Sony"], decade: ["1990s"] });
+});
+
+test("a year in a box or an address is four digits, and anything else is no limit", () => {
+  assert.equal(readYear("1984"), 1984);
+  assert.equal(readYear(" 1984 "), 1984);
+  for (const raw of [null, "", "198", "19845", "soon", "1e3", "-198", "19.5"]) assert.equal(readYear(raw), null, String(raw));
+  const params: Record<string, string> = { [YEAR_FROM]: "1990", [YEAR_TO]: "19" };
+  assert.deepEqual(
+    readYears((name) => params[name] ?? null),
+    { from: 1990, to: null },
+  );
+});
+
+test("a from and to year narrow the list as the facets do, and leave out a part and an unknown year", () => {
+  const items = offeredItems(allItems(), "all", "");
+  // no limit leaves everything, parts and unknown years too
+  assert.equal(yearItems(items, {}).length, items.length);
+  assert.equal(yearItems(items, { from: null, to: null }).length, items.length);
+  const unknown = items.find((item) => item.part === null && yearOf(item.key) === null);
+  assert.ok(unknown, "a machine of unknown year");
+  const years = { from: 1984, to: 1990 };
+  const left = yearItems(items, years);
+  assert.ok(left.length > 10);
+  assert.deepEqual(
+    left.map((item) => item.id),
+    items.filter((item) => item.part === null && inYears(item.key, years)).map((item) => item.id),
+  );
+  assert.ok(left.every((item) => item.part === null && (yearOf(item.key) as number) >= 1984 && (yearOf(item.key) as number) <= 1990));
+  assert.ok(!left.includes(unknown));
+  // one end alone is a limit, and so an unknown year still goes
+  assert.ok(!yearItems(items, { to: 3000 }).includes(unknown));
+  assert.ok(!yearItems(items, { to: 3000 }).some((item) => item.part !== null));
+  // the wrong way round leaves nothing rather than guessing
+  assert.equal(yearItems(items, { from: 1990, to: 1984 }).length, 0);
+  // with a facet, what is left is what both say
+  const apple = pickedItems(left, { maker: ["Apple"] });
+  assert.ok(apple.length > 0 && apple.length < left.length);
+});
+
+test("a year limit narrows and counts in Filters: N on", () => {
+  assert.equal(yearsSet({}), 0);
+  assert.equal(yearsSet({ from: null, to: null }), 0);
+  assert.equal(yearsSet({ from: 1984 }), 1);
+  assert.equal(yearsSet({ from: 1984, to: 1990 }), 2);
+  assert.equal(isNarrowed("", {}, { from: null, to: null }), false);
+  assert.equal(isNarrowed("", {}, { to: 1990 }), true);
+  assert.equal(filtersOn({}, {}), 0);
+  assert.equal(filtersOn({ maker: ["Apple", "Sony"], type: ["Laptop"] }, { from: 1984, to: null }), 4);
+});
+
+test("the year boxes hint at the machines' own first and last year", () => {
+  assert.deepEqual(yearHints(), yearSpan(catalogue().map((entry) => entry.key)));
 });

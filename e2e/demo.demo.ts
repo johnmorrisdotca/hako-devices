@@ -223,6 +223,7 @@ test.describe("on a desk", () => {
     for (const part of ["hako-device#hero", '[data-testid="view-bar"]', '[data-testid="device-options"]', '[data-testid="device-facts"]', '[data-testid="embed-copy"]', '[data-testid="tile"][aria-pressed="true"]']) await onScreen(part, "a machine and its options");
     await page.locator('[data-testid="gallery-filters"]').click();
     await fits("the filters");
+    for (const box of ["year-from", "year-to"]) await onScreen(`[data-testid="${box}"]`, "the filters");
     for (const facet of ["maker", "cpu", "ram", "generation"]) {
       await page.locator(`[data-testid="gallery-facet"][data-facet="${facet}"]`).click();
       await fits(`the filter ${facet}`);
@@ -778,20 +779,75 @@ test("a live screen takes words and a canvas", async ({ page, browserName }, inf
   expect(problems).toEqual([]);
 });
 
-test("a from and to year narrow the gallery and clear", async ({ page }) => {
+test("a from and to year sit in the filters, narrow like a facet, stay in the address and clear", async ({ page }) => {
   const problems = watch(page);
   await page.goto(URL);
+  const tab = page.locator('[data-testid="gallery-filters"]');
+  const from = page.locator('[data-testid="year-from"]');
+  const to = page.locator('[data-testid="year-to"]');
+  const models = page.locator('[data-testid="gallery-models"]');
+  await expect(from).toHaveCount(0);
   await page.locator('[data-testid="filter-all"]').click();
-  await page.locator('[data-testid="year-to"]').fill("1985");
-  const expected = catalogue().filter((entry) => inYears(entry.key, { to: 1985 }));
-  expect(expected.length).toBeGreaterThan(10);
-  await expect(page.locator('[data-testid="gallery-count"]')).toContainText(`${expected.length} of`);
-  await expect(page.locator('[data-testid="tile"]')).toHaveCount(expected.length);
-  await page.locator('[data-testid="year-from"]').fill("1984");
-  await expect(page.locator('[data-testid="gallery-count"]')).toContainText(`${expected.filter((entry) => inYears(entry.key, { from: 1984 })).length} of`);
-  await page.locator('[data-testid="year-from"]').fill("");
-  await page.locator('[data-testid="year-to"]').fill("");
-  await expect(page.locator('[data-testid="gallery-count"]')).toContainText("built");
+  await tab.click();
+  await expect(from).toBeVisible();
+  await expect(to).toBeVisible();
+  // a year half typed narrows nothing, the whole year does, and the box keeps the focus while the list changes
+  await to.click();
+  await page.keyboard.type("198");
+  await expect(count(page)).toContainText("built");
+  await expect(tab).toHaveText("Filters");
+  await page.keyboard.type("5");
+  const upTo = catalogue().filter((entry) => inYears(entry.key, { to: 1985 }));
+  expect(upTo.length).toBeGreaterThan(10);
+  await expect(count(page)).toContainText(`${upTo.length} of`);
+  await expect(models).toHaveAttribute("data-total", String(upTo.length));
+  await expect(tab).toHaveText("Filters: 1 on");
+  await expect(to).toBeFocused();
+  await expect(to).toHaveValue("1985");
+  await from.fill("1984");
+  const span = upTo.filter((entry) => inYears(entry.key, { from: 1984 }));
+  await expect(count(page)).toContainText(`${span.length} of`);
+  await expect(tab).toHaveText("Filters: 2 on");
+  // it works with the facets, and they count only what it left
+  const apple = page.locator('[data-testid="facet-chip"][data-facet="maker"][data-value="Apple"]');
+  const both = span.filter((entry) => matchesPicks(entry.key, { maker: ["Apple"] }));
+  expect(both.length).toBeGreaterThan(0);
+  await expect(apple).toContainText(String(both.length));
+  await apple.click();
+  await expect(count(page)).toContainText(`${both.length} of`);
+  await expect(tab).toHaveText("Filters: 3 on");
+  // the address keeps it
+  await expect(page).toHaveURL(/year-from=1984/);
+  await expect(page).toHaveURL(/year-to=1985/);
+  await expect(page).toHaveURL(/f-maker=Apple/);
+  await page.reload();
+  await expect(from).toHaveValue("1984");
+  await expect(to).toHaveValue("1985");
+  await expect(count(page)).toContainText(`${both.length} of`);
+  await expect(tab).toHaveText("Filters: 3 on");
+  await apple.click();
+  // the kinds go on being narrowed, and the boxes come back as they were
+  await page.locator('[data-testid="gallery-kinds"]').click();
+  await expect(from).toHaveCount(0);
+  await expect(count(page)).toContainText(`${span.length} of`);
+  await expect(tab).toHaveText("Filters: 2 on");
+  await tab.click();
+  await expect(from).toHaveValue("1984");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+  // an address that holds no year is no limit
+  await page.goto(`${URL}?pane=filters&year-from=soon&year-to=19`);
+  await expect(from).toHaveValue("");
+  await expect(tab).toHaveText("Filters");
+  await expect(count(page)).toContainText("built");
+  // emptying a box and Clear filters both take a limit off
+  await to.fill("1985");
+  await to.fill("");
+  await expect(tab).toHaveText("Filters");
+  await to.fill("1985");
+  await page.locator('[data-testid="facet-clear"]').click();
+  await expect(to).toHaveValue("");
+  await expect(count(page)).toContainText("built");
+  await expect(page).not.toHaveURL(/year-to/);
   expect(problems).toEqual([]);
 });
 

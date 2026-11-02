@@ -3,7 +3,8 @@ import { catalogueCounts, deviceByKey, groupLayout, groupSample, meshOf, STYLE_N
 import { FACETS, facetCounts, facetOrder, type FacetId, type Picks } from "../src/tags.ts";
 import { applyParams, createAddressState } from "@johnmorrisdotca/kazoku-ui/address-state";
 import { byId, el, rove, scrollWithin } from "./dom.ts";
-import { allItems, countByKind, drawingKey, facetParam, familiesOf, featuredItems, type Item, isNarrowed, itemById, type Kind, KINDS, offeredItems, pickedItems, readPicks, realSize, type Show, START } from "./gallery-model.ts";
+import { allItems, countByKind, drawingKey, facetParam, familiesOf, featuredItems, filtersOn, type Item, isNarrowed, itemById, type Kind, KINDS, offeredItems, pickedItems, readPicks, readYears, realSize, type Show, START, YEAR_FROM, YEAR_TO, yearHints, yearItems, yearsSet } from "./gallery-model.ts";
+import { yearFilter } from "./year-filter.ts";
 
 /** Machines are drawn this many at a time, more as the list is scrolled: the whole list is 2,300. */
 const PAGE = 80;
@@ -56,18 +57,20 @@ export function createGallery(hooks: GalleryHooks) {
   const facet = () => address.get("facet") as FacetId;
   const text = () => address.get("q") ?? "";
   const picks = (): Picks => readPicks((name) => address.get(name));
+  const yearsNow = () => readYears((name) => address.get(name));
+  const narrowedNow = () => isNarrowed(text(), picks(), yearsNow());
 
   /** The kind in use: the one chosen, else everything when something narrows it, else the home of the machine the address names, else the first row. */
   function kindNow(): string {
     const asked = address.get("kind");
     if (asked) return asked;
-    if (isNarrowed(text(), picks())) return START;
+    if (narrowedNow()) return START;
     return namedId ? (itemById(namedId)?.kind ?? START) : START;
   }
   function familyNow(): string | null {
     const asked = address.get("family");
     if (asked) return asked;
-    if (address.get("kind") || isNarrowed(text(), picks()) || !namedId) return null;
+    if (address.get("kind") || narrowedNow() || !namedId) return null;
     return itemById(namedId)?.family ?? null;
   }
   /** A step along the row is a step for Back: it gets a history entry, where a search or a filter only changes the address. */
@@ -171,11 +174,11 @@ export function createGallery(hooks: GalleryHooks) {
     const box = el("div", { className: "steps-row" });
     box.dataset.testid = "gallery-facets";
     const id = facet();
-    if (Object.values(picks()).some((values) => values?.length)) {
+    if (Object.values(picks()).some((values) => values?.length) || yearsSet(yearsNow()) > 0) {
       const clear = el("button", { type: "button", className: "facet-clear", textContent: "Clear filters" });
       clear.dataset.testid = "facet-clear";
       clear.addEventListener("click", () => {
-        address.setMany(Object.fromEntries(FACETS.map((one) => [facetParam(one.id), null])));
+        address.setMany({ ...Object.fromEntries(FACETS.map((one) => [facetParam(one.id), null])), [YEAR_FROM]: null, [YEAR_TO]: null });
         render();
       });
       box.append(clear);
@@ -189,11 +192,23 @@ export function createGallery(hooks: GalleryHooks) {
       chip.addEventListener("click", () => togglePick(id, value));
       box.append(chip);
     }
-    stepsBox.replaceChildren(box);
+    // the years stay where they are while the chips change, so typing in a box keeps the focus
+    if (years.node.parentElement !== stepsBox) stepsBox.replaceChildren(years.node);
+    stepsBox.querySelector(".steps-row")?.remove();
+    stepsBox.append(box);
+    years.show(yearsNow());
     stepsBox.hidden = false;
     refreshSteps();
     if (focused) [...box.querySelectorAll<HTMLElement>("button")].find((button) => button.dataset.value === focused)?.focus();
   }
+
+  const years = yearFilter(yearHints(), () => {
+    const next = years.range();
+    const now = yearsNow();
+    if (next.from === now.from && next.to === now.to) return;
+    address.setMany({ [YEAR_FROM]: next.from === null ? null : String(next.from), [YEAR_TO]: next.to === null ? null : String(next.to), kind: null, family: null });
+    render();
+  });
 
   // ----------------------------------------------------------- the families
   function renderFamilies(members: readonly Item[]) {
@@ -296,16 +311,17 @@ export function createGallery(hooks: GalleryHooks) {
     const value = text();
     if (search.value.trim() !== value.trim()) search.value = value;
     const chosen = picks();
-    const offered = offeredItems(allItems(), show(), value);
+    const limits = yearsNow();
+    const offered = yearItems(offeredItems(allItems(), show(), value), limits);
     const shown = pickedItems(offered, chosen);
-    const narrowed = isNarrowed(value, chosen);
+    const narrowed = isNarrowed(value, chosen, limits);
     const counts = catalogueCounts();
     countNode.textContent = narrowed ? `${shown.length} of ${counts.total} match` : `${counts.built} of ${counts.total} built`;
     for (const button of filterRow.querySelectorAll("button")) button.setAttribute("aria-pressed", String(button.dataset.value === show()));
     for (const button of styleRow.querySelectorAll("button")) button.setAttribute("aria-pressed", String(button.dataset.value === style()));
     kindsTab.setAttribute("aria-pressed", String(pane() === "kinds"));
     filtersTab.setAttribute("aria-pressed", String(pane() === "filters"));
-    const on = Object.values(chosen).reduce((sum, values) => sum + (values?.length ?? 0), 0);
+    const on = filtersOn(chosen, limits);
     filtersTab.textContent = on ? `Filters: ${on} on` : "Filters";
 
     // "Start here" is ten good machines; with anything narrowed, or with Coming soon asked for, the first row is everything left
@@ -331,7 +347,7 @@ export function createGallery(hooks: GalleryHooks) {
       } else renderFamilies(inKind);
     }
     grid.dataset.start = String(kind === START && !everything);
-    const key = [show(), value.trim().toLowerCase(), JSON.stringify(chosen), kind, family ?? "", everything].join("|");
+    const key = [show(), value.trim().toLowerCase(), JSON.stringify(chosen), JSON.stringify(limits), kind, family ?? "", everything].join("|");
     renderTiles(items, key);
     markCurrent();
   }

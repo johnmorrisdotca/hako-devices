@@ -1,6 +1,6 @@
 // The gallery's list, with no page: every machine and loose part as one row, the kinds and families they sit in, and what a search and the filters leave. Pure, and tested by test/gallery-model.test.ts.
 import { aliasesOf, catalogue, type CatalogueEntry, deviceByKey, type Device, FAMILIES, headingOf, meshOf, PARTS, type Part, SHELVES } from "../src/index.ts";
-import { FACETS, matchesPicks, type FacetId, type Picks, tagsOf } from "../src/tags.ts";
+import { FACETS, inYears, matchesPicks, type FacetId, type Picks, tagsOf, type YearRange, yearSpan } from "../src/tags.ts";
 
 export type Show = "built" | "planned" | "all";
 type Shelved = Exclude<CatalogueEntry, Device>;
@@ -96,13 +96,19 @@ export function itemById(id: string): Item | undefined {
 export const featuredItems = (): readonly Item[] => FEATURED.map((key) => itemById(key)).filter((item): item is Item => item !== undefined);
 
 export const anyPick = (picks: Picks): boolean => Object.values(picks).some((values) => (values?.length ?? 0) > 0);
-export const isNarrowed = (text: string, picks: Picks): boolean => text.trim() !== "" || anyPick(picks);
+export const yearsSet = ({ from, to }: YearRange): number => (from == null ? 0 : 1) + (to == null ? 0 : 1);
+export const isNarrowed = (text: string, picks: Picks, years: YearRange = {}): boolean => text.trim() !== "" || anyPick(picks) || yearsSet(years) > 0;
+/** What "Filters: N on" counts: each value picked and each year limit set. */
+export const filtersOn = (picks: Picks, years: YearRange): number => Object.values(picks).reduce((sum, values) => sum + (values?.length ?? 0), 0) + yearsSet(years);
 
 /** What the Built, Coming soon and All choice and the search leave. Filters come after, because their own counts are of this. */
 export function offeredItems(items: readonly Item[], show: Show, text: string): Item[] {
   const words = text.toLowerCase().split(/\s+/).filter(Boolean);
   return items.filter((item) => (show === "all" || item.status === show) && words.every((word) => item.hay.includes(word)));
 }
+
+/** What a from and to year leave of those. Like the facets' own counts, what the filters offer is of this. A loose part has no year, and a machine of unknown year goes too, as `inYears` says. */
+export const yearItems = (items: readonly Item[], years: YearRange): Item[] => (yearsSet(years) > 0 ? items.filter((item) => item.part === null && inYears(item.key, years)) : [...items]);
 
 /** What the filters leave of those. A loose part has no tags, so any filter leaves it out, and it is never "coming soon". */
 export const pickedItems = (offered: readonly Item[], picks: Picks): Item[] => (anyPick(picks) ? offered.filter((item) => item.part === null && matchesPicks(item.key, picks)) : [...offered]);
@@ -130,6 +136,15 @@ export const readPicks = (read: (name: string) => string | null): Picks => {
   }
   return picks;
 };
+
+/** The address keeps the date filter as `year-from=1984&year-to=1990`. */
+export const YEAR_FROM = "year-from";
+export const YEAR_TO = "year-to";
+/** A year as typed or as an address has it: four digits, and anything else is no limit, so a box half typed narrows nothing yet. */
+export const readYear = (raw: string | null): number | null => (raw !== null && /^\d{4}$/.test(raw.trim()) ? Number(raw) : null);
+export const readYears = (read: (name: string) => string | null): { from: number | null; to: number | null } => ({ from: readYear(read(YEAR_FROM)), to: readYear(read(YEAR_TO)) });
+/** The first and last year of the machines, for the boxes to hint at. */
+export const yearHints = () => yearSpan(allItems().filter((item) => item.part === null).map((item) => item.key));
 
 /** The drawing's key: its mesh, its own for a part, and null for a machine with no shape yet. */
 export const drawingKey = (item: Item): string | null => (item.part ? item.part.id : meshOf(item.key));
