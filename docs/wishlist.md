@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2328 machines. 866 distinct shapes still to build. 1130 entries are already built: the 338 devices in this package, plus the real models those meshes cover. 1414 entries have a sourced size; the other 914 are `null` on purpose.**
+**2328 machines. 866 distinct shapes still to build. 1130 entries are already built: the 338 devices in this package, plus the real models those meshes cover. 1443 entries have a sourced size; the other 885 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -62,7 +62,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **889** | **165** | **687** |
+| **4** | **Apple** | **889** | **165** | **716** |
 |  | Power Mac | 92 | 0 | 90 |
 |  | Performa | 71 | 0 | 71 |
 |  | MacBook Pro | 69 | 13 | 64 |
@@ -74,8 +74,8 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | iPod | 37 | 6 | 27 |
 |  | Apple Watch | 36 | 0 | 21 |
 |  | MacBook Air | 28 | 5 | 12 |
-|  | Printer | 26 | 16 | 0 |
-|  | Keyboard | 25 | 23 | 0 |
+|  | Printer | 26 | 16 | 25 |
+|  | Keyboard | 25 | 23 | 2 |
 |  | Mac mini | 21 | 0 | 20 |
 |  | Workgroup Server | 21 | 0 | 16 |
 |  | iBook | 20 | 5 | 2 |
@@ -85,7 +85,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | MacBook | 13 | 4 | 13 |
 |  | LC | 12 | 0 | 12 |
 |  | Mac Pro | 12 | 0 | 12 |
-|  | AirPods | 12 | 0 | 9 |
+|  | AirPods | 12 | 0 | 11 |
 |  | Quadra | 11 | 0 | 11 |
 |  | Xserve | 11 | 2 | 0 |
 |  | Mac Studio | 8 | 0 | 8 |
@@ -191,7 +191,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-|  | **Total** | **2328** | **866** | **1414** |
+|  | **Total** | **2328** | **866** | **1443** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -933,7 +933,7 @@ HomePod (1st generation) (2018), HomePod mini (2020), HomePod (2nd generation) (
 
 **Keyboard** (25 machines, 23 shapes)
 
-Lisa Keyboard (1983), Macintosh Keyboard (1984), Macintosh Numeric Keypad (1984), Apple Desktop Bus Keyboard (1986), Macintosh Plus Keyboard (1986), Apple Extended Keyboard (1987), Apple Keyboard (M0116) (1987), Numeric Keypad II (1987), Apple Extended Keyboard II (1990), Apple Keyboard II (1990), Apple Adjustable Keyboard (1993), AppleDesign Keyboard (1993), Newton Keyboard (1994), Twentieth Anniversary Macintosh Keyboard (1997), Apple USB Keyboard (1998), Apple Pro Keyboard (2000), Apple Keyboard (white, 109 keys) (2003), Apple Wireless Keyboard (2003), Apple Keyboard (aluminium, 109 and 78 keys) (2007), Apple Wireless Keyboard (2007), Magic Keyboard (2015), Smart Keyboard for iPad (2015), Magic Keyboard with Numeric Keypad (2017), Magic Keyboard for iPad (2020), Magic Keyboard with Touch ID (2021).
+Lisa Keyboard (1983), Macintosh Keyboard (1984), Macintosh Numeric Keypad (1984), Apple Desktop Bus Keyboard (1986), Macintosh Plus Keyboard (1986), Apple Extended Keyboard (1987), Apple Keyboard (M0116) (1987), Numeric Keypad II (1987), Apple Extended Keyboard II (1990), Apple Keyboard II (1990), Apple Adjustable Keyboard (1993), AppleDesign Keyboard (1994), Newton Keyboard (1994), Twentieth Anniversary Macintosh Keyboard (1997), Apple USB Keyboard (1998), Apple Pro Keyboard (2000), Apple Keyboard (white, 109 keys) (2003), Apple Wireless Keyboard (2003), Apple Keyboard (aluminium, 109 and 78 keys) (2007), Apple Wireless Keyboard (2007), Magic Keyboard (2015), Smart Keyboard for iPad (2015), Magic Keyboard with Numeric Keypad (2017), Magic Keyboard for iPad (2020), Magic Keyboard with Touch ID (2021).
 
 **LC** (12 machines, 0 shapes)
 
