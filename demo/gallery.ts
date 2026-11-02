@@ -259,7 +259,8 @@ export function createGallery(hooks: GalleryHooks) {
     node.dataset.status = item.status;
     node.setAttribute("aria-pressed", String(item.id === currentId));
     node.addEventListener("click", () => {
-      go({ kind: kindNow(), family: familyNow() }, `#${encodeURIComponent(item.id)}`);
+      // a colour belongs to the machine it was picked on
+      go({ kind: kindNow(), family: familyNow(), colour: null }, `#${encodeURIComponent(item.id)}`);
       hooks.onChoose();
     });
     tileNodes.set(item.id, node);

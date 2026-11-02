@@ -1022,6 +1022,54 @@ test("a machine's colours: a drawn colour switches, one with none says so and ti
   expect(problems).toEqual([]);
 });
 
+test("the address keeps a chosen colour: reload and Back do what you expect", async ({ page }) => {
+  const problems = watch(page);
+  await page.goto(`${URL}#macbook-pro-14`);
+  const hero = page.getByTestId("hero-device");
+  const chip = (name: string) => page.getByTestId("device-colours").locator(`[data-colour="${name}"]`);
+  const pressed = (name: string) => expect(chip(name)).toHaveAttribute("aria-pressed", "true");
+  await pressed("Space Black");
+  await chip("Silver").click();
+  await expect(page).toHaveURL(/colour=Silver.*#macbook-pro-14$/);
+  await page.reload();
+  await expect(hero).toHaveAttribute("key", "macbook-pro-14-silver");
+  await pressed("Silver");
+  await expect(page.getByTestId("colour-note")).toContainText("has a drawing of its own");
+  await expect(page.locator('[data-testid="embed-code"]')).toContainText('key="macbook-pro-14-silver"');
+  // a colour with no drawing keeps its tint
+  await chip("Space Gray").click();
+  await expect(hero).toHaveAttribute("key", "macbook-pro-14");
+  await expect(hero).toHaveAttribute("body-colour", /^#[0-9a-f]{6}$/);
+  await page.reload();
+  await expect(hero).toHaveAttribute("body-colour", /^#[0-9a-f]{6}$/);
+  await pressed("Space Gray");
+  // each colour is a step for Back and Forward
+  await page.goBack();
+  await expect(hero).toHaveAttribute("key", "macbook-pro-14-silver");
+  await expect(hero).not.toHaveAttribute("body-colour");
+  await pressed("Silver");
+  await page.goBack();
+  await expect(hero).toHaveAttribute("key", "macbook-pro-14");
+  await pressed("Space Black");
+  await expect(chip("Silver")).toHaveAttribute("aria-pressed", "false");
+  await page.goForward();
+  await expect(hero).toHaveAttribute("key", "macbook-pro-14-silver");
+  await pressed("Silver");
+  // another machine starts plain, and Back brings the colour back with its machine
+  await tileOf(page, "macbook-pro-14").waitFor();
+  await tileOf(page, "macbook-air-13").click();
+  await expect(hero).toHaveAttribute("key", "macbook-air-13");
+  await expect(page).not.toHaveURL(/colour=/);
+  await page.goBack();
+  await expect(hero).toHaveAttribute("key", "macbook-pro-14-silver");
+  await pressed("Silver");
+  // a colour this machine does not have is no colour, and a machine with its plain colour stays plain
+  await page.goto(`${URL}?colour=Nothing#macbook-pro-14`);
+  await expect(hero).toHaveAttribute("key", "macbook-pro-14");
+  await pressed("Space Black");
+  expect(problems).toEqual([]);
+});
+
 test("a colour with no value says only its name, and a covered machine switches to its finish's mesh", async ({ page }) => {
   const problems = watch(page);
   await page.goto(`${URL}#macbook-air-m2-2022`);

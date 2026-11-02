@@ -29,8 +29,8 @@ function chipOf(colour: MachineColour): HTMLButtonElement {
   return chip;
 }
 
-/** The row of a machine's colours, which drives this view. `key` is the machine's, drawn or planned. */
-export function colourRow(view: HakoDevice, key: string): HTMLElement {
+/** The row of a machine's colours, which drives this view. `key` is the machine's, drawn or planned, and the view is on it. `chosen` names the colour to start on, and a name it does not have is none; `onPick` hears a colour pressed that was not already on. */
+export function colourRow(view: HakoDevice, key: string, chosen: string | null = null, onPick?: (name: string) => void): HTMLElement {
   const row = document.createElement("div");
   row.className = "colours";
   row.dataset.testid = "colour-row";
@@ -50,7 +50,6 @@ export function colourRow(view: HakoDevice, key: string): HTMLElement {
   chips.setAttribute("role", "group");
   chips.setAttribute("aria-label", "Colours");
   const mesh = meshOf(key);
-  const home = view.getAttribute("key") ?? key;
   const pick = (colour: MachineColour, chip: HTMLButtonElement) => {
     for (const other of chips.querySelectorAll("button")) other.setAttribute("aria-pressed", String(other === chip));
     let words: string;
@@ -59,7 +58,7 @@ export function colourRow(view: HakoDevice, key: string): HTMLElement {
       view.setAttribute("key", colour.drawing);
       words = `${colour.name} has a drawing of its own.`;
     } else {
-      if (view.getAttribute("key") !== home) view.setAttribute("key", home);
+      if (view.getAttribute("key") !== key) view.setAttribute("key", key);
       const tint = mesh ? colour.swatch : null;
       if (tint) view.setAttribute("body-colour", tint.value);
       else view.removeAttribute("body-colour");
@@ -74,12 +73,19 @@ export function colourRow(view: HakoDevice, key: string): HTMLElement {
     source.textContent = "Where this comes from";
     note.replaceChildren(`${words} `, source);
   };
+  let start: (() => void) | undefined;
   for (const colour of colours) {
     const chip = chipOf(colour);
     chip.setAttribute("aria-pressed", String(colour.drawing !== null && colour.drawing === mesh));
-    chip.addEventListener("click", () => pick(colour, chip));
+    chip.addEventListener("click", () => {
+      const on = chip.getAttribute("aria-pressed") === "true";
+      pick(colour, chip);
+      if (!on) onPick?.(colour.name);
+    });
     chips.append(chip);
+    if (colour.name === chosen) start = () => pick(colour, chip);
   }
+  start?.();
   row.append(chips, note);
   return row;
 }

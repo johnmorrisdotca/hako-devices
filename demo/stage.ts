@@ -3,7 +3,7 @@ import { deviceByKey, meshOf, PARTS, type StyleName } from "../src/index.ts";
 import { EMBED_KINDS, embedCode, type DeviceOptions, type EmbedKind } from "../src/embed.ts";
 import { HakoDevice } from "../src/element.ts";
 import { FACETS, tagsOf } from "../src/tags.ts";
-import { createAddressState } from "@johnmorrisdotca/kazoku-ui/address-state";
+import { applyParams, createAddressState } from "@johnmorrisdotca/kazoku-ui/address-state";
 import type { ViewControlsElement } from "@johnmorrisdotca/kazoku-ui/view-controls/element";
 import { colourRow } from "./colour-row.ts";
 import { byId, el } from "./dom.ts";
@@ -28,6 +28,8 @@ export function createStage(startStyle: () => string) {
   let current: Item | null = null;
   let kind: EmbedKind = "element";
   let full = "";
+  /** The colour the row was drawn for, as the address names it. */
+  let colourNow: string | null = null;
 
   const look = () => address.get("look") as "3d" | "drawing";
   const flag = (name: string) => address.get(name) === "on";
@@ -153,9 +155,18 @@ export function createStage(startStyle: () => string) {
       ),
     );
   }
+  /** A colour changes the machine on the screen, so it is a step for Back, and the address keeps it for a reload. */
+  function pickColour(name: string) {
+    address.flush();
+    history.pushState(history.state, "", `${location.pathname}${applyParams(location.search, { colour: name })}${location.hash}`);
+    colourNow = name;
+  }
   function drawColours(item: Item) {
+    colourNow = address.get("colour");
     coloursRow.hidden = item.part !== null;
-    coloursRow.replaceChildren(...(item.part ? [] : [colourRow(hero, item.key)]));
+    hero.removeAttribute("body-colour");
+    if (!item.part) hero.setAttribute("key", item.key);
+    coloursRow.replaceChildren(...(item.part ? [] : [colourRow(hero, item.key, colourNow, pickColour)]));
   }
   function drawFacts(item: Item) {
     facts.replaceChildren();
@@ -192,14 +203,10 @@ export function createStage(startStyle: () => string) {
   return {
     show(item: Item) {
       current = item;
-      hero.removeAttribute("body-colour");
       if (item.part) {
         hero.removeAttribute("key");
         hero.setAttribute("part", item.part.id);
-      } else {
-        hero.removeAttribute("part");
-        hero.setAttribute("key", item.key);
-      }
+      } else hero.removeAttribute("part");
       nameNode.textContent = item.name;
       statusNode.textContent = item.status === "planned" ? "Coming soon" : "";
       statusNode.hidden = item.status !== "planned";
@@ -219,6 +226,7 @@ export function createStage(startStyle: () => string) {
     sync() {
       applyAttributes();
       drawOptions();
+      if (current && address.get("colour") !== colourNow) drawColours(current);
       drawEmbed();
     },
   };
