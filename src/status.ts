@@ -17,6 +17,13 @@ export const SHELVES: readonly { id: string; title: string }[] = [
   { id: "consoles", title: "Game consoles" },
   { id: "phones", title: "Retro phones and PDAs" },
   { id: "computers", title: "Retro home computers" },
+  { id: "calculators", title: "Calculators" },
+  { id: "music", title: "Personal music" },
+  { id: "readers", title: "E-readers" },
+  { id: "headsets", title: "Headsets" },
+  { id: "laptops", title: "Laptops" },
+  { id: "gadgets", title: "Other gadgets" },
+  { id: "nas", title: "NAS boxes" },
 ];
 
 /** A family's name on its shelf: "Nintendo DS", "Ericsson T series". A shelf with one maker, or a family that names its maker, needs no more. */

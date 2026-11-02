@@ -4,7 +4,8 @@ import { test } from "node:test";
 import { catalogue, DEVICES } from "../src/index.ts";
 import { TAG_DATA } from "../src/tag-data.ts";
 import { isModelPage, MODEL_KINDS, nameStates, tagProblems, type TagRow } from "../scripts/tag-rules.ts";
-import { facetCounts, facetOrder, FACETS, matchesPicks, tagsOf } from "../src/tags.ts";
+import { facetCounts, facetOrder, FACETS, inYears, matchesPicks, tagsOf, yearOf, yearSpan } from "../src/tags.ts";
+import { readYears } from "../scripts/wishlist-read.ts";
 
 const keys = catalogue().map((entry) => entry.key);
 
@@ -184,4 +185,38 @@ test("the Mac Pro steel tower says what the 2023 Mac Pro has, not a tower from b
   assert.deepEqual(tags.cores, ["24"]);
   assert.deepEqual(tags.ram, ["64 GB", "128 GB", "192 GB"]);
   assert.deepEqual(tags.decade, ["2020s"]);
+});
+
+test("a machine's year comes from its row, and a year the row doubts stays blank", () => {
+  const rows = JSON.parse(readFileSync("data/wishlist.json", "utf8")) as { key: string; year: number | null; notes?: string }[];
+  const years = readYears(rows);
+  for (const row of rows) assert.equal(yearOf(row.key), years[row.key] ?? null, row.key);
+  assert.equal(yearOf("no-such-machine"), null);
+  assert.deepEqual(readYears([{ key: "a", year: 1999, notes: "Year not confirmed against a source." }, { key: "b", year: 1999, notes: "Year from memory, not found." }, { key: "c", year: 1999, notes: "" }, { key: "d", year: null }]), { c: 1999 });
+  // every decade tag beside a year agrees with it
+  for (const [key, year] of Object.entries(years)) {
+    const decade = tagsOf(key).decade;
+    if (decade) assert.deepEqual(decade, [`${Math.floor(year / 10) * 10}s`], key);
+  }
+});
+
+test("a span of years keeps both ends, and unknown years only with no limit", () => {
+  const dated = keys.filter((key) => yearOf(key) !== null);
+  const blank = keys.find((key) => yearOf(key) === null) as string;
+  const upTo2010 = keys.filter((key) => inYears(key, { to: 2010 }));
+  assert.ok(upTo2010.length > 100);
+  assert.ok(upTo2010.every((key) => (yearOf(key) as number) <= 2010));
+  assert.equal(upTo2010.length, dated.filter((key) => (yearOf(key) as number) <= 2010).length);
+  const one = dated[0];
+  const year = yearOf(one) as number;
+  assert.equal(inYears(one, { from: year, to: year }), true);
+  assert.equal(inYears(one, { from: year + 1 }), false);
+  assert.equal(inYears(one, { to: year - 1 }), false);
+  assert.equal(inYears(blank, { from: 1900 }), false);
+  assert.equal(inYears(blank, {}), true);
+  assert.equal(inYears(blank, { from: null, to: undefined }), true);
+  assert.equal(inYears(blank, { from: Number.NaN }), true);
+  const span = yearSpan(keys);
+  assert.ok(span && span.from < 1980 && span.to >= 2020);
+  assert.equal(yearSpan([blank]), null);
 });

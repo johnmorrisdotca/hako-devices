@@ -1,7 +1,7 @@
 // Every machine's tags, and the filters they make: `@johnmorrisdotca/hako-devices/tags`. Within one facet a machine needs any of the values picked; across facets, all of them. The table is its own
 // entry point because it is large, and a page that only draws a device never loads it.
 import { deviceByKey } from "./catalogue.ts";
-import { TAG_DATA } from "./tag-data.ts";
+import { TAG_DATA, YEAR_DATA } from "./tag-data.ts";
 
 export const FACETS = [
   { id: "maker", title: "Brand" },
@@ -64,6 +64,32 @@ export function facetCounts(keys: readonly string[], picks: Picks): Record<Facet
     }
   }
   return counts;
+}
+
+/** The year a machine came out, or null where no sure year is known. */
+export const yearOf = (key: string): number | null => YEAR_DATA[key] ?? null;
+
+/** A span of years, both ends included. Leave an end out for no limit on that side. */
+export interface YearRange {
+  from?: number | null;
+  to?: number | null;
+}
+
+const limit = (year: number | null | undefined): number | null => (typeof year === "number" && Number.isFinite(year) ? year : null);
+
+/** Whether a machine came out in these years. With a limit set, a machine of unknown year is left out, because nothing says it belongs; with no limit, every machine passes. */
+export function inYears(key: string, { from, to }: YearRange): boolean {
+  const start = limit(from);
+  const end = limit(to);
+  if (start === null && end === null) return true;
+  const year = yearOf(key);
+  return year !== null && (start === null || year >= start) && (end === null || year <= end);
+}
+
+/** The first and last year among these machines, or null when none has a year. */
+export function yearSpan(keys: readonly string[]): { from: number; to: number } | null {
+  const years = keys.map(yearOf).filter((year): year is number => year !== null);
+  return years.length ? { from: Math.min(...years), to: Math.max(...years) } : null;
 }
 
 const WEIGHTS: readonly string[] = ["Under 1 kg", "1 to 3 kg", "3 to 10 kg", "Over 10 kg"];

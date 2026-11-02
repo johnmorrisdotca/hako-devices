@@ -37,6 +37,7 @@ Each machine:
 | `aliases` | Other names it goes by, in lowercase kebab-case ASCII, such as `trash-can` for `mac-pro-late-2013`. Empty when it has none. See [aliases](#aliases) |
 | `maker` | Its brand, or `null` |
 | `family` | Its product line, such as `Power Mac` or `Galaxy Tab S` |
+| `year` | The year it came out, or `null` where no sure year is known. A year nobody confirmed is left out here, though its row may still give a `decade` tag |
 | `status` | `built` when a mesh and drawings draw it, `planned` when it has a name and no shape yet |
 | `mesh` | The `key` of the device that draws it: its own for a drawn device, another for a model that device covers, `null` when `planned` |
 | `size` | Width, depth and height in millimetres, as `[w, d, h]`, for a drawn device whose size is published. `null` otherwise |

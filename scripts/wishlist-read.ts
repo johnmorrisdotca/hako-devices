@@ -21,7 +21,7 @@ export interface CoveredEntry {
   status: "built";
 }
 
-const SHELF_OF_PHASE: Readonly<Record<number, string>> = { 1: "phones", 2: "consoles", 3: "computers", 4: "apple", 5: "microsoft", 7: "raspberry-pi", 8: "tv", 9: "android", 10: "boards", 11: "mini-pcs", 12: "next" };
+const SHELF_OF_PHASE: Readonly<Record<number, string>> = { 1: "phones", 2: "consoles", 3: "computers", 4: "apple", 5: "microsoft", 7: "raspberry-pi", 8: "tv", 9: "android", 10: "boards", 11: "mini-pcs", 12: "next", 13: "calculators", 14: "music", 15: "laptops", 16: "headsets", 17: "gadgets", 18: "readers", 19: "nas" };
 
 /** The tags of every machine, built ones too, for src/tag-data.ts: the facts that stay facts when the sizes and sources stay in data/. */
 export function readTags(data: unknown, colours: Readonly<Record<string, readonly { name: string }[]>> = {}): Record<string, Record<string, readonly string[]>> {
@@ -31,6 +31,16 @@ export function readTags(data: unknown, colours: Readonly<Record<string, readonl
     tags[raw.key] = { maker: [raw.brand], ...raw.tags, ...(own?.length ? { colour: own.map(({ name }) => name) } : {}) };
   }
   return tags;
+}
+
+/** A row's notes that say its year is not a sourced release year: one nobody confirmed, one from memory, or the day a maker put a page online. */
+const UNSURE_YEAR = /\byear (?:not confirmed|from memory)|year not (?:found|confirmed)|year itself is unconfirmed|treat as unconfirmed|the year is when/i;
+
+/** The release year of every machine that has a sure one, for src/tag-data.ts. A year its own row doubts stays out: a blank, not a guess. */
+export function readYears(data: unknown): Record<string, number> {
+  const years: Record<string, number> = {};
+  for (const raw of data as { key: string; year?: number | null; notes?: string }[]) if (raw.year && !UNSURE_YEAR.test(raw.notes ?? "")) years[raw.key] = raw.year;
+  return years;
 }
 
 /** The aliases of every machine that has any, for src/alias-data.ts. */

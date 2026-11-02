@@ -3,7 +3,7 @@ import { expect, type Page, test } from "@playwright/test";
 import { allItems, drawingKey, itemById } from "../demo/gallery-model.ts";
 import { DEVICES } from "../src/catalogue.ts";
 import { catalogue, catalogueCounts, COVERED, PLANNED } from "../src/index.ts";
-import { matchesPicks, type Picks } from "../src/tags.ts";
+import { inYears, matchesPicks, type Picks } from "../src/tags.ts";
 
 const URL = "/hako-devices/";
 
@@ -775,6 +775,23 @@ test("a live screen takes words and a canvas", async ({ page, browserName }, inf
   await page.waitForTimeout(400);
   const painted = await device.screenshot();
   expect(Buffer.compare(changed, painted)).not.toBe(0);
+  expect(problems).toEqual([]);
+});
+
+test("a from and to year narrow the gallery and clear", async ({ page }) => {
+  const problems = watch(page);
+  await page.goto(URL);
+  await page.locator('[data-testid="filter-all"]').click();
+  await page.locator('[data-testid="year-to"]').fill("1985");
+  const expected = catalogue().filter((entry) => inYears(entry.key, { to: 1985 }));
+  expect(expected.length).toBeGreaterThan(10);
+  await expect(page.locator('[data-testid="gallery-count"]')).toContainText(`${expected.length} of`);
+  await expect(page.locator('[data-testid="tile"]')).toHaveCount(expected.length);
+  await page.locator('[data-testid="year-from"]').fill("1984");
+  await expect(page.locator('[data-testid="gallery-count"]')).toContainText(`${expected.filter((entry) => inYears(entry.key, { from: 1984 })).length} of`);
+  await page.locator('[data-testid="year-from"]').fill("");
+  await page.locator('[data-testid="year-to"]').fill("");
+  await expect(page.locator('[data-testid="gallery-count"]')).toContainText("built");
   expect(problems).toEqual([]);
 });
 

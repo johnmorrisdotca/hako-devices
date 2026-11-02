@@ -189,3 +189,6 @@ select, input[type="text"], input[type="search"] { min-height: 2.5rem; padding: 
 .swatch { width: 0.9rem; height: 0.9rem; flex: none; border: 1px solid var(--line); border-radius: 50%; }
 .swatch-none { border-style: dashed; background: transparent; }
 .colour-note a { color: var(--accent); }
+.year-filter { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin: 0 0 0.5rem; }
+.year-box { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.9rem; }
+.year-box input { width: 5.5rem; min-height: 2.25rem; padding: 0 0.5rem; border: 1px solid var(--line); border-radius: 0.5rem; background: var(--ground); color: inherit; font: inherit; }
