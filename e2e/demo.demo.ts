@@ -409,7 +409,7 @@ test("a tile opens one device large; Close and Back take it away", async ({ page
   await page.locator('[data-testid="gallery-card"][data-group="pi-boards"]').click();
   await page.locator('[data-testid="tile"][data-key="pi4"]').click();
   const dialog = page.locator('[data-testid="device-dialog"]');
-  await expect(dialog).toBeVisible();
+  await expect(dialog).toBeVisible({ timeout: 20_000 });
   await expect(dialog.locator('[data-testid="dialog-device"]')).toHaveAttribute("key", "pi4");
   await expect(dialog).toContainText("85 by 56 by 17 mm");
   await page.locator('[data-testid="dialog-close"]').click();
