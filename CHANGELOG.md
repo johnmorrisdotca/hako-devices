@@ -6,6 +6,8 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.12.1] - 2026-11-02
+
 ### Fixed
 
 - A family's CPU, cores or memory is no longer applied to its models. Those three tags (and the CPU maker) now rest only on a page about the machine itself: its own Wikipedia article (the title is the machine's name; "Xbox (console)" is the Xbox, a model number such as "(AGB-001)" or a watch's "(40 mm)" is not part of the title), or the maker's spec page for that one machine (Apple's, Intel's Ark, ASUS's, Raspberry Pi's). A series article, a list of models ("List of iPhone models", "List of Mac models grouped by CPU type") or a document on a family is not one. Every value was read against its page (Intel's Ark pages do not answer a program, so the 336 of them were not read and their values stay as they were): 533 CPUs, 546 CPU makers, 306 core counts and 454 memory sizes that no page about that machine gives were removed, from 768 of the 2,328 machines. The Atari 2600 Jr., the Xbox 360 S and the PC Engine Duo no longer take their chip from the console they revise; a missing value means no page about that machine gives it. CPUs on the list: 1,522 before, 1,017 after (the next release fills what has a page).
