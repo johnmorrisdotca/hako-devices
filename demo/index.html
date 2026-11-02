@@ -31,10 +31,11 @@
       <section class="hero panel" aria-labelledby="hero-title">
         <div class="hero-view">
           <hako-device id="hero" key="pi4-pitft" fireflies data-testid="hero-device"></hako-device>
+          <kazoku-view-controls id="view-bar" data-testid="view-bar" for="hero" address autoplay autoplay-for="60" speed="2" theme="dark"></kazoku-view-controls>
         </div>
         <div class="hero-side">
           <h2 id="hero-title">One device, large</h2>
-          <p class="note">It starts as its drawing and becomes the 3D view without a jump. Drag to turn it, or use the arrow keys; double-click or Home puts it back.</p>
+          <p class="note">It starts as its drawing and becomes the 3D view without a jump. Drag to turn it, or use the arrow keys. The controls under it tip, zoom and move it; Ctrl or Command with the wheel zooms, and Home puts it back.</p>
           <div class="chips" id="hero-chips" role="group" aria-label="Pick a device"></div>
           <h3 id="embed-title">Put this on your site</h3>
           <p class="note">Copy the code for the machine on the screen. The embed page is for a site that cannot run script.</p>

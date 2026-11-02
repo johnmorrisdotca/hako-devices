@@ -39,7 +39,32 @@ The parts you can style are `frame`, `figure`, `drawing`, `canvas`, `tilt` and `
 
 ## Keys and touch
 
-Drag turns it and a finger still scrolls the page up and down. Once it has the focus the wheel and a pinch zoom. Arrow keys turn it, `+` and `-` zoom, Home, `0` or a double-click put it back. On a phone leaning it turns the view a little; where a browser must ask first, a "Tilt to turn" button asks. Under `prefers-reduced-motion` nothing turns by itself and the crossfade is a short fade. The 3D canvas is held to a pixel budget (`pixelRatioFor`: a ratio of 2 at most, 4096 pixels on a side and 6 million in all), and it draws only while something moves, never out of sight or in a hidden tab.
+Drag turns it and a finger still scrolls the page up and down. These are the element's own hands, for a page that adds none; [the family's view controls](#the-familys-view-controls) can take them over. Once it has the focus the wheel and a pinch zoom. Arrow keys turn it, `+` and `-` zoom, Home, `0` or a double-click put it back. On a phone leaning it turns the view a little; where a browser must ask first, a "Tilt to turn" button asks. Under `prefers-reduced-motion` nothing turns by itself and the crossfade is a short fade. The 3D canvas is held to a pixel budget (`pixelRatioFor`: a ratio of 2 at most, 4096 pixels on a side and 6 million in all), and it draws only while something moves, never out of sight or in a hidden tab.
+
+## The family's view controls
+
+`<kazoku-view-controls>` from [`@johnmorrisdotca/kazoku-ui`](https://www.npmjs.com/package/@johnmorrisdotca/kazoku-ui) is one set of controls for every project in the family: angle and tilt, Auto-turn, zoom with Fit, move, and the same drag, pinch, wheel (with Ctrl or Command) and keys everywhere. It never draws; it tells the page what was chosen, and the page hands that to the element with `drive()`. This package does not import it, so it adds nothing to your bundle unless your page uses it. The demo does, as a devDependency.
+
+```html
+<hako-device id="device" key="pi4"></hako-device>
+<kazoku-view-controls for="device" address></kazoku-view-controls>
+
+<script type="module">
+  import "@johnmorrisdotca/hako-devices/element";
+  import "@johnmorrisdotca/kazoku-ui/view-controls/define";
+
+  const controls = document.querySelector("kazoku-view-controls");
+  controls.addEventListener("kazoku-viewchange", (event) => document.getElementById("device").drive(event.detail));
+</script>
+```
+
+`element.drive({ yaw, tilt, zoom, panX, panY })` takes what the controls report: `yaw` and `tilt` in degrees, `zoom` (1 is the whole device in the picture; held to 0.25 to 8) and the pan in pixels. Each is optional and must be a finite number, or what was stays. The first call hands over: the element's own drag, wheel, keys and spin stand down, `data-driven` is set, and the 3D view follows. `drive(null)` takes the hands back.
+
+- Yaw 0 and tilt 0 is the view the device first shows. Dragging right makes `yaw` larger, which carries the camera to the left; a larger `tilt` lowers it. The camera keeps the distance that holds the whole device, so turning never makes it breathe, and zoom is the camera's, so a zoomed 3D view stays sharp.
+- The flat drawing cannot turn, so it follows only the zoom and the pan (a transform of the picture, nothing drawn again). Give the controls `flat` when the element says `hako-fallback`, as the demo does.
+- Another device keeps the view: change `key` and the new device opens turned, tipped and zoomed as the last one was.
+- Tilt to turn on a phone still works, added to the chosen view.
+- The canvas pixel budget, and the pause out of sight, apply as ever.
 
 ## A live screen
 

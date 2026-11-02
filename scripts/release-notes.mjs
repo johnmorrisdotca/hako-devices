@@ -1,15 +1,20 @@
 // The notes of one release, taken from CHANGELOG.md: what the Release workflow puts on the GitHub release.
 //
-//   node scripts/release-notes.ts 1.7.0 > notes.md
+//   node scripts/release-notes.mjs 1.7.0 > notes.md
 //
-// It prints the text under `## [1.7.0]`, up to the next version's heading or the link list at the foot, and exits
+// The family's shared release workflow runs it for the GitHub release. It prints the text under `## [1.7.0]`, up to the next version's heading or the link list at the foot, and exits
 // with an error, printing nothing, when the changelog has no such version or nothing is written under it.
 import { readFileSync } from "node:fs";
 import { URL, fileURLToPath } from "node:url";
 import process from "node:process";
 
-/** The text a changelog has under one version's heading, or `null` when there is none. */
-export function releaseNotes(changelog: string, version: string): string | null {
+/**
+ * The text a changelog has under one version's heading, or `null` when there is none.
+ * @param {string} changelog
+ * @param {string} version
+ * @returns {string | null}
+ */
+export function releaseNotes(changelog, version) {
   const lines = changelog.replace(/\r\n/g, "\n").split("\n");
   const start = lines.findIndex((line) => line.startsWith(`## [${version}]`));
   if (start < 0) return null;

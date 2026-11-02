@@ -3,6 +3,8 @@ import { aliasesOf, catalogue, catalogueCounts, check, type CatalogueEntry, COVE
 import { EMBED_KINDS, embedCode, type EmbedKind } from "../src/embed.ts";
 import { HakoDevice, setAssetBase } from "../src/element.ts";
 import { facetCounts, FACETS, facetOrder, type FacetId, matchesPicks, type Picks } from "../src/tags.ts";
+import "@johnmorrisdotca/kazoku-ui/view-controls/define";
+import type { ViewControlsElement } from "@johnmorrisdotca/kazoku-ui/view-controls/element";
 
 const assets = new URL("assets/", document.baseURI).href;
 setAssetBase(assets);
@@ -44,6 +46,12 @@ function drawEmbed() {
   embedCodeNode.textContent = embedFull.length > 1400 ? `${embedFull.slice(0, 1400)}…` : embedFull;
   for (const tab of embedTabs.querySelectorAll("button")) tab.setAttribute("aria-selected", String(tab.dataset.testid === `tab-${embedKind}`));
 }
+// The family's view controls turn, tip, zoom and move it; the device follows, and another device keeps the view.
+const bar = byId<HTMLElement>("view-bar") as ViewControlsElement;
+bar.addEventListener("kazoku-viewchange", (event) => hero.drive((event as CustomEvent).detail));
+// the flat drawing cannot turn
+hero.addEventListener("hako-fallback", () => bar.setAttribute("flat", ""));
+hero.addEventListener("hako-ready", () => bar.removeAttribute("flat"));
 function showHero(key: string) {
   heroKey = key;
   hero.setAttribute("key", key);
@@ -437,6 +445,15 @@ renderGallery();
 // ------------------------------------------------------------- the dialog
 const dialog = byId<HTMLDialogElement>("device-dialog");
 const dialogView = byId("dialog-view");
+/** The view controls for the device in the dialog. Only the page's own bar keeps its choices in the address. */
+function viewBar(view: HakoDevice): HTMLElement {
+  const controls = document.createElement("kazoku-view-controls") as ViewControlsElement;
+  controls.dataset.testid = "dialog-view-bar";
+  controls.setAttribute("theme", "dark");
+  controls.view = view;
+  controls.addEventListener("kazoku-viewchange", (event) => view.drive((event as CustomEvent).detail));
+  return controls;
+}
 function openFromHash() {
   const asked = decodeURIComponent(location.hash.slice(1));
   const part = asked.startsWith("part:") ? PARTS[asked.slice(5)] : undefined;
@@ -448,7 +465,7 @@ function openFromHash() {
     const view = new HakoDevice();
     view.setAttribute("part", part.id);
     view.dataset.testid = "dialog-device";
-    dialogView.replaceChildren(view);
+    dialogView.replaceChildren(view, viewBar(view));
     const facts = byId("dialog-facts");
     facts.replaceChildren();
     facts.append(el("dt", { textContent: "Id" }), el("dd", { textContent: part.id }), el("dt", { textContent: "Real size" }), el("dd", { textContent: `${part.size[0]} by ${part.size[1]} by ${part.size[2]} mm` }));
@@ -465,7 +482,7 @@ function openFromHash() {
   view.setAttribute("key", asked);
   view.setAttribute("fireflies", "");
   view.dataset.testid = "dialog-device";
-  dialogView.replaceChildren(view);
+  dialogView.replaceChildren(view, viewBar(view));
   const facts = byId("dialog-facts");
   facts.replaceChildren();
   const fact = (term: string, value: string) => facts.append(el("dt", { textContent: term }), el("dd", { textContent: value }));

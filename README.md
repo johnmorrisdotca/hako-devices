@@ -31,7 +31,7 @@ npm install @johnmorrisdotca/hako-devices three
 <hako-device build='{"board":"pi4","case":"armor","hat":"pitft-28"}'></hako-device>
 ```
 
-That is all a page needs with a bundler. The drawing shows at once; when the element comes on screen and the browser can draw WebGL, the 3D view takes over without a jump. Drag to turn it, or use the arrow keys. With no WebGL, under Save-Data, or on any failure, the drawing stays.
+That is all a page needs with a bundler. The drawing shows at once; when the element comes on screen and the browser can draw WebGL, the 3D view takes over without a jump. Drag to turn it, or use the arrow keys; [the family's view controls](docs/element.md#the-familys-view-controls) add tilt, zoom and move. With no WebGL, under Save-Data, or on any failure, the drawing stays.
 
 ## Put one on your own site
 

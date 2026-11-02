@@ -32,7 +32,7 @@ import {
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { FOV_DEG, frameFor } from "../framing.ts";
+import { FOV_DEG, frameFor, type ViewChoice } from "../framing.ts";
 import { pixelRatioFor } from "../pixels.ts";
 import { desktopPicture, oledPicture, panelPicture, paperPicture, phonePicture, type ScreenContent } from "../screen/picture.ts";
 import { canvas, paintBitmap, paintGlow, paintHalo, paintPanel, paintPerforation, paintPrint, paintSteps } from "./paint.ts";
@@ -102,6 +102,8 @@ export class DeviceViewer {
   private home = { position: new Vector3(), target: new Vector3() };
   private tween: { from: Vector3; to: Vector3; start: number } | null = null;
   private tilt = { azimuth: 0, polar: 0, applied: { azimuth: 0, polar: 0 } };
+  private driven: ViewChoice | null = null;
+  private drivenDirty = false;
   private resize: ResizeObserver;
   private disposed = false;
 
@@ -159,8 +161,8 @@ export class DeviceViewer {
     this.canvas.addEventListener("focus", () => (this.controls.enableZoom = true));
     this.canvas.addEventListener("blur", () => (this.controls.enableZoom = false));
     this.canvas.addEventListener("pointerdown", () => this.canvas.focus({ preventScroll: true }));
-    this.canvas.addEventListener("dblclick", () => this.reset());
-    this.canvas.addEventListener("keydown", (event) => this.key(event));
+    this.canvas.addEventListener("dblclick", () => !this.driven && this.reset());
+    this.canvas.addEventListener("keydown", (event) => !this.driven && this.key(event));
     document.addEventListener("visibilitychange", this.onVisibility);
 
     this.resize = new ResizeObserver(() => this.fit());
@@ -197,6 +199,7 @@ export class DeviceViewer {
     this.paintAll();
     this.setPrint(this.printWords);
     this.applyHome();
+    if (this.driven) this.syncDriven();
     this.canvas.dataset.ready = "true";
     if (this.screens.length) this.canvas.dataset.screen = this.screens[0].kind;
     this.wake();
@@ -241,7 +244,7 @@ export class DeviceViewer {
   /** How the device turns: a change takes effect from where it has got to. */
   setSpin(spin: Spin): void {
     this.controls.autoRotateSpeed = autoRotateOf(spin);
-    this.controls.autoRotate = !this.options.reducedMotion && spin.seconds > 0;
+    this.controls.autoRotate = !this.driven && !this.options.reducedMotion && spin.seconds > 0;
     this.canvas.dataset.spin = `${spin.seconds}${spin.way}`;
     this.wake();
   }
@@ -251,6 +254,49 @@ export class DeviceViewer {
     this.tilt.azimuth = MathUtils.degToRad(MathUtils.clamp(azimuthDeg, -25, 25));
     this.tilt.polar = MathUtils.degToRad(MathUtils.clamp(polarDeg, -12, 12));
     this.wake();
+  }
+
+  /** Hands the turn, tip, zoom and pan to the page, as the family's view controls report them: this view's own hands (drag, wheel, keys, spin) stand down, and the camera is the first view turned and tipped by them. `null` takes them back. */
+  drive(choice: ViewChoice | null): void {
+    const same = choice !== null && this.driven !== null && (Object.keys(choice) as (keyof ViewChoice)[]).every((key) => choice[key] === this.driven?.[key]);
+    if (same) return;
+    this.driven = choice;
+    this.controls.enabled = choice === null;
+    if (choice) this.controls.autoRotate = false;
+    this.canvas.style.touchAction = choice ? "auto" : "pan-y";
+    this.syncDriven();
+  }
+
+  /** The camera is put where the choice says at once, seen or not, so a page that asks where it looks from is told the truth. */
+  private syncDriven(): void {
+    this.drivenDirty = false;
+    this.lens();
+    this.applyDriven();
+    this.needsDraw = true;
+    this.wake();
+  }
+
+  /** The camera stands where the first view, turned and tipped, puts it, as far off as the first view is, so turning never makes it breathe. Dragging right makes `yaw` larger, which carries the camera to the left; a larger `tilt` lowers it. */
+  private applyDriven(): void {
+    if (!this.driven || !this.device) return;
+    const s = new Spherical().setFromVector3(this.home.position.clone().sub(this.home.target));
+    const lean = this.tilt.applied;
+    s.theta += -MathUtils.degToRad(this.driven.yaw) + lean.azimuth;
+    s.phi = MathUtils.clamp(s.phi + MathUtils.degToRad(this.driven.tilt) + lean.polar, this.controls.minPolarAngle, this.controls.maxPolarAngle);
+    this.controls.target.copy(this.home.target);
+    this.camera.position.copy(this.home.target).add(new Vector3().setFromSpherical(s));
+    this.controls.update();
+  }
+
+  /** Zoom is the camera's, and the pan moves the picture by pixels, so the view stays sharp at any zoom. */
+  private lens(): void {
+    const { zoom = 1, panX = 0, panY = 0 } = this.driven ?? {};
+    const w = Math.max(1, this.holder.clientWidth);
+    const h = Math.max(1, this.holder.clientHeight);
+    this.camera.zoom = zoom;
+    if (panX !== 0 || panY !== 0) this.camera.setViewOffset(w, h, -panX, -panY, w, h);
+    else this.camera.clearViewOffset();
+    this.camera.updateProjectionMatrix();
   }
 
   dispose(): void {
@@ -465,9 +511,15 @@ export class DeviceViewer {
     const dA = (t.azimuth - t.applied.azimuth) * 0.12;
     const dP = (t.polar - t.applied.polar) * 0.12;
     if (Math.abs(dA) > 1e-5 || Math.abs(dP) > 1e-5) {
-      this.orbit(dA, dP);
+      if (this.driven) this.drivenDirty = true;
+      else this.orbit(dA, dP);
       t.applied.azimuth += dA;
       t.applied.polar += dP;
+      this.needsDraw = true;
+    }
+    if (this.drivenDirty) {
+      this.drivenDirty = false;
+      this.applyDriven();
       this.needsDraw = true;
     }
     if (this.tween) {
@@ -488,6 +540,10 @@ export class DeviceViewer {
       this.frames++;
       this.canvas.dataset.frames = String(this.frames);
       this.canvas.dataset.azimuth = this.controls.getAzimuthalAngle().toFixed(3);
+      if (this.driven) {
+        this.canvas.dataset.zoom = this.driven.zoom.toFixed(2);
+        this.canvas.dataset.pan = `${Math.round(this.driven.panX)},${Math.round(this.driven.panY)}`;
+      }
     }
     // the controls' own change event may already have asked for the next frame (wake): one frame is asked for, never two, or each frame would add another to the line
     if (!this.frame && (ambient || changed || this.tween || this.needsDraw || Math.abs(dA) > 1e-5)) this.frame = requestAnimationFrame(this.tick);
@@ -499,7 +555,7 @@ export class DeviceViewer {
     this.renderer.setPixelRatio(pixelRatioFor(w, h, window.devicePixelRatio));
     this.renderer.setSize(w, h, false);
     this.camera.aspect = w / h;
-    this.camera.updateProjectionMatrix();
+    this.lens();
     this.wake();
   }
 

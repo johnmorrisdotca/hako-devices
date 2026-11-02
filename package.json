@@ -168,6 +168,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
+    "@johnmorrisdotca/kazoku-ui": "0.7.3",
     "@playwright/test": "1.64.0",
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",

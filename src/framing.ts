@@ -30,3 +30,12 @@ export function frameFor(min: Vec3, max: Vec3, screen: Vec3 | null, aspect: numb
   const direction: Vec3 = [Math.sin(polar) * Math.sin(azimuth), Math.cos(polar), Math.sin(polar) * Math.cos(azimuth)];
   return { target, position: target.map((v, i) => v + direction[i] * distance) as Vec3, distance };
 }
+
+/** What the family's view controls report: the turn and tip in degrees, the zoom (1 is the whole device in the picture) and the pan in pixels. */
+export interface ViewChoice {
+  yaw: number;
+  tilt: number;
+  zoom: number;
+  panX: number;
+  panY: number;
+}

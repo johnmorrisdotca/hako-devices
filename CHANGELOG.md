@@ -6,6 +6,19 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.14.0] - 2026-11-02
+
+### Added
+
+- The demo's viewer uses the family's view controls, `<kazoku-view-controls>` from `@johnmorrisdotca/kazoku-ui` 0.7.3 (a devDependency, for the demo only; the library stays dependency-free): angle and tilt, Auto-turn (for a minute, then it stops), Front, zoom with Fit, move, and the same drag, pinch, wheel and keys as the other projects, under the large device and in the device dialog. The angle, tilt, zoom and drag choice are kept in the address (`?yaw=40&tilt=10&zoom=2`) and another device keeps the view. Addresses that opened a device (`#pi4`, `#part:armor`) open it as before.
+- `element.drive({ yaw, tilt, zoom, panX, panY })` hands the turn, tip, zoom and pan to a page; `drive(null)` takes the element's own hands back ([docs/element.md](docs/element.md#the-familys-view-controls)). The flat drawing follows the zoom and the pan. `ViewChoice` is a type of the root entry.
+- `e2e/freeze.demo.ts` also plays the controls turning the device (auto-turn, zoom 1x to 5x on a 5K screen, a lost context handing the flat drawing the zoom and the pan), and `e2e/demo.demo.ts` holds the controls, the address and the old addresses.
+- `AGENTS.md` is the family's template (kazoku-ui 0.7.3) with this repo's facts under its marker.
+
+### Changed
+
+- `release.yml` calls the family's shared release workflow (`johnmorrisdotca/kazoku-ui` `reusable-release.yml` at v0.7.3) instead of carrying its own steps; the file name is the same, so the trusted-publisher entry on npmjs.com is unchanged. The GitHub release's notes come from `scripts/release-notes.mjs` (was `.ts`).
+
 ## [0.13.0] - 2026-11-02
 
 ### Added

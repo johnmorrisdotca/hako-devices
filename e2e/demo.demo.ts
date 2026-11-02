@@ -166,29 +166,101 @@ test("Save-Data keeps the drawing too", async ({ page }) => {
   await expect(page.locator("hako-device#hero")).toHaveAttribute("data-why", "reduced-data");
 });
 
-test("drag and keys turn the view; Home brings it back", async ({ page, browserName }, info) => {
+type Bar = HTMLElement & { pause(): void; set(next: object): void; state: { yaw: number; tilt: number; zoom: number } };
+
+test("the family's view controls turn, tip, zoom and move the device, and another device keeps the view", async ({ page, browserName }, info) => {
   test.skip(!is3d(browserName) || info.project.name !== "chromium-desk");
+  const problems = watch(page);
   await page.goto(URL);
   const hero = page.locator("hako-device#hero");
-  await expect(hero).toHaveAttribute("data-view", "3d", { timeout: 30_000 });
-  const azimuth = () => page.evaluate(() => Number((document.getElementById("hero") as HTMLElement).shadowRoot?.querySelector("canvas")?.dataset.azimuth ?? "NaN"));
-  await page.waitForTimeout(300);
-  await hero.locator("canvas").focus();
+  const bar = page.locator('[data-testid="view-bar"]');
+  await expect(hero).toHaveAttribute("data-view", "3d", { timeout: 90_000 });
+  await bar.evaluate((node) => (node as Bar).pause());
+  await expect(hero).toHaveAttribute("data-driven", "true");
+  const canvas = (name: string) => hero.evaluate((node, n) => node.shadowRoot?.querySelector("canvas")?.dataset[n] ?? "", name);
+  const azimuth = async () => Number(await canvas("azimuth"));
   const before = await azimuth();
+  await bar.evaluate((node) => (node as Bar).set({ yaw: 60, tilt: 10, zoom: 2.5 }));
   // The view writes its angle when it draws a frame, which can be slow on a busy machine or with no graphics card: wait for the turn, not for a time.
-  const turned = async (from: number) => Math.abs((await azimuth()) - from);
+  await expect.poll(async () => Math.abs((await azimuth()) - before), { timeout: 15_000 }).toBeGreaterThan(0.5);
+  await expect.poll(() => canvas("zoom")).toBe("2.50");
+  await bar.evaluate((node) => (node as Bar).set({ panX: 30, panY: -20 }));
+  await expect.poll(() => canvas("pan")).not.toBe("0,0");
+  // its own hands stand down and the controls' take over: an arrow key turns it by the controls' step, in the controls' state and in the address
+  await hero.locator("canvas").focus();
   await page.keyboard.press("ArrowRight");
-  await expect.poll(() => turned(before), { timeout: 15_000 }).toBeGreaterThan(0.1);
-  const after = await azimuth();
-  const box = await hero.boundingBox();
-  if (!box) throw new Error("no box");
-  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-  await page.mouse.down();
-  await page.mouse.move(box.x + box.width / 2 + 120, box.y + box.height / 2, { steps: 5 });
-  await page.mouse.up();
-  await expect.poll(() => turned(after), { timeout: 15_000 }).toBeGreaterThan(0.1);
-  await page.keyboard.press("Home");
-  await expect.poll(() => turned(before), { timeout: 15_000 }).toBeLessThan(0.15);
+  await expect.poll(() => bar.evaluate((node) => (node as Bar).state.yaw)).toBeCloseTo(75, 0);
+  await expect.poll(() => page.url()).toMatch(/yaw=75/);
+  expect(page.url()).toMatch(/zoom=2\.5/);
+  await bar.evaluate((node) => (node as Bar).set({ yaw: 60 }));
+  // another device keeps the view
+  await page.evaluate(() => {
+    const node = document.getElementById("hero") as HTMLElement;
+    (window as unknown as { __old?: Element | null }).__old = node.shadowRoot?.querySelector("canvas");
+    node.setAttribute("key", "pi5");
+  });
+  await expect
+    .poll(() =>
+      hero.evaluate((node) => {
+        const made = node.shadowRoot?.querySelector("canvas");
+        return made !== (window as unknown as { __old?: Element | null }).__old && made?.dataset.ready === "true" && node.dataset.view === "3d";
+      }),
+    )
+    .toBe(true);
+  expect(await canvas("zoom")).toBe("2.50");
+  expect(await bar.evaluate((node) => (node as Bar).state.yaw)).toBeCloseTo(60, 0);
+  // Front puts the turn back
+  await bar.locator("button", { hasText: /^Front$/ }).click();
+  await expect.poll(() => bar.evaluate((node) => (node as Bar).state.yaw)).toBeCloseTo(0, 0);
+  expect(problems).toEqual([]);
+});
+
+test("the flat drawing, with no WebGL, still zooms and moves", async ({ page }) => {
+  const problems = watch(page);
+  await page.addInitScript(() => {
+    const real = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (this: HTMLCanvasElement, kind: string, ...rest: unknown[]) {
+      if (/webgl/.test(kind)) return null;
+      return (real as (...a: unknown[]) => unknown).call(this, kind, ...rest);
+    } as typeof real;
+  });
+  await page.goto(URL);
+  const hero = page.locator("hako-device#hero");
+  const bar = page.locator('[data-testid="view-bar"]');
+  await expect(hero).toHaveAttribute("data-why", "no-webgl");
+  await expect(bar).toHaveAttribute("flat", "");
+  await bar.evaluate((node) => (node as Bar).set({ zoom: 3 }));
+  const drawing = () => hero.evaluate((node) => ({ zoom: node.shadowRoot?.querySelector<HTMLElement>(".drawing")?.dataset.zoom, transform: node.shadowRoot?.querySelector<HTMLElement>(".drawing")?.style.transform }));
+  await expect.poll(drawing).toMatchObject({ zoom: "3.00", transform: expect.stringContaining("scale(3)") });
+  expect(problems).toEqual([]);
+});
+
+test("a device opened by its old address still opens, and the view in the address is read beside it", async ({ page, browserName }, info) => {
+  test.skip(!is3d(browserName) || info.project.name !== "chromium-desk");
+  test.setTimeout(240_000);
+  const problems = watch(page);
+  const dialog = page.locator('[data-testid="device-dialog"]');
+  for (const [address, attribute, value] of [
+    ["#pi4", "key", "pi4"],
+    ["#part:armor", "part", "armor"],
+    ["?yaw=30&tilt=8&zoom=2#pi4", "key", "pi4"],
+  ] as const) {
+    await page.goto(`${URL}${address}`, { waitUntil: "domcontentloaded" });
+    await expect(dialog).toBeVisible({ timeout: 60_000 });
+    await expect(dialog.locator('[data-testid="dialog-device"]')).toHaveAttribute(attribute, value);
+    // the dialog has its own view controls, and they drive its device
+    await expect(dialog.locator('[data-testid="dialog-view-bar"]')).toBeVisible();
+    await expect(dialog.locator('[data-testid="dialog-device"]')).toHaveAttribute("data-driven", "true");
+  }
+  // the page's own bar opened at what the address said, and closing the dialog keeps it
+  const bar = page.locator('[data-testid="view-bar"]');
+  await expect.poll(() => bar.evaluate((node) => (node as Bar).state.yaw)).toBeCloseTo(30, 0);
+  expect(await bar.evaluate((node) => (node as Bar).state.zoom)).toBeCloseTo(2, 1);
+  await page.locator('[data-testid="dialog-close"]').click();
+  await expect(dialog).toBeHidden();
+  await expect.poll(() => page.url()).not.toContain("#");
+  expect(page.url()).toMatch(/\?.*yaw=30/);
+  expect(problems).toEqual([]);
 });
 
 test("the builder checks the fit and writes the code", async ({ page }) => {

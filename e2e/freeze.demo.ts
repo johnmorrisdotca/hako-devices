@@ -5,6 +5,8 @@ import { MAX_PIXELS, MAX_SIDE } from "../src/pixels.ts";
 
 const URL = "/hako-devices/";
 const hero = (page: Page) => page.locator("hako-device#hero");
+const bar = (page: Page) => page.locator('[data-testid="view-bar"]');
+type Bar = HTMLElement & { play(): void; pause(): void; set(next: object): void };
 
 test.use({ reducedMotion: "no-preference" });
 test.beforeEach(({ browserName }, info) => {
@@ -149,6 +151,37 @@ test("changes give back what they took: contexts, buffers, vertex arrays and tex
   expect(last.textures).toBeLessThanOrEqual(first.textures);
 });
 
+test("the controls turning it draw at most once a frame", async ({ page }) => {
+  await page.goto(URL);
+  await bar(page).evaluate((node) => (node as Bar).pause());
+  await reach3d(page);
+  await bar(page).evaluate((node) => (node as Bar).play());
+  await settle(page, 1500);
+  const { drew, frames } = await measure(page, 30);
+  expect(drew).toBeGreaterThan(0);
+  expect(drew).toBeLessThanOrEqual(frames + 3);
+  expect((await usage(page)).pending).toBeLessThanOrEqual(3);
+  await bar(page).evaluate((node) => (node as Bar).pause());
+});
+
+test("a lost context is let go, the drawing takes over and still follows the zoom", async ({ page }) => {
+  await page.goto(URL);
+  await bar(page).evaluate((node) => (node as Bar).pause());
+  await reach3d(page);
+  await hero(page).evaluate((node) => {
+    const canvas = node.shadowRoot?.querySelector("canvas");
+    const gl = (canvas?.getContext("webgl2") ?? canvas?.getContext("webgl")) as WebGLRenderingContext | null;
+    gl?.getExtension("WEBGL_lose_context")?.loseContext();
+  });
+  await expect(hero(page)).toHaveAttribute("data-view", "fallback", { timeout: 10_000 });
+  await expect(hero(page)).toHaveAttribute("data-why", "context-lost");
+  await settle(page, 500);
+  expect((await usage(page)).contexts).toBe(0);
+  await expect(bar(page)).toHaveAttribute("flat", "");
+  await bar(page).evaluate((node) => (node as Bar).set({ zoom: 3 }));
+  await expect.poll(() => hero(page).evaluate((node) => node.shadowRoot?.querySelector<HTMLElement>(".drawing")?.dataset.zoom)).toBe("3.00");
+});
+
 test.describe("on a 5K screen", () => {
   test.use({ viewport: { width: 2560, height: 1440 }, deviceScaleFactor: 2 });
 
@@ -160,6 +193,7 @@ test.describe("on a 5K screen", () => {
       node.style.maxWidth = "none";
       node.style.width = "100vw";
     });
+    await bar(page).evaluate((node) => (node as Bar).pause());
     await reach3d(page);
     const size = () =>
       hero(page).evaluate((node) => {
@@ -167,10 +201,14 @@ test.describe("on a 5K screen", () => {
         return { w: canvas.width, h: canvas.height, css: canvas.clientWidth };
       });
     await expect.poll(async () => (await size()).css, { timeout: 60_000 }).toBeGreaterThan(2000);
-    const now = await size();
-    expect(now.w * now.h).toBeLessThanOrEqual(MAX_PIXELS);
-    expect(Math.max(now.w, now.h)).toBeLessThanOrEqual(MAX_SIDE);
-    // still sharp: more than the 2560 pixels the screen is wide in CSS pixels
-    expect(now.w).toBeGreaterThan(2560);
+    for (const zoom of [1, 2, 3, 4, 5]) {
+      await bar(page).evaluate((node, z) => (node as Bar).set({ zoom: z }), zoom);
+      await expect.poll(() => hero(page).evaluate((node) => node.shadowRoot?.querySelector("canvas")?.dataset.zoom), { timeout: 60_000 }).toBe(zoom.toFixed(2));
+      const now = await size();
+      expect(now.w * now.h).toBeLessThanOrEqual(MAX_PIXELS);
+      expect(Math.max(now.w, now.h)).toBeLessThanOrEqual(MAX_SIDE);
+      // still sharp: more than the 2560 pixels the screen is wide in CSS pixels
+      expect(now.w).toBeGreaterThan(2560);
+    }
   });
 });

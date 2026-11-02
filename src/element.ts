@@ -10,6 +10,7 @@ import { type ArtMetrics, parseUnit, readMetrics, realPlacement, realScaleSvg } 
 import type { ScreenContent } from "./screen/picture.ts";
 import { cleanStyle, drawingFile, STYLE_NAMES, STYLES, type StyleName } from "./styles.ts";
 import { type Reading, tiltMode, tiltTurn } from "./tilt.ts";
+import type { ViewChoice } from "./framing.ts";
 import type { DeviceViewer, Painter, Spin } from "./element/scene.ts";
 
 export type { Painter };
@@ -35,6 +36,8 @@ const CSS = `
 .picture { position: relative; width: 100%; aspect-ratio: 320 / 220; margin: 0; }
 .drawing, .drawing svg, img.drawing { display: block; width: 100%; height: 100%; }
 .drawing, .canvas { transition: opacity var(--hako-fade, 1500ms) ease-in-out, transform var(--hako-fade, 1500ms) ease-in-out, filter var(--hako-fade, 1500ms) ease-in-out; }
+:host([data-driven]) .picture { overflow: hidden; }
+:host([data-driven]) .drawing { transition: opacity var(--hako-fade, 1500ms) ease-in-out, filter var(--hako-fade, 1500ms) ease-in-out; }
 .stage { position: absolute; inset: 0; }
 .canvas { display: block; width: 100%; height: 100%; opacity: 0; transform: scale(0.97); filter: blur(3px); cursor: grab; border-radius: inherit; }
 .canvas:active { cursor: grabbing; }
@@ -147,6 +150,7 @@ export class HakoDevice extends HTMLBase {
   private built: Promise<import("./build/index.ts").Built> | null = null;
   private renderQueued = false;
   private currentView: HakoView = "picture";
+  private driven: ViewChoice | null = null;
 
   /** What is showing now. */
   get view(): HakoView {
@@ -173,6 +177,39 @@ export class HakoDevice extends HTMLBase {
   /** Paints the device's screen now, and whenever its 3D view is made. */
   paintScreen(painter: Painter | ScreenContent): void {
     this.screen = painter;
+  }
+
+  /** Lets a page choose the turn, tip, zoom and pan, as the family's `<kazoku-view-controls>` reports them in `kazoku-viewchange` (`element.drive(event.detail)`): the element's own drag, wheel, keys and spin stand down, and the 3D view follows. The drawing, which is one flat picture, follows the zoom and the pan. `null` takes the hands back. */
+  drive(choice: Partial<ViewChoice> | null): void {
+    const before = this.driven;
+    if (choice === null) {
+      this.driven = null;
+      delete this.dataset.driven;
+    } else {
+      const number = (value: unknown, fallback: number, lo: number, hi: number) => (typeof value === "number" && Number.isFinite(value) ? Math.min(hi, Math.max(lo, value)) : fallback);
+      this.driven = {
+        yaw: number(choice.yaw, this.driven?.yaw ?? 0, -3600, 3600),
+        tilt: number(choice.tilt, this.driven?.tilt ?? 0, -90, 90),
+        zoom: number(choice.zoom, this.driven?.zoom ?? 1, 0.25, 8),
+        panX: number(choice.panX, this.driven?.panX ?? 0, -5000, 5000),
+        panY: number(choice.panY, this.driven?.panY ?? 0, -5000, 5000),
+      };
+      this.dataset.driven = "true";
+    }
+    const now = this.driven;
+    if (before && now && (Object.keys(now) as (keyof ViewChoice)[]).every((key) => before[key] === now[key])) return;
+    this.viewer?.drive(this.driven);
+    this.place();
+  }
+
+  /** The flat drawing, zoomed and moved to the chosen view: a transform only, so nothing is drawn again. The 3D view moves its own camera. */
+  private place(): void {
+    const drawing = this.shadowRoot?.querySelector<HTMLElement>(".drawing");
+    if (!drawing) return;
+    const { zoom = 1, panX = 0, panY = 0 } = this.driven ?? {};
+    drawing.style.transform = this.currentView === "3d" || (zoom === 1 && panX === 0 && panY === 0) ? "" : `translate(${panX}px, ${panY}px) scale(${zoom})`;
+    drawing.dataset.zoom = zoom.toFixed(2);
+    drawing.dataset.pan = `${Math.round(panX)},${Math.round(panY)}`;
   }
 
   /** Puts the camera back where it started. */
@@ -276,6 +313,7 @@ export class HakoDevice extends HTMLBase {
     this.dataset.view = view;
     if (why) this.dataset.why = why;
     else delete this.dataset.why;
+    if (this.driven) this.place();
   }
 
   private syncFlipped(): void {
@@ -375,6 +413,7 @@ export class HakoDevice extends HTMLBase {
     }
     picture.appendChild(holder);
     if (real && metrics) this.applyReal(frame, picture, metrics);
+    if (this.driven) this.place();
 
     // the 3D view: made when it first comes near the screen, paused out of it, let go after a while away
     const reason = whyNot(this.getAttribute("mode") ?? "auto");
@@ -405,6 +444,7 @@ export class HakoDevice extends HTMLBase {
           fireflies: this.hasAttribute("fireflies"),
         });
         this.viewer = made;
+        if (this.driven) made.drive(this.driven);
         if (this.screenValue) made.paintScreen(this.screenValue);
         made.setSpin(this.spin());
         made.setVisible(true);
