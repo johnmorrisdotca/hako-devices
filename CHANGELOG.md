@@ -6,6 +6,8 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.11.0] - 2026-11-02
+
 ### Added
 
 - Apple Watch: 34 models on 21 bodies, the first generation and Series 1 to 12, the SE (1st generation and 3rd generation) and the Ultra 1 to 4, each a row of numbers read from Apple's dimensional drawing of that model. The case only, no band: the picture, the crown, the side button, the speaker slot and the back crystal, in the sizes the sheets give. Models whose sheets give the same numbers share a body (the Series 4, 5 and SE; the Series 7, 8 and 9; the Series 10 and 11; the Ultra 2 and 3). Their sizes in the list now come from those drawings.
