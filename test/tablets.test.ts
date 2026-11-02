@@ -54,7 +54,7 @@ test("every part of a phone's row sits on its body", () => {
   for (const body of SLAB_BODIES) {
     const device = DEVICES.find(({ key }) => key === body.key);
     assert.ok(device?.size, body.key);
-    const [width, height] = device.size;
+    const [width, height] = body.landscape ? [device.size[1], device.size[0]] : device.size;
     for (const [x, y, r] of [...body.back.lenses, ...(body.back.flash ?? []), ...(body.back.mics ?? []), ...(body.back.lidar ? [body.back.lidar] : [])]) {
       assert.ok(x - r >= 0 && x + r <= width && y - r >= 0 && y + r <= height, `${body.key}: ${x}, ${y}`);
     }

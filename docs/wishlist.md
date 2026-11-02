@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2328 machines. 896 distinct shapes still to build. 1057 entries are already built: the 287 devices in this package, plus the real models those meshes cover. 1386 entries have a sourced size; the other 942 are `null` on purpose.**
+**2328 machines. 888 distinct shapes still to build. 1074 entries are already built: the 301 devices in this package, plus the real models those meshes cover. 1386 entries have a sourced size; the other 942 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -62,14 +62,14 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **889** | **195** | **659** |
+| **4** | **Apple** | **889** | **187** | **659** |
 |  | Power Mac | 92 | 0 | 90 |
 |  | Performa | 71 | 0 | 71 |
 |  | MacBook Pro | 69 | 13 | 64 |
 |  | iMac | 68 | 0 | 62 |
 |  | PowerBook | 61 | 15 | 60 |
 |  | iPhone | 55 | 0 | 55 |
-|  | iPad | 46 | 10 | 46 |
+|  | iPad | 46 | 2 | 46 |
 |  | Display | 38 | 37 | 28 |
 |  | iPod | 37 | 20 | 20 |
 |  | Apple Watch | 36 | 8 | 0 |
@@ -191,7 +191,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-|  | **Total** | **2328** | **896** | **1386** |
+|  | **Total** | **2328** | **888** | **1386** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -889,7 +889,7 @@ TI-99/4A (1981).
 
 Yamaha CX5M (1984).
 
-### Phase 4: Apple (889 machines, 195 shapes to build)
+### Phase 4: Apple (889 machines, 187 shapes to build)
 
 **AirPods** (12 machines, 0 shapes)
 
@@ -1043,9 +1043,9 @@ iBook (1999), iBook (FireWire) (2000), iBook SE (2000), iBook (Dual USB) (2001),
 
 iMac (1998) *built*, iMac (266 MHz) (1999) *built*, iMac (333 MHz) (1999) *built*, iMac (Slot Loading) (1999) *built*, iMac DV (1999) *built*, iMac DV Special Edition (1999) *built*, iMac (Summer 2000) *built*, iMac DV (Summer 2000) *built*, iMac DV Special Edition (Summer 2000) *built*, iMac DV+ (Summer 2000) *built*, iMac (Early 2001) *built*, iMac (Summer 2001) *built*, iMac (Flat Panel) (15-inch) (2002) *built*, iMac (Flat Panel) (17-inch) (2002) *built*, iMac (17-inch 1Ghz) (2003) *built*, iMac (USB 2.0) (15-inch) (2003) *built*, iMac (USB 2.0) (17-inch) (2003) *built*, iMac (USB 2.0) (20-inch) (2003) *built*, iMac G5 (2004, 17-inch) *built*, iMac G5 (2004, 20-inch) *built*, iMac G5 (Ambient Light Sensor) (17-inch) (2005) *built*, iMac G5 (Ambient Light Sensor) (20-inch) (2005) *built*, iMac G5 (iSight) (17-inch) (2005) *built*, iMac G5 (iSight) (20-inch) (2005) *built*, iMac (Early 2006) (17-inch) *built*, iMac (Early 2006) (20-inch) *built*, iMac (Late 2006) (17-inch) *built*, iMac (Late 2006) (20-inch) *built*, iMac (Late 2006) (24-inch) *built*, iMac (Mid 2007) (20-inch) *built*, iMac (Mid 2007) (24-inch) *built*, iMac (Early 2008) (20-inch) *built*, iMac (Early 2008) (24-inch) *built*, iMac (20-inch, Mid 2009) *built*, iMac (21.5-inch, Late 2009) *built*, iMac (27-inch, Late 2009) *built*, iMac (Early 2009) (20-inch) *built*, iMac (Early 2009) (24-inch) *built*, iMac (21.5-inch, Mid 2010) *built*, iMac (27-inch, Mid 2010) *built*, iMac (21.5-inch, Late 2011) *built*, iMac (21.5-inch, Mid 2011) *built*, iMac (27-inch, Mid 2011) *built*, iMac (21.5-inch, Late 2012) *built*, iMac (27-inch, Late 2012) *built*, iMac (21.5-inch, Late 2013) *built*, iMac (27-inch, Late 2013) *built*, iMac (21.5-inch, Mid 2014) *built*, iMac (Retina 5K, 27-inch, Late 2014) *built*, iMac (21.5-inch, Late 2015) *built*, iMac (Retina 4K, 21.5-inch, Late 2015) *built*, iMac (Retina 5K, 27-inch, Late 2015) *built*, iMac (Retina 5K, 27-inch, Mid 2015) *built*, iMac (21.5-inch, 2017) *built*, iMac (Retina 4K, 21.5-inch, 2017) *built*, iMac (Retina 5K, 27-inch, 2017) *built*, iMac Pro (2017) *built*, iMac (Retina 4K, 21.5-inch, 2019) *built*, iMac (Retina 5K, 27-inch, 2019) *built*, iMac (Retina 5K, 27-inch, 2020) *built*, iMac (24-inch, M1, 2021, Four ports) *built*, iMac (24-inch, M1, 2021, Two ports) *built*, iMac (24-inch, 2023, Four ports) *built*, iMac (24-inch, 2023, Two ports) *built*, iMac (24-inch, 2024, Four ports) *built*, iMac (24-inch, 2024, Two ports) *built*, iMac (24-inch, M6) (2026) *built*, iMac 24-inch, two ports: M1, M3 and M4 *built*.
 
-**iPad** (46 machines, 10 shapes)
+**iPad** (46 machines, 2 shapes)
 
-iPad (1st generation) (2010), iPad 2 (2011), iPad (3rd generation) (2012), iPad (4th generation) (2012), iPad mini (1st generation) (2012), iPad Air (1st generation) (2013), iPad mini 2 (2013), iPad Air 2 (2014), iPad mini 3 (2014), iPad Pro (12.9-inch) (2015) *built*, iPad mini 4 (2015), iPad Pro (9.7-inch) (2016) *built*, iPad (5th generation) (2017), iPad Pro (10.5-inch) (2017) *built*, iPad Pro 12.9-inch (2nd generation) (2017) *built*, iPad (6th generation) (2018), iPad Pro 11-inch (2018) *built*, iPad Pro 12.9-inch (3rd generation) (2018) *built*, iPad (7th generation) (2019), iPad Air (3rd generation) (2019), iPad mini (5th generation) (2019), iPad (8th generation) (2020), iPad Air (4th generation) (2020) *built*, iPad Pro 11-inch (2nd generation) (2020) *built*, iPad Pro 12.9-inch (4th generation) (2020) *built*, iPad (9th generation) (2021), iPad Pro 11-inch (3rd generation) (2021) *built*, iPad Pro 12.9-inch (5th generation) (2021) *built*, iPad mini (6th generation) (2021) *built*, iPad (10th generation) (2022) *built*, iPad Air (5th generation) (2022) *built*, iPad Pro 11-inch (4th generation) (2022) *built*, iPad Pro 12.9-inch (6th generation) (2022) *built*, iPad Air 11-inch (M2) (2024) *built*, iPad Air 13-inch (M2) (2024), iPad Pro 11-inch (M4) (2024) *built*, iPad Pro 13-inch (M4) (2024) *built*, iPad mini (A17 Pro) (2024) *built*, iPad (A16) (2025) *built*, iPad Air 11-inch (M3) (2025) *built*, iPad Air 13-inch (M3) (2025), iPad Pro 11-inch (M5) (2025) *built*, iPad Pro 13-inch (M5) (2025) *built*, iPad Air 11‑inch (M4) (2026) *built*, iPad Air 13‑inch (M4) (2026), iPad mini (A20 Pro) (2026).
+iPad (1st generation) (2010) *built*, iPad 2 (2011) *built*, iPad (3rd generation) (2012) *built*, iPad (4th generation) (2012) *built*, iPad mini (1st generation) (2012) *built*, iPad Air (1st generation) (2013) *built*, iPad mini 2 (2013) *built*, iPad Air 2 (2014) *built*, iPad mini 3 (2014) *built*, iPad Pro (12.9-inch) (2015) *built*, iPad mini 4 (2015) *built*, iPad Pro (9.7-inch) (2016) *built*, iPad (5th generation) (2017) *built*, iPad Pro (10.5-inch) (2017) *built*, iPad Pro 12.9-inch (2nd generation) (2017) *built*, iPad (6th generation) (2018) *built*, iPad Pro 11-inch (2018) *built*, iPad Pro 12.9-inch (3rd generation) (2018) *built*, iPad (7th generation) (2019) *built*, iPad Air (3rd generation) (2019) *built*, iPad mini (5th generation) (2019) *built*, iPad (8th generation) (2020) *built*, iPad Air (4th generation) (2020) *built*, iPad Pro 11-inch (2nd generation) (2020) *built*, iPad Pro 12.9-inch (4th generation) (2020) *built*, iPad (9th generation) (2021) *built*, iPad Pro 11-inch (3rd generation) (2021) *built*, iPad Pro 12.9-inch (5th generation) (2021) *built*, iPad mini (6th generation) (2021) *built*, iPad (10th generation) (2022) *built*, iPad Air (5th generation) (2022) *built*, iPad Pro 11-inch (4th generation) (2022) *built*, iPad Pro 12.9-inch (6th generation) (2022) *built*, iPad Air 11-inch (M2) (2024) *built*, iPad Air 13-inch (M2) (2024), iPad Pro 11-inch (M4) (2024) *built*, iPad Pro 13-inch (M4) (2024) *built*, iPad mini (A17 Pro) (2024) *built*, iPad (A16) (2025) *built*, iPad Air 11-inch (M3) (2025) *built*, iPad Air 13-inch (M3) (2025), iPad Pro 11-inch (M5) (2025) *built*, iPad Pro 13-inch (M5) (2025) *built*, iPad Air 11‑inch (M4) (2026) *built*, iPad Air 13‑inch (M4) (2026), iPad mini (A20 Pro) (2026).
 
 **iPhone** (55 machines, 0 shapes)
 

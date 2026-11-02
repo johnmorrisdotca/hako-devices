@@ -116,26 +116,30 @@ test("every drawing in the gallery loads, in thin, in thick and in both", async 
   expect(problems).toEqual([]);
 });
 
-test("every device reaches its 3D view", async ({ page, browserName }, info) => {
-  test.skip(!is3d(browserName) || info.project.name !== "chromium-desk", "one browser is enough for this long walk");
-  test.setTimeout(process.env.CI ? 2_400_000 : 1_200_000);
-  const problems = watch(page);
-  await page.goto(URL);
-  const hero = page.locator("hako-device#hero");
-  await hero.scrollIntoViewIfNeeded();
-  for (const { key } of DEVICES) {
-    await page.evaluate((k) => document.getElementById("hero")?.setAttribute("key", k), key);
-    await expect(hero, key).toHaveAttribute("data-view", "3d", { timeout: 30_000 });
-    const frames = await page.evaluate(async () => {
-      const node = document.getElementById("hero") as HTMLElement;
-      const canvas = node.shadowRoot?.querySelector("canvas");
-      for (let i = 0; i < 60 && !canvas?.dataset.frames; i++) await new Promise((r) => setTimeout(r, 50));
-      return Number(canvas?.dataset.frames ?? 0);
-    });
-    expect(frames, key).toBeGreaterThan(0);
-  }
-  expect(problems).toEqual([]);
-});
+// The walk is split into parts so that no one test grows with the catalogue: each part takes every SHARDS-th device and has the whole timeout to itself.
+const SHARDS = 6;
+for (let part = 0; part < SHARDS; part++) {
+  test(`every device reaches its 3D view, part ${part + 1} of ${SHARDS}`, async ({ page, browserName }, info) => {
+    test.skip(!is3d(browserName) || info.project.name !== "chromium-desk", "one browser is enough for this long walk");
+    test.setTimeout(process.env.CI ? 900_000 : 600_000);
+    const problems = watch(page);
+    await page.goto(URL);
+    const hero = page.locator("hako-device#hero");
+    await hero.scrollIntoViewIfNeeded();
+    for (const { key } of DEVICES.filter((_, index) => index % SHARDS === part)) {
+      await page.evaluate((k) => document.getElementById("hero")?.setAttribute("key", k), key);
+      await expect(hero, key).toHaveAttribute("data-view", "3d", { timeout: 30_000 });
+      const frames = await page.evaluate(async () => {
+        const node = document.getElementById("hero") as HTMLElement;
+        const canvas = node.shadowRoot?.querySelector("canvas");
+        for (let i = 0; i < 60 && !canvas?.dataset.frames; i++) await new Promise((r) => setTimeout(r, 50));
+        return Number(canvas?.dataset.frames ?? 0);
+      });
+      expect(frames, key).toBeGreaterThan(0);
+    }
+    expect(problems).toEqual([]);
+  });
+}
 
 test("the drawing stays when there is no WebGL", async ({ page }) => {
   const problems = watch(page);
