@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { catalogue, DEVICES } from "../src/index.ts";
 import { TAG_DATA } from "../src/tag-data.ts";
-import { nameStates, tagProblems, type TagRow } from "../scripts/tag-rules.ts";
+import { isModelPage, MODEL_KINDS, nameStates, tagProblems, type TagRow } from "../scripts/tag-rules.ts";
 import { facetCounts, facetOrder, FACETS, matchesPicks, tagsOf } from "../src/tags.ts";
 
 const keys = catalogue().map((entry) => entry.key);
@@ -33,11 +33,13 @@ test("a machine must have one of the values picked in each facet", () => {
   assert.ok(!matchesPicks("pi4", { maker: ["Apple"] }));
 });
 
-test("a plain Pi Zero is on the list, with its facts", () => {
+test("a plain Pi Zero is on the list with its decade, and no CPU until a page about the Zero gives it", () => {
   assert.ok(keys.includes("rpi-zero"));
-  assert.deepEqual(tagsOf("rpi-zero").cpu, ["ARM11"]);
-  assert.deepEqual(tagsOf("rpi-zero").cores, ["1"]);
+  assert.equal(tagsOf("rpi-zero").cpu, undefined);
+  assert.equal(tagsOf("rpi-zero").cores, undefined);
   assert.deepEqual(tagsOf("rpi-zero").decade, ["2010s"]);
+  assert.deepEqual(tagsOf("pi4").cpu, ["Cortex-A72"]);
+  assert.deepEqual(tagsOf("pi4").cores, ["4"]);
 });
 
 test("a built device also says its ports and parts", () => {
@@ -148,4 +150,38 @@ test("years read in order, and every value a machine has is offered", () => {
   const years = facetOrder("discontinued", counts.discontinued);
   assert.ok(years.indexOf("1992") < years.indexOf("2014"));
   assert.equal(years.length, counts.discontinued.size);
+});
+
+test("a machine's CPU, cores and memory rest on a page about that machine, never a series, a list or a family", () => {
+  const apple = "https://support.apple.com/en-us/112025";
+  assert.ok(isModelPage("Mac Pro (Late 2013)", apple));
+  assert.ok(isModelPage("Wii U", "https://en.wikipedia.org/wiki/Wii_U"));
+  assert.ok(isModelPage("Mac Pro (2023)", "https://en.wikipedia.org/wiki/Mac_Pro_(2023)"));
+  assert.ok(isModelPage("Apple Watch Series 4 (40 mm)", "https://en.wikipedia.org/wiki/Apple_Watch_Series_4"));
+  assert.ok(isModelPage("Xbox", "https://en.wikipedia.org/wiki/Xbox_(console)"));
+  assert.ok(isModelPage("Game Boy Advance (AGB-001)", "https://en.wikipedia.org/wiki/Game_Boy_Advance"));
+  assert.ok(!isModelPage("Mac mini (M1, 2020)", "https://en.wikipedia.org/wiki/Mac_Mini"));
+  assert.ok(!isModelPage("Xbox 360 S", "https://en.wikipedia.org/wiki/Xbox_360_(console)"));
+  assert.ok(!isModelPage("Atari 2600 Jr.", "https://en.wikipedia.org/wiki/Atari_2600"));
+  assert.ok(!isModelPage("Mac mini (Late 2012)", "https://en.wikipedia.org/wiki/Mac_Mini"));
+  assert.ok(!isModelPage("iPhone 5s", "https://en.wikipedia.org/wiki/List_of_iPhone_models"));
+  assert.ok(!isModelPage("Surface Pro 7", "https://en.wikipedia.org/wiki/Microsoft_Surface"));
+  assert.ok(!isModelPage("Apple Watch Series 4", "https://developer.apple.com/accessories/Accessory-Design-Guidelines.pdf"));
+  const found = (rowTags: TagRow["tags"], more: Partial<TagRow> = {}) => tagProblems([row(rowTags, more)]);
+  for (const kind of MODEL_KINDS) {
+    const family = "https://en.wikipedia.org/wiki/Atari_2600";
+    assert.deepEqual(found({ [kind]: ["x"] }, { name: "Atari 2600 Jr.", tagsSource: family }), [`x: ${kind} rests on a page that is not about Atari 2600 Jr.: ${family}`]);
+    assert.deepEqual(found({ [kind]: ["x"] }, { name: "Atari 2600 Jr.", tagSources: { [kind]: [family] } }), [`x: ${kind} rests on a page that is not about Atari 2600 Jr.: ${family}`]);
+    assert.deepEqual(found({ [kind]: ["x"] }, { name: "Atari 2600", tagsSource: family }), []);
+  }
+  // a size's page can be a family's: only the tag's own pages are held to it
+  assert.deepEqual(found({ cpu: ["Z80"] }, { name: "Atari 2600 Jr.", tagSources: { cpu: ["https://example.org/jr"] }, dimensionsSource: "https://en.wikipedia.org/wiki/Atari_2600" }), []);
+});
+
+test("the Mac Pro steel tower says what the 2023 Mac Pro has, not a tower from before", () => {
+  const tags = tagsOf("mac-pro");
+  assert.deepEqual(tags.cpu, ["Apple M2 Ultra"]);
+  assert.deepEqual(tags.cores, ["24"]);
+  assert.deepEqual(tags.ram, ["64 GB", "128 GB", "192 GB"]);
+  assert.deepEqual(tags.decade, ["2020s"]);
 });

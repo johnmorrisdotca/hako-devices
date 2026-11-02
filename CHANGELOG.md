@@ -6,6 +6,16 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- A family's CPU, cores or memory is no longer applied to its models. Those three tags (and the CPU maker) now rest only on a page about the machine itself: its own Wikipedia article (the title is the machine's name; "Xbox (console)" is the Xbox, a model number such as "(AGB-001)" or a watch's "(40 mm)" is not part of the title), or the maker's spec page for that one machine (Apple's, Intel's Ark, ASUS's, Raspberry Pi's). A series article, a list of models ("List of iPhone models", "List of Mac models grouped by CPU type") or a document on a family is not one. Every value was read against its page (Intel's Ark pages do not answer a program, so the 336 of them were not read and their values stay as they were): 533 CPUs, 546 CPU makers, 306 core counts and 454 memory sizes that no page about that machine gives were removed, from 768 of the 2,328 machines. The Atari 2600 Jr., the Xbox 360 S and the PC Engine Duo no longer take their chip from the console they revise; a missing value means no page about that machine gives it. CPUs on the list: 1,522 before, 1,017 after (the next release fills what has a page).
+- The Mac Pro steel tower (2023) in `machines.json` said 2 or 4 cores, 256 MB to 16 GB of memory, FireWire and no decade, carried over from the towers before it. It now says what Apple's page for the 2023 Mac Pro says: 24 cores, 64, 128 or 192 GB, USB-C, Thunderbolt and HDMI, the 2020s.
+- Memory read from an infobox no longer mixes in storage and ROM (the Nokia E71 listed 110, 256, 128 and 71 MB; its RAM is 128 MB), and a NUC's 64 GB that its maker's page puts at 32 GB is gone.
+
+### Changed
+
+- `pnpm wishlist` and `pnpm test` fail on a CPU, CPU maker, core count or memory whose page is not about the machine (`isModelPage` in `scripts/tag-rules.ts`, held by `test/tags.test.ts`), as they already did for a tag with no page. CPU, cores and memory no longer rest on a machine's size page unless that page is about the machine too ([docs/machines.md](docs/machines.md#tags)).
+
 ## [0.12.0] - 2026-11-02
 
 ### Added
