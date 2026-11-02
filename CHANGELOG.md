@@ -6,6 +6,18 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.13.0] - 2026-11-02
+
+### Added
+
+- 87 machines gain a CPU and its maker, each from a page about that machine: 51 from Apple's own tech specs page for it (the MacBook, MacBook Air, MacBook Pro, Mac mini, iMac, Mac Pro and older Macs, found through Apple's manuals-and-downloads page for the model) and 36 from the machine's own Wikipedia article (the Surface Go, Pro and Laptop, several Pixels and Nexus phones, Nokia and Palm phones, the Macintosh LC III and SE/30, Amstrad and Philips home computers). The page is named in `tagSources`. Nothing is guessed: a machine with no readable page about itself stays empty.
+- Coverage of the 2,328 machines, CPU: 1,522 (65.4%) at 0.11.0, 1,017 (43.7%) after 0.12.1 removed the CPUs that rested on a family's page, 1,104 (47.4%) now. Of the 2,161 that have a processor at all (not a display, printer, keyboard or the like): 70.2%, 47.0%, 51.0%.
+
+### Changed
+
+- 28 CPU names that were a line of the infobox ("369 MHz ARM11 Freescale MXC-300-xx processor", "Motorola 68000 @ 7.16 MHz (NTSC) 7.09 MHz (PAL)", "TI OMAP 1710, 32-bit RISC ARM9 @ 220 MHz") are now the chip: `ARM11`, `Motorola 68000`, `ARM9`, so a filter by CPU offers one value for each.
+- Still empty, and why: the Raspberry Pi 1, 2, 3 and Zero (the maker's pages answer no program, and its product briefs exist only for the later boards), 336 Intel Ark pages (unreadable by a program, so their values are kept as they were), consoles' later revisions (no article of their own), the Chromecasts, iPods, Apple Watches and BlackBerry and Nokia phones with no article.
+
 ## [0.12.2] - 2026-11-02
 
 ### Fixed
