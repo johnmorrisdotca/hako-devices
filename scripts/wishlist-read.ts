@@ -33,6 +33,16 @@ export function readTags(data: unknown, colours: Readonly<Record<string, readonl
   return tags;
 }
 
+/** A row's notes that say its year is not a sourced release year: one nobody confirmed, one from memory, or the day a maker put a page online. */
+const UNSURE_YEAR = /\byear (?:not confirmed|from memory)|year not (?:found|confirmed)|year itself is unconfirmed|treat as unconfirmed|the year is when/i;
+
+/** The release year of every machine that has a sure one, for src/tag-data.ts. A year its own row doubts stays out: a blank, not a guess. */
+export function readYears(data: unknown): Record<string, number> {
+  const years: Record<string, number> = {};
+  for (const raw of data as { key: string; year?: number | null; notes?: string }[]) if (raw.year && !UNSURE_YEAR.test(raw.notes ?? "")) years[raw.key] = raw.year;
+  return years;
+}
+
 /** The aliases of every machine that has any, for src/alias-data.ts. */
 export function readAliases(data: unknown): Record<string, readonly string[]> {
   const aliases: Record<string, readonly string[]> = {};

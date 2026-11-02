@@ -77,12 +77,12 @@ report.issues[0].message; // "Faceted metal case (Argon ONE style) closes over t
 | Entry | What | Needs |
 | --- | --- | --- |
 | `@johnmorrisdotca/hako-devices` | The catalogue (`DEVICES`, `catalogue()`, `statusOf`), the parts (`PARTS`), the fit check (`check`), the camera rule (`frameFor`), `findMachine(keyOrAlias)`, mapping helpers (`piKey`, `macKey`, `nasKey`, `pcKey`, `deviceKeyOf`), styles, scale helpers, screen pictures | Nothing |
-| `.../tags` | `FACETS`, `tagsOf(key)`, `matchesPicks(key, picks)`, `facetCounts(keys, picks)`: filter machines by what they are (brand, type, decade, discontinued year, CPU, memory, operating system, wireless, weight, colour...). Its own entry because the table is large | Nothing |
+| `.../tags` | `FACETS`, `tagsOf(key)`, `matchesPicks(key, picks)`, `facetCounts(keys, picks)`, `yearOf(key)`, `inYears(key, { from, to })`, `yearSpan(keys)`: filter machines by what they are (brand, type, decade, discontinued year, CPU, memory, operating system, wireless, weight, colour...). Its own entry because the table is large | Nothing |
 | `.../build` | `build(description)`, `buildDevice(key)`, `buildPart(id)`: one mesh and one drawing. `toGlb`, `Drawing`, `Box` | `three` |
 | `.../element` | `<hako-device>` and `<hako-lineup>`: load `three` only when a 3D view is wanted | `three` for 3D |
 | `.../embed` | `embedCode`: the element, an iframe, a module, the SVG or a data address | `three` for the SVG |
 | `.../react` | A thin `<HakoDevice>` wrapper | `react` |
-| `.../machines.json` | The machine list as static JSON: key, name, maker, family, status, tags and, for drawn devices, size and ports | Nothing |
+| `.../machines.json` | The machine list as static JSON: key, name, maker, family, year, status, tags and, for drawn devices, size and ports | Nothing |
 | `.../assets/*` | Ready files: `pi4.glb`, `pi4.svg`, `pi4.thick.svg`, `parts/armor.glb`, `coming-soon.svg` | Nothing |
 
 ## Build computers from parts
@@ -162,6 +162,15 @@ import { matchesPicks } from "@johnmorrisdotca/hako-devices/tags";
 
 const intelLaptops = catalogue().filter(({ key }) => matchesPicks(key, { type: ["Laptop"], cpuMaker: ["Intel"] }));
 const wifiMacsOfThe2000s = catalogue().filter(({ key }) => matchesPicks(key, { maker: ["Apple"], decade: ["2000s"], wireless: ["Wi-Fi"], os: ["Mac OS X"] }));
+```
+
+To filter by date, `yearOf(key)` gives the year a machine came out, or `null` where no sure year is known, and `inYears(key, { from, to })` keeps a span, both ends included. With a limit set, a machine of unknown year is left out. `yearSpan(keys)` gives the first and last year of a list.
+
+```ts
+import { catalogue } from "@johnmorrisdotca/hako-devices";
+import { inYears } from "@johnmorrisdotca/hako-devices/tags";
+
+const upTo2010 = catalogue().filter(({ key }) => inYears(key, { to: 2010 }));
 ```
 
 ## Find a machine by a nickname

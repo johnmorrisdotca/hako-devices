@@ -12,6 +12,7 @@ All notable changes to this project are written here. The format follows
 - `data/machines.json` has `colours` on every machine, and the `colour` filter covers the new machines.
 - `<hako-device body-colour="#rrggbb">` shows a colour on the body of the mesh in the 3D view, for a colour with no drawing of its own.
 - The demo shows a machine's colours beside the view: a colour with a drawing switches to it, and one with none says so.
+- Filter machines by date: `yearOf(key)`, `inYears(key, { from, to })` and `yearSpan(keys)` in `@johnmorrisdotca/hako-devices/tags`, and `year` on every machine in `data/machines.json`. A year nobody confirmed stays blank. The demo's gallery has a From and To year.
 
 ## [0.14.0] - 2026-11-02
 

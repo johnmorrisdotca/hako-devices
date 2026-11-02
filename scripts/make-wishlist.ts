@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { DEVICES } from "../src/catalogue.ts";
 import { colourProblems, type ColourListRow, type ColourRow, colourTable, readColours } from "./colour-rules.ts";
 import { tagProblems, type TagRow } from "./tag-rules.ts";
-import { aliasProblems, readAliases, readTags, readWishlist } from "./wishlist-read.ts";
+import { aliasProblems, readAliases, readTags, readWishlist, readYears } from "./wishlist-read.ts";
 
 interface Raw {
   key: string;
@@ -71,6 +71,11 @@ writeFileSync(
   `// Every machine's tags, from data/wishlist.json by scripts/make-wishlist.ts. Do not edit: run \`pnpm wishlist\`.
 export const TAG_DATA: Readonly<Record<string, Readonly<Partial<Record<string, readonly string[]>>>>> = {
 ${Object.entries(readTags(data, colours)).map(([key, tags]) => `  ${JSON.stringify(key)}: ${JSON.stringify(tags)},`).join("\n")}
+};
+
+/** The year each machine came out. A machine with no sure year is not here. */
+export const YEAR_DATA: Readonly<Record<string, number>> = {
+${Object.entries(readYears(data)).map(([key, year]) => `  ${JSON.stringify(key)}: ${year},`).join("\n")}
 };
 `,
 );

@@ -3,7 +3,8 @@ import { aliasesOf, catalogue, catalogueCounts, check, type CatalogueEntry, COVE
 import { colourRow } from "./colour-row.ts";
 import { EMBED_KINDS, embedCode, type EmbedKind } from "../src/embed.ts";
 import { HakoDevice, setAssetBase } from "../src/element.ts";
-import { facetCounts, FACETS, facetOrder, type FacetId, matchesPicks, type Picks } from "../src/tags.ts";
+import { facetCounts, FACETS, facetOrder, type FacetId, matchesPicks, type Picks, yearSpan } from "../src/tags.ts";
+import { yearFilter } from "./year-filter.ts";
 import "@johnmorrisdotca/kazoku-ui/view-controls/define";
 import type { ViewControlsElement } from "@johnmorrisdotca/kazoku-ui/view-controls/element";
 
@@ -203,6 +204,8 @@ const search = byId<HTMLInputElement>("gallery-search");
 const groups = byId("gallery-groups");
 const facetsBox = byId("gallery-facets");
 const picks: Partial<Record<FacetId, string[]>> = {};
+const years = yearFilter(yearSpan(entries.map((entry) => entry.key)), () => renderGallery());
+facetsBox.before(years.node);
 const anyPick = () => Object.values(picks).some((values) => values.length > 0);
 function togglePick(facet: FacetId, value: string) {
   const now = picks[facet] ?? [];
@@ -371,15 +374,15 @@ function renderGallery() {
   for (const button of styleRow.querySelectorAll("button")) button.setAttribute("aria-pressed", String(button.dataset.value === galleryStyle));
   const counts = catalogueCounts();
   const text = search.value;
-  const offered = entries.filter((entry) => (filter === "all" || entry.status === filter) && matches(entry, text));
+  const offered = entries.filter((entry) => (filter === "all" || entry.status === filter) && matches(entry, text) && years.passes(entry.key));
   const shown = offered.filter((entry) => matchesPicks(entry.key, picks as Picks));
-  const narrowed = text !== "" || anyPick();
+  const narrowed = text !== "" || anyPick() || years.active();
   renderFacets(offered.map((entry) => entry.key));
   byId("gallery-count").textContent = narrowed ? `${shown.length} of ${counts.total} match` : `${counts.built} of ${counts.total} built`;
   groups.replaceChildren();
   const devices = shown.filter((entry) => !("shelf" in entry));
   const shelved = (id: string) => shown.filter((entry): entry is Shelved => "shelf" in entry && entry.shelf === id);
-  const parts = filter === "planned" || anyPick() ? [] : Object.values(PARTS).filter((part) => part.kind !== "board" && matches({ key: part.id, name: part.name } as CatalogueEntry, text));
+  const parts = filter === "planned" || anyPick() || years.active() ? [] : Object.values(PARTS).filter((part) => part.kind !== "board" && matches({ key: part.id, name: part.name } as CatalogueEntry, text));
   const shownFamily = (id: string) => devices.filter((entry) => entry.family === id);
   // Nothing narrowed and no group chosen: the groups alone, each a bunch of its machines. A list this long is browsed by opening one.
   if (!narrowed && openGroup === null) {

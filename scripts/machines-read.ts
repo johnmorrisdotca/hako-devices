@@ -1,7 +1,7 @@
 // Makes the machine list, as the static JSON published at `@johnmorrisdotca/hako-devices/machines.json` and on the demo site, from the typed model: the catalogue, the tags and the table of
 // ports. Only what the package already ships goes in: names, makers, families, tags, and the size and ports of a built device. The list's other sizes and its sources stay in data/.
 import { catalogue, type Device } from "../src/index.ts";
-import { FACETS, tagsOf, type FacetId } from "../src/tags.ts";
+import { FACETS, tagsOf, yearOf, type FacetId } from "../src/tags.ts";
 import { meshOf } from "../src/status.ts";
 import { aliasesOf } from "../src/find.ts";
 import { coloursOf, type MachineColour } from "../src/colours.ts";
@@ -12,6 +12,7 @@ export interface Machine {
   aliases: readonly string[];
   maker: string | null;
   family: string;
+  year: number | null;
   status: "built" | "planned";
   mesh: string | null;
   size: readonly [number, number, number] | null;
@@ -44,6 +45,7 @@ export function machineList(rows: readonly { key: string; family: string }[], pk
       aliases: aliasesOf(entry.key),
       maker: tags.maker?.[0] ?? null,
       family,
+      year: yearOf(entry.key),
       status: entry.status,
       mesh: meshOf(entry.key),
       size: device?.size ?? null,
