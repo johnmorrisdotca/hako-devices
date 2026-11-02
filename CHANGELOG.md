@@ -6,6 +6,8 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.15.0] - 2026-11-02
+
 ### Added
 
 - What colours a machine came in: `coloursOf(key)` and `colouredKeys()` in the new entry point `@johnmorrisdotca/hako-devices/colours`. Each colour is the maker's word, the pages that say so, a swatch that says how it is known and the key of its drawing, or null. A colour with no drawing is still listed, and an empty list means nobody has checked. `FINISHES` is unchanged. The facts are in `data/colours.json`, 200 more machines read from their pages, beside the 167 whose colours were already tags. See [docs/assets.md](docs/assets.md#what-colours-a-machine-came-in).
