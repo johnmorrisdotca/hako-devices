@@ -14,6 +14,7 @@ All notable changes to this project are written here. The format follows
 - The demo shows a machine's colours beside the view: a colour with a drawing switches to it, and one with none says so.
 - Filter machines by date: `yearOf(key)`, `inYears(key, { from, to })` and `yearSpan(keys)` in `@johnmorrisdotca/hako-devices/tags`, and `year` on every machine in `data/machines.json`. A year nobody confirmed stays blank. The demo's gallery has a From and To year.
 - Sizes from their own pages for 25 Apple printers (Apple's specification page for each, which also gives the year stopped for 15 of them), AirPods 3, AirPods 4 and the Magic Keyboard with and without a keypad. Seven doubted years confirmed or corrected: AppleDesign Keyboard is 1994, not 1993.
+- 103 more machines on the list, each from a page that was opened: calculators, Walkmans and Discmans, Samsung Galaxy phones, PDAs and pagers, more consoles, the IBM PC line and other classics, laptops, Kindles, and shelves for calculators, personal music, e-readers, headsets, laptops and other gadgets. A year read only on a page about the whole line is left blank.
 
 ## [0.14.0] - 2026-11-02
 

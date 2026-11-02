@@ -104,7 +104,7 @@ ${Object.entries(readAliases(data)).map(([key, aliases]) => `  ${JSON.stringify(
 );
 
 // docs/wishlist.md: the counts, and the machines by phase. The words around them are written by hand.
-const PHASES: Readonly<Record<number, string>> = { 1: "Retro phones and PDAs", 2: "Game consoles", 3: "Retro home computers", 4: "Apple", 5: "Microsoft", 6: "What is built today", 7: "Raspberry Pi", 8: "TV sticks and boxes", 9: "Android phones and tablets", 10: "Other small boards", 11: "Mini PCs", 12: "NeXT" };
+const PHASES: Readonly<Record<number, string>> = { 1: "Retro phones and PDAs", 2: "Game consoles", 3: "Retro home computers", 4: "Apple", 5: "Microsoft", 6: "What is built today", 7: "Raspberry Pi", 8: "TV sticks and boxes", 9: "Android phones and tablets", 10: "Other small boards", 11: "Mini PCs", 12: "NeXT", 13: "Calculators", 14: "Personal music", 15: "Laptops", 16: "Headsets", 17: "Other gadgets", 18: "E-readers" };
 const builtGroups = new Set(data.filter((entry) => entry.status === "built").map((entry) => entry.formFactorGroup));
 const shapes = (rows: readonly Raw[]) => new Set(rows.filter((entry) => entry.status === "planned" && !builtGroups.has(entry.formFactorGroup)).map((entry) => entry.formFactorGroup)).size;
 const sized = (rows: readonly Raw[]) => rows.filter((entry) => entry.dimensionsMm).length;

@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2328 machines. 866 distinct shapes still to build. 1130 entries are already built: the 338 devices in this package, plus the real models those meshes cover. 1443 entries have a sourced size; the other 885 are `null` on purpose.**
+**2431 machines. 969 distinct shapes still to build. 1130 entries are already built: the 338 devices in this package, plus the real models those meshes cover. 1446 entries have a sourced size; the other 985 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -10,24 +10,27 @@ The shape count is the real work: a group of machines that share a body is one m
 
 | Phase | Group | Machines | Shapes to build | With a sourced size |
 |---|---|---:|---:|---:|
-| **1** | **Retro phones and PDAs** | **214** | **169** | **106** |
+| **1** | **Retro phones and PDAs** | **223** | **178** | **106** |
 |  | Nokia | 53 | 49 | 43 |
 |  | Palm | 48 | 32 | 15 |
 |  | BlackBerry | 32 | 20 | 10 |
+|  | Motorola | 14 | 13 | 8 |
 |  | Handspring | 13 | 7 | 3 |
 |  | Sony Ericsson | 13 | 12 | 13 |
-|  | Motorola | 12 | 11 | 8 |
 |  | Siemens | 11 | 11 | 4 |
 |  | Danger | 9 | 8 | 2 |
 |  | Apple | 8 | 4 | 4 |
 |  | Ericsson | 8 | 8 | 0 |
-|  | Psion | 2 | 2 | 2 |
+|  | Psion | 6 | 6 | 2 |
 |  | Compaq | 1 | 1 | 0 |
 |  | IBM | 1 | 1 | 1 |
 |  | Kyocera | 1 | 1 | 1 |
 |  | Qualcomm | 1 | 1 | 0 |
 |  | Sharp | 1 | 1 | 0 |
-| **2** | **Game consoles** | **227** | **157** | **72** |
+|  | Atari | 1 | 1 | 0 |
+|  | Hewlett-Packard | 1 | 1 | 0 |
+|  | Casio | 1 | 1 | 0 |
+| **2** | **Game consoles** | **237** | **167** | **72** |
 |  | Nintendo | 111 | 51 | 29 |
 |  | Sony | 27 | 23 | 24 |
 |  | Sega | 22 | 21 | 6 |
@@ -42,26 +45,41 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Coleco | 2 | 2 | 0 |
 |  | Mattel | 2 | 2 | 0 |
 |  | Valve | 2 | 1 | 0 |
+|  | ASUS | 2 | 2 | 0 |
+|  | Tiger Electronics | 2 | 2 | 0 |
 |  | Bandai / Apple | 1 | 1 | 0 |
 |  | GCE / Milton Bradley | 1 | 1 | 0 |
 |  | Goldstar | 1 | 1 | 0 |
 |  | INTV | 1 | 1 | 0 |
 |  | Milton Bradley | 1 | 1 | 0 |
 |  | iQue | 1 | 1 | 0 |
-| **3** | **Retro home computers** | **59** | **52** | **12** |
+|  | Fairchild | 1 | 1 | 0 |
+|  | Bally | 1 | 1 | 0 |
+|  | Panic | 1 | 1 | 0 |
+|  | Analogue | 1 | 1 | 0 |
+|  | Entex | 1 | 1 | 0 |
+|  | Tapwave | 1 | 1 | 0 |
+| **3** | **Retro home computers** | **69** | **62** | **12** |
 |  | Commodore | 19 | 17 | 8 |
 |  | Apple | 8 | 6 | 1 |
 |  | Acorn | 6 | 4 | 1 |
 |  | Atari | 6 | 6 | 0 |
 |  | Sinclair | 6 | 5 | 2 |
 |  | Amstrad | 4 | 4 | 0 |
+|  | IBM | 3 | 3 | 0 |
 |  | Panasonic | 2 | 2 | 0 |
 |  | Philips | 2 | 2 | 0 |
+|  | Sony | 2 | 2 | 0 |
 |  | Tandy | 2 | 2 | 0 |
 |  | Sharp | 1 | 1 | 0 |
-|  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
+|  | MITS | 1 | 1 | 0 |
+|  | Osborne | 1 | 1 | 0 |
+|  | IMSAI | 1 | 1 | 0 |
+|  | Radio Shack | 1 | 1 | 0 |
+|  | Non-Linear Systems | 1 | 1 | 0 |
+|  | Timex | 1 | 1 | 0 |
 | **4** | **Apple** | **889** | **165** | **716** |
 |  | Power Mac | 92 | 0 | 90 |
 |  | Performa | 71 | 0 | 71 |
@@ -139,15 +157,19 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Fire TV | 12 | 12 | 0 |
 |  | Chromecast | 7 | 7 | 0 |
 |  | Shield TV | 5 | 5 | 0 |
-| **9** | **Android phones and tablets** | **139** | **139** | **80** |
+| **9** | **Android phones and tablets** | **166** | **166** | **80** |
 |  | Pixel | 39 | 39 | 0 |
 |  | Galaxy Tab S | 33 | 33 | 33 |
 |  | Galaxy Tab A | 21 | 21 | 19 |
 |  | Galaxy Tab | 19 | 19 | 17 |
+|  | Galaxy S | 16 | 16 | 0 |
 |  | Nexus | 12 | 12 | 1 |
 |  | Galaxy Tab Active | 7 | 7 | 5 |
+|  | Galaxy Note | 5 | 5 | 0 |
+|  | Galaxy Z | 5 | 5 | 0 |
 |  | Galaxy Tab Pro | 4 | 4 | 4 |
 |  | Galaxy Tab E | 4 | 4 | 1 |
+|  | Dream | 1 | 1 | 0 |
 | **10** | **Other small boards** | **49** | **49** | **0** |
 |  | Banana Pi | 20 | 20 | 0 |
 |  | Jetson | 10 | 10 | 0 |
@@ -191,7 +213,48 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-|  | **Total** | **2328** | **866** | **1443** |
+| **13** | **Calculators** | **16** | **16** | **0** |
+|  | TI graphing | 2 | 2 | 0 |
+|  | TI-Nspire | 2 | 2 | 0 |
+|  | fx graphing | 1 | 1 | 0 |
+|  | Calculator watch | 1 | 1 | 0 |
+|  | Executive | 1 | 1 | 0 |
+|  | 141-PF | 1 | 1 | 0 |
+|  | Pocketronic | 1 | 1 | 0 |
+|  | HP-41 | 1 | 1 | 0 |
+|  | HP-65 | 1 | 1 | 0 |
+|  | Bowmar Brain | 1 | 1 | 0 |
+|  | HP 9100 | 1 | 1 | 0 |
+|  | HP-45 | 1 | 1 | 0 |
+|  | TI SR | 1 | 1 | 0 |
+|  | HP-25 | 1 | 1 | 0 |
+| **14** | **Personal music** | **12** | **12** | **0** |
+|  | Walkman | 4 | 4 | 0 |
+|  | Discman | 2 | 2 | 0 |
+|  | MiniDisc | 2 | 2 | 0 |
+|  | Nomad | 1 | 1 | 0 |
+|  | ZEN | 1 | 1 | 0 |
+|  | H300 | 1 | 1 | 0 |
+|  | Sansa | 1 | 1 | 0 |
+| **15** | **Laptops** | **10** | **10** | **1** |
+|  | ThinkPad | 4 | 4 | 1 |
+|  | Portable | 1 | 1 | 0 |
+|  | T series | 1 | 1 | 0 |
+|  | VAIO | 1 | 1 | 0 |
+|  | OmniBook | 1 | 1 | 0 |
+|  | Eee PC | 1 | 1 | 0 |
+|  | XPS | 1 | 1 | 0 |
+| **16** | **Headsets** | **1** | **1** | **0** |
+|  | Quest | 1 | 1 | 0 |
+| **17** | **Other gadgets** | **4** | **4** | **2** |
+|  | Tamagotchi | 1 | 1 | 0 |
+|  | Echo | 1 | 1 | 0 |
+|  | DiskStation | 1 | 1 | 1 |
+|  | Drobo | 1 | 1 | 1 |
+| **18** | **E-readers** | **4** | **4** | **0** |
+|  | Kindle | 3 | 3 | 0 |
+|  | eReader | 1 | 1 | 0 |
+|  | **Total** | **2431** | **969** | **1446** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -243,11 +306,15 @@ No open dataset of outer dimensions for consoles or old phones was found. One se
 
 ## The machines
 
-### Phase 1: Retro phones and PDAs (214 machines, 169 shapes to build)
+### Phase 1: Retro phones and PDAs (223 machines, 178 shapes to build)
 
 **Apple Newton** (8 machines, 4 shapes)
 
 MessagePad (Original Model) (1993), MessagePad 100 (1994), MessagePad 110 (1994), MessagePad 120 (1995), MessagePad 130 (1996), MessagePad 2000 (1997), MessagePad 2100 (1997), eMate 300 (1997).
+
+**Atari Portfolio** (1 machines, 1 shapes)
+
+Atari Portfolio (1989).
 
 **BlackBerry 5000 series** (2 machines, 1 shapes)
 
@@ -301,6 +368,10 @@ BlackBerry Torch 9800 (2010).
 
 BlackBerry Tour 9630 (2009).
 
+**Casio Digital Diary** (1 machines, 1 shapes)
+
+Casio SF-4000 (1988).
+
 **Compaq iPAQ** (1 machines, 1 shapes)
 
 Compaq iPAQ H3600 (2000).
@@ -337,6 +408,10 @@ Treo 180 (2001), Treo 180g (2002), Treo 270 (2002), Treo 300 (2002), Treo 90 (20
 
 Visor (1999), Visor Deluxe (1999), Visor Solo (1999), Visor Platinum (2000), Visor Prism (2000), Visor Edge (2001), Visor Neo (2001), Visor Pro (2001).
 
+**Hewlett-Packard Palmtop PC** (1 machines, 1 shapes)
+
+HP 200LX (1994).
+
 **IBM Simon** (1 machines, 1 shapes)
 
 IBM Simon (1994).
@@ -360,6 +435,10 @@ MicroTAC (1989).
 **Motorola PEBL** (1 machines, 1 shapes)
 
 PEBL U6 (2005).
+
+**Motorola Pagers** (2 machines, 2 shapes)
+
+Motorola Pageboy (1974), Motorola Bravo (1986).
 
 **Motorola Q** (1 machines, 1 shapes)
 
@@ -481,13 +560,25 @@ Palm i705 (2001).
 
 Palm m100 (2000), Palm m105 (2001), Palm m125 (2001), Palm m500 (2001), Palm m505 (2001), Palm m130 (2002), Palm m515 (2002).
 
-**Psion Organiser** (1 machines, 1 shapes)
+**Psion Organiser** (2 machines, 2 shapes)
 
-Psion Organiser II (1986).
+Psion Organiser (1984), Psion Organiser II (1986).
+
+**Psion Revo** (1 machines, 1 shapes)
+
+Psion Revo (1999).
+
+**Psion Series 3** (1 machines, 1 shapes)
+
+Psion Series 3 (1991).
 
 **Psion Series 5** (1 machines, 1 shapes)
 
 Psion Series 5 (1997).
+
+**Psion Series 7** (1 machines, 1 shapes)
+
+Psion Series 7 (2000).
 
 **Qualcomm pdQ** (1 machines, 1 shapes)
 
@@ -541,7 +632,15 @@ Sony Ericsson W800 (2005), Sony Ericsson W810 (2006).
 
 Sony Ericsson Xperia X1 (2008), Sony Ericsson Xperia X10 (2010), Sony Ericsson Xperia Play (2011).
 
-### Phase 2: Game consoles (227 machines, 157 shapes to build)
+### Phase 2: Game consoles (237 machines, 167 shapes to build)
+
+**ASUS ROG Ally** (2 machines, 2 shapes)
+
+ROG Ally (2023), ROG Ally X (2024).
+
+**Analogue Pocket** (1 machines, 1 shapes)
+
+Analogue Pocket (2021).
 
 **Atari 2600** (5 machines, 4 shapes)
 
@@ -571,6 +670,10 @@ Atari Home Pong (1975).
 
 Atari XEGS (1987).
 
+**Bally Astrocade** (1 machines, 1 shapes)
+
+Bally Astrocade (1978).
+
 **Bandai / Apple Pippin** (1 machines, 1 shapes)
 
 Apple Bandai Pippin (1996).
@@ -586,6 +689,14 @@ ColecoVision (1982).
 **Coleco Telstar** (1 machines, 1 shapes)
 
 Coleco Telstar (1976).
+
+**Entex Adventure Vision** (1 machines, 1 shapes)
+
+Entex Adventure Vision (1982).
+
+**Fairchild Channel F** (1 machines, 1 shapes)
+
+Fairchild Channel F (1976).
 
 **GCE / Milton Bradley Vectrex** (1 machines, 1 shapes)
 
@@ -711,6 +822,10 @@ Wii U (2012).
 
 Panasonic Q (2001).
 
+**Panic Playdate** (1 machines, 1 shapes)
+
+Playdate (2022).
+
 **SNK Neo Geo** (4 machines, 4 shapes)
 
 Neo Geo AES (1990), Neo Geo CD (front loader) (1994), Neo Geo CD (top loader) (1995), Neo Geo CDZ (1995).
@@ -787,6 +902,18 @@ PlayStation 5 (2020) *built*, PlayStation 5 Digital Edition (2020), PlayStation 
 
 PlayStation Vita (PCH-1000) (2011), PlayStation TV (Vita TV) (2013), PlayStation Vita (PCH-2000) (2013).
 
+**Tapwave Zodiac** (1 machines, 1 shapes)
+
+Tapwave Zodiac (2003).
+
+**Tiger Electronics Game.com** (1 machines, 1 shapes)
+
+Game.com (1997).
+
+**Tiger Electronics R-Zone** (1 machines, 1 shapes)
+
+R-Zone (1995).
+
 **Valve Steam Deck** (2 machines, 1 shapes)
 
 Steam Deck (LCD) (2022), Steam Deck (OLED) (2023).
@@ -795,7 +922,7 @@ Steam Deck (LCD) (2022), Steam Deck (OLED) (2023).
 
 iQue Player (2003).
 
-### Phase 3: Retro home computers (59 machines, 52 shapes to build)
+### Phase 3: Retro home computers (69 machines, 62 shapes to build)
 
 **Acorn Archimedes** (1 machines, 1 shapes)
 
@@ -849,6 +976,26 @@ Amiga 1000 (1985), Amiga 2000 (1987), Amiga 500 (1987) *built*, Amiga 3000 (1990
 
 Commodore PET 2001 (1977).
 
+**IBM PC** (3 machines, 3 shapes)
+
+IBM Personal Computer XT 5160 (1983), IBM PCjr (1984), IBM Personal Computer AT 5170 (1984).
+
+**IMSAI** (1 machines, 1 shapes)
+
+IMSAI 8080 (1975).
+
+**MITS Altair** (1 machines, 1 shapes)
+
+Altair 8800 (1975).
+
+**Non-Linear Systems Kaypro** (1 machines, 1 shapes)
+
+Kaypro II (1982).
+
+**Osborne** (1 machines, 1 shapes)
+
+Osborne 1 (1981).
+
 **Panasonic MSX** (2 machines, 2 shapes)
 
 Panasonic FS-A1 (1986), Panasonic FS-A1GT (turboR) (1991).
@@ -856,6 +1003,10 @@ Panasonic FS-A1 (1986), Panasonic FS-A1GT (turboR) (1991).
 **Philips MSX** (2 machines, 2 shapes)
 
 Philips VG-8020 (1984), Philips NMS 8250 (1986).
+
+**Radio Shack TRS-80** (1 machines, 1 shapes)
+
+TRS-80 Model 100 (1983).
 
 **Sharp X68000** (1 machines, 1 shapes)
 
@@ -873,9 +1024,9 @@ ZX80 (1980), ZX81 (1981).
 
 ZX Spectrum 16K/48K (1982) *built*, ZX Spectrum+ (1984), ZX Spectrum 128 (1985).
 
-**Sony MSX** (1 machines, 1 shapes)
+**Sony MSX** (2 machines, 2 shapes)
 
-Sony HiTBiT HB-75 (1984).
+Sony HiTBiT HB-75 (1984), Sony HB-F1 (1986).
 
 **Tandy TRS-80** (2 machines, 2 shapes)
 
@@ -884,6 +1035,10 @@ TRS-80 Model I (1977), TRS-80 Color Computer (1980).
 **Texas Instruments TI-99** (1 machines, 1 shapes)
 
 TI-99/4A (1981).
+
+**Timex Sinclair** (1 machines, 1 shapes)
+
+Timex Sinclair 1000 (1982).
 
 **Yamaha MSX** (1 machines, 1 shapes)
 
@@ -1203,7 +1358,7 @@ Shield TV (2015), Shield TV Pro (2015), Shield TV (2017), Shield TV (2019), Shie
 
 Roku DVP (N1000) (2008), Roku HD (N1100) (2009), Roku HD-XR (N1101) (2009), Roku SD (N1050) (2009), Roku HD (2000) (2010), Roku XD (2050) (2010), Roku XDS (2100) (2010), Roku 2 HD (3000) (2011), Roku 2 XD (3050) (2011), Roku 2 XS (3100) (2011), Roku LT (2400) (2011), Roku HD (2500) (2012), Roku LT (2450) (2012), Roku Streaming Stick, MHL (3400, 3420) (2012), Roku 1, SE (2710) (2013), Roku 2 (2720) (2013), Roku 3 (4200) (2013), Roku LT (2700) (2013), Roku Streaming Stick, HDMI (3500) (2014), Roku 2 (4210) (2015), Roku 3 (4230) (2015), Roku 4 (4400) (2015), Roku Express (3700) (2016), Roku Express+ (3710) (2016), Roku Premiere (4620) (2016), Roku Premiere+ (4630) (2016), Roku Streaming Stick (3600) (2016), Roku Ultra (4640) (2016), Roku Express (3900) (2017), Roku Express+ (3910) (2017), Roku Streaming Stick (3800) (2017), Roku Streaming Stick+ (3810) (2017), Roku Ultra (4660) (2017), Roku Premiere (3920) (2018), Roku Premiere+ (3921) (2018), Roku Ultra (4661) (2018), Roku Express+ (3931) (2019), Roku Express, SE, LE (3930) (2019), Roku Ultra (4670) (2019), Roku Ultra LT (4662) (2019), Roku Streambar (9102) (2020), Roku Ultra (4800) (2020), Roku Express 4K (3940) (2021), Roku Express 4K+ (3941) (2021), Roku Streambar Pro (9101) (2021), Roku Streaming Stick 4K (3820) (2021), Roku Streaming Stick 4K+ (3821) (2021), Roku Ultra LT (4801) (2021), Roku Express (3960) (2022), Roku Ultra (4802) (2022), Roku Streambar SE (9104) (2024), Roku Ultra (4850) (2024), Roku Streaming Stick HD (3840) (2025), Roku Streaming Stick Plus (3830) (2025).
 
-### Phase 9: Android phones and tablets (139 machines, 139 shapes to build)
+### Phase 9: Android phones and tablets (166 machines, 166 shapes to build)
 
 **Google Nexus** (12 machines, 12 shapes)
 
@@ -1212,6 +1367,18 @@ Nexus One (2010), Nexus S (2010), Galaxy Nexus (2011), Nexus 10 (2012), Nexus 4 
 **Google Pixel** (39 machines, 39 shapes)
 
 Pixel (2016), Pixel XL (2016), Pixel 2 (2017), Pixel 2 XL (2017), Pixel 3 (2018), Pixel 3 XL (2018), Pixel 3a (2019), Pixel 3a XL (2019), Pixel 4 (2019), Pixel 4 XL (2019), Pixel 4a (2020), Pixel 4a (5G) (2020), Pixel 5 (2020), Pixel 5a (2021), Pixel 6 (2021), Pixel 6 Pro (2021), Pixel 6a (2022), Pixel 7 (2022), Pixel 7 Pro (2022), Pixel 7a (2023), Pixel 8 (2023), Pixel 8 Pro (2023), Pixel Fold (2023), Pixel Tablet (2023), Pixel 8a (2024), Pixel 9 (2024), Pixel 9 Pro (2024), Pixel 9 Pro Fold (2024), Pixel 9 Pro XL (2024), Pixel 10 (2025), Pixel 10 Pro (2025), Pixel 10 Pro Fold (2025), Pixel 10 Pro XL (2025), Pixel 9a (2025), Pixel 10a (2026), Pixel 11 (2026), Pixel 11 Pro (2026), Pixel 11 Pro Fold (2026), Pixel 11 Pro XL (2026).
+
+**HTC Dream** (1 machines, 1 shapes)
+
+HTC Dream (2008).
+
+**Samsung Galaxy Note** (5 machines, 5 shapes)
+
+Galaxy Note (2011), Galaxy Note II (2012), Galaxy Note 4 (2014), Galaxy Note7 (2016), Galaxy Note20 (2020).
+
+**Samsung Galaxy S** (16 machines, 16 shapes)
+
+Galaxy S II (2011), Galaxy S III (2012), Galaxy S4 (2013), Galaxy S5 (2014), Galaxy S6 (2015), Galaxy S7 (2016), Galaxy S8 (2017), Galaxy S9 (2018), Galaxy S10 (2019), Galaxy S20 (2020), Galaxy S21 (2021), Galaxy S22 (2022), Galaxy S23 (2023), Galaxy S24 (2024), Galaxy S25 (2025), Galaxy S.
 
 **Samsung Galaxy Tab** (19 machines, 19 shapes)
 
@@ -1236,6 +1403,10 @@ Galaxy Tab Pro 10.1 (2014), Galaxy Tab Pro 12.2 (2014), Galaxy Tab Pro 8.4 (2014
 **Samsung Galaxy Tab S** (33 machines, 33 shapes)
 
 Galaxy Tab S 10.5 (2014), Galaxy Tab S 8.4 (2014), Galaxy Tab S2 8.0 (2015), Galaxy Tab S2 9.7 (2015), Galaxy Tab S2 8.0 (2016), Galaxy Tab S2 9.7 (2016), Galaxy Tab S3 (2017), Galaxy Tab S4 (2018), Galaxy Tab S5e (2019), Galaxy Tab S6 (2019), Galaxy Tab S6 Lite (2020), Galaxy Tab S7 (2020), Galaxy Tab S7+ (2020), Galaxy Tab S7 FE (2021), Galaxy Tab S6 Lite (2022), Galaxy Tab S8 (2022), Galaxy Tab S8 Ultra (2022), Galaxy Tab S8+ (2022), Galaxy Tab S9 (2023), Galaxy Tab S9 FE (2023), Galaxy Tab S9 FE+ (2023), Galaxy Tab S9 Ultra (2023), Galaxy Tab S9+ (2023), Galaxy Tab S10 Ultra (2024), Galaxy Tab S10+ (2024), Galaxy Tab S6 Lite (2024), Galaxy Tab S10 FE (2025), Galaxy Tab S10 FE+ (2025), Galaxy Tab S10 Lite (2025), Galaxy Tab S11 (2025), Galaxy Tab S11 Ultra (2025), Galaxy Tab S12 Ultra (2026), Galaxy Tab S12+ (2026).
+
+**Samsung Galaxy Z** (5 machines, 5 shapes)
+
+Galaxy Fold (2019), Galaxy Z Flip (2020), Galaxy Z Fold2 (2020), Galaxy Z Flip4 (2022), Galaxy Z Fold4 (2022).
 
 ### Phase 10: Other small boards (49 machines, 49 shapes to build)
 
@@ -1410,3 +1581,159 @@ NeXT Keyboard, NeXT Mouse.
 **NeXT Printers** (2 machines, 2 shapes)
 
 NeXT Laser Printer (1988), NeXT Color Printer.
+
+### Phase 13: Calculators (16 machines, 16 shapes to build)
+
+**Bowmar Brain** (1 machines, 1 shapes)
+
+Bowmar 901B (1971).
+
+**Busicom 141-PF** (1 machines, 1 shapes)
+
+Busicom 141-PF (1971).
+
+**Canon Pocketronic** (1 machines, 1 shapes)
+
+Canon Pocketronic (1970).
+
+**Casio Calculator watch** (1 machines, 1 shapes)
+
+Casio CA-53W (1988).
+
+**Casio fx graphing** (1 machines, 1 shapes)
+
+Casio fx-7000G (1985).
+
+**Hewlett-Packard HP 9100** (1 machines, 1 shapes)
+
+HP 9100A (1968).
+
+**Hewlett-Packard HP-25** (1 machines, 1 shapes)
+
+HP-25 (1975).
+
+**Hewlett-Packard HP-41** (1 machines, 1 shapes)
+
+HP-41C (1979).
+
+**Hewlett-Packard HP-45** (1 machines, 1 shapes)
+
+HP-45 (1973).
+
+**Hewlett-Packard HP-65** (1 machines, 1 shapes)
+
+HP-65 (1974).
+
+**Sinclair Executive** (1 machines, 1 shapes)
+
+Sinclair Executive (1972).
+
+**Texas Instruments TI SR** (1 machines, 1 shapes)
+
+TI SR-50 (1974).
+
+**Texas Instruments TI graphing** (2 machines, 2 shapes)
+
+TI-81 (1990), TI-89 (1998).
+
+**Texas Instruments TI-Nspire** (2 machines, 2 shapes)
+
+TI-Nspire, TI-Nspire CX.
+
+### Phase 14: Personal music (12 machines, 12 shapes to build)
+
+**Creative Nomad** (1 machines, 1 shapes)
+
+Creative Nomad Jukebox.
+
+**Creative ZEN** (1 machines, 1 shapes)
+
+Creative ZEN Micro.
+
+**SanDisk Sansa** (1 machines, 1 shapes)
+
+SanDisk Sansa Clip.
+
+**Sony Discman** (2 machines, 2 shapes)
+
+Sony Discman D-50 (1984), Sony Discman D-NE1.
+
+**Sony MiniDisc** (2 machines, 2 shapes)
+
+Sony MiniDisc MZ-1, Sony MiniDisc MZ-RH1.
+
+**Sony Walkman** (4 machines, 4 shapes)
+
+Sony Walkman TPS-L2, Sony Walkman WM-2, Sony Walkman WM-20, Sony Walkman WM-DD.
+
+**iRiver H300** (1 machines, 1 shapes)
+
+iRiver H320.
+
+### Phase 15: Laptops (10 machines, 10 shapes to build)
+
+**ASUS Eee PC** (1 machines, 1 shapes)
+
+ASUS Eee PC 701.
+
+**Compaq Portable** (1 machines, 1 shapes)
+
+Compaq Portable (1983).
+
+**Dell XPS** (1 machines, 1 shapes)
+
+Dell XPS 13 9343.
+
+**Hewlett-Packard OmniBook** (1 machines, 1 shapes)
+
+HP OmniBook 300 (1993).
+
+**IBM ThinkPad** (2 machines, 2 shapes)
+
+IBM ThinkPad 700C, IBM ThinkPad 701C.
+
+**Lenovo ThinkPad** (2 machines, 2 shapes)
+
+ThinkPad T480, ThinkPad X1 Carbon (1st Gen).
+
+**Sony VAIO** (1 machines, 1 shapes)
+
+Sony VAIO PCG-505 (1997).
+
+**Toshiba T series** (1 machines, 1 shapes)
+
+Toshiba T1100 (1985).
+
+### Phase 16: Headsets (1 machines, 1 shapes to build)
+
+**Oculus Quest** (1 machines, 1 shapes)
+
+Quest 2 (2020).
+
+### Phase 17: Other gadgets (4 machines, 4 shapes to build)
+
+**Amazon Echo** (1 machines, 1 shapes)
+
+Amazon Echo (1st generation) (2014).
+
+**Bandai Tamagotchi** (1 machines, 1 shapes)
+
+Tamagotchi (1996).
+
+**Drobo** (1 machines, 1 shapes)
+
+Drobo 5N.
+
+**Synology DiskStation** (1 machines, 1 shapes)
+
+DS218+.
+
+### Phase 18: E-readers (4 machines, 4 shapes to build)
+
+**Amazon Kindle** (3 machines, 3 shapes)
+
+Kindle (1st generation) (2007), Kindle Paperwhite (2012), Kindle Oasis (2017).
+
+**Kobo eReader** (1 machines, 1 shapes)
+
+Kobo eReader (2010).
