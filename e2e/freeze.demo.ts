@@ -214,11 +214,11 @@ test.describe("on a 5K screen", () => {
     for (const zoom of [1, 2, 3, 4, 5]) {
       await bar(page).evaluate((node, z) => (node as Bar).set({ zoom: z }), zoom);
       await expect.poll(() => hero(page).evaluate((node) => node.shadowRoot?.querySelector("canvas")?.dataset.zoom), { timeout: 60_000 }).toBe(zoom.toFixed(2));
+      // still sharp: more than the 2560 pixels the screen is wide in CSS pixels. The backing store takes its size a frame or more after the box does, so a busy machine is waited for.
+      await expect.poll(async () => (await size()).w, { timeout: 60_000 }).toBeGreaterThan(2560);
       const now = await size();
       expect(now.w * now.h).toBeLessThanOrEqual(MAX_PIXELS);
       expect(Math.max(now.w, now.h)).toBeLessThanOrEqual(MAX_SIDE);
-      // still sharp: more than the 2560 pixels the screen is wide in CSS pixels
-      expect(now.w).toBeGreaterThan(2560);
     }
   });
 });
@@ -259,8 +259,8 @@ test.describe("on a 5120 x 2880 window at a scale of 2, with three 3D views", ()
       }
       return sizes;
     };
-    const [large] = await inBudget();
-    expect(large.w * large.h).toBeGreaterThan(MAX_PIXELS * 0.99);
+    await expect.poll(async () => size(hero(page)).then(({ w, h }) => w * h), { timeout: 60_000 }).toBeGreaterThan(MAX_PIXELS * 0.99);
+    await inBudget();
     for (const zoom of [3, 5]) {
       await bar(page).evaluate((node, z) => (node as Bar).set({ zoom: z }), zoom);
       await expect.poll(() => hero(page).evaluate((node) => node.shadowRoot?.querySelector("canvas")?.dataset.zoom), { timeout: 60_000 }).toBe(zoom.toFixed(2));
