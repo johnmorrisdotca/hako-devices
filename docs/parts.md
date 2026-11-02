@@ -24,6 +24,27 @@ report.ok; // false
 report.issues[0].code; // "no-poe-pins"
 ```
 
+## A form that never shows an error
+
+`whatFits` says what to offer and `nearestWorking` what to change, so a form never has to show a fault. Both are pure and need no three.js, and neither touches `print`, which stays at the person's own risk.
+
+```ts
+import { fillNeeded, nearestWorking, whatFits } from "@johnmorrisdotca/hako-devices";
+
+// a needed choice with one answer is made for you: bare holes under a hat get their header, and a module with no hat gets the one hat that takes it
+fillNeeded({ board: "pi-zero-2w", hat: "oled-bonnet" }).description; // { board: "pi-zero-2w", hat: "oled-bonnet", solderHeader: true }
+
+// grey what cannot work, with its reason
+whatFits({ board: "pi-zero-2w" }, "case").find((option) => option.id === "armor"); // { id: "armor", name: "...", fits: false, why: "... is cut for other sockets than those of ..." }
+
+// or take anything, and change the rest: the second argument is the choice just made, which stays
+const { description, changes } = nearestWorking({ board: "pi-zero-2w", case: "armor" }, "board");
+description.case; // "unipi"
+changes[0].message; // "the case is now Small domed case (UniPiCase Zero style)"
+```
+
+The nearest set changes as little as it can. Another case that fits is nearer than no case, because cases do one job; a hat, a module or a cooler each does its own job, so no hat is nearer than a different hat. A board moves last of all, when a part fits no other way. `hat-overhangs` stays a warning: a hat past a board's edge goes together, so it is a fact to say, not a fit to avoid. The demo's builder is both ways behind one switch.
+
 ## The description
 
 | Field | What |

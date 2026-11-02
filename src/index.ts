@@ -2,6 +2,8 @@
 export { baseInfo, check, DEVICES, deviceByKey, FAMILIES, FINISHES, PRESETS } from "./catalogue.ts";
 export type { Device, FamilyId, Port, PortKind } from "./catalogue.ts";
 export { checkWith } from "./fit.ts";
+export { CHOICE_SLOTS, fillNeeded, nearestWorking, stillWorks, whatFits } from "./choices.ts";
+export type { ChoiceChange, ChoiceOption, ChoiceSlot, Settled } from "./choices.ts";
 export type { BaseInfo, BaseLookup, Description, FitCode, FitIssue, FitReport, Print } from "./fit.ts";
 export { BOARDS, CASES, COOLERS, DRIVES, FIT_TOLERANCE, HATS, HAT_STACK, MAX_RISER, PARTS, partsOfKind, SCREENS, STANDS } from "./parts.ts";
 export type { BoardId, BoardPart, BoardShape, CaseId, CasePart, CoolerId, CoolerPart, DriveId, DrivePart, HatId, HatPart, Part, Rect, ScreenId, ScreenInfo, ScreenPart, Size, StandId, StandPart, TallZone } from "./parts.ts";

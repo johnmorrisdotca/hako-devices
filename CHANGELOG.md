@@ -12,9 +12,11 @@ All notable changes to this project are written here. The format follows
 - `data/machines.json` has `colours` on every machine, and the `colour` filter covers the new machines.
 - `<hako-device body-colour="#rrggbb">` shows a colour on the body of the mesh in the 3D view, for a colour with no drawing of its own.
 - The demo shows a machine's colours beside its options: a colour with a drawing switches to it, and one with none says so.
+- `whatFits(description, slot)`, `nearestWorking(description, keep?)`, `fillNeeded(description, keep?)`, `stillWorks(description)` and `CHOICE_SLOTS`, in the root entry beside `check`: what fits a set of choices and the nearest set that works, so that a form never has to show an error ([docs/parts.md](docs/parts.md#a-form-that-never-shows-an-error)). A test walks every board, case, hat, module and cooler, in both ways, and no choice ends in an error.
 
 ### Changed
 
+- The demo's builder never shows an error, and never a picture of something other than what is chosen. Its choices are clicks in a row. A switch offers two ways: "Keep it working" (the default: pick anything, and the other parts change to ones that fit, with one quiet line saying what changed) and "Only what fits" (what cannot work is greyed with its reason). A needed choice with one answer is made for you, such as the header under a hat on a Pi Zero. A hat past a board's edge is said quietly, as the fact it is.
 - The demo is one screen at a time, and the gallery no longer folds. On a desk the page is the size of the window: pick a kind, then a family, then a machine, each list scrolling inside itself, and the machine stands large beside its colours, options, facts and the code to copy. Each machine with no shape yet opens as the one "Coming soon" picture. Filters are the same three steps: a fact, its values, the machines. Build, To scale and Live screen are views of their own, and only the device on show draws in 3D. Choices are kept in the address, and a step along the row is a step for Back; old addresses (`#pi4`, `#part:armor`, `#builder`) still go where they went. It works by mouse, touch and keyboard, and at a phone's width each row scrolls sideways inside itself.
 
 ## [0.14.0] - 2026-11-02

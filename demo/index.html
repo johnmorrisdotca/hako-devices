@@ -83,25 +83,36 @@
       </section>
 
       <section class="view view-builder panel" id="builder" aria-labelledby="builder-title" hidden>
-        <h2 id="builder-title">Build a computer from parts</h2>
-        <p class="note">Pick a board, a case and a hat. Every choice is checked for fit by real sizes and mount types, and one description makes the mesh and the drawing.</p>
+        <div class="builder-head">
+          <h2 id="builder-title">Build a computer from parts</h2>
+          <p class="note">One description makes the mesh and the drawing, and real sizes and mount types decide what fits.</p>
+        </div>
         <div class="builder">
           <form class="builder-form" id="builder-form">
-            <label>Board <select id="pick-board" data-testid="pick-board"></select></label>
-            <label>Case <select id="pick-case" data-testid="pick-case"></select></label>
-            <label>Hat <select id="pick-hat" data-testid="pick-hat"></select></label>
-            <label>Screen module <select id="pick-screen" data-testid="pick-screen"></select></label>
-            <label>Cooler <select id="pick-cooler" data-testid="pick-cooler"></select></label>
-            <label class="check"><input type="checkbox" id="pick-solder" data-testid="pick-solder" /> Solder a header on</label>
-            <label>Your own print <input type="text" id="pick-print" maxlength="40" placeholder="At your own risk" data-testid="pick-print" /></label>
-            <div class="presets" id="builder-presets" role="group" aria-label="Machines people have built"></div>
+            <div class="builder-ways">
+              <div class="seg" role="group" aria-label="How choices work" id="builder-way"></div>
+              <p class="quiet" id="builder-way-note"></p>
+            </div>
+            <div class="part-row"><span class="option-label">Board</span><div class="part-chips" id="pick-board" role="group" aria-label="Board" data-testid="pick-board"></div></div>
+            <div class="part-row"><span class="option-label">Case</span><div class="part-chips" id="pick-case" role="group" aria-label="Case" data-testid="pick-case"></div></div>
+            <div class="part-row"><span class="option-label">Hat</span><div class="part-chips" id="pick-hat" role="group" aria-label="Hat" data-testid="pick-hat"></div></div>
+            <div class="part-pair">
+              <div class="part-row"><span class="option-label">Screen module</span><div class="part-chips" id="pick-screen" role="group" aria-label="Screen module" data-testid="pick-screen"></div></div>
+              <div class="part-row"><span class="option-label">Cooler</span><div class="part-chips" id="pick-cooler" role="group" aria-label="Cooler" data-testid="pick-cooler"></div></div>
+            </div>
+            <p class="quiet" id="builder-why" role="status" data-testid="builder-why"></p>
+            <label class="check" id="solder-row"><input type="checkbox" id="pick-solder" data-testid="pick-solder" /> Solder a header on</label>
+            <label class="print-row">Your own print <input type="text" id="pick-print" maxlength="40" placeholder="At your own risk" data-testid="pick-print" /></label>
           </form>
           <div class="builder-view">
             <div class="builder-stage" id="builder-stage"></div>
-            <ul class="issues" id="builder-issues" role="status" data-testid="builder-issues"></ul>
+            <p class="quiet" id="builder-changed" role="status" data-testid="builder-changed"></p>
+            <ul class="issues" id="builder-issues" data-testid="builder-issues"></ul>
             <p class="size" id="builder-size" data-testid="builder-size"></p>
           </div>
           <div class="builder-code">
+            <h3>Machines people have built</h3>
+            <div class="presets" id="builder-presets" role="group" aria-label="Machines people have built"></div>
             <div class="tabs" role="tablist" aria-label="Code to copy" id="code-tabs"></div>
             <pre class="code"><code id="builder-code" data-testid="builder-code"></code></pre>
             <button type="button" class="btn" id="builder-copy">Copy</button>

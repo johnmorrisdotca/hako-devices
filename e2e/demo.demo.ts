@@ -535,34 +535,115 @@ test("a device opened by its old address still opens, and the view in the addres
   expect(problems).toEqual([]);
 });
 
-test("the builder checks the fit and writes the code", async ({ page }) => {
+const pick = (page: Page, slot: string, value: string) => page.locator(`[data-testid="pick-option"][data-slot="${slot}"][data-value="${value}"]`);
+const noFaults = async (page: Page) => {
+  await expect(page.locator('[data-testid="builder-issues"] [data-level="error"]')).toHaveCount(0);
+  await expect(page.locator("#builder")).not.toContainText("does not go together");
+};
+/** What the builder's code says, and what its device was given: the same, always. */
+const built = (page: Page) =>
+  page.evaluate(() => ({
+    code: JSON.parse(/build='(.*)'/.exec(document.querySelector('[data-testid="builder-code"]')?.textContent ?? "")?.[1] ?? "{}") as Record<string, unknown>,
+    shown: (document.querySelector('[data-testid="builder-device"]') as HTMLElement & { description: Record<string, unknown> }).description,
+  }));
+
+test("the builder keeps it working: pick anything, and the other parts change to ones that fit", async ({ page }) => {
   const problems = watch(page);
   await page.goto(`${URL}#builder`);
-  const issues = page.locator('[data-testid="builder-issues"]');
-  await expect(issues).toContainText("It all fits.");
-  await page.locator('[data-testid="pick-case"]').selectOption("argon");
-  await expect(issues.locator('li[data-code="case-covers-header"]')).toBeVisible();
-  await page.locator('[data-testid="pick-hat"]').selectOption("");
-  await expect(issues).toContainText("It all fits.");
-  await page.locator('[data-testid="pick-board"]').selectOption("pi-zero-2w");
-  await expect(issues.locator('li[data-code="case-wrong-board"]')).toBeVisible();
-  await page.locator('[data-testid="pick-case"]').selectOption("unipi");
-  await expect(issues).toContainText("It all fits.");
+  const changed = page.locator('[data-testid="builder-changed"]');
+  await expect(page.locator('[data-testid="builder-issues"]')).toBeVisible();
+  // a closed case under a hat: the case was just chosen, so the hat goes, and one quiet line says so
+  await pick(page, "case", "argon").click();
+  await expect(pick(page, "case", "argon")).toHaveAttribute("aria-pressed", "true");
+  await expect(pick(page, "hat", "")).toHaveAttribute("aria-pressed", "true");
+  await expect(changed).toHaveText(/^Changed to fit: the hat is off\.$/);
+  await noFaults(page);
+  // a new board: another case that fits it
+  await pick(page, "board", "pi-zero-2w").click();
+  await expect(pick(page, "case", "unipi")).toHaveAttribute("aria-pressed", "true");
+  await expect(changed).toContainText("case is now");
   await expect(page.locator('[data-testid="builder-code"]')).toContainText('"case":"unipi"');
-  await page.locator('[data-testid="pick-case"]').selectOption("");
-  await page.locator('[data-testid="pick-hat"]').selectOption("oled-bonnet");
-  await expect(issues.locator('li[data-code="header-not-soldered"]')).toBeVisible();
-  await page.locator('[data-testid="pick-solder"]').check();
-  await expect(issues).toContainText("It all fits.");
+  await noFaults(page);
+  // a hat on bare holes: the header is the one answer, so it is soldered without asking, and the closed case goes
+  await pick(page, "hat", "oled-bonnet").click();
+  await expect(page.locator('[data-testid="pick-solder"]')).toBeChecked();
+  await expect(page.locator('[data-testid="pick-solder"]')).toBeDisabled();
+  await expect(changed).toContainText("the header is soldered on");
+  await noFaults(page);
+  // and no hat, no need: it comes off again
+  await pick(page, "hat", "").click();
+  await expect(page.locator('[data-testid="pick-solder"]')).not.toBeChecked();
+  // a module for a display header brings the one hat that has one
+  await pick(page, "board", "pi4").click();
+  await pick(page, "screen", "oled-module").click();
+  await expect(pick(page, "hat", "proto-hat")).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator('[data-testid="builder-device"]')).toHaveAttribute("data-view", /picture|loading|3d/);
+  expect(problems).toEqual([]);
+});
+
+test("a hat past the board's edge is a fact said quietly, with no alarm colour", async ({ page }) => {
+  await page.goto(`${URL}#builder`);
+  await pick(page, "board", "pi-zero-2w").click();
+  await pick(page, "hat", "pitft-28").click();
+  const fact = page.locator('[data-testid="builder-issues"] [data-code="hat-overhangs"]');
+  await expect(fact).toContainText("past the edge");
+  const colour = await fact.evaluate((node) => getComputedStyle(node).color);
+  expect(colour).toBe(await page.locator('[data-testid="builder-size"]').evaluate((node) => getComputedStyle(node).color));
+});
+
+test("only what fits: what cannot work is greyed with its reason and cannot be chosen", async ({ page }) => {
+  const problems = watch(page);
+  await page.goto(`${URL}#builder`);
+  await page.locator('[data-testid="builder-way-fits"]').click();
+  await expect(page).toHaveURL(/fit=fits/);
+  // the first machine has a hat on a Pi 4 in the finned case
+  const closed = pick(page, "case", "argon");
+  await expect(closed).toHaveAttribute("aria-disabled", "true");
+  // a greyed part can still be pressed, by finger or by key, to hear why: `force` because a test tool will not press what says it is disabled
+  await closed.click({ force: true });
+  await expect(closed).toHaveAttribute("aria-pressed", "false");
+  await expect(page.locator('[data-testid="builder-why"]')).toContainText("closes over the header");
+  await noFaults(page);
+  // what fits still can be
+  await pick(page, "case", "").click();
+  await expect(pick(page, "case", "")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator('[data-testid="builder-changed"]')).toHaveText("");
+  // the address is written a moment after the last change
+  await expect(page).toHaveURL(/parts=pi4%2C%2C/);
+  await page.reload();
+  await expect(page.locator('[data-testid="builder-way-fits"]')).toHaveAttribute("aria-pressed", "true");
+  await expect(pick(page, "case", "")).toHaveAttribute("aria-pressed", "true");
+  expect(problems).toEqual([]);
+});
+
+test("every board, case, hat, module and cooler, pressed in both ways, ends with no error and the picture of what is chosen", async ({ page }, info) => {
+  test.skip(info.project.name !== "chromium-desk", "one browser is enough for this walk");
+  test.setTimeout(240_000);
+  const problems = watch(page);
+  await page.goto(`${URL}#builder`);
+  for (const way of ["working", "fits"]) {
+    await page.locator(`[data-testid="builder-way-${way}"]`).click();
+    const options = await page.locator('[data-testid="pick-option"]').evaluateAll((nodes) => nodes.map((node) => ({ slot: (node as HTMLElement).dataset.slot ?? "", value: (node as HTMLElement).dataset.value ?? "" })));
+    expect(options.length).toBeGreaterThan(20);
+    for (const { slot, value } of options) {
+      const option = pick(page, slot, value);
+      const greyed = (await option.getAttribute("aria-disabled")) === "true";
+      await option.click({ force: greyed });
+      if (way === "working") await expect(option).toHaveAttribute("aria-pressed", "true");
+      if (greyed) await expect(option).toHaveAttribute("aria-pressed", "false");
+      await noFaults(page);
+      const { code, shown } = await built(page);
+      expect(shown, `${way} ${slot} ${value}`).toEqual(code);
+    }
+  }
   expect(problems).toEqual([]);
 });
 
 test("a hostile print stays text, in the drawing and on the page", async ({ page }) => {
   const problems = watch(page);
   await page.goto(`${URL}#builder`);
-  await page.locator('[data-testid="pick-case"]').selectOption("");
-  await page.locator('[data-testid="pick-hat"]').selectOption("pitft-28");
+  await pick(page, "case", "").click();
+  await pick(page, "hat", "pitft-28").click();
   await page.locator('[data-testid="pick-print"]').fill('<img src=x onerror=alert(1)>');
   await page.locator('[data-testid="pick-print"]').blur();
   await page.waitForTimeout(600);
