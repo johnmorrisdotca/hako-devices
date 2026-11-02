@@ -222,3 +222,49 @@ test.describe("on a 5K screen", () => {
     }
   });
 });
+
+test.describe("on a 5120 x 2880 window at a scale of 2, with three 3D views", () => {
+  test.use({ viewport: { width: 5120, height: 2880 }, deviceScaleFactor: 2 });
+
+  test("each canvas stays inside its pixel budget, and the large one fills it", async ({ page }) => {
+    test.setTimeout(300_000);
+    await page.goto(URL);
+    await bar(page).evaluate((node) => (node as Bar).pause());
+    await reach3d(page);
+    // the page shows one; two more over its corner are a page that shows three, each past the budget at this scale
+    await page.evaluate(() => {
+      for (const [at, key] of ["pi5", "mac-studio"].entries()) {
+        const more = document.createElement("hako-device");
+        more.setAttribute("key", key);
+        more.setAttribute("spin", "off");
+        more.dataset.testid = "more-3d";
+        more.style.cssText = `position:fixed;left:${at * 1700}px;top:0;width:1600px;z-index:9`;
+        document.body.append(more);
+      }
+    });
+    const views = page.locator('hako-device#hero, [data-testid="more-3d"]');
+    await expect.poll(() => page.locator('[data-testid="more-3d"][data-view="3d"]').count(), { timeout: 240_000 }).toBe(2);
+    expect((await usage(page)).contexts).toBe(3);
+    const size = (view: ReturnType<Page["locator"]>) =>
+      view.evaluate((node) => {
+        const canvas = node.shadowRoot?.querySelector("canvas") as HTMLCanvasElement;
+        return { w: canvas.width, h: canvas.height };
+      });
+    const inBudget = async () => {
+      const sizes = await Promise.all((await views.all()).map(size));
+      expect(sizes).toHaveLength(3);
+      for (const { w, h } of sizes) {
+        expect(w * h).toBeLessThanOrEqual(MAX_PIXELS);
+        expect(Math.max(w, h)).toBeLessThanOrEqual(MAX_SIDE);
+      }
+      return sizes;
+    };
+    const [large] = await inBudget();
+    expect(large.w * large.h).toBeGreaterThan(MAX_PIXELS * 0.99);
+    for (const zoom of [3, 5]) {
+      await bar(page).evaluate((node, z) => (node as Bar).set({ zoom: z }), zoom);
+      await expect.poll(() => hero(page).evaluate((node) => node.shadowRoot?.querySelector("canvas")?.dataset.zoom), { timeout: 60_000 }).toBe(zoom.toFixed(2));
+      await inBudget();
+    }
+  });
+});
