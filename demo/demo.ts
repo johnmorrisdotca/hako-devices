@@ -1,6 +1,6 @@
 // The demo page: a device large, the part builder, a lineup to scale, the gallery by family and a live screen. Everything comes from the package's own entries.
 import { aliasesOf, catalogue, catalogueCounts, check, type CatalogueEntry, COVERED, deviceByKey, FAMILIES, groupLayout, groupSample, headingOf, meshOf, PARTS, partsOfKind, PRESETS, SHELVES, STYLE_NAMES, type Description, type Device, type Part, type StyleName } from "../src/index.ts";
-import { colourRow } from "./colours.ts";
+import { colourRow } from "./colour-row.ts";
 import { EMBED_KINDS, embedCode, type EmbedKind } from "../src/embed.ts";
 import { HakoDevice, setAssetBase } from "../src/element.ts";
 import { facetCounts, FACETS, facetOrder, type FacetId, matchesPicks, type Picks } from "../src/tags.ts";
