@@ -2,6 +2,7 @@
 // keyboard, tilt on phones, reduced motion, and the drawing stays on no WebGL, Save-Data or any failure. `<hako-lineup keys="...">` draws machines at their true relative size.
 // Importing this file defines both elements. three.js is loaded only when a 3D view is wanted.
 import { deviceByKey } from "./catalogue.ts";
+import { bodyColourValue } from "./element/body.ts";
 import { PARTS } from "./parts.ts";
 import { CROSSFADE_MS, REDUCED_FADE_MS, revealDelay } from "./crossfade.ts";
 import type { Description } from "./fit.ts";
@@ -133,7 +134,7 @@ function rulerSvg(mm: number, unit: number): SVGSVGElement {
 }
 
 export class HakoDevice extends HTMLBase {
-  static readonly observedAttributes = ["key", "device", "part", "build", "style", "drawing-style", "mode", "assets", "spin", "way", "label", "print", "scale", "unit", "ruler", "fireflies", "no-ground", "flipped"];
+  static readonly observedAttributes = ["key", "device", "part", "build", "style", "drawing-style", "mode", "assets", "spin", "way", "label", "print", "scale", "unit", "ruler", "fireflies", "no-ground", "flipped", "body-colour"];
 
   /** A machine built from parts, as a property: the same as the `build` attribute's JSON. */
   private descriptionValue: Description | null = null;
@@ -238,6 +239,10 @@ export class HakoDevice extends HTMLBase {
     if (name === "flipped") {
       this.viewer?.setFlipped(this.hasAttribute("flipped"));
       this.syncFlipped();
+      return;
+    }
+    if (name === "body-colour") {
+      this.viewer?.setBodyColour(bodyColourValue(after));
       return;
     }
     if (name === "style" && !this.styleName(after)) return;
@@ -456,6 +461,7 @@ export class HakoDevice extends HTMLBase {
         } else await made.load(`${base}${key}.glb`);
         if (generation !== this.generation) return;
         made.setFlipped(this.hasAttribute("flipped"));
+        made.setBodyColour(bodyColourValue(this.getAttribute("body-colour")));
         // the drawing stays a moment, then becomes the device
         const wait = revealDelay(shownAt, performance.now(), reduced);
         this.revealTimer = window.setTimeout(() => {

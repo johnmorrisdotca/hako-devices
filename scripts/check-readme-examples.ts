@@ -19,6 +19,7 @@ function rewrite(code: string): string {
     .replaceAll('"@johnmorrisdotca/hako-devices/embed"', `"${dist}/embed.js"`)
     .replaceAll('"@johnmorrisdotca/hako-devices/build"', `"${dist}/build/index.js"`)
     .replaceAll('"@johnmorrisdotca/hako-devices/tags"', `"${dist}/tags.js"`)
+    .replaceAll('"@johnmorrisdotca/hako-devices/colours"', `"${dist}/colours.js"`)
     .replaceAll('"@johnmorrisdotca/hako-devices"', `"${dist}/index.js"`);
   // `expression; // value` becomes a check of that value
   return imports

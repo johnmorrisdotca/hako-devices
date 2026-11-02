@@ -60,7 +60,7 @@ test("every machine has the documented fields and nothing else", () => {
   assert.match(list.licence, /LICENSES\//);
   const facets = new Set<string>(FACETS.map((facet) => facet.id));
   for (const machine of list.machines) {
-    assert.deepEqual(Object.keys(machine), ["key", "name", "aliases", "maker", "family", "status", "mesh", "size", "ports", "tags"], machine.key);
+    assert.deepEqual(Object.keys(machine), ["key", "name", "aliases", "maker", "family", "status", "mesh", "size", "ports", "tags", "colours"], machine.key);
     assert.ok(machine.name && machine.family, machine.key);
     assert.ok(machine.status === "built" || machine.status === "planned", machine.key);
     assert.ok(machine.size === null || (machine.size.length === 3 && machine.size.every((mm: number) => mm > 0)), machine.key);

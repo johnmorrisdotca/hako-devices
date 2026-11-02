@@ -3,6 +3,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { DEVICES } from "../src/catalogue.ts";
+import { colourProblems, type ColourListRow, type ColourRow, colourTable, readColours } from "./colour-rules.ts";
 import { tagProblems, type TagRow } from "./tag-rules.ts";
 import { aliasProblems, readAliases, readTags, readWishlist } from "./wishlist-read.ts";
 
@@ -24,6 +25,11 @@ const problems = aliasProblems(data as { key: string; aliases?: string[] }[]);
 if (problems.length) throw new Error(`aliases in data/wishlist.json:\n${problems.join("\n")}`);
 const tagIssues = tagProblems(data as unknown as TagRow[]);
 if (tagIssues.length) throw new Error(`tags in data/wishlist.json:\n${tagIssues.slice(0, 40).join("\n")}${tagIssues.length > 40 ? `\n... and ${tagIssues.length - 40} more` : ""}`);
+const colourRows = JSON.parse(readFileSync(join(root, "data", "colours.json"), "utf8")) as ColourRow[];
+const colourList = data as unknown as ColourListRow[];
+const colourIssues = colourProblems(colourRows, colourList, new Set(DEVICES.map((device) => device.key)));
+if (colourIssues.length) throw new Error(`colours in data/colours.json:\n${colourIssues.slice(0, 40).join("\n")}${colourIssues.length > 40 ? `\n... and ${colourIssues.length - 40} more` : ""}`);
+const colours = readColours(colourRows, colourList);
 const { planned, covered } = readWishlist(data, new Set(DEVICES.map((device) => device.key)));
 const lines = (list: readonly unknown[]) => list.map((entry) => `  ${JSON.stringify(entry)},`).join("\n");
 writeFileSync(
@@ -64,7 +70,21 @@ writeFileSync(
   join(root, "src", "tag-data.ts"),
   `// Every machine's tags, from data/wishlist.json by scripts/make-wishlist.ts. Do not edit: run \`pnpm wishlist\`.
 export const TAG_DATA: Readonly<Record<string, Readonly<Partial<Record<string, readonly string[]>>>>> = {
-${Object.entries(readTags(data)).map(([key, tags]) => `  ${JSON.stringify(key)}: ${JSON.stringify(tags)},`).join("\n")}
+${Object.entries(readTags(data, colours)).map(([key, tags]) => `  ${JSON.stringify(key)}: ${JSON.stringify(tags)},`).join("\n")}
+};
+`,
+);
+
+const colourData = colourTable(colours);
+writeFileSync(
+  join(root, "src", "colour-data.ts"),
+  `// Every machine's colours and the pages that say so, from data/colours.json and data/wishlist.json by scripts/make-wishlist.ts. Do not edit: run \`pnpm wishlist\`.
+export const COLOUR_PAGES: readonly string[] = [
+${colourData.pages.map((page) => `  ${JSON.stringify(page)},`).join("\n")}
+];
+
+export const COLOUR_DATA: Readonly<Record<string, readonly { name: string; pages: readonly number[]; swatch?: string; swatchPage?: number; drawing?: string }[]>> = {
+${Object.entries(colourData.data).map(([key, entries]) => `  ${JSON.stringify(key)}: ${JSON.stringify(entries)},`).join("\n")}
 };
 `,
 );

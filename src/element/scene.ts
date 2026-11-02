@@ -6,6 +6,7 @@ import {
   AdditiveBlending,
   Box3,
   CanvasTexture,
+  Color,
   DirectionalLight,
   Group,
   HemisphereLight,
@@ -33,9 +34,27 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { FOV_DEG, frameFor, type ViewChoice } from "../framing.ts";
+import { bodyMaterial } from "./body.ts";
 import { pixelRatioFor } from "../pixels.ts";
 import { desktopPicture, oledPicture, panelPicture, paperPicture, phonePicture, type ScreenContent } from "../screen/picture.ts";
 import { canvas, paintBitmap, paintGlow, paintHalo, paintPanel, paintPerforation, paintPrint, paintSteps } from "./paint.ts";
+
+/** A mesh's surface, in the units it stands in. */
+function surfaceOf(mesh: Mesh): number {
+  const position = mesh.geometry.getAttribute("position");
+  if (!position) return 0;
+  const index = mesh.geometry.getIndex();
+  const count = index ? index.count : position.count;
+  const [a, b, c] = [new Vector3(), new Vector3(), new Vector3()];
+  let area = 0;
+  for (let at = 0; at + 2 < count; at += 3) {
+    a.fromBufferAttribute(position, index ? index.getX(at) : at).applyMatrix4(mesh.matrixWorld);
+    b.fromBufferAttribute(position, index ? index.getX(at + 1) : at + 1).applyMatrix4(mesh.matrixWorld);
+    c.fromBufferAttribute(position, index ? index.getX(at + 2) : at + 2).applyMatrix4(mesh.matrixWorld);
+    area += b.sub(a).cross(c.sub(a)).length() / 2;
+  }
+  return area;
+}
 
 export type Painter = ScreenContent | HTMLCanvasElement | ((ctx: CanvasRenderingContext2D, width: number, height: number) => void);
 
@@ -90,6 +109,7 @@ export class DeviceViewer {
   private prints = new Map<string, Mesh>();
   private printWords: string | Readonly<Record<string, string>> | undefined;
   private screenPainter: Painter | null = null;
+  private bodyParts: { material: MeshStandardMaterial; base: Color }[] | null = null;
   private flipped = false;
   private textures: Texture[] = [];
   private controls: OrbitControls;
@@ -227,6 +247,32 @@ export class DeviceViewer {
       node.visible = true;
     }
     this.wake();
+  }
+
+  /** Shows the body in this colour, or as drawn with null. Only the body's own material changes, and it costs one frame. Says whether the device has a body to colour. */
+  setBodyColour(value: string | null): boolean {
+    const device = this.device;
+    if (!device) return false;
+    if (this.bodyParts === null) {
+      const areas = new Map<string, number>();
+      const meshes: { material: MeshStandardMaterial; name: string }[] = [];
+      device.updateMatrixWorld(true);
+      device.traverse((node) => {
+        if (!(node instanceof Mesh)) return;
+        const material = node.material as MeshStandardMaterial;
+        meshes.push({ material, name: material.name });
+        areas.set(material.name, (areas.get(material.name) ?? 0) + surfaceOf(node));
+      });
+      const body = bodyMaterial(areas);
+      this.bodyParts = [...new Set(meshes.filter(({ name }) => name === body).map(({ material }) => material))].map((material) => ({ material, base: material.color.clone() }));
+    }
+    for (const { material, base } of this.bodyParts) {
+      if (value) material.color.set(value);
+      else material.color.copy(base);
+    }
+    this.needsDraw = true;
+    this.wake();
+    return this.bodyParts.length > 0;
   }
 
   setFlipped(flipped: boolean): void {

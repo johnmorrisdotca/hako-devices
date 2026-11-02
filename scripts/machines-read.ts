@@ -4,6 +4,7 @@ import { catalogue, type Device } from "../src/index.ts";
 import { FACETS, tagsOf, type FacetId } from "../src/tags.ts";
 import { meshOf } from "../src/status.ts";
 import { aliasesOf } from "../src/find.ts";
+import { coloursOf, type MachineColour } from "../src/colours.ts";
 
 export interface Machine {
   key: string;
@@ -16,6 +17,8 @@ export interface Machine {
   size: readonly [number, number, number] | null;
   ports: readonly { kind: string; count: number }[];
   tags: Partial<Record<FacetId, readonly string[]>>;
+  /** Each colour without its pages: like every other fact's, they are not in this file. `coloursOf` has them. */
+  colours: readonly (Pick<MachineColour, "name" | "drawing"> & { swatch: { value: string; from: string } | null })[];
 }
 
 export interface MachineList {
@@ -46,6 +49,7 @@ export function machineList(rows: readonly { key: string; family: string }[], pk
       size: device?.size ?? null,
       ports: device?.ports.map(({ kind, count }) => ({ kind, count })) ?? [],
       tags: Object.fromEntries(FACETS.filter(({ id }) => tags[id]?.length).map(({ id }) => [id, tags[id]])),
+      colours: coloursOf(entry.key).map(({ name, swatch, drawing }) => ({ name, swatch: swatch && { value: swatch.value, from: swatch.from }, drawing })),
     };
   });
   return { schema: 1, package: pkg.name, version: pkg.version, licence: "see LICENSES/ and NOTICE.md", sources: "see NOTICE.md", machines };
