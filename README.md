@@ -12,7 +12,7 @@ Boards, hats, cases, NAS boxes, desktops, laptops, tablets, game consoles, old p
 
 <p align="center"><a href="https://johnmorrisdotca.github.io/hako-devices/"><strong>Open the demo →</strong></a> · <a href="./docs/parts.md">Build from parts</a> · <a href="./docs/element.md">The element</a> · <a href="./docs/embed.md">Use one on your site</a> · <a href="./docs/scale.md">To scale</a> · <a href="./docs/styles.md">Styles</a></p>
 
-<p align="center"><img alt="A gallery on a night-blue page: groups of line drawings such as single-board computers, desktops, laptops and classic machines, each a bunch of its machines." src="https://raw.githubusercontent.com/johnmorrisdotca/hako-devices/main/docs/images/gallery.jpg" width="820"></p>
+<p align="center"><img alt="The gallery on a night-blue page: a list of kinds beside line drawings of machines, and one machine large in 3D with its options, its facts and the code to copy." src="https://raw.githubusercontent.com/johnmorrisdotca/hako-devices/main/docs/images/gallery.jpg" width="820"></p>
 
 <p align="center"><img alt="The part builder: a small computer in a finned case with a touch screen hat, in 3D, beside its choices and the code to copy." src="https://raw.githubusercontent.com/johnmorrisdotca/hako-devices/main/docs/images/builder.jpg" width="820"></p>
 

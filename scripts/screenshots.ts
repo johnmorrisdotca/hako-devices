@@ -7,7 +7,7 @@ import { chromium } from "@playwright/test";
 
 const out = process.argv[2] ?? "docs/images";
 mkdirSync(out, { recursive: true });
-const port = 7802;
+const port = Number(process.env.SHOTS_PORT ?? 7802);
 const server = spawn("node", ["scripts/dev.ts"], { env: { ...process.env, PORT: String(port) }, stdio: "ignore" });
 await new Promise((resolve) => setTimeout(resolve, 600));
 const browser = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"] });
@@ -49,6 +49,9 @@ try {
   await shoot("#gallery", "gallery.jpg");
   await page.locator('[data-testid="style-thick"]').click();
   await eager();
+  // the large view changes its style too: wait for it to finish, or the picture catches it half way
+  await page.locator('hako-device#hero[data-view="3d"]').waitFor({ timeout: 60_000 });
+  await page.waitForTimeout(3000);
   await shoot("#gallery", "gallery-thick.jpg");
   await page.locator('[data-testid="style-thin"]').click();
   await page.locator('[data-testid="filter-all"]').click();
