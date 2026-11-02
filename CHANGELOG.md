@@ -6,6 +6,8 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-11-02
+
 ### Added
 
 - The older iPads and iPad minis, 17 models on 14 bodies, each a row of numbers read from Apple's dimensional drawing of that model: the iPad (1st to 9th generation), the iPad mini (1st, 2nd, 3rd, 4th and 5th generation) and the iPad Air (1st, 2nd and 3rd generation), with their front camera, rear camera, home button, buttons, switch, jack, sockets and speaker grilles. The mini 3, the 6th generation and the 8th generation share the body of the mini 2, the 5th generation and the 7th generation, which Apple draws once for each pair. The tablets stand long side down, as the iPad Pros do. Not drawn yet: the iPad Air 13-inch (M2, M3 and M4) and the iPad mini (A20 Pro), left as coming soon.
