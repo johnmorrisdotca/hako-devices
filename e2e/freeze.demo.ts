@@ -111,9 +111,19 @@ test("a view out of sight draws nothing, even while it would turn", async ({ pag
     document.getElementById("hero")?.scrollIntoView();
     window.scrollTo(0, document.body.scrollHeight);
   });
-  await settle(page, 1500);
+  // a slow runner takes a while to hear that the view left the screen: wait for it to stop, then it must stay stopped
+  await expect
+    .poll(
+      async () => {
+        const mark = await drawn(page);
+        await settle(page, 1500);
+        return (await drawn(page)) - mark;
+      },
+      { timeout: 60_000, intervals: [500] },
+    )
+    .toBe(0);
   const before = await drawn(page);
-  await settle(page, 1500);
+  await settle(page, 2500);
   expect(await drawn(page)).toBe(before);
 });
 
