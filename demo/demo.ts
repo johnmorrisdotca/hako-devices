@@ -1,5 +1,6 @@
 // The demo page: a device large, the part builder, a lineup to scale, the gallery by family and a live screen. Everything comes from the package's own entries.
 import { aliasesOf, catalogue, catalogueCounts, check, type CatalogueEntry, COVERED, deviceByKey, FAMILIES, groupLayout, groupSample, headingOf, meshOf, PARTS, partsOfKind, PRESETS, SHELVES, STYLE_NAMES, type Description, type Device, type Part, type StyleName } from "../src/index.ts";
+import { EMBED_KINDS, embedCode, type EmbedKind } from "../src/embed.ts";
 import { HakoDevice, setAssetBase } from "../src/element.ts";
 import { facetCounts, FACETS, facetOrder, type FacetId, matchesPicks, type Picks } from "../src/tags.ts";
 
@@ -21,13 +22,47 @@ const el = <K extends keyof HTMLElementTagNameMap>(tag: K, props: Partial<HTMLEl
 // ------------------------------------------------------------- the device large
 const HERO = ["pi4-pitft", "pi3b-oled", "pi-zero", "pi4-armor", "pi5", "mac-studio", "macbook-pro-14", "ipad-pro-11", "nas-2bay", "mini-pc"];
 const hero = byId<HakoDevice>("hero");
-const heroCode = byId("hero-code").querySelector("code") as HTMLElement;
 const chips = byId("hero-chips");
+let heroKey = "pi4-pitft";
+let embedKind: EmbedKind = "element";
+let embedFull = "";
+const embedTabs = byId("embed-tabs");
+const embedCodeNode = byId("embed-code");
+const embedStatus = byId("embed-status");
+for (const kind of EMBED_KINDS) {
+  const tab = el("button", { type: "button", textContent: kind });
+  tab.dataset.testid = `tab-${kind}`;
+  tab.setAttribute("role", "tab");
+  tab.addEventListener("click", () => {
+    embedKind = kind;
+    drawEmbed();
+  });
+  embedTabs.append(tab);
+}
+function drawEmbed() {
+  embedFull = embedCode({ key: heroKey }, embedKind);
+  embedCodeNode.textContent = embedFull.length > 1400 ? `${embedFull.slice(0, 1400)}…` : embedFull;
+  for (const tab of embedTabs.querySelectorAll("button")) tab.setAttribute("aria-selected", String(tab.dataset.testid === `tab-${embedKind}`));
+}
 function showHero(key: string) {
+  heroKey = key;
   hero.setAttribute("key", key);
-  heroCode.textContent = `<hako-device key="${key}"></hako-device>`;
+  drawEmbed();
   for (const chip of chips.querySelectorAll("button")) chip.setAttribute("aria-pressed", String(chip.dataset.key === key));
 }
+byId("embed-copy").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(embedFull);
+  } catch {
+    const area = el("textarea");
+    area.value = embedFull;
+    document.body.append(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+  }
+  embedStatus.textContent = "Copied";
+});
 for (const key of HERO) {
   const chip = el("button", { type: "button", className: "chip", textContent: deviceByKey(key)?.name.replace(/^Raspberry /, "") ?? key });
   chip.dataset.key = key;

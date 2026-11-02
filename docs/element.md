@@ -72,6 +72,8 @@ React keeps `key` and `style` for itself, so the props are `device` and `drawing
 
 The element uses constructable style sheets and the DOM's own style objects, and loads no inline script or style. It needs `img-src` and `connect-src` to reach the assets. The demo runs under `default-src 'self'` with nothing added but `img-src data:`.
 
+The same attributes are the query of [the embed page](embed.md), for a site that cannot run script. `embedCode` writes the snippet.
+
 ## With no bundler
 
 An import map names three.js and the package:

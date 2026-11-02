@@ -73,11 +73,13 @@ writeFileSync(
   `import { check, DEVICES } from ${JSON.stringify(pkg.name)};
 import { build } from ${JSON.stringify(`${pkg.name}/build`)};
 import { HakoDevice } from ${JSON.stringify(`${pkg.name}/element`)};
+import { embedCode } from ${JSON.stringify(`${pkg.name}/embed`)};
 import { HakoDevice as ReactDevice } from ${JSON.stringify(`${pkg.name}/react`)};
 import { createRequire } from "node:module";
 import { readFileSync } from "node:fs";
 if (!check({ board: "pi4" }).ok || DEVICES.length !== ${DEVICES.length}) throw new Error("the catalogue");
 if (typeof HakoDevice !== "function" || typeof ReactDevice !== "function") throw new Error("the element");
+if (!embedCode({ key: "pi4" }, "element").includes("<hako-device")) throw new Error("the embed");
 const machine = build({ board: "pi4", case: "armor", hat: "pitft-28" });
 if (machine.svg() !== ${JSON.stringify(machine.svg())}) throw new Error("the installed package drew another machine");
 if (machine.glb().bytes.length !== ${machine.glb().bytes.length}) throw new Error("the installed package made another mesh");

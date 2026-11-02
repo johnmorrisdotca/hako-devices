@@ -16,6 +16,7 @@ let failed = 0;
 
 function rewrite(code: string): string {
   const imports = code
+    .replaceAll('"@johnmorrisdotca/hako-devices/embed"', `"${dist}/embed.js"`)
     .replaceAll('"@johnmorrisdotca/hako-devices/build"', `"${dist}/build/index.js"`)
     .replaceAll('"@johnmorrisdotca/hako-devices/tags"', `"${dist}/tags.js"`)
     .replaceAll('"@johnmorrisdotca/hako-devices"', `"${dist}/index.js"`);

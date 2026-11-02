@@ -25,3 +25,5 @@ export { groupLayout, groupSample, type GroupPlace } from "./group.ts";
 export { catalogue, catalogueCounts, headingOf, meshOf, SHELVES, statusOf } from "./status.ts";
 export { aliasesOf, findMachine } from "./find.ts";
 export type { CatalogueEntry } from "./status.ts";
+export { OPTION_ATTRIBUTES, attributesFromOptions, deviceFromParams, deviceToParams, optionsFromAttributes } from "./attrs.ts";
+export type { DeviceOptions } from "./attrs.ts";

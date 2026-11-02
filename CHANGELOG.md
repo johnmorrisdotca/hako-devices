@@ -6,6 +6,8 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.12.0] - 2026-11-02
+
 ## [0.11.0] - 2026-11-02
 
 ### Added
@@ -75,6 +77,7 @@ All notable changes to this project are written here. The format follows
 
 ### Added
 
+- Embeds: an embed page for a site that cannot run script, and `embedCode` for the element, an iframe, a module, the SVG and a data address, so a drawing can go on another site.
 - [Building machines](docs/building-machines.md): how to add a machine to the same standard, with prompts for a coding agent.
 - The list has every Galaxy Tab released so far: 68 more models, in the families Galaxy Tab A, E, S and Active, 88 in all. A row of the phones and tablets also gives `released`, `discontinued`, `lastUpdate`, `weightG`, `colours` and the pages in `factsSources`, each only where a page says so.
 - Every iPhone: 50 bodies, from the first to the iPhone 18 Pro Max and the Duo (closed), each a row of numbers read from Apple's dimensional drawings, with its front, cameras, plateau, buttons, sockets and holes. New port kinds `lightning` and `dock-30`.
