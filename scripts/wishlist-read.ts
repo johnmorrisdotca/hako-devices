@@ -21,7 +21,7 @@ export interface CoveredEntry {
   status: "built";
 }
 
-const SHELF_OF_PHASE: Readonly<Record<number, string>> = { 1: "phones", 2: "consoles", 3: "computers", 4: "apple", 5: "microsoft", 7: "raspberry-pi", 8: "tv", 9: "android", 10: "boards", 11: "mini-pcs", 12: "next", 13: "calculators", 14: "music", 15: "laptops", 16: "headsets", 17: "gadgets", 18: "readers" };
+const SHELF_OF_PHASE: Readonly<Record<number, string>> = { 1: "phones", 2: "consoles", 3: "computers", 4: "apple", 5: "microsoft", 7: "raspberry-pi", 8: "tv", 9: "android", 10: "boards", 11: "mini-pcs", 12: "next", 13: "calculators", 14: "music", 15: "laptops", 16: "headsets", 17: "gadgets", 18: "readers", 19: "nas" };
 
 /** The tags of every machine, built ones too, for src/tag-data.ts: the facts that stay facts when the sizes and sources stay in data/. */
 export function readTags(data: unknown, colours: Readonly<Record<string, readonly { name: string }[]>> = {}): Record<string, Record<string, readonly string[]>> {

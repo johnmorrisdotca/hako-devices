@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2431 machines. 969 distinct shapes still to build. 1130 entries are already built: the 338 devices in this package, plus the real models those meshes cover. 1446 entries have a sourced size; the other 985 are `null` on purpose.**
+**2494 machines. 1032 distinct shapes still to build. 1130 entries are already built: the 338 devices in this package, plus the real models those meshes cover. 1469 entries have a sourced size; the other 1025 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -170,12 +170,17 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Galaxy Tab Pro | 4 | 4 | 4 |
 |  | Galaxy Tab E | 4 | 4 | 1 |
 |  | Dream | 1 | 1 | 0 |
-| **10** | **Other small boards** | **49** | **49** | **0** |
+| **10** | **Other small boards** | **58** | **58** | **0** |
 |  | Banana Pi | 20 | 20 | 0 |
 |  | Jetson | 10 | 10 | 0 |
 |  | BeagleBoard | 10 | 10 | 0 |
 |  | Orange Pi | 5 | 5 | 0 |
+|  | ODROID | 5 | 5 | 0 |
 |  | Arduino Uno | 4 | 4 | 0 |
+|  | ROCK | 1 | 1 | 0 |
+|  | PINE A64 | 1 | 1 | 0 |
+|  | Le Potato | 1 | 1 | 0 |
+|  | Teensy | 1 | 1 | 0 |
 | **11** | **Mini PCs** | **509** | **1** | **384** |
 |  | NUC 11 | 82 | 0 | 61 |
 |  | NUC 12 | 61 | 0 | 43 |
@@ -236,7 +241,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | ZEN | 1 | 1 | 0 |
 |  | H300 | 1 | 1 | 0 |
 |  | Sansa | 1 | 1 | 0 |
-| **15** | **Laptops** | **10** | **10** | **1** |
+| **15** | **Laptops** | **12** | **12** | **1** |
 |  | ThinkPad | 4 | 4 | 1 |
 |  | Portable | 1 | 1 | 0 |
 |  | T series | 1 | 1 | 0 |
@@ -244,17 +249,23 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | OmniBook | 1 | 1 | 0 |
 |  | Eee PC | 1 | 1 | 0 |
 |  | XPS | 1 | 1 | 0 |
+|  | Pixelbook | 1 | 1 | 0 |
+|  | Chromebook Pixel | 1 | 1 | 0 |
 | **16** | **Headsets** | **1** | **1** | **0** |
 |  | Quest | 1 | 1 | 0 |
-| **17** | **Other gadgets** | **4** | **4** | **2** |
+| **17** | **Other gadgets** | **2** | **2** | **0** |
 |  | Tamagotchi | 1 | 1 | 0 |
 |  | Echo | 1 | 1 | 0 |
-|  | DiskStation | 1 | 1 | 1 |
-|  | Drobo | 1 | 1 | 1 |
 | **18** | **E-readers** | **4** | **4** | **0** |
 |  | Kindle | 3 | 3 | 0 |
 |  | eReader | 1 | 1 | 0 |
-|  | **Total** | **2431** | **969** | **1446** |
+| **19** | **NAS** | **54** | **54** | **25** |
+|  | TS series | 25 | 25 | 0 |
+|  | DiskStation | 24 | 24 | 24 |
+|  | TVS series | 3 | 3 | 0 |
+|  | Drobo | 1 | 1 | 1 |
+|  | TBS series | 1 | 1 | 0 |
+|  | **Total** | **2494** | **1032** | **1469** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -1408,7 +1419,7 @@ Galaxy Tab S 10.5 (2014), Galaxy Tab S 8.4 (2014), Galaxy Tab S2 8.0 (2015), Gal
 
 Galaxy Fold (2019), Galaxy Z Flip (2020), Galaxy Z Fold2 (2020), Galaxy Z Flip4 (2022), Galaxy Z Fold4 (2022).
 
-### Phase 10: Other small boards (49 machines, 49 shapes to build)
+### Phase 10: Other small boards (58 machines, 58 shapes to build)
 
 **Arduino Uno** (4 machines, 4 shapes)
 
@@ -1422,6 +1433,14 @@ Banana Pi BPI-D1, Banana Pi BPI-F2, Banana Pi BPI-G1, Banana Pi BPI-M1, Banana P
 
 BeagleBoard (2008), BeagleBoard-xM (2010), BeagleBone (2011), BeagleBone Black (2013), BeagleBoard-X15 (2016), PocketBeagle (2017), BeagleBone AI (2019), BeagleBone AI-64 (2022), BeaglePlay (2023), BeagleV-Ahead (2023).
 
+**Hardkernel ODROID** (5 machines, 5 shapes)
+
+ODROID-C4, ODROID-H3, ODROID-M1, ODROID-N2+, ODROID-N2L.
+
+**Libre Computer Le Potato** (1 machines, 1 shapes)
+
+Le Potato AML-S905X-CC.
+
 **Nvidia Jetson** (10 machines, 10 shapes)
 
 Jetson TK1 (2014), Jetson TX1 (2015), Jetson TX2 (2017), Jetson AGX Xavier (2018), Jetson Nano (2019), Jetson Xavier NX (2020), Jetson AGX Orin (2023), Jetson Orin NX (2023), Jetson Orin Nano (2023), Jetson AGX Thor (2025).
@@ -1429,6 +1448,18 @@ Jetson TK1 (2014), Jetson TX1 (2015), Jetson TX2 (2017), Jetson AGX Xavier (2018
 **Orange Pi** (5 machines, 5 shapes)
 
 Orange Pi 5 Ultra, Orange Pi AIpro (20T), Orange Pi Prime, Orange Pi R1, Orange Pi RV.
+
+**PJRC Teensy** (1 machines, 1 shapes)
+
+Teensy 4.1.
+
+**Pine64 PINE A64** (1 machines, 1 shapes)
+
+PINE A64.
+
+**Pine64 ROCK** (1 machines, 1 shapes)
+
+ROCKPro64.
 
 ### Phase 11: Mini PCs (509 machines, 1 shapes to build)
 
@@ -1670,7 +1701,7 @@ Sony Walkman TPS-L2, Sony Walkman WM-2, Sony Walkman WM-20, Sony Walkman WM-DD.
 
 iRiver H320.
 
-### Phase 15: Laptops (10 machines, 10 shapes to build)
+### Phase 15: Laptops (12 machines, 12 shapes to build)
 
 **ASUS Eee PC** (1 machines, 1 shapes)
 
@@ -1683,6 +1714,14 @@ Compaq Portable (1983).
 **Dell XPS** (1 machines, 1 shapes)
 
 Dell XPS 13 9343.
+
+**Google Chromebook Pixel** (1 machines, 1 shapes)
+
+Chromebook Pixel (2013).
+
+**Google Pixelbook** (1 machines, 1 shapes)
+
+Pixelbook (2017).
 
 **Hewlett-Packard OmniBook** (1 machines, 1 shapes)
 
@@ -1710,7 +1749,7 @@ Toshiba T1100 (1985).
 
 Quest 2 (2020).
 
-### Phase 17: Other gadgets (4 machines, 4 shapes to build)
+### Phase 17: Other gadgets (2 machines, 2 shapes to build)
 
 **Amazon Echo** (1 machines, 1 shapes)
 
@@ -1719,14 +1758,6 @@ Amazon Echo (1st generation) (2014).
 **Bandai Tamagotchi** (1 machines, 1 shapes)
 
 Tamagotchi (1996).
-
-**Drobo** (1 machines, 1 shapes)
-
-Drobo 5N.
-
-**Synology DiskStation** (1 machines, 1 shapes)
-
-DS218+.
 
 ### Phase 18: E-readers (4 machines, 4 shapes to build)
 
@@ -1737,3 +1768,25 @@ Kindle (1st generation) (2007), Kindle Paperwhite (2012), Kindle Oasis (2017).
 **Kobo eReader** (1 machines, 1 shapes)
 
 Kobo eReader (2010).
+
+### Phase 19: NAS (54 machines, 54 shapes to build)
+
+**Drobo** (1 machines, 1 shapes)
+
+Drobo 5N.
+
+**QNAP TBS series** (1 machines, 1 shapes)
+
+TBS-464.
+
+**QNAP TS series** (25 machines, 25 shapes)
+
+TS-133, TS-216G, TS-230, TS-231K, TS-233, TS-251A, TS-251D, TS-253D, TS-262, TS-264, TS-364, TS-410E, TS-431K, TS-431P3, TS-451D2, TS-453A, TS-453D, TS-462, TS-464, TS-473A, TS-664, TS-673A, TS-873A, TS-932PX, TS-h973AX.
+
+**QNAP TVS series** (3 machines, 3 shapes)
+
+TVS-872XT, TVS-h674, TVS-h874.
+
+**Synology DiskStation** (24 machines, 24 shapes)
+
+DS1019+, DS118, DS119j, DS120j, DS1520+, DS1618+, DS1621+, DS1621xs+, DS1819+, DS218, DS218+, DS218j, DS218play, DS220+, DS220j, DS2419+, DS418, DS418j, DS420+, DS420j, DS620slim, DS718+, DS720+, DS920+.
