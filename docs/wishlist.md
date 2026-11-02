@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2328 machines. 874 distinct shapes still to build. 1096 entries are already built: the 317 devices in this package, plus the real models those meshes cover. 1393 entries have a sourced size; the other 935 are `null` on purpose.**
+**2328 machines. 866 distinct shapes still to build. 1130 entries are already built: the 338 devices in this package, plus the real models those meshes cover. 1414 entries have a sourced size; the other 914 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -62,7 +62,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony | 1 | 1 | 0 |
 |  | Texas Instruments | 1 | 1 | 0 |
 |  | Yamaha | 1 | 1 | 0 |
-| **4** | **Apple** | **889** | **173** | **666** |
+| **4** | **Apple** | **889** | **165** | **687** |
 |  | Power Mac | 92 | 0 | 90 |
 |  | Performa | 71 | 0 | 71 |
 |  | MacBook Pro | 69 | 13 | 64 |
@@ -72,7 +72,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | iPad | 46 | 2 | 46 |
 |  | Display | 38 | 37 | 28 |
 |  | iPod | 37 | 6 | 27 |
-|  | Apple Watch | 36 | 8 | 0 |
+|  | Apple Watch | 36 | 0 | 21 |
 |  | MacBook Air | 28 | 5 | 12 |
 |  | Printer | 26 | 16 | 0 |
 |  | Keyboard | 25 | 23 | 0 |
@@ -191,7 +191,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | NeXT Printers | 2 | 2 | 0 |
 |  | NeXT Keyboards | 2 | 2 | 0 |
 |  | NeXT Boards | 1 | 1 | 0 |
-|  | **Total** | **2328** | **874** | **1393** |
+|  | **Total** | **2328** | **866** | **1414** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -889,7 +889,7 @@ TI-99/4A (1981).
 
 Yamaha CX5M (1984).
 
-### Phase 4: Apple (889 machines, 173 shapes to build)
+### Phase 4: Apple (889 machines, 165 shapes to build)
 
 **AirPods** (12 machines, 0 shapes)
 
@@ -907,9 +907,9 @@ AirTag (1st generation) (2021), AirTag (2nd generation) (2026).
 
 Apple TV (1st generation) (2007), Apple TV (2nd generation) (2010), Apple TV (3rd generation) (2012), Apple TV HD (2015), Apple TV 4K (1st generation) (2017) *built*, Apple TV 4K (2nd generation) (2021) *built*, Apple TV 4K (3rd generation) (2022).
 
-**Apple Watch** (36 machines, 8 shapes)
+**Apple Watch** (36 machines, 0 shapes)
 
-Apple Watch (1st generation) (38 mm) (2015), Apple Watch (1st generation) (42 mm) (2015), Apple Watch Series 1 (38 mm) (2016), Apple Watch Series 1 (42 mm) (2016), Apple Watch Series 2 (38 mm) (2016), Apple Watch Series 2 (42 mm) (2016), Apple Watch Series 3 (38 mm) (2017), Apple Watch Series 3 (42 mm) (2017), Apple Watch Series 4 (40 mm) (2018), Apple Watch Series 4 (44 mm) (2018), Apple Watch Series 5 (40 mm) (2019), Apple Watch Series 5 (44 mm) (2019), Apple Watch SE (40 mm) (2020), Apple Watch SE (44 mm) (2020), Apple Watch Series 6 (40 mm) (2020), Apple Watch Series 6 (44 mm) (2020), Apple Watch Series 7 (41 mm) (2021), Apple Watch Series 7 (45 mm) (2021), Apple Watch SE 2 (40 mm) (2022), Apple Watch SE 2 (44 mm) (2022), Apple Watch Series 8 (41 mm) (2022), Apple Watch Series 8 (45 mm) (2022), Apple Watch Ultra (49 mm) (2022), Apple Watch Series 9 (41 mm) (2023), Apple Watch Series 9 (45 mm) (2023), Apple Watch Ultra 2 (49 mm) (2023), Apple Watch Series 10 (42 mm) (2024), Apple Watch Series 10 (46 mm) (2024), Apple Watch SE 3 (40 mm) (2025), Apple Watch SE 3 (44 mm) (2025), Apple Watch Series 11 (42 mm) (2025), Apple Watch Series 11 (46 mm) (2025), Apple Watch Ultra 3 (49 mm) (2025), Apple Watch Series 12 (42 mm) (2026), Apple Watch Series 12 (46 mm) (2026), Apple Watch Ultra 4 (49 mm) (2026).
+Apple Watch (1st generation) (38 mm) (2015) *built*, Apple Watch (1st generation) (42 mm) (2015) *built*, Apple Watch Series 1 (38 mm) (2016) *built*, Apple Watch Series 1 (42 mm) (2016) *built*, Apple Watch Series 2 (38 mm) (2016) *built*, Apple Watch Series 2 (42 mm) (2016) *built*, Apple Watch Series 3 (38 mm) (2017) *built*, Apple Watch Series 3 (42 mm) (2017) *built*, Apple Watch Series 4 (40 mm) (2018) *built*, Apple Watch Series 4 (44 mm) (2018) *built*, Apple Watch Series 5 (40 mm) (2019) *built*, Apple Watch Series 5 (44 mm) (2019) *built*, Apple Watch SE (40 mm) (2020) *built*, Apple Watch SE (44 mm) (2020) *built*, Apple Watch Series 6 (40 mm) (2020) *built*, Apple Watch Series 6 (44 mm) (2020) *built*, Apple Watch Series 7 (41 mm) (2021) *built*, Apple Watch Series 7 (45 mm) (2021) *built*, Apple Watch SE 2 (40 mm) (2022), Apple Watch SE 2 (44 mm) (2022), Apple Watch Series 8 (41 mm) (2022) *built*, Apple Watch Series 8 (45 mm) (2022) *built*, Apple Watch Ultra (49 mm) (2022) *built*, Apple Watch Series 9 (41 mm) (2023) *built*, Apple Watch Series 9 (45 mm) (2023) *built*, Apple Watch Ultra 2 (49 mm) (2023) *built*, Apple Watch Series 10 (42 mm) (2024) *built*, Apple Watch Series 10 (46 mm) (2024) *built*, Apple Watch SE 3 (40 mm) (2025) *built*, Apple Watch SE 3 (44 mm) (2025) *built*, Apple Watch Series 11 (42 mm) (2025) *built*, Apple Watch Series 11 (46 mm) (2025) *built*, Apple Watch Ultra 3 (49 mm) (2025) *built*, Apple Watch Series 12 (42 mm) (2026) *built*, Apple Watch Series 12 (46 mm) (2026) *built*, Apple Watch Ultra 4 (49 mm) (2026) *built*.
 
 **Camera** (5 machines, 3 shapes)
 
