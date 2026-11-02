@@ -30,6 +30,7 @@ Importing the module defines `<hako-device>` and `<hako-lineup>`, and it imports
 | `fireflies` | Three little lights drifting round it |
 | `no-ground` | No pool of light under it |
 | `flipped` | Turned half a turn, its screen's picture too |
+| `body-colour` | `#rrggbb`: the body of the mesh in this colour, in the 3D view. A tint, not a drawing of that colour: [what colours a machine came in](assets.md#what-colours-a-machine-came-in) |
 
 ## What it says
 

@@ -1,5 +1,6 @@
 // The demo page: a device large, the part builder, a lineup to scale, the gallery by family and a live screen. Everything comes from the package's own entries.
 import { aliasesOf, catalogue, catalogueCounts, check, type CatalogueEntry, COVERED, deviceByKey, FAMILIES, groupLayout, groupSample, headingOf, meshOf, PARTS, partsOfKind, PRESETS, SHELVES, STYLE_NAMES, type Description, type Device, type Part, type StyleName } from "../src/index.ts";
+import { colourRow } from "./colours.ts";
 import { EMBED_KINDS, embedCode, type EmbedKind } from "../src/embed.ts";
 import { HakoDevice, setAssetBase } from "../src/element.ts";
 import { facetCounts, FACETS, facetOrder, type FacetId, matchesPicks, type Picks } from "../src/tags.ts";
@@ -54,7 +55,9 @@ hero.addEventListener("hako-fallback", () => bar.setAttribute("flat", ""));
 hero.addEventListener("hako-ready", () => bar.removeAttribute("flat"));
 function showHero(key: string) {
   heroKey = key;
+  hero.removeAttribute("body-colour");
   hero.setAttribute("key", key);
+  byId("hero-colours").replaceChildren(colourRow(hero, key));
   drawEmbed();
   for (const chip of chips.querySelectorAll("button")) chip.setAttribute("aria-pressed", String(chip.dataset.key === key));
 }
@@ -469,6 +472,7 @@ function openFromHash() {
     const facts = byId("dialog-facts");
     facts.replaceChildren();
     facts.append(el("dt", { textContent: "Id" }), el("dd", { textContent: part.id }), el("dt", { textContent: "Real size" }), el("dd", { textContent: `${part.size[0]} by ${part.size[1]} by ${part.size[2]} mm` }));
+    byId("dialog-colours").replaceChildren();
     byId("dialog-code").textContent = `<hako-device part="${part.id}"></hako-device>`;
     if (!dialog.open) dialog.showModal();
     return;
@@ -491,6 +495,7 @@ function openFromHash() {
   fact("Real size", entry.size ? `${entry.size[0]} by ${entry.size[1]} by ${entry.size[2]} mm` : "No real size: a stand-in");
   fact("Ports", entry.ports.map((port) => `${port.count} ${port.kind}`).join(", ") || "None");
   fact("Parts", JSON.stringify(entry.parts));
+  byId("dialog-colours").replaceChildren(colourRow(view, asked));
   byId("dialog-code").textContent = `<hako-device key="${asked}"></hako-device>`;
   if (!dialog.open) dialog.showModal();
 }

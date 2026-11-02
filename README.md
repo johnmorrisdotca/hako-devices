@@ -185,7 +185,20 @@ Every machine is also one static file, for a page or a script that wants the lis
 
 ## Groups and colours
 
-`groupLayout` and `groupSample` lay out a group's picture, a few of its machines in a bunch. `FINISHES` lists a machine's other colours, each a device of its own. See [docs/assets.md](docs/assets.md).
+`groupLayout` and `groupSample` lay out a group's picture, a few of its machines in a bunch. `FINISHES` lists a machine's other colours that have a drawing, each a device of its own. See [docs/assets.md](docs/assets.md).
+
+**What colours a machine came in** is in its own entry point, because the table is large: `coloursOf(key)` from `@johnmorrisdotca/hako-devices/colours` gives each colour's name in the maker's word, the pages that say so, a swatch that says how it is known, and the key of its drawing, or null when it has none. An empty list means nobody has checked that machine yet, not that it has no colours; a colour with no drawing is still listed. `<hako-device body-colour="#e8a0b4">` shows the colour on the body of the mesh, in the 3D view.
+
+```ts
+import { coloursOf, colouredKeys } from "@johnmorrisdotca/hako-devices/colours";
+
+coloursOf("imac-1998")[0].name; // "Bondi Blue"
+coloursOf("macbook-air-m2-2022").length; // 4
+coloursOf("macbook-air-m2-2022").find(({ name }) => name === "Silver")?.drawing; // "macbook-air-13-silver"
+coloursOf("macbook-air-m2-2022").find(({ name }) => name === "Starlight")?.drawing; // null
+coloursOf("a-machine-nobody-has").length; // 0
+colouredKeys().length > 300; // true
+```
 
 ## Coming soon
 

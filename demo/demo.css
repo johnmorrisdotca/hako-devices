@@ -115,3 +115,9 @@ select, input[type="text"], input[type="search"] { min-height: 2.5rem; padding: 
   .hero, .builder, .screen-demo { grid-template-columns: minmax(0, 1fr); }
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+.colour-chip { display: inline-flex; align-items: center; gap: 0.4rem; }
+.colour-chip small { color: var(--muted); font-size: 0.7rem; }
+.colour-chip[aria-pressed="true"] small { color: inherit; }
+.swatch { width: 0.9rem; height: 0.9rem; flex: none; border: 1px solid var(--line); border-radius: 50%; }
+.swatch-none { border-style: dashed; background: transparent; }
+.colour-note a { color: var(--accent); }

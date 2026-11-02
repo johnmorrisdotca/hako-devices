@@ -117,6 +117,8 @@ test("a word's swatch is only ever the plain word in the name", () => {
 
 test("the body of a mesh is its largest surface that can be one, and a colour is only ever #rrggbb", () => {
   assert.equal(bodyMaterial(new Map([["alu", 9], ["shell-blue", 12], ["front-glass", 40], ["led-power", 1]])), "shell-blue");
+  assert.equal(bodyMaterial(new Map([["plastic-white", 50], ["plastic-bondi", 10]])), "plastic-bondi");
+  assert.equal(bodyMaterial(new Map([["plastic-white", 50], ["alu", 10]])), "plastic-white");
   assert.equal(bodyMaterial(new Map([["front-glass", 40], ["pcb-green", 30]])), null);
   assert.equal(bodyMaterial(new Map()), null);
   assert.equal(bodyColourValue("#AABBCC"), "#aabbcc");

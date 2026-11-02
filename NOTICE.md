@@ -12,6 +12,8 @@ Product names appear only as plain descriptive words, in the catalogue, the part
 
 The published package carries the names of the machines (`src/wishlist.ts`), under which no shape is drawn, and their tags (`src/tag-data.ts`, the `./tags` entry): plain facts such as a CPU's name, how many cores and how much memory, read from the same pages and, for the operating system, wireless, weight, colour and the year a machine was discontinued, from each machine's own page: Apple's spec pages, Intel's Ark pages, Raspberry Pi's product briefs, the makers' pages for the iPhones, iPads and Galaxy Tabs, and Wikipedia's articles (CC BY-SA 4.0). The page of every such tag is named in `data/wishlist.json` (`tagSources`). This package's MIT licence covers its own work; whatever rights those sources hold in what they publish stay theirs.
 
+Its colours (`src/colour-data.ts`, the `./colours` entry) are the same kind of plain fact: the maker's name for a colour, and the page that says the machine came in it, from the makers' own pages (Apple, Microsoft), EveryMac and Wikipedia (CC BY-SA 4.0). A few swatch values are the colour boxes of a Wikipedia article, which `swatch.source` names; the words' chips and the rest are this package's own.
+
 ## What it uses
 
 The published package has no runtime dependency of its own. These are peer dependencies the caller installs, and tools used to build and test it; none of their code is copied into the package.

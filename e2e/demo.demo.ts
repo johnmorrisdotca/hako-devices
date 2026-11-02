@@ -560,3 +560,42 @@ test("the React wrapper draws the element", async ({ page }) => {
   await expect(device.locator("img")).toHaveAttribute("src", /pi4\.svg$/);
   expect(problems).toEqual([]);
 });
+
+test("a machine's colours: a drawn colour switches, one with none says so and tints the body or does nothing", async ({ page }) => {
+  await page.goto("/hako-devices/");
+  const hero = page.getByTestId("hero-device");
+  await expect(page.locator("#hero-colours").getByTestId("colour-note")).toContainText("nobody has checked");
+  await page.locator('#hero-chips button[data-key="macbook-pro-14"]').click();
+  const row = page.locator("#hero-colours").getByTestId("colour-row");
+  const chip = (name: string) => row.locator(`[data-colour="${name}"]`);
+  await expect(chip("Space Black")).toHaveAttribute("aria-pressed", "true");
+  await expect(chip("Space Gray")).toContainText("no drawing");
+  await expect(chip("Silver")).not.toContainText("no drawing");
+
+  await chip("Silver").click();
+  await expect(hero).toHaveAttribute("key", "macbook-pro-14-silver");
+  await expect(hero).not.toHaveAttribute("body-colour");
+  await expect(row.getByTestId("colour-note")).toContainText("has a drawing of its own");
+  await expect(row.getByRole("link", { name: "Where this comes from" })).toHaveAttribute("href", /support\.apple\.com/);
+
+  await chip("Space Gray").click();
+  await expect(hero).toHaveAttribute("key", "macbook-pro-14");
+  await expect(hero).toHaveAttribute("body-colour", /^#[0-9a-f]{6}$/);
+  await expect(row.getByTestId("colour-note")).toContainText("no drawing of its own");
+  await expect(row.getByTestId("colour-note")).toContainText("not the maker's paint");
+
+  await page.locator('#hero-chips button[data-key="pi5"]').click();
+  await expect(hero).not.toHaveAttribute("body-colour");
+  await expect(page.locator("#hero-colours").getByTestId("colour-note")).toContainText("nobody has checked");
+});
+
+test("a colour with no value says only its name, and a covered machine switches to its finish's mesh", async ({ page }) => {
+  await page.goto("/hako-devices/#macbook-air-m2-2022");
+  const box = page.locator("#dialog-colours");
+  await expect(box.locator('[data-colour="Midnight"]')).toHaveAttribute("aria-pressed", "true");
+  await box.locator('[data-colour="Starlight"]').click();
+  await expect(box.getByTestId("colour-note")).toContainText("only its name");
+  await expect(page.getByTestId("dialog-device")).not.toHaveAttribute("body-colour");
+  await box.locator('[data-colour="Silver"]').click();
+  await expect(page.getByTestId("dialog-device")).toHaveAttribute("key", "macbook-air-13-silver");
+});

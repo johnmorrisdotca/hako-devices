@@ -24,7 +24,7 @@ DEVICES.length > 50; // true
 
 ## Group pictures and colours
 
-`groupLayout(count)` says where each of a group's pictures goes, so they sit in a bunch with the first in front, and `groupSample(items)` picks a few that show the group's range. The demo's gallery opens on groups drawn this way. `FINISHES` lists a machine's other colours; each one is a device with its own key.
+`groupLayout(count)` says where each of a group's pictures goes, so they sit in a bunch with the first in front, and `groupSample(items)` picks a few that show the group's range. The demo's gallery opens on groups drawn this way. `FINISHES` lists a machine's other colours that have a drawing; each one is a device with its own key. Every colour a machine came in, drawn or not, is `coloursOf`.
 
 ```ts
 import { FINISHES, groupLayout, groupSample } from "@johnmorrisdotca/hako-devices";
@@ -33,6 +33,37 @@ groupLayout(3).length; // 3
 groupSample(["a", "b", "c", "d", "e", "f", "g"]).length; // 4
 FINISHES["macbook-pro-14"].length; // 2
 ```
+
+## What colours a machine came in
+
+`@johnmorrisdotca/hako-devices/colours` is its own entry point, because the table is large.
+
+| | |
+| --- | --- |
+| `coloursOf(key)` | The colours of a machine, drawn or planned. An empty list means nobody has checked it yet, never that it has no colours |
+| `colouredKeys()` | The machines somebody has checked |
+| `wordSwatch(name)` | The chip for a plain colour word in a name, or null |
+
+Each colour is `{ name, sources, swatch, drawing }`:
+
+- `name`: the maker's own word: `Bondi Blue`, `Space Black`, `Clearly White`.
+- `sources`: the pages that say this machine came in this colour.
+- `drawing`: the key of the device drawn in this colour, or null: it has no drawing of its own, and is still listed.
+- `swatch`: `{ value, from, source }` for a small chip, or null when nothing says what it looks like. `value` is `#rrggbb`. `from` says how it is known: `page` (a page gives this value; `source` is the page), `drawing` (the colour of this machine's drawing), `word` (only the plain colour word in the maker's name, such as the blue of "Sierra Blue": an approximation, not the maker's paint). A name with no plain word, such as "Midnight", has no swatch unless a page gives one.
+
+```ts
+import { coloursOf } from "@johnmorrisdotca/hako-devices/colours";
+
+const [bondi] = coloursOf("imac-1998");
+bondi.swatch?.value; // "#178a9c"
+bondi.swatch?.from; // "page"
+coloursOf("ipad-2").map(({ name }) => name).join(); // "Black,White"
+coloursOf("macbook-air-m2-2022").find(({ name }) => name === "Midnight")?.drawing; // "macbook-air-13"
+```
+
+**A colour on a mesh with no drawing of it.** A finish is the same shape with another shell material, so `<hako-device key="imac-24" body-colour="#e8a0b4">` does that one thing in the 3D view: the mesh's body material takes the colour (the largest surface in a colour of its own, else the largest plain one), and glass, lights, screens, keys and trim stay as drawn. It is a tint, not a drawing of that colour: a white phone's black front stays black. The flat drawing does not change. A device with no body, such as a bare board, ignores it, and anything but `#rrggbb` is ignored. It costs one frame and no new mesh.
+
+The facts live in `data/colours.json`, one row per line: `{ "keys": [...], "source": "https://...", "colours": ["Silver", { "name": "Midnight", "drawing": "macbook-air-13", "swatch": "#2d333b" }] }`. A colour may name its own `source`, and a `swatch` needs a `swatchSource` page or a `drawing`. Machines whose colours are still `tags.colour` in `data/wishlist.json` are read from there, and a machine is in one place only; `pnpm wishlist` refuses anything else. The `colour` tag of the filters says what this table says.
 
 ## Built or planned
 

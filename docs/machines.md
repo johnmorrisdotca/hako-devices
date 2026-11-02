@@ -42,6 +42,7 @@ Each machine:
 | `size` | Width, depth and height in millimetres, as `[w, d, h]`, for a drawn device whose size is published. `null` otherwise |
 | `ports` | A drawn device's ports as `{ "kind", "count" }`. Empty when it has none or is not drawn |
 | `tags` | What the machine is, as lists of values by facet: `maker`, `type`, `decade`, `discontinued`, `cpuMaker`, `cpu`, `cores`, `ram`, `os`, `screen`, `ports`, `wireless`, `weight`, `colour`, `generation`, `parts`. A fact with no source is absent, never guessed. See [tags](#tags) |
+| `colours` | The colours it came in, as `{ "name", "swatch", "drawing" }`: the maker's word, a chip as `{ "value", "from" }` or `null`, and the key of its drawing or `null`. Empty means nobody has checked. The pages are `coloursOf`'s, in [the colours entry](assets.md#what-colours-a-machine-came-in) |
 
 ## Tags
 
@@ -57,7 +58,7 @@ Each machine:
 | `ports`, `parts` | A drawn device's own ports and parts, or the ports a page lists |
 | `wireless` | `Wi-Fi`, `Bluetooth` or `Cellular`: every radio a page names for the machine, including a version with a SIM. An optional card is not counted |
 | `weight` | `Under 1 kg`, `1 to 3 kg`, `3 to 10 kg` or `Over 10 kg`; a page that gives several weights in different bands is left out |
-| `colour` | The finishes the maker gives it, in the maker's words: `Space Gray`, `Pink Gold`. Only for iPhones, iPads and Galaxy Tabs so far |
+| `colour` | The finishes the maker gives it, in the maker's words: `Space Gray`, `Pink Gold`. The same list as `colours` |
 
 **Every tag has a page.** In `data/wishlist.json` a machine's `tagSources` gives the pages for each kind, `{ "os": ["https://..."] }`. Brand, type and decade need none. A generation or a screen size may be read from the name (`iPad (3rd generation)`, `MacBook Pro (13-inch)`). Ports, screen and generation without `tagSources` rest on the machine's `tagsSource` or `dimensionsSource`. CPU, CPU maker, cores and memory do too, but their page must be about the machine itself (below). Operating system, wireless, weight, colour and discontinued year always need their own `tagSources`. `pnpm wishlist` and `pnpm test` fail on a tag with no source, on a source that is not a page address and on a kind the package does not know.
 
