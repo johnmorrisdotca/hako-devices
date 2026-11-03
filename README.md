@@ -1,3 +1,5 @@
+<p align="center"><a href="https://johnmorrisdotca.github.io/hako-devices/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/johnmorrisdotca/hako-devices/main/docs/images/thumbnail-dark.png"><img src="https://raw.githubusercontent.com/johnmorrisdotca/hako-devices/main/docs/images/thumbnail.png" alt="Hako Devices: a laptop, a Raspberry Pi with its touch screen, a two-bay NAS and an early compact Mac, in 3D." width="1200"></picture></a></p>
+
 <h1 align="center">Hako Devices <sub>箱</sub></h1>
 
 <p align="center"><strong>Line drawings and 3D views of computers, that you drop into a page and assemble from parts.</strong><br>
