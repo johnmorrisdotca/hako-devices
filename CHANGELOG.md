@@ -10,13 +10,12 @@ All notable changes to this project are written here. The format follows
 
 - Calculators, personal music, e-readers and headsets, as shelves. The first rows are machines whose pages were opened again: the HP-35, the Voyager models, the HP 48GX, both Curtas, the TI-83 family, the fx-82 and fx-82A, the Sharp EL-8, the Rio PMP300, both Nook 1st Edition models, the Oculus Rift CV1, and the IBM 5150. A size with no named axes is left blank.
 - The HP-12C, as a flat body. Its size on the list stays blank: the Voyager page's 128 by 79 by 15 mm names no axes, and the mesh uses that triple as a stand-in after a photograph. The underside is plain.
-- The HP-12C, as a flat body.
 - The HP-15C, HP-35, TI-83, TI-84 Plus, TI-30, Casio fx-82 and Curta Type I. A size a page does not name stays blank, and the mesh stand-in is in the note. The TI-84 Plus back has its battery door. The others have no back photograph, so the back is plain.
- Its size on the list stays blank: the Voyager page's 128 by 79 by 15 mm names no axes, and the mesh uses that triple as a stand-in after a photograph. The underside is plain.
 - The Game Boy Pocket, Game Boy Color, GameCube and the original 3DS. The Pocket, the GameCube and the closed 3DS use sizes already on the list. The Color has no listed size, so its mesh is a stand-in. The 3DS photograph is the open unit, so the screens are not drawn on the closed outside.
 - The Famicom, the NES, the Super Famicom and the North American SNES. The Famicom uses a named size from a collector page. The NES and the Super Famicom use Nintendo's unlabeled sizes as stand-ins, with the axes assigned after the photographs. The North American SNES has no size on the pages opened, so its mesh is a stand-in.
 - The Master System, the Mega Drive, the Game Gear and the Saturn. Sega names the Mega Drive's axes. The Game Gear's page names wide, high and deep. The Saturn manual names width, length and height. The Master System's page gives a size and names no axes, so that list size stays blank.
 - The four-switch Atari 2600, the four-port 5200, the 7800, the Lynx, the Jaguar, the Intellivision, the PC Engine and the TurboGrafx-16. The Jaguar page and a Japanese page name axes. The others stay blank on the list, and the note states the mesh. The 5200's stored triple was cleared because the article names no axes.
+- The original PlayStation, the original PlayStation 3, the PSP-1000, the Vita PCH-1000, the Xbox One and the Xbox Series S. The PlayStation 3, the PSP and the Vita use named sizes. The others stay blank, and the note states the mesh. The original Xbox and the Xbox 360 are not drawn: the 320 mm figure on the list is a table width, not a measurement, and no replacement size was opened. The Series X was already drawn.
 
 ### Fixed
 

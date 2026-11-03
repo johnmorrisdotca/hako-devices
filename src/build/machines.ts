@@ -500,6 +500,77 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     corner: 6,
     marks: [top("slot", 70, -8, 80, 26), front("slot", 80, 22, 16, 12), back("slot", -16, 24, 78, 18)],
   },
+  // Two pages give 270 by 60 by 188 mm. One calls them length, height and width. The list stays blank. The mesh uses 270 mm across the front, 188 mm deep and 60 mm tall after the photograph. Places are not measured. The controller is not part of the body.
+  "playstation-scph-1000": {
+    size: [270, 188, 60],
+    body: "plastic-grey",
+    corner: 6,
+    marks: [
+      top("dark", 16, -8, 110, 110, { round: true }),
+      top("key", -90, 10, 22, 22, { round: true }),
+      top("key", -90, 40, 12, 12, { round: true }),
+      top("key", 100, 20, 22, 22, { round: true }),
+      front("slot", -40, 18, 28, 10),
+      front("slot", 40, 18, 28, 10),
+    ],
+  },
+  // Wikipedia names width 325 mm, height 98 mm and depth 274 mm for the original. The curved shell is a box here. The disc slot, the front band and a row of rear ports follow the photographs. Places are not measured.
+  "playstation-3-original": {
+    size: [325, 274, 98],
+    body: "plastic-char",
+    corner: 8,
+    marks: [
+      front("slot", -20, 52, 160, 8),
+      front("panel", 0, 36, 220, 10),
+      front("dark", 0, 18, 240, 8),
+      back("slot", -80, 28, 14, 8),
+      back("slot", -40, 28, 18, 8),
+      back("slot", 10, 28, 14, 8),
+      back("slot", 50, 28, 16, 10),
+      back("key", 110, 30, 16, 22),
+    ],
+  },
+  // The article names height 74 mm, width 170 mm and depth 23 mm. A screen, a pad and face buttons, from a photograph. The back has a round door. Places are not measured. Printed names are not drawn.
+  "psp-psp-1000": {
+    size: [170, 23, 74],
+    body: "plastic-char",
+    corner: 8,
+    marks: [
+      front("lcd", 6, 46, 78, 44),
+      front("key", -62, 48, 8, 8, { round: true, cols: 3, rows: 3, gap: 1 }),
+      front("key", 62, 50, 8, 8, { round: true, cols: 3, rows: 3, gap: 1 }),
+      front("key", -62, 22, 10, 10, { round: true }),
+      back("dark", 0, 40, 52, 52, { round: true }),
+      back("panel", 48, 36, 36, 40),
+    ],
+  },
+  // The article names height 83.55 mm, width 182 mm and depth 18.6 mm for the PCH-1000. A screen, two sticks and buttons, from a photograph. No back photograph was opened, so the back is plain. Places are not measured.
+  "playstation-vita-pch-1000": {
+    size: [182, 18.6, 83.55],
+    body: "plastic-char",
+    corner: 8,
+    marks: [
+      front("lcd", 0, 46, 96, 52),
+      front("key", -68, 52, 16, 16, { round: true }),
+      front("key", 68, 40, 16, 16, { round: true }),
+      front("key", -68, 28, 8, 8, { round: true }),
+      front("key", 62, 62, 7, 7, { round: true, cols: 2, rows: 2, gap: 2 }),
+    ],
+  },
+  // The article gives 3.1 by 13.1 by 10.8 in and names no axes. The mesh uses 333 mm across, 274 mm deep and 79 mm tall: the photograph is a low wide slab, and 79 is the only figure short enough to be the height. The ribbed half of the top follows the photograph. Places are not measured.
+  "xbox-one": {
+    size: [333, 274, 79],
+    body: "plastic-char",
+    corner: 4,
+    marks: [top("dark", 80, 0, 140, 200), front("slot", -20, 28, 180, 6)],
+  },
+  // The article gives 15.1 by 6.5 by 27.5 cm and names no axes. The Series X on this list stands, and the photograph of the Series S is a tall thin tower, so the mesh uses 151 mm across, 65 mm deep and 275 mm tall. The list size stays blank. No back photograph was opened, so the back is plain.
+  "xbox-series-s": {
+    size: [151, 65, 275],
+    body: "plastic-white",
+    corner: 4,
+    marks: [front("dark", 0, 165, 112, 112, { round: true })],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };

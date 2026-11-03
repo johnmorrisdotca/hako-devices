@@ -248,6 +248,12 @@ export const DEVICES: readonly Device[] = [
   whole("intellivision", "Intellivision", "classics", [406, 229, 76], []),
   whole("pc-engine", "PC Engine", "classics", [140, 135, 40.4], []),
   whole("turbografx-16", "TurboGrafx-16", "classics", [305, 178, 76], []),
+  whole("playstation-scph-1000", "PlayStation (SCPH-1000)", "classics", [270, 188, 60], []),
+  whole("playstation-3-original", "PlayStation 3 (original)", "classics", [325, 274, 98], []),
+  whole("psp-psp-1000", "PSP (PSP-1000)", "classics", [170, 23, 74], []),
+  whole("playstation-vita-pch-1000", "PlayStation Vita (PCH-1000)", "classics", [182, 18.6, 83.55], []),
+  whole("xbox-one", "Xbox One", "classics", [333, 274, 79], []),
+  whole("xbox-series-s", "Xbox Series S", "classics", [151, 65, 275], []),
 
   whole("nintendo-64", "Nintendo 64", "classics", [260, 190, 73], ports({ power: 1 })),
   whole("game-boy-advance-agb-001", "Game Boy Advance (AGB-001)", "classics", [144.5, 24.5, 82], ports({ audio: 1 })),

@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2517 machines. 1027 distinct shapes still to build. 1158 entries are already built: the 366 devices in this package, plus the real models those meshes cover. 1473 entries have a sourced size; the other 1044 are `null` on purpose.**
+**2517 machines. 1021 distinct shapes still to build. 1164 entries are already built: the 372 devices in this package, plus the real models those meshes cover. 1470 entries have a sourced size; the other 1047 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -30,13 +30,13 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Atari | 1 | 1 | 0 |
 |  | Hewlett-Packard | 1 | 1 | 0 |
 |  | Casio | 1 | 1 | 0 |
-| **2** | **Game consoles** | **237** | **147** | **73** |
+| **2** | **Game consoles** | **237** | **141** | **70** |
 |  | Nintendo | 111 | 43 | 30 |
-|  | Sony | 27 | 23 | 24 |
+|  | Sony | 27 | 19 | 24 |
 |  | Sega | 22 | 17 | 6 |
 |  | Atari | 14 | 8 | 1 |
 |  | NEC | 13 | 9 | 1 |
-|  | Microsoft | 9 | 8 | 6 |
+|  | Microsoft | 9 | 6 | 3 |
 |  | SNK | 6 | 6 | 3 |
 |  | Magnavox | 4 | 4 | 0 |
 |  | Bandai | 3 | 3 | 2 |
@@ -279,7 +279,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2517** | **1027** | **1473** |
+|  | **Total** | **2517** | **1021** | **1470** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -657,7 +657,7 @@ Sony Ericsson W800 (2005), Sony Ericsson W810 (2006).
 
 Sony Ericsson Xperia X1 (2008), Sony Ericsson Xperia X10 (2010), Sony Ericsson Xperia Play (2011).
 
-### Phase 2: Game consoles (237 machines, 147 shapes to build)
+### Phase 2: Game consoles (237 machines, 141 shapes to build)
 
 **ASUS ROG Ally** (2 machines, 2 shapes)
 
@@ -751,13 +751,13 @@ Xbox (2001).
 
 Xbox 360 (original) (2005), Xbox 360 S (2010), Xbox 360 E (2013).
 
-**Microsoft Xbox One** (3 machines, 3 shapes)
+**Microsoft Xbox One** (3 machines, 2 shapes)
 
-Xbox One (2013), Xbox One S (2016), Xbox One X (2017).
+Xbox One (2013) *built*, Xbox One S (2016), Xbox One X (2017).
 
-**Microsoft Xbox Series** (2 machines, 1 shapes)
+**Microsoft Xbox Series** (2 machines, 0 shapes)
 
-Xbox Series S (2020), Xbox Series X (2020) *built*.
+Xbox Series S (2020) *built*, Xbox Series X (2020) *built*.
 
 **Milton Bradley Microvision** (1 machines, 1 shapes)
 
@@ -899,21 +899,21 @@ Mega-CD / Sega CD (model 1) (1991), Mega-CD / Sega CD (model 2) (1993), Multi-Me
 
 Sharp Nintendo Television (C1 NES TV) (1983), Sharp Twin Famicom (1986), Sharp Famicom Titler (1989).
 
-**Sony PSP** (5 machines, 4 shapes)
+**Sony PSP** (5 machines, 3 shapes)
 
-PSP (PSP-1000) (2004), PSP Slim & Lite (PSP-2000) (2007), PSP-3000 (2008), PSP Go (PSP-N1000) (2009), PSP Street (PSP-E1000) (2011).
+PSP (PSP-1000) (2004) *built*, PSP Slim & Lite (PSP-2000) (2007), PSP-3000 (2008), PSP Go (PSP-N1000) (2009), PSP Street (PSP-E1000) (2011).
 
-**Sony PlayStation** (4 machines, 4 shapes)
+**Sony PlayStation** (4 machines, 3 shapes)
 
-PlayStation (SCPH-1000) (1994), PocketStation (1999), PS one (SCPH-100) (2000), PlayStation Classic (2018).
+PlayStation (SCPH-1000) (1994) *built*, PocketStation (1999), PS one (SCPH-100) (2000), PlayStation Classic (2018).
 
 **Sony PlayStation 2** (3 machines, 2 shapes)
 
 PlayStation 2 (fat) (2000) *built*, PSX (DESR) (2003), PlayStation 2 Slim (2004).
 
-**Sony PlayStation 3** (3 machines, 3 shapes)
+**Sony PlayStation 3** (3 machines, 2 shapes)
 
-PlayStation 3 (original) (2006), PlayStation 3 Slim (2009), PlayStation 3 Super Slim (2012).
+PlayStation 3 (original) (2006) *built*, PlayStation 3 Slim (2009), PlayStation 3 Super Slim (2012).
 
 **Sony PlayStation 4** (3 machines, 2 shapes)
 
@@ -923,9 +923,9 @@ PlayStation 4 (original) (2013) *built*, PlayStation 4 Pro (2016), PlayStation 4
 
 PlayStation 5 (2020) *built*, PlayStation 5 Digital Edition (2020), PlayStation 5 Slim (2023), PlayStation 5 Slim Digital Edition (2023), PlayStation Portal (2023), PlayStation 5 Pro (2024).
 
-**Sony Vita** (3 machines, 3 shapes)
+**Sony Vita** (3 machines, 2 shapes)
 
-PlayStation Vita (PCH-1000) (2011), PlayStation TV (Vita TV) (2013), PlayStation Vita (PCH-2000) (2013).
+PlayStation Vita (PCH-1000) (2011) *built*, PlayStation TV (Vita TV) (2013), PlayStation Vita (PCH-2000) (2013).
 
 **Tapwave Zodiac** (1 machines, 1 shapes)
 
