@@ -18,8 +18,8 @@ import {
 } from "../scripts/family-thumbnail.mjs";
 
 const sha = (path: string) => createHash("sha256").update(readFileSync(path)).digest("hex");
-/** The hash of scripts/family-thumbnail.mjs, recorded each time the family changes it. */
-const HASH = "36ef086cc2a0144e3b0d7aa26177d1de085e4d8791f283a89a18e2cee5fb3613";
+/** The hash of scripts/family-thumbnail.mjs, recorded each time the family changes it. This copy has one line more than the master: the apple-touch-icon href is relative (icon.png), until the master says so too. */
+const HASH = "99ecc8f53d7c40f9fc6c4878286cb911b8fbe03c8d612934f5f109104f73e128";
 
 /** The bytes of a PNG header saying a size: enough for pngSize, not a picture. */
 const header = (width: number, height: number) => {

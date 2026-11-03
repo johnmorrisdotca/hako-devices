@@ -6,6 +6,14 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-11-03
+
+### Fixed
+
+- The demo's gallery listed the same kind of machine under several kinds: "Raspberry Pi" (2) beside "Single-board computers", "NeXT" beside "NeXT: every model", "Classic Macs" and "Desktops" beside "Apple", "Small PCs and towers" beside "Mini PCs", "Boards with hats and cases" and "Other small boards". The kinds were the drawn machines' groups and the list's shelves side by side, and one machine could be argued into either. They are now kinds of device, 16 of them in place of 31 (the "Raspberry Pi" kind is gone, and its two machines are single-board computers), and a machine's kind comes from its `type` tag, each type in one kind only. A maker is a filter (Brand) and a product line is the step inside a kind. A test fails when a type is in two kinds or a kind is a part of another. An address with an old kind (`?kind=apple`) opens on the first row.
+- A year on the list is rejected only when it is before 1900 or still in the future. The Curta Type I keeps 1948.
+- The demo's `apple-touch-icon` link is a relative address (`icon.png`). The absolute Pages address was blocked by the page's content security policy (`img-src 'self' data:`), which failed every test that watches the console. `og:image` and `twitter:image` stay absolute. A test holds it.
+
 ### Added
 
 - Calculators, personal music, e-readers and headsets, as shelves. The first rows are machines whose pages were opened again: the HP-35, the Voyager models, the HP 48GX, both Curtas, the TI-83 family, the fx-82 and fx-82A, the Sharp EL-8, the Rio PMP300, both Nook 1st Edition models, the Oculus Rift CV1, and the IBM 5150. A size with no named axes is left blank.
@@ -16,19 +24,6 @@ All notable changes to this project are written here. The format follows
 - The Master System, the Mega Drive, the Game Gear and the Saturn. Sega names the Mega Drive's axes. The Game Gear's page names wide, high and deep. The Saturn manual names width, length and height. The Master System's page gives a size and names no axes, so that list size stays blank.
 - The four-switch Atari 2600, the four-port 5200, the 7800, the Lynx, the Jaguar, the Intellivision, the PC Engine and the TurboGrafx-16. The Jaguar page and a Japanese page name axes. The others stay blank on the list, and the note states the mesh. The 5200's stored triple was cleared because the article names no axes.
 - The original PlayStation, the original PlayStation 3, the PSP-1000, the Vita PCH-1000, the Xbox One and the Xbox Series S. The PlayStation 3, the PSP and the Vita use named sizes. The others stay blank, and the note states the mesh. The original Xbox and the Xbox 360 are not drawn: the 320 mm figure on the list is a table width, not a measurement, and no replacement size was opened. The Series X was already drawn.
-
-### Fixed
-
-- A year on the list is rejected only when it is before 1900 or still in the future. The Curta Type I keeps 1948.
-
-## [0.16.0] - 2026-11-03
-
-### Fixed
-
-- The demo's gallery listed the same kind of machine under several kinds: "Raspberry Pi" (2) beside "Single-board computers", "NeXT" beside "NeXT: every model", "Classic Macs" and "Desktops" beside "Apple", "Small PCs and towers" beside "Mini PCs", "Boards with hats and cases" and "Other small boards". The kinds were the drawn machines' groups and the list's shelves side by side, and one machine could be argued into either. They are now kinds of device, 16 of them in place of 31 (the "Raspberry Pi" kind is gone, and its two machines are single-board computers), and a machine's kind comes from its `type` tag, each type in one kind only. A maker is a filter (Brand) and a product line is the step inside a kind. A test fails when a type is in two kinds or a kind is a part of another. An address with an old kind (`?kind=apple`) opens on the first row.
-
-### Added
-
 - The README opens with the package's thumbnail, and the demo carries it as its link preview (og:image) and publishes the card, a dark card and an icon on Pages at `thumbnail.png`, `thumbnail-dark.png` and `icon.png`.
 - `lineOf(key)` in `@johnmorrisdotca/hako-devices/tags`: the product line of a drawn device ("Power Mac", "iPhone"). `headingOf` takes just a shelf, a maker and a family.
 

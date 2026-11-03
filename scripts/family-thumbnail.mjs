@@ -89,7 +89,7 @@ export function thumbnailHead(pkg, { alt = defaultAlt(pkg) } = {}) {
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:image" content="${at.card}" />`,
     `<meta name="twitter:image:alt" content="${escapeHtml(alt)}" />`,
-    `<link rel="apple-touch-icon" href="${at.icon}" />`,
+    `<link rel="apple-touch-icon" href="icon.png" />`,
   ].join("\n    ");
 }
 
