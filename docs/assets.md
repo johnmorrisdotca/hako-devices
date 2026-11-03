@@ -76,7 +76,7 @@ meshOf("ipad-pro-11-inch-m4"); // "ipad-pro-11"
 catalogueCounts().total > 1000; // true
 ```
 
-Machines on the list carry a `shelf` (`SHELVES`: Apple, Microsoft, Raspberry Pi, Android phones and tablets, TV sticks and boxes, Other small boards, Mini PCs, Game consoles, Retro phones and PDAs, Retro home computers), a `maker` and a `family`, and `headingOf(entry)` names the family on its shelf ("Nintendo DS"). The demo's gallery groups them that way.
+Machines on the list carry a `shelf` (`SHELVES`: Apple, Microsoft, Raspberry Pi, Android phones and tablets, TV sticks and boxes, Other small boards, Mini PCs, Game consoles, Retro phones and PDAs, Retro home computers), a `maker` and a `family`, and `headingOf(entry)` names the family on its shelf ("Nintendo DS"). A shelf is a place on the list, not a kind of device: the demo's gallery sorts every machine by its `type` tag into one kind (a Raspberry Pi is a single-board computer, whichever shelf it is on), and the family inside a kind is its product line, from `headingOf` or, for a drawn device, `lineOf` in the tags entry.
 
 Every machine has tags, in `@johnmorrisdotca/hako-devices/tags`, its own entry point because the table is large: `FACETS` (brand, type, decade, CPU maker, CPU, cores, memory, operating system, screen, ports, wireless, weight, generation, parts), `tagsOf(key)`, `matchesPicks(key, picks)` and `facetCounts(keys, picks)`, with `facetOrder(facet, counts)` for reading them out. A fact with no source is absent, never guessed, so a CPU filter leaves out machines whose CPU nobody has sourced yet.
 

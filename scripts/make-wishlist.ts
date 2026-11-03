@@ -30,7 +30,8 @@ const colourList = data as unknown as ColourListRow[];
 const colourIssues = colourProblems(colourRows, colourList, new Set(DEVICES.map((device) => device.key)));
 if (colourIssues.length) throw new Error(`colours in data/colours.json:\n${colourIssues.slice(0, 40).join("\n")}${colourIssues.length > 40 ? `\n... and ${colourIssues.length - 40} more` : ""}`);
 const colours = readColours(colourRows, colourList);
-const { planned, covered } = readWishlist(data, new Set(DEVICES.map((device) => device.key)));
+const drawnKeys = new Set(DEVICES.map((device) => device.key));
+const { planned, covered } = readWishlist(data, drawnKeys);
 const lines = (list: readonly unknown[]) => list.map((entry) => `  ${JSON.stringify(entry)},`).join("\n");
 writeFileSync(
   join(root, "src", "wishlist.ts"),
@@ -76,6 +77,11 @@ ${Object.entries(readTags(data, colours)).map(([key, tags]) => `  ${JSON.stringi
 /** The year each machine came out. A machine with no sure year is not here. */
 export const YEAR_DATA: Readonly<Record<string, number>> = {
 ${Object.entries(readYears(data)).map(([key, year]) => `  ${JSON.stringify(key)}: ${year},`).join("\n")}
+};
+
+/** The product line of each drawn device ("Power Mac", "iPhone"), as the list gives it. A machine the list only covers or plans has its line on its row in wishlist.ts. */
+export const LINE_DATA: Readonly<Record<string, string>> = {
+${data.filter((entry) => drawnKeys.has(entry.key)).map((entry) => `  ${JSON.stringify(entry.key)}: ${JSON.stringify(entry.family)},`).join("\n")}
 };
 `,
 );

@@ -6,7 +6,20 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-11-03
+
+### Fixed
+
+- The demo's gallery listed the same kind of machine under several kinds: "Raspberry Pi" (2) beside "Single-board computers", "NeXT" beside "NeXT: every model", "Classic Macs" and "Desktops" beside "Apple", "Small PCs and towers" beside "Mini PCs", "Boards with hats and cases" and "Other small boards". The kinds were the drawn machines' groups and the list's shelves side by side, and one machine could be argued into either. They are now kinds of device, 16 of them in place of 31 (the "Raspberry Pi" kind is gone, and its two machines are single-board computers), and a machine's kind comes from its `type` tag, each type in one kind only. A maker is a filter (Brand) and a product line is the step inside a kind. A test fails when a type is in two kinds or a kind is a part of another. An address with an old kind (`?kind=apple`) opens on the first row.
+
+### Added
+
 - The README opens with the package's thumbnail, and the demo carries it as its link preview (og:image) and publishes the card, a dark card and an icon on Pages at `thumbnail.png`, `thumbnail-dark.png` and `icon.png`.
+- `lineOf(key)` in `@johnmorrisdotca/hako-devices/tags`: the product line of a drawn device ("Power Mac", "iPhone"). `headingOf` takes just a shelf, a maker and a family.
+
+### Changed
+
+- The MacBooks and the Compute Module 4 on its IO board are in the product lines "MacBook" and "Compute Module" in `data/wishlist.json` and `machines.json`, where they were "Generic".
 
 ## [0.15.0] - 2026-11-02
 

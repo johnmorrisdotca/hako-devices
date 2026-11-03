@@ -48,7 +48,7 @@ const kindRow = (page: Page, id: string) => page.locator(`[data-testid="gallery-
 const tileOf = (page: Page, key: string) => page.locator(`[data-testid="tile"][data-key="${key}"]`);
 const count = (page: Page) => page.locator('[data-testid="gallery-count"]');
 /** A small PC, and the family it sits in. */
-const PC = allItems().filter((item) => item.kind === "pcs" && item.family !== null)[3] as { key: string; family: string };
+const PC = allItems().filter((item) => item.kind === "mini-pcs" && item.status === "built" && item.family !== null)[3] as { key: string; family: string };
 
 test("the gallery opens on a few machines beside the kinds, one click from any kind's machines", async ({ page }) => {
   const problems = watch(page);
@@ -57,20 +57,26 @@ test("the gallery opens on a few machines beside the kinds, one click from any k
   expect(counts.total).toBeGreaterThan(1000);
   await expect(count(page)).toHaveText(`${counts.built} of ${counts.total} built`);
   await expect(page.locator('[data-testid="tile"]')).toHaveCount(10);
-  for (const family of ["pi-boards", "pi-dressed", "desktops", "laptops", "tablets-phones", "pcs", "nas", "classics", "clients", "parts"]) await expect(kindRow(page, family)).toBeAttached();
-  expect(await kindRow(page, "pi-boards").locator("img").count()).toBeGreaterThan(1);
-  await kindRow(page, "pi-boards").click();
-  await expect(tileOf(page, "rpi-zero")).toContainText("Raspberry Pi Zero");
+  for (const family of ["sbc", "mini-pcs", "desktops", "laptops", "tablets", "phones", "wearables", "audio", "tv", "consoles", "nas", "peripherals", "parts"]) await expect(kindRow(page, family)).toBeAttached();
+  expect(await kindRow(page, "sbc").locator("img").count()).toBeGreaterThan(1);
+  await kindRow(page, "sbc").click();
+  // every Raspberry Pi is a single-board computer: the list has no kind of its own for them, nor for a maker
+  await expect(kindRow(page, "raspberry-pi")).toHaveCount(0);
+  await expect(kindRow(page, "apple")).toHaveCount(0);
+  await page.locator('[data-testid="gallery-family"][data-family="Zero"]').click();
+  await expect(tileOf(page, "rpi-zero-v13")).toContainText("Raspberry Pi Zero v1.3");
+  await page.locator('[data-testid="gallery-family"][data-family="Model A and B"]').click();
+  await expect(tileOf(page, "rpi-2-model-b-v12")).toContainText("Raspberry Pi 2 Model B v1.2");
   await expect(tileOf(page, "nas-rack")).toHaveCount(0);
   await kindRow(page, "parts").click();
   await expect(page.locator('[data-testid="part-tile"]').first()).toBeVisible();
-  // every machine still to come is on a shelf
+  // every machine still to come is in a kind, and the kinds' counts add up to them
   await page.locator('[data-testid="filter-planned"]').click();
-  const shelved = await page.locator('[data-testid="gallery-card"][data-shelf]').evaluateAll((nodes) => nodes.filter((node) => !(node as HTMLElement).hidden).map((node) => Number((node as HTMLElement).dataset.count)));
-  expect(shelved.reduce((sum, one) => sum + one, 0)).toBe(counts.planned);
+  const planned = await page.locator('[data-testid="gallery-card"]:not([data-group="start"])').evaluateAll((nodes) => nodes.filter((node) => !(node as HTMLElement).hidden).map((node) => Number((node as HTMLElement).dataset.count)));
+  expect(planned.reduce((sum, one) => sum + one, 0)).toBe(counts.planned);
   const first = PLANNED.find((entry) => entry.shelf === "consoles" && entry.family === "DS") ?? PLANNED[0];
   const item = itemById(first.key);
-  await kindRow(page, first.shelf).click();
+  await kindRow(page, item?.kind ?? "").click();
   await page.locator(`[data-testid="gallery-family"][data-family="${item?.family}"]`).click();
   await expect(tileOf(page, first.key)).toContainText(first.name);
   await expect(tileOf(page, first.key)).toContainText("Coming soon");
@@ -135,10 +141,18 @@ test("every machine and part can be reached: a kind, a family, a machine", async
   expect(problems).toEqual([]);
 });
 
+test("an address from before the kinds were kinds of device opens on the first row", async ({ page }) => {
+  const problems = watch(page);
+  await page.goto(`${URL}?kind=apple&family=iMac`);
+  await expect(kindRow(page, "start")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator('[data-testid="tile"]')).toHaveCount(10);
+  expect(problems).toEqual([]);
+});
+
 test("a PC takes three clicks, and it and its options are on the screen together", async ({ page }) => {
   const problems = watch(page);
   await page.goto(URL);
-  await kindRow(page, "pcs").click();
+  await kindRow(page, "mini-pcs").click();
   await page.locator(`[data-testid="gallery-family"][data-family="${PC.family}"]`).click();
   const tower = page.locator(`[data-testid="tile"][data-key="${PC.key}"]`);
   const key = PC.key;
@@ -241,7 +255,7 @@ test.describe("on a desk", () => {
 test("only the one device on show is a live view: tiles and rows are drawings", async ({ page }) => {
   const problems = watch(page);
   await page.goto(URL);
-  await kindRow(page, "tablets-phones").click();
+  await kindRow(page, "tablets").click();
   const live = () => page.evaluate(() => ({ devices: document.querySelectorAll("hako-device").length, canvases: document.querySelectorAll("canvas").length, hero: document.getElementById("hero")?.shadowRoot?.querySelectorAll("canvas").length ?? 0 }));
   expect(await live()).toMatchObject({ devices: 1, canvases: 0 });
   // leaving the gallery gives the other views' devices a place, and coming back takes them away
@@ -258,17 +272,17 @@ test("only the one device on show is a live view: tiles and rows are drawings", 
 test("the address keeps the choice: reload and Back do what you expect", async ({ page }) => {
   const problems = watch(page);
   await page.goto(URL);
-  await kindRow(page, "pcs").click();
+  await kindRow(page, "mini-pcs").click();
   await page.locator(`[data-testid="gallery-family"][data-family="${PC.family}"]`).click();
   const key = PC.key;
   await page.locator(`[data-testid="tile"][data-key="${key}"]`).click();
-  await expect(page).toHaveURL(new RegExp(`kind=pcs.*family=.*#${key}$`));
+  await expect(page).toHaveURL(new RegExp(`kind=mini-pcs.*family=.*#${key}$`));
   const pressed = (node: string) => expect(page.locator(node)).toHaveAttribute("aria-pressed", "true");
   const hero = page.locator("hako-device#hero");
   await page.reload();
   await expect(hero).toHaveAttribute("key", key);
   await pressed(`[data-testid="tile"][data-key="${key}"]`);
-  await pressed('[data-testid="gallery-card"][data-group="pcs"]');
+  await pressed('[data-testid="gallery-card"][data-group="mini-pcs"]');
   await pressed(`[data-testid="gallery-family"][data-family="${PC.family}"]`);
   // a step along the row is a step back
   await page.goBack();
@@ -279,7 +293,7 @@ test("the address keeps the choice: reload and Back do what you expect", async (
   await page.goBack();
   await pressed('[data-testid="gallery-card"][data-group="start"]');
   await page.goForward();
-  await pressed('[data-testid="gallery-card"][data-group="pcs"]');
+  await pressed('[data-testid="gallery-card"][data-group="mini-pcs"]');
   // a machine's own address finds its kind and family by itself
   await page.goto(`${URL}#macbook-pro-14`);
   await pressed('[data-testid="gallery-card"][data-group="laptops"]');
@@ -316,7 +330,7 @@ test("the keyboard walks each row with the arrows, and each row is one Tab stop"
   const active = () => page.evaluate(() => { const node = document.activeElement as HTMLElement; return { group: node.dataset.group, key: node.dataset.key, family: node.dataset.family, testid: node.dataset.testid }; });
   await kindRow(page, "start").focus();
   await page.keyboard.press("ArrowDown");
-  expect((await active()).group).toBe("pi-boards");
+  expect((await active()).group).toBe("sbc");
   await page.keyboard.press("End");
   expect((await active()).group).toBe("parts");
   await page.keyboard.press("Home");
@@ -947,7 +961,7 @@ test("the filters offer operating system, wireless, weight, colour and discontin
 test("a tile opens one device large beside its facts; a part too", async ({ page }) => {
   const problems = watch(page);
   await page.goto(URL);
-  await kindRow(page, "pi-boards").click();
+  await kindRow(page, "sbc").click();
   await tileOf(page, "pi4").click();
   const hero = page.locator("hako-device#hero");
   await expect(hero).toHaveAttribute("key", "pi4");

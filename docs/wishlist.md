@@ -139,13 +139,15 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Surface Neo | 1 | 1 | 0 |
 | **6** | **What is built today** | **58** | **0** | **16** |
 |  | Raspberry Pi | 20 | 0 | 0 |
-|  | Generic | 9 | 0 | 4 |
 |  | Clients | 8 | 0 | 0 |
+|  | MacBook | 7 | 0 | 4 |
 |  | Mac | 5 | 0 | 5 |
 |  | iPad | 5 | 0 | 5 |
 |  | Small PC | 5 | 0 | 2 |
 |  | NAS | 5 | 0 | 0 |
 |  | iPhone | 1 | 0 | 0 |
+|  | Generic | 1 | 0 | 0 |
+|  | Compute Module | 1 | 0 | 0 |
 | **7** | **Raspberry Pi** | **19** | **11** | **3** |
 |  | Compute Module | 6 | 3 | 0 |
 |  | Model A and B | 4 | 3 | 1 |
@@ -1285,13 +1287,13 @@ Samsung SUR40 (PixelSense) (2011).
 
 ### Phase 6: What is built today (58 machines, 0 shapes to build)
 
-**Generic** (7 machines, 0 shapes)
-
-MacBook *built*, MacBook Air 13-inch *built*, MacBook Air 13-inch, silver *built*, MacBook Pro 14-inch *built*, MacBook Pro 14-inch, silver *built*, MacBook Pro 16-inch *built*, MacBook Pro 16-inch, black *built*.
-
 **Mac** (5 machines, 0 shapes)
 
 Mac Pro steel tower, 2023 *built*, Mac Studio: M1, M2, M3, M4 and M5, 2022 to 2026 *built*, Mac mini, flat and silver, two Thunderbolt: M1 and M2, 2020 to 2023 *built*, Mac mini, small: M4, M5 Pro and M6, 2024 on *built*, iMac 24-inch, four ports: M1, M3 and M4 *built*.
+
+**MacBook** (7 machines, 0 shapes)
+
+MacBook *built*, MacBook Air 13-inch *built*, MacBook Air 13-inch, silver *built*, MacBook Pro 14-inch *built*, MacBook Pro 14-inch, silver *built*, MacBook Pro 16-inch *built*, MacBook Pro 16-inch, black *built*.
 
 **iPad** (5 machines, 0 shapes)
 
@@ -1317,7 +1319,7 @@ Mini PC *built*, Small PC *built*, Small tower PC *built*.
 
 Intel NUC 12 Pro (slim) (2022) *built*, Intel NUC 12 Pro (tall) (2022) *built*.
 
-**Generic** (1 machines, 0 shapes)
+**Compute Module** (1 machines, 0 shapes)
 
 Compute Module 4 on its IO board *built*.
 

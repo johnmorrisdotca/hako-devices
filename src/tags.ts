@@ -1,7 +1,7 @@
 // Every machine's tags, and the filters they make: `@johnmorrisdotca/hako-devices/tags`. Within one facet a machine needs any of the values picked; across facets, all of them. The table is its own
 // entry point because it is large, and a page that only draws a device never loads it.
 import { deviceByKey } from "./catalogue.ts";
-import { TAG_DATA, YEAR_DATA } from "./tag-data.ts";
+import { LINE_DATA, TAG_DATA, YEAR_DATA } from "./tag-data.ts";
 
 export const FACETS = [
   { id: "maker", title: "Brand" },
@@ -65,6 +65,9 @@ export function facetCounts(keys: readonly string[], picks: Picks): Record<Facet
   }
   return counts;
 }
+
+/** The product line of a drawn device, such as "Power Mac" or "iPhone", or null for a key that is not a drawn device. The other machines carry theirs on their row of the list (`headingOf`). */
+export const lineOf = (key: string): string | null => LINE_DATA[key] ?? null;
 
 /** The year a machine came out, or null where no sure year is known. */
 export const yearOf = (key: string): number | null => YEAR_DATA[key] ?? null;

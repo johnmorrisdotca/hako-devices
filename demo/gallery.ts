@@ -63,13 +63,14 @@ export function createGallery(hooks: GalleryHooks) {
   /** The kind in use: the one chosen, else everything when something narrows it, else the home of the machine the address names, else the first row. */
   function kindNow(): string {
     const asked = address.get("kind");
-    if (asked) return asked;
+    // an address from before the kinds were kinds of device (`kind=apple`) names none now, and opens on the first row
+    if (asked) return KINDS.some((kind) => kind.id === asked) ? asked : START;
     if (narrowedNow()) return START;
     return namedId ? (itemById(namedId)?.kind ?? START) : START;
   }
   function familyNow(): string | null {
     const asked = address.get("family");
-    if (asked) return asked;
+    if (asked) return kindNow() === START && address.get("kind") ? null : asked;
     if (address.get("kind") || narrowedNow() || !namedId) return null;
     return itemById(namedId)?.family ?? null;
   }
@@ -113,7 +114,6 @@ export function createGallery(hooks: GalleryHooks) {
     for (const kind of KINDS) {
       const members = allItems().filter((item) => item.kind === kind.id);
       const node = kindRow(kind.id, kind.title, picturesOf(members));
-      if (kind.shelf) node.dataset.shelf = kind.shelf;
       rows.set(kind.id, node);
       railBox.append(node);
     }

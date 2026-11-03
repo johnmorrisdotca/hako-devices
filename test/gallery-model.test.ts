@@ -1,9 +1,9 @@
 // The demo's picker, with no page: every machine has one place, the kinds are the list's own and a search finds what the old one found.
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { allItems, countByKind, familiesOf, FEATURED, filtersOn, isNarrowed, itemById, KINDS, offeredItems, PARTS_KIND, pickedItems, readPicks, readYear, readYears, shelfKind, YEAR_FROM, YEAR_TO, yearHints, yearItems, yearsSet } from "../demo/gallery-model.ts";
+import { allItems, countByKind, familiesOf, FEATURED, filtersOn, isNarrowed, itemById, kindOf, KINDS, offeredItems, PARTS_KIND, pickedItems, readPicks, readYear, readYears, YEAR_FROM, YEAR_TO, yearHints, yearItems, yearsSet } from "../demo/gallery-model.ts";
 import { catalogue, PARTS } from "../src/index.ts";
-import { inYears, yearOf, yearSpan } from "../src/tags.ts";
+import { inYears, tagsOf, yearOf, yearSpan } from "../src/tags.ts";
 
 test("every machine and every loose part is one row, in a kind that exists", () => {
   const items = allItems();
@@ -18,9 +18,23 @@ test("every machine and every loose part is one row, in a kind that exists", () 
   assert.equal(itemById("no such thing"), undefined);
 });
 
-test("NeXT as a family and NeXT as a shelf are two kinds", () => {
-  assert.equal(shelfKind("next"), "next-shelf");
-  assert.equal(shelfKind("apple"), "apple");
+test("a machine's kind comes from what it is, whichever list it was written on", () => {
+  assert.equal(kindOf("pi4"), "sbc");
+  assert.equal(kindOf("rpi-zero"), "sbc");
+  assert.equal(kindOf("mac-studio"), "desktops");
+  assert.equal(kindOf("nextcube-turbo"), "desktops");
+  assert.equal(kindOf("macbook-pro-14"), "laptops");
+  assert.throws(() => kindOf("pi4-no-such-thing"), /no kind holds that type/);
+});
+
+test("a kind is named for a kind of device: none stands for a maker or a product line", () => {
+  const makers = new Set(allItems().flatMap((item) => (item.part ? [] : (tagsOf(item.key).maker ?? []))));
+  for (const kind of KINDS) {
+    for (const maker of makers) assert.ok(!kind.title.toLowerCase().includes(maker.toLowerCase()), `${kind.title} is named for ${maker}`);
+    assert.equal(new Set(kind.types).size, kind.types.length, `${kind.id} lists a type twice`);
+  }
+  const types = KINDS.flatMap((kind) => kind.types);
+  assert.equal(new Set(types).size, types.length, "a type is named by two kinds");
 });
 
 test("the first row's machines are all drawn ones", () => {
