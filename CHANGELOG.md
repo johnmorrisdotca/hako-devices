@@ -10,6 +10,10 @@ All notable changes to this project are written here. The format follows
 
 - The Sony Walkman TPS-L2 and the WM-2. Both stay blank on the list. The TPS-L2 stands window-forward, silver, with a blue door, a cassette window, an orange button and keys along the top. The WM-2 is the silver body with a cassette window and keys on the right. The WM-20 and the WM-DD are not drawn.
 
+### Changed
+
+- Galaxy S25, S25+ and S25 Ultra: the bottom edge has the microphone slot, the speaker and one small hole, measured from the accessory drawing's bottom view. The USB port's middle was measured and stays at the centre. The Ultra also has the short opening at the left of that edge.
+
 ## [0.17.0] - 2026-11-05
 
 ### Added
