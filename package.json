@@ -158,7 +158,10 @@
     "screenshots": "pnpm site && node scripts/screenshots.ts",
     "wishlist": "node scripts/make-wishlist.ts",
     "family:readme": "node scripts/family-readme.mjs",
-    "machines": "node scripts/make-machines.ts"
+    "machines": "node scripts/make-machines.ts",
+    "docs:site": "pnpm build && node scripts/docs-site.mjs build",
+    "docs:check": "pnpm build && node scripts/docs-site.mjs check",
+    "size": "node scripts/docs-site.mjs size"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -182,6 +185,8 @@
     "@types/three": "0.186.0",
     "esbuild": "^0.25.0",
     "eslint": "^9.0.0",
+    "marked": "^18.1.3",
+    "pagefind": "^1.6.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "three": "0.186.1",
