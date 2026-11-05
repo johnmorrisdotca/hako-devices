@@ -14,7 +14,7 @@ All notable changes to this project are written here. The format follows
 ### Changed
 
 - Galaxy S25, S25+ and S25 Ultra: the bottom edge has the microphone slot, the speaker and one small hole, measured from the accessory drawing's bottom view. The USB port's middle was measured and stays at the centre. The Ultra also has the short opening at the left of that edge.
-- Galaxy S24, S24+ and S24 Ultra: the published outer sizes are on the list. Samsung's accessory page no longer has an S24 drawing, so the cameras and buttons are not drawn.
+- Galaxy S24, S24+ and S24 Ultra: the published outer sizes are on the list. Samsung's accessory page no longer has an S24 drawing, and the picture on the S24 page is tilted, so the cameras and buttons are not drawn.
 - Pixel 9, 9 Pro, 9 Pro XL, 9 Pro Fold, Pixel 8, 8 Pro and 8a: the published outer sizes are on the list. The Fold's size is the folded phone. Google publishes no accessory drawing. The store and blog pictures are tilted, cropped or held in a hand, and the Pixel 9 help-page diagram is not to scale (about 76 mm wide against 72 mm), so nothing is drawn.
 - motorola razr and razr+ (2025): the published closed sizes are on the list, and the open sizes are in the notes. The 2025 razr page now shows the 2026 phone, so the cameras and buttons are not drawn.
 - Nokia 5.4, C20, C22, C32, G10, G20, G22, G50, X30, XR20 and XR21: the published outer sizes are on the list, from HMD's spec pages. Those pages have no scaled drawing, so the cameras and buttons are not drawn. The G42, G60 and G21 pages did not answer.
