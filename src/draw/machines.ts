@@ -13,6 +13,7 @@ const STYLE: Readonly<Record<Exclude<MarkKind, "light">, ShapeStyle>> = { screen
 const PAINT: Readonly<Record<string, ShapeStyle>> = {
   "shell-orange": { fill: "#c9652c", stroke: "#8fa1b8", sw: 0.6 },
   "shell-silver": { fill: "#d5d8dc", stroke: "#8fa1b8", sw: 0.5 },
+  "brushed-silver": { fill: "#c5c8cc", stroke: "#8fa1b8", sw: 0.5 },
   alu: { fill: "#c9cdd3", stroke: "#8fa1b8", sw: 0.5 },
   "alu-dark": { fill: "#6a6e76", stroke: "#8fa1b8", sw: 0.5 },
   "plastic-grey": { fill: "#5c6370", stroke: "#8fa1b8", sw: 0.5 },
@@ -24,6 +25,8 @@ const PAINT: Readonly<Record<string, ShapeStyle>> = {
   "plastic-blue": { fill: "#3f6fb0", stroke: "#8fa1b8", sw: 0.5 },
   clear: { fill: "#d5e4ef", stroke: "#8fa1b8", sw: 0.4 },
   bezel: { fill: "#14161c", stroke: "#8fa1b8", sw: 0.4 },
+  "screen-glass": { fill: "#1a1e18", stroke: "#8fa1b8", sw: 0.4 },
+  "shell-blue": { fill: "#7f9fc4", stroke: "#8fa1b8", sw: 0.5 },
 };
 const BLUE: SolidStyle = { top: "#7aa0cc", front: "#3f6fb0", side: "#2c4f86", sw: 1.3 };
 
@@ -57,7 +60,7 @@ function drawFlip(d: Drawing, spec: MachineSpec) {
   const lowerT = spec.half ?? depth * 0.5;
   const lidT = spec.lidThick ?? lowerT;
   const radius = Math.min(spec.corner, w / 2 - 0.4, (hinge - gap) / 2 - 0.2);
-  const style = spec.body === "shell-silver" ? METAL : undefined;
+  const style = spec.body === "shell-silver" || spec.body === "brushed-silver" ? METAL : undefined;
   d.rounded(0, 0, w, lowerT, radius, 0, hinge - gap, style, 4);
   if (spec.chin) d.rounded(0, 0.5, w * 0.94, lowerT + 2.4, Math.min(3, spec.chin / 2 - 0.3), 0, spec.chin, style, 3);
   d.cylinder(0, 0, Math.min(lowerT, lidT) * 0.42, hinge - 1.1, hinge + 1.1, style, 12);

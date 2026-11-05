@@ -1,6 +1,6 @@
 // Well-known machines, each one body with marks on its front and top: one description for its mesh and its drawing, placed from its published size. Plain geometry: no mark or logo.
 import * as THREE from "three";
-import { type Box, box, cyl, type Material, rbox, roundedSquare, torus, tube, type Vec3 } from "./kit.ts";
+import { type Box, box, cyl, type Material, plate, rbox, roundedSquare, torus, tube, type Vec3 } from "./kit.ts";
 
 export type MarkKind = "screen" | "lcd" | "dark" | "panel" | "slot" | "key" | "light";
 
@@ -686,7 +686,7 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
   // The article gives 53 x 98 x 13 mm and names no axes, so the list size stays blank. John reads the 53 mm as the width and the thickness as about 14 mm closed, so each half is about 7 mm. The open phone is about 160 mm tall, from the photograph's width-to-height once the width is 53 mm. Two thin silver halves, the lid leaned back 15 degrees. A thin earpiece slot, a screen with an even border, one etched keypad plate, a round nav ring, and a chin. No mark.
   "razr-v3": {
     size: [53, 13.9, 160],
-    body: "shell-silver",
+    body: "brushed-silver",
     corner: 4,
     shape: "flip",
     hinge: 78,
@@ -718,15 +718,15 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     body: "plastic-char",
     corner: 16,
     shape: "shell",
-    waist: 3.5,
+    waist: 2,
     marks: [
       front("panel", 0, 92, 40, 58, { material: "shell-silver", out: 0.2 }),
       front("slot", -5, 112, 7, 1.3, { out: 0.9 }),
       front("slot", -5, 108.5, 7, 1.3, { out: 0.9 }),
-      front("lcd", 0.9, 90, 34, 22, { material: "pale-glass", out: 0.45 }),
-      front("lcd", 0.9, 90, 22, 17, { material: "black-glass", out: 0.85 }),
-      front("key", -16, 56, 8, 7, { material: "plastic-white", out: 1.3 }),
-      front("key", 1, 56, 20, 9, { material: "plastic-blue", out: 1.35 }),
+      front("panel", 0.9, 90, 32, 24, { material: "bezel", out: 0.35 }),
+      front("lcd", 0.9, 90, 26, 20, { material: "screen-glass", out: 0.6 }),
+      front("key", -18, 56, 8, 7, { material: "plastic-white", out: 1.2 }),
+      front("key", 2, 55, 28, 8, { material: "shell-blue", out: 1.15 }),
       front("key", 16, 56, 7, 12, { material: "plastic-grey", out: 1.25 }),
       front("key", 0, 29.3, 12, 6.5, { cols: 3, rows: 4, gap: 2.4, material: "plastic-white", out: 0.85 }),
     ],
@@ -798,6 +798,7 @@ function faceMarks(m: Box, marks: readonly Mark[], yOf: (y: number) => number, t
       const pill = mark.kind === "key" && !mark.round && mark.h > 2 && mark.w > mark.h * 1.3;
       if (mark.round && mark.w >= 12) m.add(tone, torus(mark.w / 2 - 1.2, 0.9, 28, 8), at);
       else if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 20), at, [90, 0, 0]);
+      else if (pill && (tone === "alu" || tone === "brushed-silver" || tone === "shell-silver")) m.add(tone, plate(mark.w, mark.h, 0.55, 0.12, 0.2), at);
       else if (pill) m.add(tone, cyl(mark.h / 2, thin, 16), at, [90, 0, 0], { scale: [mark.w / mark.h, 1, 1] });
       else m.add(tone, box(mark.w, mark.h, thin), at);
     });
