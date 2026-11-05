@@ -20,6 +20,7 @@ All notable changes to this project are written here. The format follows
 - `pnpm test:usage` builds every example against the package as npm packs it and opens the page. CI runs that too.
 - The demo's "Put this on your site" is the family's embed panel. The five ways are still there (the custom element, an iframe, a module, the SVG and a data address), with Copy, the note about the embed page, Open the embed page and Read the docs.
 - The demo uses the family's shared header and footer: the language picker, the theme switch, and the list of the other packages. This package is on that list. Those controls use the demo's night colours. The section tabs sit in the same gutter as the title.
+- The DynaTAC 8000X. RigPix names a width, a height and a depth, without the antenna. The photograph shows the face wider than that width, so the list size stays blank. The mesh is the cream brick with a black face, a drawn antenna, a red window and two key blocks. The StarTAC and the RAZR V3 are not drawn: the photographs opened are the open phones, and a closed pink RAZR marked as a zoom camera was not used.
 
 ## [0.18.0] - 2026-11-05
 
