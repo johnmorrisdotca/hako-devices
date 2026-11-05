@@ -2,10 +2,10 @@
 title: 埋め込みページの iframe
 section: how-to
 order: 7
-description: サイト自身が要素を動かせないときは、埋め込みページを枠に入れます。
+description: サイト側で要素を動かせないときは、埋め込みページを iframe で表示します。
 ---
 
-スクリプトを動かせないサイトでも、機械は見せられます。埋め込みページは、アドレスが名指ししたものを描きます。下のファイルは `examples/iframe.html` そのものです。
+スクリプトを実行できないサイトでも、機器を表示できます。埋め込みページは、URL で指定された機器を描画します。下のコードは `examples/iframe.html` と同じ内容です。
 
 ```html
 <!doctype html>

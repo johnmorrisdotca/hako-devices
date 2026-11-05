@@ -2,10 +2,10 @@
 title: Vue
 section: how-to
 order: 4
-description: Vue で要素をカスタム要素として使い、ビルドして開くページにします。
+description: Vue でカスタム要素として使い、ビルドして開けるページを作ります。
 ---
 
-Vue は、そのタグがカスタム要素だと教えれば `<hako-device>` を描画できます。コンポーネントはページに載ってから要素をインポートするので、サーバーでの描画では読み込みません。下のファイルは `examples/vue/` にあるものと同じ文です。
+Vue にタグがカスタム要素だと伝えると、`<hako-device>` を描画できます。コンポーネントは、ページにマウントされてから要素をインポートします。そのため、サーバーでの描画では読み込まれません。下のファイルは `examples/vue/` にあるものと同じ内容です。
 
 ## コンポーネント
 
@@ -50,7 +50,7 @@ import DeviceView from "./DeviceView.vue";
 createApp(DeviceView).mount("#app");
 ```
 
-## タグが要素だと Vue に伝える
+## タグがカスタム要素だと Vue に伝える
 
 ```ts
 import vue from "@vitejs/plugin-vue";

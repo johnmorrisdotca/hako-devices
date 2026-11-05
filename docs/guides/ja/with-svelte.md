@@ -2,10 +2,10 @@
 title: Svelte
 section: how-to
 order: 5
-description: Svelte で要素を使い、ビルドして開くページにします。
+description: Svelte で要素を使い、ビルドして開けるページを作ります。
 ---
 
-Svelte は `device` 属性をそのまま渡します。`onMount` はサーバーでは走らないので、インポートはブラウザーを待ちます。下のファイルは `examples/svelte/` にあるものと同じ文です。
+Svelte は `device` 属性をそのまま要素に渡します。`onMount` はサーバーでは実行されないので、インポートはブラウザーで実行されたときに行われます。下のファイルは `examples/svelte/` にあるものと同じ内容です。
 
 ```html
 <script lang="ts">

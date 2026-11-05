@@ -2,10 +2,10 @@
 title: Vite と webpack
 section: how-to
 order: 3
-description: CDN を使わず、Vite または webpack で要素をまとめます。
+description: CDN を使わず、Vite または webpack で要素をバンドルします。
 ---
 
-パッケージと three.js をインストールします（`npm install @johnmorrisdotca/hako-devices three`）。要素は一度だけインポートします。線画だけを出すページは three.js を読み込みません。下の各ファイルは `examples/` にあるものと同じ文です。
+パッケージと three.js をインストールします（`npm install @johnmorrisdotca/hako-devices three`）。要素のインポートは一度だけです。線画だけを表示するページでは、three.js は読み込まれません。下の各ファイルは `examples/` にあるものと同じ内容です。
 
 ## Vite
 
@@ -34,7 +34,7 @@ if (device) device.setAttribute("print", deviceByKey("pi4")?.name ?? "");
 
 ## webpack
 
-同じインポートが webpack 5 でも動きます。設定はこれで全部です。
+同じインポートは webpack 5 でも使えます。設定はこれだけです。
 
 ```js
 import "@johnmorrisdotca/hako-devices/element";
