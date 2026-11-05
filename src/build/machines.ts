@@ -774,6 +774,28 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 35, 62, 2, 12, { material: "plastic-black", out: 0.3 }),
     ],
   },
+  // The article's axes are already on the list: 60 mm across, 13.9 mm thick, 109 mm tall. A black body, a screen, a green key, a square pad, a red key and four rows. The rows are straight. No word.
+  "curve-8520": {
+    size: [60, 13.9, 109],
+    body: "plastic-black",
+    corner: 12,
+    shape: "shell",
+    marks: [
+      front("slot", 0, 102, 14, 1.4, { material: "alu-dark", out: 0.4 }),
+      front("screen", 0, 76, 50, 42, { out: 0.35 }),
+      front("key", -20, 48, 7, 4, { material: "pcb-green", out: 0.45 }),
+      front("panel", 0, 48, 11, 11, { material: "alu", out: 0.3 }),
+      front("key", 0, 48, 7, 7, { material: "plastic-char", out: 0.55 }),
+      front("key", 14, 48, 6, 3.2, { material: "alu-dark", out: 0.45 }),
+      front("key", 23, 48, 6, 6, { round: true, material: "lid-red", out: 0.5 }),
+      front("key", 0, 37, 4.6, 4, { cols: 10, rows: 1, gap: 0.6, material: "plastic-grey", out: 0.4 }),
+      front("key", 0, 31, 4.6, 4, { cols: 10, rows: 1, gap: 0.6, material: "plastic-grey", out: 0.4 }),
+      front("key", 0, 25, 4.6, 4, { cols: 10, rows: 1, gap: 0.6, material: "plastic-grey", out: 0.4 }),
+      front("key", -20, 18, 9, 4.2, { material: "plastic-grey", out: 0.4 }),
+      front("key", 1, 18, 22, 4.4, { material: "plastic-grey", out: 0.4 }),
+      front("key", 20, 18, 9, 4.2, { material: "plastic-grey", out: 0.4 }),
+    ],
+  },
   // The article's axes are already on the list. The shell is 43.9 mm across and 132 mm tall, from a straight-on photograph scaled so the shell's long side is 132 mm. A stub antenna of 18 mm stands on the top right. The cover is blue. A screen window, a long centre key and pale number keys. No word.
   "nokia-5110": {
     size: [43.9, 31, 132],

@@ -846,7 +846,6 @@ export const PLANNED: readonly PlannedDevice[] = [
   {"key":"blackberry-curve-8300","name":"BlackBerry Curve 8300","family":"Curve","shelf":"phones","maker":"BlackBerry","status":"planned"},
   {"key":"blackberry-curve-8310","name":"BlackBerry Curve 8310","family":"Curve","shelf":"phones","maker":"BlackBerry","status":"planned"},
   {"key":"blackberry-curve-8320","name":"BlackBerry Curve 8320","family":"Curve","shelf":"phones","maker":"BlackBerry","status":"planned"},
-  {"key":"blackberry-curve-8520","name":"BlackBerry Curve 8520","family":"Curve","shelf":"phones","maker":"BlackBerry","status":"planned"},
   {"key":"blackberry-curve-8900","name":"BlackBerry Curve 8900","family":"Curve","shelf":"phones","maker":"BlackBerry","status":"planned"},
   {"key":"blackberry-950","name":"BlackBerry 950","family":"Pager","shelf":"phones","maker":"BlackBerry","status":"planned"},
   {"key":"blackberry-850","name":"BlackBerry 850","family":"Pager","shelf":"phones","maker":"BlackBerry","status":"planned"},
