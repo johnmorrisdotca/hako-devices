@@ -879,7 +879,6 @@ export const PLANNED: readonly PlannedDevice[] = [
   {"key":"treo-300","name":"Treo 300","family":"Treo","shelf":"phones","maker":"Handspring","status":"planned"},
   {"key":"treo-90","name":"Treo 90","family":"Treo","shelf":"phones","maker":"Handspring","status":"planned"},
   {"key":"visor","name":"Visor","family":"Visor","shelf":"phones","maker":"Handspring","status":"planned"},
-  {"key":"visor-deluxe","name":"Visor Deluxe","family":"Visor","shelf":"phones","maker":"Handspring","status":"planned"},
   {"key":"visor-solo","name":"Visor Solo","family":"Visor","shelf":"phones","maker":"Handspring","status":"planned"},
   {"key":"visor-platinum","name":"Visor Platinum","family":"Visor","shelf":"phones","maker":"Handspring","status":"planned"},
   {"key":"visor-prism","name":"Visor Prism","family":"Visor","shelf":"phones","maker":"Handspring","status":"planned"},

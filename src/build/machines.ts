@@ -125,6 +125,25 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 26, 17, 8, 8, { round: true, material: "plastic-grey", out: 0.4 }),
     ],
   },
+  // The list already assigns the axes. A nearly straight photograph of the black one, a little high. A dark slab, ribbed edges, a green-grey screen, four round keys and a wider centre key. No word.
+  "visor-deluxe": {
+    size: [76.2, 17.8, 121.9],
+    body: "plastic-black",
+    corner: 8,
+    shape: "shell",
+    marks: [
+      front("slot", -35, 80, 1, 62, { cols: 3, rows: 1, gap: 1, material: "plastic-char", out: 0.35 }),
+      front("slot", 35, 80, 1, 62, { cols: 3, rows: 1, gap: 1, material: "plastic-char", out: 0.35 }),
+      front("screen", 0, 80, 60, 72, { material: "lcd-grey", out: 0.3 }),
+      front("slot", 0, 50, 56, 0.7, { material: "plastic-char", out: 0.45 }),
+      front("light", -32, 26, 3, 3, { round: true, material: "pcb-green", out: 0.5 }),
+      front("key", -26, 18, 8, 8, { round: true, material: "alu", out: 0.45 }),
+      front("key", -14, 18, 8, 8, { round: true, material: "alu", out: 0.45 }),
+      front("key", 0, 18, 12, 7, { material: "alu", out: 0.45 }),
+      front("key", 14, 18, 8, 8, { round: true, material: "alu", out: 0.45 }),
+      front("key", 26, 18, 8, 8, { round: true, material: "alu", out: 0.45 }),
+    ],
+  },
   "wii-rvl-001": {
     size: [157, 197, 60],
     body: "plastic-white",

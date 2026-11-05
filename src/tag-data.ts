@@ -4804,6 +4804,7 @@ export const YEAR_DATA: Readonly<Record<string, number>> = {
 export const LINE_DATA: Readonly<Record<string, string>> = {
   "bold-9900": "Bold",
   "curve-8520": "Curve",
+  "visor-deluxe": "Visor",
   "dynatac-8000x": "DynaTAC",
   "razr-v3": "RAZR",
   "razr-v3-shut": "RAZR",

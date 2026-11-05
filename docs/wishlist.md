@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2536 machines. 1023 distinct shapes still to build. 1181 entries are already built: the 389 devices in this package, plus the real models those meshes cover. 1495 entries have a sourced size; the other 1041 are `null` on purpose.**
+**2536 machines. 1022 distinct shapes still to build. 1182 entries are already built: the 390 devices in this package, plus the real models those meshes cover. 1495 entries have a sourced size; the other 1041 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -10,12 +10,12 @@ The shape count is the real work: a group of machines that share a body is one m
 
 | Phase | Group | Machines | Shapes to build | With a sourced size |
 |---|---|---:|---:|---:|
-| **1** | **Retro phones and PDAs** | **224** | **170** | **104** |
+| **1** | **Retro phones and PDAs** | **224** | **169** | **104** |
 |  | Nokia | 53 | 47 | 43 |
 |  | Palm | 48 | 31 | 15 |
 |  | BlackBerry | 32 | 18 | 10 |
 |  | Motorola | 15 | 10 | 6 |
-|  | Handspring | 13 | 7 | 3 |
+|  | Handspring | 13 | 6 | 3 |
 |  | Sony Ericsson | 13 | 12 | 13 |
 |  | Siemens | 11 | 11 | 4 |
 |  | Danger | 9 | 8 | 2 |
@@ -286,7 +286,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2536** | **1023** | **1495** |
+|  | **Total** | **2536** | **1022** | **1495** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -338,7 +338,7 @@ No open dataset of outer dimensions for consoles or old phones was found. One se
 
 ## The machines
 
-### Phase 1: Retro phones and PDAs (224 machines, 170 shapes to build)
+### Phase 1: Retro phones and PDAs (224 machines, 169 shapes to build)
 
 **Apple Newton** (8 machines, 4 shapes)
 
@@ -436,9 +436,9 @@ Ericsson T18 (1998), Ericsson T28 (1999), Ericsson T39 (2001).
 
 Treo 180 (2001), Treo 180g (2002), Treo 270 (2002), Treo 300 (2002), Treo 90 (2002).
 
-**Handspring Visor** (8 machines, 4 shapes)
+**Handspring Visor** (8 machines, 3 shapes)
 
-Visor (1999), Visor Deluxe (1999), Visor Solo (1999), Visor Platinum (2000), Visor Prism (2000), Visor Edge (2001), Visor Neo (2001), Visor Pro (2001).
+Visor (1999), Visor Deluxe (1999) *built*, Visor Solo (1999), Visor Platinum (2000), Visor Prism (2000), Visor Edge (2001), Visor Neo (2001), Visor Pro (2001).
 
 **Hewlett-Packard Palmtop PC** (1 machines, 1 shapes)
 
