@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2535 machines. 1033 distinct shapes still to build. 1170 entries are already built: the 378 devices in this package, plus the real models those meshes cover. 1497 entries have a sourced size; the other 1038 are `null` on purpose.**
+**2535 machines. 1031 distinct shapes still to build. 1172 entries are already built: the 380 devices in this package, plus the real models those meshes cover. 1495 entries have a sourced size; the other 1040 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -10,8 +10,8 @@ The shape count is the real work: a group of machines that share a body is one m
 
 | Phase | Group | Machines | Shapes to build | With a sourced size |
 |---|---|---:|---:|---:|
-| **1** | **Retro phones and PDAs** | **223** | **178** | **106** |
-|  | Nokia | 53 | 49 | 43 |
+| **1** | **Retro phones and PDAs** | **223** | **176** | **104** |
+|  | Nokia | 53 | 47 | 41 |
 |  | Palm | 48 | 32 | 15 |
 |  | BlackBerry | 32 | 20 | 10 |
 |  | Motorola | 14 | 13 | 8 |
@@ -286,7 +286,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2535** | **1033** | **1497** |
+|  | **Total** | **2535** | **1031** | **1495** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -338,7 +338,7 @@ No open dataset of outer dimensions for consoles or old phones was found. One se
 
 ## The machines
 
-### Phase 1: Retro phones and PDAs (223 machines, 178 shapes to build)
+### Phase 1: Retro phones and PDAs (223 machines, 176 shapes to build)
 
 **Apple Newton** (8 machines, 4 shapes)
 
@@ -500,9 +500,9 @@ Timeport L7089 (1999).
 
 V70 (2002).
 
-**Nokia Candybar** (23 machines, 19 shapes)
+**Nokia Candybar** (23 machines, 17 shapes)
 
-Nokia 1011 (1992), Nokia 2110 (1994), Nokia 3110 (1997), Nokia 6110 (1997), Nokia 5110 (1998), Nokia 3210 (1999), Nokia 8210 (1999), Nokia 3310 (2000) *built*, Nokia 6210 (2000), Nokia 8250 (2000), Nokia 3330 (2001), Nokia 5210 (2001), Nokia 6310 (2001), Nokia 8310 (2001), Nokia 3510 (2002), Nokia 6310i (2002), Nokia 1100 (2003), Nokia 3650 (2003), Nokia 6230 (2003), Nokia 6600 (2003), Nokia 7610 (2004), Nokia 1110 (2005), Nokia 6300 (2007).
+Nokia 1011 (1992), Nokia 2110 (1994), Nokia 3110 (1997), Nokia 6110 (1997), Nokia 5110 (1998) *built*, Nokia 3210 (1999) *built*, Nokia 8210 (1999), Nokia 3310 (2000) *built*, Nokia 6210 (2000), Nokia 8250 (2000), Nokia 3330 (2001), Nokia 5210 (2001), Nokia 6310 (2001), Nokia 8310 (2001), Nokia 3510 (2002), Nokia 6310i (2002), Nokia 1100 (2003), Nokia 3650 (2003), Nokia 6230 (2003), Nokia 6600 (2003), Nokia 7610 (2004), Nokia 1110 (2005), Nokia 6300 (2007).
 
 **Nokia Communicator** (5 machines, 5 shapes)
 

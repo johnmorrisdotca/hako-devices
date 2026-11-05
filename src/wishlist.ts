@@ -906,8 +906,6 @@ export const PLANNED: readonly PlannedDevice[] = [
   {"key":"nokia-2110","name":"Nokia 2110","family":"Candybar","shelf":"phones","maker":"Nokia","status":"planned"},
   {"key":"nokia-3110","name":"Nokia 3110","family":"Candybar","shelf":"phones","maker":"Nokia","status":"planned"},
   {"key":"nokia-6110","name":"Nokia 6110","family":"Candybar","shelf":"phones","maker":"Nokia","status":"planned"},
-  {"key":"nokia-5110","name":"Nokia 5110","family":"Candybar","shelf":"phones","maker":"Nokia","status":"planned"},
-  {"key":"nokia-3210","name":"Nokia 3210","family":"Candybar","shelf":"phones","maker":"Nokia","status":"planned"},
   {"key":"nokia-8210","name":"Nokia 8210","family":"Candybar","shelf":"phones","maker":"Nokia","status":"planned"},
   {"key":"nokia-6210","name":"Nokia 6210","family":"Candybar","shelf":"phones","maker":"Nokia","status":"planned"},
   {"key":"nokia-8250","name":"Nokia 8250","family":"Candybar","shelf":"phones","maker":"Nokia","status":"planned"},

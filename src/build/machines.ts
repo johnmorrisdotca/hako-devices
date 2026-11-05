@@ -611,6 +611,34 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 28, 34, 16, 8, { material: "alu", out: 0.6 }),
     ],
   },
+  // The article gives 123.8 x 50.5 x 22.5 mm and names no axes, so the list size stays blank. The phone is one body, 50.8 mm across and 123.8 mm tall, from a straight-on photograph scaled so the long side is 123.8 mm. The 22.5 mm is the remaining figure, and that photograph has no side, so the mesh uses it for the depth. The display, the centre key, the key beside it and the number rows are measured on the photograph. No mark.
+  "nokia-3210": {
+    size: [50.8, 22.5, 123.8],
+    body: "plastic-char",
+    corner: 10,
+    marks: [
+      front("lcd", 0.9, 81.7, 42.6, 26.9),
+      front("key", -15.1, 63, 8, 6),
+      front("key", 0.9, 60, 14.1, 8),
+      front("key", 16, 63, 8, 5),
+      front("key", 16, 57, 8, 5),
+      front("key", 0, 29.3, 12, 6.2, { cols: 3, rows: 4, gap: 3 }),
+    ],
+  },
+  // The article gives 132 x 48 x 31 mm and names no axes, so the list size stays blank. The shell, not the antenna, is one body, 43.9 mm across and 132 mm tall, from a straight-on photograph scaled so the shell's long side is 132 mm. The antenna is not part of the one body. The 31 mm is the remaining figure, and the side photograph is held and tilted, so the mesh uses 31 mm for the depth. The display is the greener region. The centre key and the number rows are measured; the bottom number row sits one space below the three that separated. No mark.
+  "nokia-5110": {
+    size: [43.9, 31, 132],
+    body: "plastic-char",
+    corner: 10,
+    marks: [
+      front("lcd", 0, 79, 38, 36.5),
+      front("key", -11, 51.2, 7, 5),
+      front("key", 0, 51.2, 10, 6),
+      front("key", 14, 53.5, 6, 4),
+      front("key", 14, 49, 6, 4),
+      front("key", 0, 29.8, 9, 5.2, { cols: 3, rows: 4, gap: 3.3 }),
+    ],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };
