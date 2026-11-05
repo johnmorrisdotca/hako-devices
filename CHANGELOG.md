@@ -6,6 +6,12 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.20.1] - 2026-11-05
+
+### Fixed
+
+- The brushed metal works under a strict Content Security Policy: the normal map is made in the viewer from code, and the .glb carries no image, so no blob address is fetched. A downloaded model shows plain brushed-silver colours.
+
 ### Fixed
 
 - Brushed silver no longer puts a picture in the .glb. The viewer makes the brush in code as a texture of bytes, so a page with a strict content security policy shows every device in 3D with no blob request. The .glb is smaller and has no images.
