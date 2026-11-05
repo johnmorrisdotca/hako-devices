@@ -1,6 +1,7 @@
 // The drawings of the well-known machines, from the one description their meshes use (build/machines.ts).
 import * as THREE from "three";
 import type { Vec3 } from "../build/kit.ts";
+import { keyPlacements } from "../build/keys.ts";
 import { bandPoints, eachMark, type MachineSpec, type Mark, type MarkKind, smileOutline } from "../build/machines.ts";
 import { DARK, HOLE, METAL } from "./common.ts";
 import { type Drawing, type ShapeStyle, type SolidStyle, X, Y } from "./drawing.ts";
@@ -102,6 +103,11 @@ function drawShell(d: Drawing, spec: MachineSpec) {
       if (mark.round) d.circle(c, X, Y, mark.w / 2, paint, 4);
       else d.rect(c, X, Y, mark.w, mark.h, paint, 4, pill ? mark.h / 2 : tall ? mark.w / 2 : Math.min(mark.w, mark.h) * 0.28);
     });
+  }
+  if (spec.keyLayout) {
+    for (const key of keyPlacements(spec.keyLayout)) {
+      d.rect([key.x, key.y, depth / 2 + 0.8], X, Y, key.w, key.h, PAINT.alu, 4, Math.min(key.w, key.h) * 0.28);
+    }
   }
   return d;
 }

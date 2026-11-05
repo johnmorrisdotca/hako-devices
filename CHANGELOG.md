@@ -19,6 +19,7 @@ All notable changes to this project are written here. The format follows
 - Curve 8520. The list size stays as it was. A black body, a screen, a green key, a square pad, a red key and four straight rows. No word.
 - Curve 8300. GSMArena lists 107 by 60 by 15.5 mm, and the inches are a height, a width and a thickness. The list stores the width, the depth and the height. A silver body, a screen, a round ball in a metal ring, a green key, a red key and four rows. No word.
 - A lathe, a domed plate, and a brushed silver. The brush is a normal map made in code. See docs/building-machines.md.
+- One key builder. A layout is rows of unit widths, and a cap is flat, domed, dished or sculpted. The Curve 8300 keypad is the first layout on it.
 
 ## [0.19.0] - 2026-11-05
 

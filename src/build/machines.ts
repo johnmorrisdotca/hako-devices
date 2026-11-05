@@ -1,6 +1,8 @@
 // Well-known machines, each one body with marks on its front and top: one description for its mesh and its drawing, placed from its published size. Plain geometry: no mark or logo.
 import * as THREE from "three";
 import { type Box, box, cyl, type Material, plate, rbox, roundedSquare, torus, tube, type Vec3 } from "./kit.ts";
+import { type KeyLayout, placeKeys } from "./keys.ts";
+import { curve8300Layout } from "./layouts/curve-8300.ts";
 
 export type MarkKind = "screen" | "lcd" | "dark" | "panel" | "slot" | "key" | "light";
 
@@ -48,6 +50,8 @@ export interface MachineSpec {
   chin?: number;
   /** How far each side tucks in at the middle, for a waisted shell. */
   waist?: number;
+  /** A keypad from the shared builder, instead of a hand-drawn grid. */
+  keyLayout?: KeyLayout;
 }
 
 /** Points along the band over the head of a pair of headphones, or round the back of a headset. */
@@ -858,13 +862,8 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 14, 50, 6, 3.2, { material: "alu-dark", out: 0.55 }),
       front("key", 23, 50, 6, 6, { round: true, material: "lid-red", out: 0.6 }),
       front("panel", 0, 28, 54, 30, { material: "plastic-black", out: 0.2 }),
-      front("key", 0, 38, 4.4, 3.4, { cols: 10, rows: 1, gap: 0.55, material: "alu", out: 0.7 }),
-      front("key", 0, 32, 4.4, 3.4, { cols: 10, rows: 1, gap: 0.55, material: "alu", out: 0.7 }),
-      front("key", 0, 26, 4.4, 3.4, { cols: 10, rows: 1, gap: 0.55, material: "alu", out: 0.7 }),
-      front("key", -20, 18, 9, 3.6, { material: "alu", out: 0.7 }),
-      front("key", 1, 18, 20, 3.8, { material: "alu", out: 0.7 }),
-      front("key", 20, 18, 9, 3.6, { material: "alu", out: 0.7 }),
     ],
+    keyLayout: curve8300Layout,
   },
   "curve-8520": {
     size: [60, 13.9, 109],
@@ -1105,6 +1104,7 @@ function shellPhone(m: Box, spec: MachineSpec) {
       else m.add(tone, box(mark.w, mark.h, thin), at);
     });
   }
+  if (spec.keyLayout) placeKeys(m, spec.keyLayout, d / 2 + 0.7);
   return m;
 }
 
