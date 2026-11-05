@@ -2,6 +2,7 @@
 // material, positions and normals packed into 16 bits (KHR_mesh_quantization). The same Box always gives the same bytes: no clock, no random, a fixed order.
 import * as THREE from "three";
 import { mergeGeometries, mergeVertices } from "three/addons/utils/BufferGeometryUtils.js";
+import { brushNormalPng } from "./brush.ts";
 import { type Box, extent, MATERIALS, type Material, type Vec3 } from "./kit.ts";
 
 const MM = 0.001;
@@ -38,14 +39,15 @@ export function toGlb(model: Box): Glb {
   const bufferViews: Record<string, number>[] = [];
   const accessors: Accessor[] = [];
 
-  const put = (data: Uint8Array, target: number, byteStride?: number): number => {
+  const put = (data: Uint8Array, target?: number, byteStride?: number): number => {
     const pad = (4 - (offset % 4)) % 4;
     if (pad) {
       chunks.push(new Uint8Array(pad));
       offset += pad;
     }
     chunks.push(data);
-    const view: Record<string, number> = { buffer: 0, byteOffset: offset, byteLength: data.byteLength, target };
+    const view: Record<string, number> = { buffer: 0, byteOffset: offset, byteLength: data.byteLength };
+    if (target) view.target = target;
     if (byteStride) view.byteStride = byteStride;
     bufferViews.push(view);
     offset += data.byteLength;
@@ -58,10 +60,12 @@ export function toGlb(model: Box): Glb {
 
   const materialIndex = new Map<Material, number>();
   const materials: Record<string, unknown>[] = [];
+  let brushView: number | undefined;
   const useMaterial = (name: Material): number => {
     const known = materialIndex.get(name);
     if (known !== undefined) return known;
-    const spec: { color: string; metal: number; rough: number; glow?: string; strength?: number; alpha?: number } = MATERIALS[name];
+    const spec: { color: string; metal: number; rough: number; glow?: string; strength?: number; alpha?: number; brush?: "line" } = MATERIALS[name];
+    if (spec.brush === "line" && brushView === undefined) brushView = put(brushNormalPng());
     const lin = new THREE.Color(spec.color);
     const entry: Record<string, unknown> = {
       name,
@@ -72,6 +76,7 @@ export function toGlb(model: Box): Glb {
       },
     };
     if (spec.alpha !== undefined && spec.alpha < 1) entry.alphaMode = "BLEND";
+    if (spec.brush === "line") entry.normalTexture = { index: 0 };
     if (spec.glow) {
       const e = new THREE.Color(spec.glow);
       entry.emissiveFactor = [round6(e.r), round6(e.g), round6(e.b)];
@@ -162,6 +167,7 @@ export function toGlb(model: Box): Glb {
     nodes,
     meshes,
     materials,
+    ...(brushView === undefined ? {} : { images: [{ bufferView: brushView, mimeType: "image/png" }], textures: [{ sampler: 0, source: 0 }], samplers: [{}] }),
     accessors,
     bufferViews,
     buffers: [{ byteLength: offset }],

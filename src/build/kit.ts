@@ -17,6 +17,8 @@ export interface MaterialSpec {
   strength?: number;
   /** Below 1 the material blends. */
   alpha?: number;
+  /** A normal pattern made in code. "line" is a fine brush along the face. */
+  brush?: "line";
 }
 
 /** Every material a device may use. The viewer reads the `led-` names. */
@@ -95,6 +97,12 @@ export const MATERIALS = {
   "screen-face": { color: "#000000", metal: 0, rough: 0.25, glow: "#000000", strength: 1 },
   // A face for the caller's own print: clear until it is painted, in any viewer.
   print: { color: "#000000", metal: 0, rough: 0.5, alpha: 0 },
+  /** Silver with a fine brush. The lines are a generated normal map, not a picture. */
+  "brushed-silver": { color: "#c5c8cc", metal: 1, rough: 0.38, brush: "line" },
+  /** A flat plastic with no shine. */
+  "matte-plastic": { color: "#2a2c31", metal: 0, rough: 0.86 },
+  /** A dark glass screen. */
+  "screen-glass": { color: "#07080b", metal: 0, rough: 0.04 },
 } as const satisfies Record<string, MaterialSpec>;
 
 export type Material = keyof typeof MATERIALS;
@@ -230,6 +238,13 @@ export const ring = (inner: number, outer: number, seg = 32) => new THREE.RingGe
 export const tube = (points: Vec3[], r: number, seg = 18, sides = 5) =>
   new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map((p) => new THREE.Vector3(...p))), seg, r, sides, false);
 export const torus = (r: number, tubeR: number, seg = 32, sides = 6) => new THREE.TorusGeometry(r, tubeR, sides, seg);
+/** A profile of [radius, height] revolved round the upright axis. */
+export function lathe(profile: readonly [number, number][], seg = 20): THREE.BufferGeometry {
+  const g = new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(Math.max(0, r), y)), seg);
+  g.deleteAttribute("uv");
+  g.computeVertexNormals();
+  return g;
+}
 
 /** A squircle-ish rounded square path with true circular corners. */
 export function roundedSquare(w: number, d: number, r: number, seg = 12): THREE.Shape {
@@ -253,6 +268,57 @@ export function roundedSquare(w: number, d: number, r: number, seg = 12): THREE.
   });
   s.closePath();
   return s;
+}
+
+/** A plate facing the front, centred. `edge` drops the rim. `rise` domes the middle. */
+export function plate(w: number, h: number, d: number, edge: number, rise = 0): THREE.BufferGeometry {
+  const cols = 10;
+  const rows = 8;
+  const pos: number[] = [];
+  const idx: number[] = [];
+  const id = (i: number, j: number, front: boolean) => (front ? 0 : (cols + 1) * (rows + 1)) + j * (cols + 1) + i;
+  for (const front of [true, false]) {
+    for (let j = 0; j <= rows; j++) {
+      for (let i = 0; i <= cols; i++) {
+        const x = -w / 2 + (w * i) / cols;
+        const y = -h / 2 + (h * j) / rows;
+        const u = (x / (w / 2)) ** 2 + (y / (h / 2)) ** 2;
+        const rim = Math.min(1, Math.hypot(x / (w / 2), y / (h / 2)));
+        const drop = rim > 0.82 ? edge * ((rim - 0.82) / 0.18) : 0;
+        const z = front ? d / 2 + rise * Math.max(0, 1 - Math.min(1, u)) - drop : -d / 2;
+        pos.push(x, y, z);
+      }
+    }
+  }
+  const quad = (a: number, b: number, c: number, d4: number) => idx.push(a, b, c, a, c, d4);
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
+      const a = id(i, j, true);
+      const b = id(i + 1, j, true);
+      const c = id(i + 1, j + 1, true);
+      const d4 = id(i, j + 1, true);
+      quad(a, d4, c, b);
+      const e = id(i, j, false);
+      const f = id(i + 1, j, false);
+      const g = id(i + 1, j + 1, false);
+      const h4 = id(i, j + 1, false);
+      quad(e, f, g, h4);
+    }
+  }
+  const side = (i0: number, j0: number, i1: number, j1: number) => quad(id(i0, j0, true), id(i1, j1, true), id(i1, j1, false), id(i0, j0, false));
+  for (let i = 0; i < cols; i++) {
+    side(i, 0, i + 1, 0);
+    side(i + 1, rows, i, rows);
+  }
+  for (let j = 0; j < rows; j++) {
+    side(0, j + 1, 0, j);
+    side(cols, j, cols, j + 1);
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  geometry.setIndex(idx);
+  geometry.computeVertexNormals();
+  return geometry;
 }
 
 /** A slab of `shape` (in the XZ plane, seen from above) `height` tall standing on y = 0, with rounded top and bottom edges and smooth normals. */

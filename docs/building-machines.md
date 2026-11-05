@@ -32,6 +32,14 @@ A reader who owned the machine would recognise it, from the front and from behin
 
 Be careful with other sites' files even for reference. "Creative Commons" comes in kinds with very different terms: read the licence, not just the badge. Check for a separate notice restricting the file, such as Sketchfab's NoAI tag. A repository with no licence means all rights reserved. Some uploads are copies of another person's work under a new name.
 
+## Shapes a box cannot make
+
+These helpers are in `src/build/kit.ts`. Run `pnpm machines` after a machine starts using one, the same as any other body.
+
+- `lathe(profile, segments)` revolves pairs of `[radius, height]` round the upright axis. A domed key, a round earpiece, an antenna or a nav ring. Turn it if the dome should face the front.
+- `plate(width, height, depth, edge, rise)` is a plate facing the front. `edge` drops the rim. `rise` domes the middle.
+- `brushed-silver` is silver with a fine brush. The lines are a normal map made in code when the mesh is written, not a picture file. `matte-plastic` is a flat plastic. `screen-glass` is a dark glossy glass. A machine that does not use `brushed-silver` is written exactly as before.
+
 ## The steps
 
 1. **Pick one line.** Find its rows in `data/wishlist.json`, one machine per line. Add any model that is missing.
