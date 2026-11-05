@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2521 machines. 1022 distinct shapes still to build. 1167 entries are already built: the 375 devices in this package, plus the real models those meshes cover. 1483 entries have a sourced size; the other 1038 are `null` on purpose.**
+**2522 machines. 1022 distinct shapes still to build. 1168 entries are already built: the 376 devices in this package, plus the real models those meshes cover. 1484 entries have a sourced size; the other 1038 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -159,7 +159,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Fire TV | 12 | 12 | 0 |
 |  | Chromecast | 7 | 7 | 0 |
 |  | Shield TV | 5 | 5 | 0 |
-| **9** | **Android phones and tablets** | **170** | **167** | **93** |
+| **9** | **Android phones and tablets** | **171** | **167** | **94** |
 |  | Pixel | 39 | 39 | 7 |
 |  | Galaxy Tab S | 33 | 33 | 33 |
 |  | Galaxy Tab A | 21 | 21 | 19 |
@@ -171,6 +171,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Galaxy Z | 5 | 5 | 0 |
 |  | Galaxy Tab Pro | 4 | 4 | 4 |
 |  | Galaxy Tab E | 4 | 4 | 1 |
+|  | edge | 1 | 0 | 1 |
 |  | Dream | 1 | 1 | 0 |
 | **10** | **Other small boards** | **58** | **58** | **0** |
 |  | Banana Pi | 20 | 20 | 0 |
@@ -279,7 +280,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2521** | **1022** | **1483** |
+|  | **Total** | **2522** | **1022** | **1484** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -1383,7 +1384,7 @@ Shield TV (2015), Shield TV Pro (2015), Shield TV (2017), Shield TV (2019), Shie
 
 Roku DVP (N1000) (2008), Roku HD (N1100) (2009), Roku HD-XR (N1101) (2009), Roku SD (N1050) (2009), Roku HD (2000) (2010), Roku XD (2050) (2010), Roku XDS (2100) (2010), Roku 2 HD (3000) (2011), Roku 2 XD (3050) (2011), Roku 2 XS (3100) (2011), Roku LT (2400) (2011), Roku HD (2500) (2012), Roku LT (2450) (2012), Roku Streaming Stick, MHL (3400, 3420) (2012), Roku 1, SE (2710) (2013), Roku 2 (2720) (2013), Roku 3 (4200) (2013), Roku LT (2700) (2013), Roku Streaming Stick, HDMI (3500) (2014), Roku 2 (4210) (2015), Roku 3 (4230) (2015), Roku 4 (4400) (2015), Roku Express (3700) (2016), Roku Express+ (3710) (2016), Roku Premiere (4620) (2016), Roku Premiere+ (4630) (2016), Roku Streaming Stick (3600) (2016), Roku Ultra (4640) (2016), Roku Express (3900) (2017), Roku Express+ (3910) (2017), Roku Streaming Stick (3800) (2017), Roku Streaming Stick+ (3810) (2017), Roku Ultra (4660) (2017), Roku Premiere (3920) (2018), Roku Premiere+ (3921) (2018), Roku Ultra (4661) (2018), Roku Express+ (3931) (2019), Roku Express, SE, LE (3930) (2019), Roku Ultra (4670) (2019), Roku Ultra LT (4662) (2019), Roku Streambar (9102) (2020), Roku Ultra (4800) (2020), Roku Express 4K (3940) (2021), Roku Express 4K+ (3941) (2021), Roku Streambar Pro (9101) (2021), Roku Streaming Stick 4K (3820) (2021), Roku Streaming Stick 4K+ (3821) (2021), Roku Ultra LT (4801) (2021), Roku Express (3960) (2022), Roku Ultra (4802) (2022), Roku Streambar SE (9104) (2024), Roku Ultra (4850) (2024), Roku Streaming Stick HD (3840) (2025), Roku Streaming Stick Plus (3830) (2025).
 
-### Phase 9: Android phones and tablets (170 machines, 167 shapes to build)
+### Phase 9: Android phones and tablets (171 machines, 167 shapes to build)
 
 **Google Nexus** (12 machines, 12 shapes)
 
@@ -1396,6 +1397,10 @@ Pixel (2016), Pixel XL (2016), Pixel 2 (2017), Pixel 2 XL (2017), Pixel 3 (2018)
 **HTC Dream** (1 machines, 1 shapes)
 
 HTC Dream (2008).
+
+**Motorola edge** (1 machines, 0 shapes)
+
+motorola edge 2025 *built*.
 
 **Samsung Galaxy Note** (5 machines, 5 shapes)
 

@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- motorola edge (2025): the published outer size, with the punch hole, the four rear lenses and the two buttons on the right measured from Motorola's straight-on product pictures. The USB-C is not drawn, because those pictures have no bottom view, and the camera island is not drawn, because its edge does not show against the leather.
+
 ### Changed
 
 - Galaxy S25, S25+ and S25 Ultra: the bottom edge has the microphone slot, the speaker and one small hole, measured from the accessory drawing's bottom view. The USB port's middle was measured and stays at the centre. The Ultra also has the short opening at the left of that edge.

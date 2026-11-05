@@ -2399,6 +2399,7 @@ export const TAG_DATA: Readonly<Record<string, Readonly<Partial<Record<string, r
   "samsung-galaxy-s25": {"maker":["Samsung"],"type":["Phone"],"decade":["2020s"],"cpu":["Snapdragon 8 Elite for Galaxy"],"cpuMaker":["Qualcomm"],"cores":["8"],"ram":["12 GB"],"os":["Android"],"screen":["6.2-inch"],"ports":["USB-C"],"wireless":["Wi-Fi","Bluetooth","NFC","Cellular"]},
   "samsung-galaxy-s25-plus": {"maker":["Samsung"],"type":["Phone"],"decade":["2020s"],"cpu":["Snapdragon 8 Elite for Galaxy"],"cpuMaker":["Qualcomm"],"cores":["8"],"ram":["12 GB"],"os":["Android"],"screen":["6.7-inch"],"ports":["USB-C"],"wireless":["Wi-Fi","Bluetooth","NFC","Cellular"]},
   "samsung-galaxy-s25-ultra": {"maker":["Samsung"],"type":["Phone"],"decade":["2020s"],"cpu":["Snapdragon 8 Elite for Galaxy"],"cpuMaker":["Qualcomm"],"cores":["8"],"ram":["12 GB"],"os":["Android"],"screen":["6.9-inch"],"ports":["USB-C"],"wireless":["Wi-Fi","Bluetooth","NFC","Cellular"]},
+  "motorola-edge-2025": {"maker":["Motorola"],"type":["Phone"],"decade":["2020s"]},
   "samsung-galaxy-note": {"maker":["Samsung"],"type":["Phone"],"decade":["2010s"]},
   "samsung-galaxy-note-ii": {"maker":["Samsung"],"type":["Phone"],"decade":["2010s"]},
   "samsung-galaxy-note-4": {"maker":["Samsung"],"type":["Phone"],"decade":["2010s"]},
@@ -4724,6 +4725,7 @@ export const YEAR_DATA: Readonly<Record<string, number>> = {
   "samsung-galaxy-s25": 2025,
   "samsung-galaxy-s25-plus": 2025,
   "samsung-galaxy-s25-ultra": 2025,
+  "motorola-edge-2025": 2025,
   "samsung-galaxy-note": 2011,
   "samsung-galaxy-note-ii": 2012,
   "samsung-galaxy-note-4": 2014,
@@ -5156,4 +5158,5 @@ export const LINE_DATA: Readonly<Record<string, string>> = {
   "samsung-galaxy-s25": "Galaxy S",
   "samsung-galaxy-s25-plus": "Galaxy S",
   "samsung-galaxy-s25-ultra": "Galaxy S",
+  "motorola-edge-2025": "edge",
 };
