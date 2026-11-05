@@ -106,4 +106,5 @@ export const SLAB_ROWS: readonly SlabRow[] = [
   ["samsung-galaxy-s25", "Galaxy S25, 2025", [70.5, 146.9, 7.2], { "usb-c": 1 }],
   ["samsung-galaxy-s25-plus", "Galaxy S25+, 2025", [75.8, 158.4, 7.3], { "usb-c": 1 }],
   ["samsung-galaxy-s25-ultra", "Galaxy S25 Ultra, 2025", [77.6, 162.8, 8.2], { "usb-c": 1 }],
+  ["motorola-edge-2025", "motorola edge, 2025", [73.06, 161.19, 7.99], {}],
 ];

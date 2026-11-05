@@ -1754,4 +1754,5 @@ export const ALIAS_DATA: Readonly<Record<string, readonly string[]>> = {
   "simplynuc-nuc7i3dnfe": ["nuc7i3dnfe-fanless-porcoolpine","nuc7i3dnfe"],
   "simplynuc-nuc7i5dnfe": ["nuc7i5dnfe-fanless-porcoolpine","nuc7i5dnfe"],
   "simplynuc-nuc7i7dnfe": ["nuc7i7dnfe-fanless-porcoolpine","nuc7i7dnfe"],
+  "motorola-edge-2025": ["edge-2025"],
 };

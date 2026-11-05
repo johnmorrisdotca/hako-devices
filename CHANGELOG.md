@@ -9,6 +9,7 @@ All notable changes to this project are written here. The format follows
 ### Added
 
 - The Sony Walkman TPS-L2 and the WM-2. Both stay blank on the list. The TPS-L2 stands window-forward, silver, with a blue door, a cassette window, an orange button and keys along the top. The WM-2 is the silver body with a cassette window and keys on the right. The WM-20 and the WM-DD are not drawn.
+- motorola edge (2025): the published outer size, with the punch hole, the four rear lenses and the two buttons on the right measured from Motorola's straight-on product pictures. The USB-C is not drawn, because those pictures have no bottom view, and the camera island is not drawn, because its edge does not show against the leather.
 
 ### Changed
 
