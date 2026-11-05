@@ -2047,7 +2047,6 @@ export const PLANNED: readonly PlannedDevice[] = [
   {"key":"samsung-galaxy-s22","name":"Galaxy S22","family":"Galaxy S","shelf":"android","maker":"Samsung","status":"planned"},
   {"key":"samsung-galaxy-s23","name":"Galaxy S23","family":"Galaxy S","shelf":"android","maker":"Samsung","status":"planned"},
   {"key":"samsung-galaxy-s24","name":"Galaxy S24","family":"Galaxy S","shelf":"android","maker":"Samsung","status":"planned"},
-  {"key":"samsung-galaxy-s25","name":"Galaxy S25","family":"Galaxy S","shelf":"android","maker":"Samsung","status":"planned"},
   {"key":"samsung-galaxy-note","name":"Galaxy Note","family":"Galaxy Note","shelf":"android","maker":"Samsung","status":"planned"},
   {"key":"samsung-galaxy-note-ii","name":"Galaxy Note II","family":"Galaxy Note","shelf":"android","maker":"Samsung","status":"planned"},
   {"key":"samsung-galaxy-note-4","name":"Galaxy Note 4","family":"Galaxy Note","shelf":"android","maker":"Samsung","status":"planned"},

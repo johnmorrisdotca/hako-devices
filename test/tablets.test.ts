@@ -26,7 +26,7 @@ test("every iPad Pro body is built", () => {
 });
 
 const list = (): { key: string; family: string; brand: string; dimensionsMm: number[] | null; dimensionsSource: string | null; released?: string; discontinued?: string; lastUpdate?: string; factsSources?: string[] }[] => JSON.parse(readFileSync("data/wishlist.json", "utf8"));
-const slabLines = (entry: { family: string }) => /^(iPhone|iPad|Galaxy Tab)/.test(entry.family);
+const slabLines = (entry: { family: string }) => /^(iPhone|iPad|Galaxy Tab|Galaxy S)/.test(entry.family);
 
 test("a phone or tablet in the list has the longer side as its height, and it names its pages", () => {
   for (const entry of list().filter(slabLines)) {
