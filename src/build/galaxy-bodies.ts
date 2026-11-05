@@ -23,7 +23,13 @@ export const GALAXY_BODIES: readonly SlabBody[] = [
       ["button", 36.7, 19.8],
       ["button", 61.7, 10.9],
     ],
-    bottom: [["usb-c", 35.3]],
+    // The sheet's bottom view: the microphone slot, the USB port, the speaker, and one small hole. The port's middle measures 35.2.
+    bottom: [
+      ["grille", 18.3, 14.5],
+      ["usb-c", 35.2],
+      ["grille", 51.9, 10.2],
+    ],
+    bottomHoles: [[28.1], 0.7],
   },
   // SM-S936B. 158.4 × 75.8 × 7.3 mm. Same arrangement, its own measurements.
   {
@@ -44,7 +50,12 @@ export const GALAXY_BODIES: readonly SlabBody[] = [
       ["button", 38.4, 20.2],
       ["button", 63.4, 11.2],
     ],
-    bottom: [["usb-c", 37.9]],
+    bottom: [
+      ["grille", 21, 14.6],
+      ["usb-c", 37.9],
+      ["grille", 54.7, 10.2],
+    ],
+    bottomHoles: [[30.8], 0.7],
   },
   // SM-S938B. 162.8 × 77.6 × 8.2 mm. Sharper corners, a second column of lenses, the flash between those two.
   {
@@ -67,6 +78,13 @@ export const GALAXY_BODIES: readonly SlabBody[] = [
       ["button", 41.5, 21.1],
       ["button", 67.4, 11.8],
     ],
-    bottom: [["usb-c", 38.8]],
+    // A short opening at the left of the bottom, then a slot, the USB port, one small hole and the speaker.
+    bottom: [
+      ["tray", 6.3, 7],
+      ["grille", 22.3, 10],
+      ["usb-c", 38.8],
+      ["grille", 56.1, 15.1],
+    ],
+    bottomHoles: [[46.6], 0.7],
   },
 ];
