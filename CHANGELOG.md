@@ -10,6 +10,7 @@ All notable changes to this project are written here. The format follows
 - A guide shows a plain page that loads the element from jsDelivr, and the same page from unpkg.
 - A guide shows the same element bundled with Vite, and with webpack.
 - A guide shows the element in Vue.
+- A guide shows the element in Svelte.
 - The demo's "Put this on your site" is the family's embed panel. The five ways are still there (the custom element, an iframe, a module, the SVG and a data address), with Copy, the note about the embed page, Open the embed page and Read the docs.
 - The demo uses the family's shared header and footer: the language picker, the theme switch, and the list of the other packages. This package is on that list. Those controls use the demo's night colours. The section tabs sit in the same gutter as the title.
 
