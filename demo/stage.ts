@@ -1,9 +1,11 @@
 // The device on show: the one large view, the only one in the gallery that draws in 3D, with its name, colours, options, facts and the code to copy beside it.
 import { deviceByKey, meshOf, PARTS, type StyleName } from "../src/index.ts";
-import { EMBED_KINDS, embedCode, type DeviceOptions, type EmbedKind } from "../src/embed.ts";
+import { deviceToParams, EMBED_KINDS, embedCode, type DeviceOptions, type EmbedKind } from "../src/embed.ts";
 import { HakoDevice } from "../src/element.ts";
 import { FACETS, tagsOf } from "../src/tags.ts";
 import { applyParams, createAddressState } from "@johnmorrisdotca/kazoku-ui/address-state";
+import "@johnmorrisdotca/kazoku-ui/embed-panel/define";
+import type { EmbedPanelElement } from "@johnmorrisdotca/kazoku-ui/embed-panel/element";
 import type { ViewControlsElement } from "@johnmorrisdotca/kazoku-ui/view-controls/element";
 import { colourRow } from "./colour-row.ts";
 import { byId, el } from "./dom.ts";
@@ -21,13 +23,9 @@ export function createStage(startStyle: () => string) {
   const coloursRow = byId("device-colours");
   const optionsBox = byId("device-options");
   const facts = byId("device-facts");
-  const embedTabs = byId("embed-tabs");
-  const codeNode = byId("embed-code");
-  const copyStatus = byId("embed-status");
+  const panel = byId<EmbedPanelElement>("embed-panel");
   const viewNote = byId("view-note");
   let current: Item | null = null;
-  let kind: EmbedKind = "element";
-  let full = "";
   /** The colour the row was drawn for, as the address names it. */
   let colourNow: string | null = null;
 
@@ -53,34 +51,18 @@ export function createStage(startStyle: () => string) {
     if (flag("turned")) options.flipped = true;
     return options;
   }
+  const asKind = (kind: string): EmbedKind => ((EMBED_KINDS as readonly string[]).includes(kind) ? (kind as EmbedKind) : "element");
+  panel.labels = { data: "Data address" };
+  panel.note = "Copy the code for the machine on the screen. The embed page is for a site that cannot run script.";
+  panel.generate = ({ kind }) => {
+    const one = asKind(kind);
+    return embedCode(optionsNow(one === "svg" || one === "data"), one);
+  };
   function drawEmbed() {
-    full = embedCode(optionsNow(kind === "svg" || kind === "data"), kind);
-    codeNode.textContent = full.length > 1400 ? `${full.slice(0, 1400)}…` : full;
-    for (const tab of embedTabs.querySelectorAll("button")) tab.setAttribute("aria-selected", String(tab.dataset.testid === `tab-${kind}`));
+    const query = deviceToParams(optionsNow(false)).toString();
+    panel.openHref = `embed.html${query === "" ? "" : `?${query}`}`;
+    panel.update();
   }
-  for (const one of EMBED_KINDS) {
-    const tab = el("button", { type: "button", textContent: one });
-    tab.dataset.testid = `tab-${one}`;
-    tab.setAttribute("role", "tab");
-    tab.addEventListener("click", () => {
-      kind = one;
-      drawEmbed();
-    });
-    embedTabs.append(tab);
-  }
-  byId("embed-copy").addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(full);
-    } catch {
-      const area = el("textarea");
-      area.value = full;
-      document.body.append(area);
-      area.select();
-      document.execCommand("copy");
-      area.remove();
-    }
-    copyStatus.textContent = "Copied";
-  });
 
   // The family's view controls turn, tip, zoom and move it; the device follows, and another device keeps the view.
   bar.addEventListener("kazoku-viewchange", (event) => hero.drive((event as CustomEvent).detail));
@@ -211,7 +193,6 @@ export function createStage(startStyle: () => string) {
       statusNode.textContent = item.status === "planned" ? "Coming soon" : "";
       statusNode.hidden = item.status !== "planned";
       viewNote.hidden = item.status === "planned";
-      copyStatus.textContent = "";
       applyAttributes();
       drawColours(item);
       drawOptions();
