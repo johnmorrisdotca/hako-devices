@@ -159,7 +159,7 @@ test("a PC takes three clicks, and it and its options are on the screen together
   await tower.click();
   await expect(page.locator("hako-device#hero")).toHaveAttribute("key", key);
   await expect(page.locator('[data-testid="device-facts"]')).toContainText(key);
-  await expect(page.locator('[data-testid="embed-code"]')).toContainText(`key="${key}"`);
+  await expect(page.locator('#embed-panel [part="code"]')).toContainText(`key="${key}"`);
   expect(problems).toEqual([]);
 });
 
@@ -234,7 +234,7 @@ test.describe("on a desk", () => {
     await page.locator('[data-testid="filter-built"]').click();
     await kindRow(page, "laptops").click();
     await tileOf(page, "macbook-pro-14").click();
-    for (const part of ["hako-device#hero", '[data-testid="view-bar"]', '[data-testid="device-options"]', '[data-testid="device-facts"]', '[data-testid="embed-copy"]', '[data-testid="tile"][aria-pressed="true"]']) await onScreen(part, "a machine and its options");
+    for (const part of ["hako-device#hero", '[data-testid="view-bar"]', '[data-testid="device-options"]', '[data-testid="device-facts"]', '#embed-panel [part="copy"]', '[data-testid="tile"][aria-pressed="true"]']) await onScreen(part, "a machine and its options");
     await page.locator('[data-testid="gallery-filters"]').click();
     await fits("the filters");
     for (const box of ["year-from", "year-to"]) await onScreen(`[data-testid="${box}"]`, "the filters");
@@ -387,7 +387,7 @@ test("the options change the device and the code to copy", async ({ page }) => {
   const problems = watch(page);
   await page.goto(`${URL}#pi5`);
   const hero = page.locator("hako-device#hero");
-  const code = page.locator('[data-testid="embed-code"]');
+  const code = page.locator('#embed-panel [part="code"]');
   await page.locator('[data-testid="option-look-drawing"]').click();
   await expect(hero).toHaveAttribute("mode", "drawing");
   await expect(code).toContainText('mode="drawing"');
@@ -399,7 +399,7 @@ test("the options change the device and the code to copy", async ({ page }) => {
   await expect(code).toContainText('drawing-style="thick"');
   // a covered machine's drawing is its mesh's
   await page.goto(`${URL}#${COVERED[0].key}`);
-  await page.locator('[data-testid="tab-svg"]').click();
+  await page.locator('#embed-panel button[data-kind="svg"]').click();
   await expect(code).toContainText("<svg");
   await expect(code).not.toContainText("Coming soon");
   expect(problems).toEqual([]);
@@ -970,7 +970,7 @@ test("a tile opens one device large beside its facts; a part too", async ({ page
   await page.locator('[data-testid="part-tile"][data-key="armor"]').click();
   await expect(hero).toHaveAttribute("part", "armor");
   await expect(hero).not.toHaveAttribute("key", /./);
-  await expect(page.locator('[data-testid="embed-code"]')).toContainText('part="armor"');
+  await expect(page.locator('#embed-panel [part="code"]')).toContainText('part="armor"');
   await expect(page).toHaveURL(/#part%3Aarmor$/);
   expect(problems).toEqual([]);
 });
@@ -1016,16 +1016,16 @@ test("the copy panel matches the device on screen, and the embed page draws its 
   if (browserName === "chromium") await context.grantPermissions(["clipboard-read", "clipboard-write"]);
   const problems = watch(page);
   await page.goto(URL);
-  const code = page.locator('[data-testid="embed-code"]');
+  const code = page.locator('#embed-panel [part="code"]');
   await expect(code).toContainText("hako-device");
   await expect(code).toContainText('key="pi4-pitft"');
   await page.locator('[data-testid="tile"]').nth(2).click();
   await expect(code).toContainText('key="pi-zero"');
-  await page.locator('[data-testid="tab-iframe"]').click();
+  await page.locator('#embed-panel button[data-kind="iframe"]').click();
   await expect(code).toContainText("embed.html");
   await expect(code).toContainText("pi-zero");
-  await page.locator('[data-testid="embed-copy"]').click();
-  await expect(page.locator("#embed-status")).toHaveText("Copied");
+  await page.locator('#embed-panel [part="copy"]').click();
+  await expect(page.locator("#embed-panel .status")).toHaveText("Copied");
   await page.goto(`${URL}embed.html?key=mac-studio&drawing-style=thick&spin=off`);
   await expect(page.locator("html")).toHaveAttribute("data-ready", "true");
   await expect(page.locator('[data-testid="device"]')).toHaveAttribute("key", "mac-studio");
@@ -1058,7 +1058,7 @@ test("a machine's colours: a drawn colour switches, one with none says so and ti
   await expect(row.getByTestId("colour-note")).toContainText("has a drawing of its own");
   await expect(row.getByRole("link", { name: "Where this comes from" })).toHaveAttribute("href", /support\.apple\.com/);
   // the code to copy is for what is on the screen
-  await expect(page.locator('[data-testid="embed-code"]')).toContainText('key="macbook-pro-14-silver"');
+  await expect(page.locator('#embed-panel [part="code"]')).toContainText('key="macbook-pro-14-silver"');
 
   await chip("Space Gray").click();
   await expect(hero).toHaveAttribute("key", "macbook-pro-14");
@@ -1090,7 +1090,7 @@ test("the address keeps a chosen colour: reload and Back do what you expect", as
   await expect(hero).toHaveAttribute("key", "macbook-pro-14-silver");
   await pressed("Silver");
   await expect(page.getByTestId("colour-note")).toContainText("has a drawing of its own");
-  await expect(page.locator('[data-testid="embed-code"]')).toContainText('key="macbook-pro-14-silver"');
+  await expect(page.locator('#embed-panel [part="code"]')).toContainText('key="macbook-pro-14-silver"');
   // a colour with no drawing keeps its tint
   await chip("Space Gray").click();
   await expect(hero).toHaveAttribute("key", "macbook-pro-14");
