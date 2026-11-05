@@ -1,5 +1,6 @@
 // Well-known machines, each one body with marks on its front and top: one description for its mesh and its drawing, placed from its published size. Plain geometry: no mark or logo.
-import { type Box, box, cyl, type Material, rbox, tube, type Vec3 } from "./kit.ts";
+import * as THREE from "three";
+import { type Box, box, cyl, type Material, rbox, roundedSquare, tube, type Vec3 } from "./kit.ts";
 
 export type MarkKind = "screen" | "lcd" | "dark" | "panel" | "slot" | "key" | "light";
 
@@ -32,7 +33,17 @@ export interface MachineSpec {
   /** A rod rising from the top. The length is a drawing, not a measured axis. */
   antenna?: number;
   /** Not one block: its own shape, in its size. */
-  shape?: "headphones" | "headset" | "can" | "dynatac";
+  shape?: "headphones" | "headset" | "can" | "dynatac" | "flip" | "shell";
+  /** Hinge, up from the desk, on the open phone the marks were measured on. */
+  hinge?: number;
+  /** How far the lid leans back from upright. 20 degrees is open at about 160. */
+  lean?: number;
+  /** Thickness of the lower half. The size's depth is the closed phone. */
+  half?: number;
+  /** Thickness of the lid, when it is not the same as the lower half. */
+  lidThick?: number;
+  /** A thicker lip at the bottom, this tall. */
+  chin?: number;
 }
 
 /** Points along the band over the head of a pair of headphones, or round the back of a headset. */
@@ -632,6 +643,86 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       back("dark", 13, 98, 0.9, 170, { out: 0.5 }),
     ],
   },
+  // Motorola's 1997 page gives 93 x 52 x 20 mm and names no axes, so the list size stays blank. Two halves, 26.9 mm across, from a straight-on photograph of a StarTAC 8500 scaled so the long side is 93 mm. The hinge is 60 mm up. The lid leans back 20 degrees. The earpiece is on the lid. The display and the keys are on the lower half. No word.
+  startac: {
+    size: [26.9, 20, 93],
+    body: "plastic-char",
+    corner: 8,
+    shape: "flip",
+    hinge: 60,
+    lean: 20,
+    half: 11,
+    lidThick: 7,
+    marks: [
+      front("panel", 0, 80, 16, 12, { material: "plastic-black", out: 0.35 }),
+      front("slot", 0, 81, 1.3, 1.3, { round: true, cols: 3, rows: 2, gap: 1.5, out: 0.7 }),
+      front("screen", 2.2, 35.6, 12.3, 12.1, { material: "shell-orange", out: 0.4 }),
+      front("key", 0, 18.3, 6.2, 2.8, { cols: 3, rows: 4, gap: 1.1, material: "plastic-grey", out: 0.45 }),
+      front("key", 0, 8.6, 4.2, 2.6, { cols: 4, rows: 1, gap: 1, material: "plastic-grey", out: 0.45 }),
+      front("key", 0, 4.7, 5, 2.4, { cols: 3, rows: 1, gap: 1.2, material: "plastic-grey", out: 0.45 }),
+    ],
+  },
+  // The article gives 53 x 98 x 13 mm and names no axes, so the list size stays blank. John reads the 53 mm as the width and the thickness as about 14 mm closed, so each half is about 7 mm. The open phone is about 160 mm tall, from the photograph's width-to-height once the width is 53 mm. Two thin silver halves, the lid leaned back 15 degrees. A thin earpiece slot, a screen with an even border, one etched keypad plate, a round nav ring, and a chin. No mark.
+  "razr-v3": {
+    size: [53, 13.9, 160],
+    body: "shell-silver",
+    corner: 4,
+    shape: "flip",
+    hinge: 78,
+    lean: 15,
+    half: 7,
+    lidThick: 6.5,
+    chin: 12,
+    marks: [
+      front("slot", 0, 152, 16, 1.3, { out: 0.35 }),
+      front("screen", 0, 118, 42, 52, { out: 0.4 }),
+      front("key", 0, 64, 16, 16, { round: true, material: "alu", out: 0.25 }),
+      front("dark", 0, 64, 10, 10, { round: true, out: 0.4 }),
+      front("key", 0, 64, 4.5, 4.5, { round: true, material: "shell-silver", out: 0.55 }),
+      front("key", -16, 68, 5, 3.5, { material: "alu", out: 0.3 }),
+      front("key", 16, 68, 5, 3.5, { material: "alu", out: 0.3 }),
+      front("key", -16, 60, 4, 4, { round: true, material: "pcb-green", out: 0.35 }),
+      front("key", 16, 60, 4, 4, { round: true, material: "lid-red", out: 0.35 }),
+      front("slot", 0, 38, 36, 0.45, { rows: 3, gap: 9, out: 0.3 }),
+      front("slot", 0, 38, 0.45, 30, { cols: 2, gap: 12, out: 0.3 }),
+      front("slot", 0, 8, 1.2, 3, { cols: 7, rows: 1, gap: 1.1, out: 1.6 }),
+    ],
+  },
+  // The article's axes are already on the list. The shell is 50.8 mm across and 123.8 mm tall, from a straight-on photograph scaled so the long side is 123.8 mm. The ends are round. A silver cover, a green screen window, a long centre key and pale number keys. No word.
+  "nokia-3210": {
+    size: [50.8, 22.5, 123.8],
+    body: "plastic-char",
+    corner: 16,
+    shape: "shell",
+    marks: [
+      front("panel", 0, 90, 42, 60, { material: "shell-silver", out: 0.45 }),
+      front("slot", -5, 112, 7, 1.3, { out: 0.85 }),
+      front("slot", -5, 108.5, 7, 1.3, { out: 0.85 }),
+      front("lcd", 0.9, 86, 30, 18, { material: "pcb-green", out: 0.95 }),
+      front("key", -15, 63, 9, 7, { material: "plastic-grey", out: 1 }),
+      front("key", 1, 62, 18, 8, { material: "plastic-white", out: 1 }),
+      front("key", 16, 61, 8, 11, { material: "shell-silver", out: 0.85 }),
+      front("key", 0, 29.3, 12, 6, { cols: 3, rows: 4, gap: 2.6, material: "plastic-white", out: 0.7 }),
+    ],
+  },
+  // The article's axes are already on the list. The shell is 43.9 mm across and 132 mm tall, from a straight-on photograph scaled so the shell's long side is 132 mm. A stub antenna of 18 mm stands on the top right. The cover is blue. A screen window, a long centre key and pale number keys. No word.
+  "nokia-5110": {
+    size: [43.9, 31, 132],
+    body: "plastic-blue",
+    corner: 14,
+    shape: "shell",
+    antenna: 18,
+    marks: [
+      front("dark", -2, 112, 14, 14, { round: true, material: "plastic-black", out: 0.4 }),
+      front("light", 12, 114, 4, 4, { round: true, out: 0.55 }),
+      front("panel", 0, 80, 32, 28, { material: "plastic-black", out: 0.35 }),
+      front("lcd", 0, 81, 24, 18, { material: "pale-glass", out: 0.75 }),
+      front("key", -11, 52, 8, 6, { material: "plastic-grey", out: 0.7 }),
+      front("key", 0.5, 51, 16, 8, { material: "shell-silver", out: 0.8 }),
+      front("key", 14, 52, 7, 10, { material: "shell-silver", out: 0.7 }),
+      front("key", 0, 28, 10, 5.2, { cols: 3, rows: 4, gap: 2.4, material: "plastic-white", out: 0.6 }),
+    ],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };
@@ -650,8 +741,88 @@ export function eachMark(mark: Mark, each: (x: number, y: number) => void) {
   }
 }
 
+/** A rounded front, extruded by the thickness, centred on its own middle. */
+function phoneShell(w: number, h: number, d: number, r: number): THREE.BufferGeometry {
+  const bevel = Math.min(0.8, d / 6);
+  const shape = roundedSquare(w, h, Math.min(r, w / 2 - 0.5, h / 2 - 0.5), 6);
+  const g = new THREE.ExtrudeGeometry(shape, {
+    depth: Math.max(0.4, d - 2 * bevel),
+    bevelEnabled: true,
+    bevelThickness: bevel,
+    bevelSize: bevel * 0.45,
+    bevelSegments: 2,
+    curveSegments: 6,
+  });
+  g.computeBoundingBox();
+  const box3 = g.boundingBox;
+  if (box3) g.translate(-(box3.min.x + box3.max.x) / 2, -(box3.min.y + box3.max.y) / 2, -(box3.min.z + box3.max.z) / 2);
+  g.deleteAttribute("uv");
+  g.computeVertexNormals();
+  return g;
+}
+
+function frontMarks(m: Box, marks: readonly Mark[], yOf: (y: number) => number, thick: number) {
+  const thin = 0.45;
+  for (const mark of marks) {
+    if (mark.face !== "front") continue;
+    eachMark(mark, (x, y) => {
+      const at: Vec3 = [x, yOf(y), thick / 2 - thin / 2 + 0.05 + (mark.out ?? 0)];
+      const tone = mark.material ?? MATERIAL[mark.kind];
+      if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 20), at, [90, 0, 0]);
+      else m.add(tone, box(mark.w, mark.h, thin), at);
+    });
+  }
+}
+
+/** Two halves on a hinge, the lid leaning back. Mark heights are from the open, flat photograph. */
+function flipPhone(m: Box, spec: MachineSpec) {
+  const [w, , h] = spec.size;
+  const hinge = spec.hinge ?? h * 0.55;
+  const lean = spec.lean ?? 20;
+  const gap = 1.4;
+  const lowerH = hinge - gap;
+  const lidH = h - hinge - gap;
+  const lowerT = spec.half ?? spec.size[1] * 0.5;
+  const lidT = spec.lidThick ?? lowerT;
+  const radius = Math.min(spec.corner, w / 2 - 0.4);
+  m.add(spec.body, phoneShell(w, lowerH, lowerT, radius), [0, lowerH / 2, 0]);
+  if (spec.chin) m.add(spec.body, phoneShell(w * 0.94, spec.chin, lowerT + 2.4, Math.min(radius, spec.chin / 2 - 0.3)), [0, spec.chin / 2, 0.5]);
+  m.add(spec.body, cyl(Math.min(lowerT, lidT) * 0.42, w * 0.46, 16), [0, hinge, 0], [0, 0, 90]);
+  const lidMarks = spec.marks.filter((mark) => mark.y - mark.h / 2 >= hinge - 1);
+  frontMarks(m, spec.marks.filter((mark) => !lidMarks.includes(mark)), (y) => y, lowerT);
+  const frame = new THREE.Matrix4().makeTranslation(0, hinge, 0).multiply(new THREE.Matrix4().makeRotationX((-lean * Math.PI) / 180));
+  m.within(frame, () => {
+    m.add(spec.body, phoneShell(w, lidH, lidT, radius), [0, lidH / 2, 0]);
+    frontMarks(m, lidMarks, (y) => y - hinge, lidT);
+  });
+  return m;
+}
+
+/** One rounded shell, marks on the front, and a stub antenna when the phone has one. The DynaTAC keeps its own shape. */
+function shellPhone(m: Box, spec: MachineSpec) {
+  const [w, d, h] = spec.size;
+  const r = Math.min(spec.corner, w / 2 - 0.6);
+  m.add(spec.body, phoneShell(w, h, d, r), [0, h / 2, 0]);
+  if (spec.antenna) m.add(spec.body, cyl(2.2, spec.antenna + 4, 12), [w * 0.32, h + spec.antenna / 2 - 2, 0]);
+  const thin = 0.45;
+  for (const mark of spec.marks) {
+    if (mark.face !== "front") continue;
+    eachMark(mark, (x, y) => {
+      const at: Vec3 = [x, y, d / 2 + (mark.out ?? 0)];
+      const tone = mark.material ?? MATERIAL[mark.kind];
+      const oval = !mark.cols && !mark.round && mark.kind !== "panel" && mark.kind !== "slot" && mark.w > mark.h * 1.35;
+      if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 20), at, [90, 0, 0]);
+      else if (oval) m.add(tone, cyl(mark.h / 2, thin, 22), at, [90, 0, 0], { scale: [mark.w / mark.h, 1, 1] });
+      else m.add(tone, box(mark.w, mark.h, thin), at);
+    });
+  }
+  return m;
+}
+
 export function machine(m: Box, spec: MachineSpec) {
   const [w, d, h] = spec.size;
+  if (spec.shape === "flip") return flipPhone(m, spec);
+  if (spec.shape === "shell") return shellPhone(m, spec);
   if (spec.shape === "headphones") {
     for (const side of [-1, 1]) {
       m.add(spec.body, rbox(34, 110, d, spec.corner, 4), [side * (w / 2 - 17), 55, 0]);
