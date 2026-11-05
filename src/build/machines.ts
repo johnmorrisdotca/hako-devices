@@ -23,6 +23,8 @@ export interface Mark {
   cols?: number;
   rows?: number;
   gap?: number;
+  /** How far the middle of a row sits below its ends, so the row smiles. */
+  bow?: number;
 }
 
 export interface MachineSpec {
@@ -744,10 +746,11 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("panel", 0, 74, 36, 26, { material: "bezel", out: 0.9 }),
       front("lcd", 0, 74, 32, 22, { material: "lcd-grey", out: 1.15 }),
       front("key", -18, 58, 6.5, 6.5, { round: true, material: "plastic-white", out: 1.35 }),
-      front("key", 0, 56, 30, 10, { material: "shell-silver", out: 1.35 }),
-      front("slot", 0, 56, 10, 1.3, { material: "shell-blue", out: 1.7 }),
-      front("key", 17.5, 58, 5.5, 12, { material: "plastic-char", out: 1.3 }),
-      front("key", 0, 30, 13, 8, { cols: 3, rows: 4, gap: 2, material: "plastic-white", out: 0.9 }),
+      front("key", 0, 56, 30, 14, { material: "alu-dark", out: 1.2 }),
+      front("key", 0, 56, 26, 11, { material: "shell-silver", out: 1.5 }),
+      front("slot", 0, 56, 10, 1.4, { material: "shell-blue", out: 1.75 }),
+      front("key", 17.5, 56, 5.5, 13, { material: "plastic-char", out: 1.35 }),
+      front("key", 0, 28, 12, 8, { cols: 3, rows: 4, gap: 3.2, material: "plastic-white", out: 0.95 }),
     ],
   },
   // The article's axes are already on the list: 66 mm across, 10.5 mm thick, 115 mm tall. A metal band, a black face, a screen, a square pad and four rows of keys. The rows are straight. No word.
@@ -765,12 +768,16 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 0, 50, 8, 8, { material: "plastic-black", out: 1.4 }),
       front("key", 16, 50, 7, 3.4, { material: "alu-dark", out: 1.25 }),
       front("key", 26, 50, 6, 6, { round: true, material: "plastic-char", out: 1.3 }),
-      front("key", 0, 39, 5.2, 4.2, { cols: 10, rows: 1, gap: 0.7, material: "plastic-grey", out: 1.25 }),
-      front("key", 0, 33, 5.2, 4.2, { cols: 10, rows: 1, gap: 0.7, material: "plastic-grey", out: 1.25 }),
-      front("key", 0, 27, 5.2, 4.2, { cols: 10, rows: 1, gap: 0.7, material: "plastic-grey", out: 1.25 }),
-      front("key", -22, 20, 10, 4.4, { material: "plastic-grey", out: 1.25 }),
-      front("key", 2, 20, 26, 4.6, { material: "plastic-grey", out: 1.25 }),
-      front("key", 22, 20, 10, 4.4, { material: "plastic-grey", out: 1.25 }),
+      front("slot", 0, 42.2, 56, 0.7, { material: "alu", out: 1.55, bow: 1.3 }),
+      front("key", 0, 39, 5, 3.6, { cols: 10, rows: 1, gap: 0.55, material: "plastic-grey", out: 1.3, bow: 1.3 }),
+      front("slot", 0, 36, 56, 0.7, { material: "alu", out: 1.55, bow: 1.3 }),
+      front("key", 0, 33, 5, 3.6, { cols: 10, rows: 1, gap: 0.55, material: "plastic-grey", out: 1.3, bow: 1.3 }),
+      front("slot", 0, 30, 56, 0.7, { material: "alu", out: 1.55, bow: 1.3 }),
+      front("key", 0, 27, 5, 3.6, { cols: 10, rows: 1, gap: 0.55, material: "plastic-grey", out: 1.3, bow: 1.3 }),
+      front("slot", 0, 23.6, 56, 0.7, { material: "alu", out: 1.55, bow: 1.3 }),
+      front("key", -22, 19.2, 10, 3.8, { material: "plastic-grey", out: 1.3, bow: 0.4 }),
+      front("key", 2, 18.6, 24, 4, { material: "plastic-grey", out: 1.3 }),
+      front("key", 22, 19.2, 10, 3.8, { material: "plastic-grey", out: 1.3, bow: 0.4 }),
       front("key", 35, 62, 2, 12, { material: "plastic-black", out: 0.3 }),
     ],
   },
@@ -826,7 +833,10 @@ export function eachMark(mark: Mark, each: (x: number, y: number) => void) {
   for (let c = 0; c < cols; c++) {
     for (let r = 0; r < rows; r++) {
       const x = mark.x + (c - (cols - 1) / 2) * (mark.w + gap);
-      const y = mark.y + ((rows - 1) / 2 - r) * (mark.h + gap) * (mark.face === "top" ? -1 : 1);
+      const span = cols * (mark.w + gap) - gap;
+      const along = span > 0 ? (x - mark.x) / (span / 2) : 0;
+      const smile = (mark.bow ?? 0) * (1 - Math.min(1, along * along));
+      const y = mark.y + ((rows - 1) / 2 - r) * (mark.h + gap) * (mark.face === "top" ? -1 : 1) - smile;
       each(x, y);
     }
   }
@@ -988,14 +998,26 @@ function shellPhone(m: Box, spec: MachineSpec) {
         return;
       }
       const at: Vec3 = [x, y, d / 2 + (mark.out ?? 0)];
-      const oval = !mark.cols && !mark.round && mark.kind !== "panel" && mark.kind !== "slot" && mark.kind !== "lcd" && mark.kind !== "screen" && mark.w > mark.h * 1.35;
+      if ((mark.bow ?? 0) > 0 && !mark.cols && mark.h < 2 && mark.w > 20) {
+        const steps = 12;
+        for (let i = 0; i < steps; i++) {
+          const t = (i + 0.5) / steps - 0.5;
+          const fx = mark.x + t * mark.w;
+          const fy = mark.y - (mark.bow ?? 0) * (1 - (2 * t) ** 2);
+          m.add(tone, box(mark.w / steps + 0.6, mark.h, 0.35), [fx, fy, d / 2 + (mark.out ?? 0)]);
+        }
+        return;
+      }
       const cover = mark.kind === "panel" && mark.h > 36;
-      const tall = mark.kind === "key" && !mark.round && !mark.cols && mark.h > mark.w * 1.3;
+      const tall = mark.kind === "key" && !mark.round && mark.h > mark.w * 1.3;
+      const pill = mark.kind === "key" && !mark.round && mark.w > mark.h * 1.4;
+      const cap = mark.kind === "key" && !mark.round && !pill && !tall && mark.h > 2;
       if (cover && tone === "shell-silver") m.add(tone, smileCover(mark.w, mark.h, 1.6, 6), [x, y, d / 2 + (mark.out ?? 0)]);
       else if (cover) m.add(tone, phoneShell(mark.w, mark.h, 1.6, 8), [x, y, d / 2 + (mark.out ?? 0)]);
       else if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 20), at, [90, 0, 0]);
       else if (tall) m.add(tone, cyl(mark.w / 2, thin, 16), at, [90, 0, 0], { scale: [1, 1, mark.h / mark.w] });
-      else if (oval) m.add(tone, cyl(mark.h / 2, thin, 28), at, [90, 0, 0], { scale: [mark.w / mark.h, 1, 1] });
+      else if (pill) m.add(tone, cyl(mark.h / 2, thin, 28), at, [90, 0, 0], { scale: [mark.w / mark.h, 1, 1] });
+      else if (cap) m.add(tone, plate(mark.w, mark.h, 0.5, 0.12, 0.2), at);
       else m.add(tone, box(mark.w, mark.h, thin), at);
     });
   }

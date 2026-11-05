@@ -97,10 +97,10 @@ function drawShell(d: Drawing, spec: MachineSpec) {
         d.flat(smileOutline(mark.w, mark.h, 6).map(([px, py]) => [x + px, y + py, z] as Vec3), [0, 0, 1], paint, 4);
         return;
       }
-      const oval = !mark.cols && !mark.round && mark.kind !== "panel" && mark.kind !== "slot" && mark.kind !== "lcd" && mark.kind !== "screen" && mark.w > mark.h * 1.35;
-      const tall = mark.kind === "key" && !mark.round && !mark.cols && mark.h > mark.w * 1.3;
+      const pill = mark.kind === "key" && !mark.round && mark.w > mark.h * 1.4;
+      const tall = mark.kind === "key" && !mark.round && mark.h > mark.w * 1.3;
       if (mark.round) d.circle(c, X, Y, mark.w / 2, paint, 4);
-      else d.rect(c, X, Y, mark.w, mark.h, paint, 4, oval ? mark.h / 2 : tall ? mark.w / 2 : Math.min(mark.w, mark.h) * 0.28);
+      else d.rect(c, X, Y, mark.w, mark.h, paint, 4, pill ? mark.h / 2 : tall ? mark.w / 2 : Math.min(mark.w, mark.h) * 0.28);
     });
   }
   return d;
