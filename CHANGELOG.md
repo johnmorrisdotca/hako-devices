@@ -6,7 +6,7 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
-- The demo uses the family's shared header and footer: the language picker, the theme switch, and the list of the other packages. This package is on that list. Those controls use the demo's night colours.
+- The demo uses the family's shared header and footer: the language picker, the theme switch, and the list of the other packages. This package is on that list. Those controls use the demo's night colours. The section tabs sit in the same gutter as the title.
 
 ## [0.17.0] - 2026-11-05
 
