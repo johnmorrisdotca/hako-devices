@@ -611,6 +611,18 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 28, 34, 16, 8, { material: "alu", out: 0.6 }),
     ],
   },
+  // Motorola's 1997 page gives 93 x 52 x 20 mm and names no axes, so the list size stays blank. The open phone is one body, 26.9 mm across and 93 mm tall, from a straight-on photograph of a StarTAC 8500 scaled so the long side is 93 mm. The 20 mm is the closed thickness, and that photograph has no side, so the mesh uses it for the depth. The display and the key rows are measured on the photograph. The speaker did not separate from the dark lid, and one body cannot show the hinge gap.
+  startac: {
+    size: [26.9, 20, 93],
+    body: "plastic-char",
+    corner: 6,
+    marks: [
+      front("screen", 2.2, 35.6, 12.3, 12.1),
+      front("key", 0, 18.3, 6.2, 2.8, { cols: 3, rows: 4, gap: 1.1 }),
+      front("key", 0, 8.6, 4.2, 2.6, { cols: 4, rows: 1, gap: 1 }),
+      front("key", 0, 4.7, 5, 2.4, { cols: 3, rows: 1, gap: 1.2 }),
+    ],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };

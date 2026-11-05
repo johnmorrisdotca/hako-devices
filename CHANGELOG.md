@@ -6,9 +6,9 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
-### Changed
+### Added
 
-- StarTAC: the size is Motorola's own 93 x 52 x 20 mm. That page names no axes, and its picture is open and at an angle, so the keys and the screen are not drawn.
+- StarTAC, open. Motorola's 93 x 52 x 20 mm names no axes, so the list size stays blank. The body follows a straight-on photograph of a StarTAC 8500, scaled so the long side is 93 mm, and the display and the keys are measured on that photograph. The depth is the 20 mm closed thickness, because the photograph has no side.
 
 ## [0.18.0] - 2026-11-05
 
