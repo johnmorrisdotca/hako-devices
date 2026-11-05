@@ -891,7 +891,6 @@ export const PLANNED: readonly PlannedDevice[] = [
   {"key":"ibm-simon","name":"IBM Simon","family":"Simon","shelf":"phones","maker":"IBM","status":"planned"},
   {"key":"kyocera-qcp-6035","name":"Kyocera QCP-6035","family":"QCP","shelf":"phones","maker":"Kyocera","status":"planned"},
   {"key":"motorola-droid","name":"Motorola Droid","family":"Droid","shelf":"phones","maker":"Motorola","status":"planned"},
-  {"key":"dynatac-8000x","name":"DynaTAC 8000X","family":"DynaTAC","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"microtac","name":"MicroTAC","family":"MicroTAC","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"pebl-u6","name":"PEBL U6","family":"PEBL","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"motorola-q","name":"Motorola Q","family":"Q","shelf":"phones","maker":"Motorola","status":"planned"},
