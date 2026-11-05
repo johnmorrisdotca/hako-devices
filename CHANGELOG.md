@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- The DynaTAC 8000X. RigPix names a width, a height and a depth, without the antenna. The photograph shows the face wider than that width, so the list size stays blank and the note states the mesh. The antenna is not drawn. The StarTAC and the RAZR V3 are not drawn: the photographs opened are the open phones, and a closed pink RAZR marked as a zoom camera was not used.
+
 ## [0.16.0] - 2026-11-03
 
 ### Fixed

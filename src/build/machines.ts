@@ -571,6 +571,19 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     corner: 4,
     marks: [front("dark", 0, 165, 112, 112, { round: true })],
   },
+  // RigPix names width 40 mm, height 195 mm and depth 80 mm, with the battery and without the antenna. The photograph shows the face wider than the side, so that width is not used and the list stays blank. The mesh uses 80 mm across the face, 40 mm thick and 195 mm tall. The antenna is not drawn. No back photograph was opened, so the back is plain. Places are not measured.
+  "dynatac-8000x": {
+    size: [80, 40, 195],
+    body: "plastic-grey",
+    corner: 6,
+    marks: [
+      front("panel", 0, 155, 64, 60),
+      front("dark", 0, 168, 22, 22, { round: true }),
+      front("lcd", 0, 142, 40, 10),
+      front("key", 0, 112, 12, 9, { cols: 3, rows: 4, gap: 3 }),
+      front("key", 0, 58, 12, 8, { cols: 3, rows: 3, gap: 3 }),
+    ],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };
