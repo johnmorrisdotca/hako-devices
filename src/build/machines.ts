@@ -32,7 +32,7 @@ export interface MachineSpec {
   /** A rod rising from the top. The length is a drawing, not a measured axis. */
   antenna?: number;
   /** Not one block: its own shape, in its size. */
-  shape?: "headphones" | "headset" | "can";
+  shape?: "headphones" | "headset" | "can" | "dynatac";
 }
 
 /** Points along the band over the head of a pair of headphones, or round the back of a headset. */
@@ -613,21 +613,23 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 28, 34, 16, 8, { material: "alu", out: 0.6 }),
     ],
   },
-  // RigPix names width 40 mm, height 195 mm and depth 80 mm, with the battery and without the antenna. The photograph shows the face wider than the side, so that width is not used and the list stays blank. The mesh uses 80 mm across the face, 40 mm thick and 195 mm tall, cream, with a black face. The antenna is a drawing 160 mm long; no page opened names its length. No back photograph was opened, so the back is plain. Places are not measured.
+  // RigPix names width 40 mm, height 195 mm and depth 80 mm, with the battery and without the antenna. The photograph shows the face wider than the side, so that width is not used and the list stays blank. The mesh is 80 mm across, 40 mm thick and 195 mm tall. The antenna is a drawing 160 mm long, thick at the base and thin at the tip; no page opened names that length. The back is three panels. Places are not measured.
   "dynatac-8000x": {
     size: [80, 40, 195],
     body: "plastic-beige",
     corner: 6,
     antenna: 160,
+    shape: "dynatac",
     marks: [
-      front("panel", 0, 98, 62, 168),
-      front("dark", 0, 168, 22, 22, { round: true, material: "alu-dark", out: 0.5 }),
-      front("slot", 0, 168, 2.4, 2.4, { round: true, cols: 3, rows: 3, gap: 2.4, out: 1.1 }),
-      front("light", 0, 146, 34, 8, { out: 0.6 }),
-      front("key", 0, 108, 14, 10, { cols: 3, rows: 4, gap: 3, material: "deck-white", out: 0.7 }),
-      front("key", 0, 68, 14, 9, { cols: 3, rows: 3, gap: 3, material: "deck-white", out: 0.7 }),
-      front("key", 17, 80, 14, 9, { material: "lid-red", out: 1.3 }),
-      front("slot", 0, 28, 28, 3, { out: 0.6 }),
+      front("dark", 0, 174, 18, 18, { round: true, material: "alu-dark", out: 10.4 }),
+      front("slot", 0, 174, 2.2, 2.2, { round: true, cols: 3, rows: 3, gap: 2.2, out: 11 }),
+      front("light", 0, 150, 32, 7, { out: 0.8 }),
+      front("key", 0, 120, 13, 9, { cols: 3, rows: 4, gap: 2.5, material: "deck-white", out: 1.6 }),
+      front("key", 0, 70, 13, 8, { cols: 3, rows: 3, gap: 2.5, material: "deck-white", out: -5.8 }),
+      front("key", 15.5, 80.5, 13, 8, { material: "lid-red", out: -5.4 }),
+      front("slot", 0, 44, 22, 3, { out: -6.4 }),
+      back("dark", -13, 98, 0.9, 170, { out: 0.5 }),
+      back("dark", 13, 98, 0.9, 170, { out: 0.5 }),
     ],
   },
 };
@@ -669,19 +671,37 @@ export function machine(m: Box, spec: MachineSpec) {
     m.add(spec.body, cyl(r, h * 0.78, 32), [0, h * 0.42, 0]);
     m.add(spec.body, box(r, 4, 4), [r * 0.4, h * 0.86, 0]);
     m.add(spec.body, cyl(4, 10, 16), [r * 0.85, h * 0.86, 0]);
+  } else if (spec.shape === "dynatac") {
+    // A dark battery along the rear, a light back of three panels, and a cream shell that steps back under the keypad.
+    m.add("plastic-graphite", rbox(w - 4, h - 8, 22, 3, 2), [0, h / 2, -8]);
+    m.add(spec.body, rbox(w - 2, h - 6, 6, 2, 2), [0, h / 2, -d / 2 + 2.6]);
+    m.add(spec.body, rbox(w, 92, 22, 4, 2), [0, 148, 4]);
+    m.add(spec.body, rbox(w - 1, 78, 16, 3, 2), [0, 62, 0]);
+    m.add(spec.body, rbox(w - 2, 36, 24, 4, 2), [0, 20, 6]);
+    m.add("plastic-black", rbox(56, 100, 8, 2, 2), [0, 136, 16]);
+    m.add("plastic-black", cyl(14, 16, 28), [0, 174, 22], [90, 0, 0]);
+    m.add("plastic-black", rbox(54, 82, 6, 2, 2), [0, 66, 10]);
   } else m.add(spec.body, rbox(w, h, d, Math.min(spec.corner, Math.min(w, d, h) / 2 - 0.1), 4), [0, h / 2, 0]);
-  if (spec.antenna) m.add("rubber", cyl(3.2, spec.antenna, 16), [-w * 0.22, h + spec.antenna / 2 - 2, 0]);
+  if (spec.antenna) {
+    const len = spec.antenna;
+    const x = spec.shape === "dynatac" ? 0 : -w * 0.22;
+    const z = spec.shape === "dynatac" ? -3 : 0;
+    m.add("rubber", cyl(7.2, 14, 16, 4.6), [x, h + 5, z]);
+    m.add("rubber", cyl(4.6, len - 22, 20, 2.3), [x, h + 12 + (len - 22) / 2, z]);
+    m.add("rubber", cyl(2.3, 10, 12, 1.6), [x, h + len - 8, z]);
+  }
   const thin = 0.5;
   for (const mark of spec.marks) {
     eachMark(mark, (x, y) => {
       const onTop = mark.face === "top";
       const out = mark.out ?? 0;
-      const z = mark.face === "back" ? -d / 2 + thin / 2 - 0.05 - out : d / 2 - thin / 2 + 0.05 + out;
-      const at: [number, number, number] = onTop ? [x, h - thin / 2 + 0.05 + out, y] : [x, y, z];
+      const depth = spec.shape === "dynatac" && mark.kind === "key" ? 2.4 : thin;
+      const z = mark.face === "back" ? -d / 2 + depth / 2 - 0.05 - out : d / 2 - depth / 2 + 0.05 + out;
+      const at: [number, number, number] = onTop ? [x, h - depth / 2 + 0.05 + out, y] : [x, y, z];
       const tone = mark.material ?? MATERIAL[mark.kind];
-      if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 24), at, onTop ? [0, 0, 0] : [90, 0, 0]);
-      else if (onTop) m.add(tone, box(mark.w, thin, mark.h), at);
-      else m.add(tone, box(mark.w, mark.h, thin), at);
+      if (mark.round) m.add(tone, cyl(mark.w / 2, depth, 24), at, onTop ? [0, 0, 0] : [90, 0, 0]);
+      else if (onTop) m.add(tone, box(mark.w, depth, mark.h), at);
+      else m.add(tone, box(mark.w, mark.h, depth), at);
     });
   }
   return m;
