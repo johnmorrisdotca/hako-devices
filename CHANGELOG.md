@@ -8,7 +8,7 @@ All notable changes to this project are written here. The format follows
 
 ### Added
 
-- The Sony Walkman TPS-L2 and the WM-2. Both stay blank on the list. M+ names no axes for the TPS-L2, and the WM-2's named width does not match the control face in its photograph. The note states each mesh. The WM-20 and the WM-DD are not drawn.
+- The Sony Walkman TPS-L2 and the WM-2. Both stay blank on the list. The TPS-L2 stands window-forward, silver, with a blue door, a cassette window, an orange button and keys along the top. The WM-2 is the silver body with a cassette window and keys on the right. The WM-20 and the WM-DD are not drawn.
 
 ## [0.17.0] - 2026-11-05
 

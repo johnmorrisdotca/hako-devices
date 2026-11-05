@@ -14,6 +14,10 @@ export interface Mark {
   h: number;
   /** A round mark: `w` is its diameter. */
   round?: boolean;
+  /** A mark in a material of its own. The kind still decides the drawing. */
+  material?: Material;
+  /** How far the mark stands out from its face, so one mark can sit on another. */
+  out?: number;
   /** A block of marks, centred on (x, y). */
   cols?: number;
   rows?: number;
@@ -571,31 +575,40 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     corner: 4,
     marks: [front("dark", 0, 165, 112, 112, { round: true })],
   },
-  // M+ gives 13.6 by 8.9 by 2.8 cm and names no axes. MoMA's page was not opened. A fan page's 88 by 133.5 by 29 mm is not stored. The mesh uses 89 mm across, 28 mm thick and 136 mm tall after the photograph of a tall thin player. The blue and the silver have no such tone. The controls on the right edge are not drawn. No rear panel was opened, so the back is plain. Places are not measured.
+  // M+ gives 13.6 by 8.9 by 2.8 cm and names no axes. The mesh stands window-forward: 136 mm across, 28 mm thick and 89 mm tall, after the photograph that lays the silver edge along the top. The body is that silver. A blue door, a cassette window with two hubs and the orange button sit on the front, and the jacks sit on the silver band above the door. Four keys and two wheels sit on the top. No rear panel was opened, so the back is plain. Places are not measured.
   "sony-tps-l2": {
-    size: [89, 28, 136],
-    body: "plastic-char",
-    corner: 4,
+    size: [136, 28, 89],
+    body: "shell-silver",
+    corner: 3,
     marks: [
-      front("dark", -6, 58, 36, 72),
-      front("key", -28, 120, 16, 8),
-      front("light", 8, 120, 4, 4, { round: true }),
-      front("slot", 20, 120, 6, 6, { round: true }),
-      front("slot", 32, 120, 6, 6, { round: true }),
+      front("panel", 0, 36, 130, 68, { material: "plastic-blue" }),
+      front("dark", 12, 38, 62, 36, { out: 0.7 }),
+      front("dark", -2, 38, 8, 8, { round: true, material: "steel", out: 1.3 }),
+      front("dark", 26, 38, 8, 8, { round: true, material: "steel", out: 1.3 }),
+      front("key", -48, 28, 16, 12, { material: "shell-orange-panel", out: 0.7 }),
+      front("slot", -40, 78, 6, 6, { round: true, out: 0.4 }),
+      front("slot", -26, 78, 6, 6, { round: true, out: 0.4 }),
+      top("key", -16, 4, 18, 14, { cols: 4, rows: 1, gap: 3, material: "alu-dark", out: 0.6 }),
+      top("key", 48, 4, 10, 10, { round: true, material: "steel", out: 0.6 }),
+      top("key", 62, 4, 10, 10, { round: true, material: "steel", out: 0.6 }),
     ],
   },
-  // Radiomuseum names width 30 mm, height 109 mm and depth 80 mm. The photograph shows the control face far wider than 30 mm against that height, so those axis names are not used and the list stays blank. The mesh uses 80 mm across the control face, 30 mm thick and 109 mm tall. The belt holder and the battery case in the photograph are not part of the body. No back photograph was opened, so the back is plain. Places are not measured.
+  // Radiomuseum names width 30 mm, height 109 mm and depth 80 mm. The photograph shows the control face far wider than 30 mm, so the list stays blank. The mesh uses 80 mm across, 30 mm thick and 109 mm tall, in the silver of that photograph. A cassette window with two hubs, and the keys along the right. The belt holder and the battery case are not part of the body. No back photograph was opened, so the back is plain. Places are not measured.
   "sony-wm-2": {
     size: [80, 30, 109],
-    body: "plastic-grey",
+    body: "shell-silver",
     corner: 4,
     marks: [
-      front("slot", -16, 96, 5, 5, { round: true }),
-      front("slot", -4, 96, 5, 5, { round: true }),
-      front("key", 24, 82, 14, 14, { round: true }),
-      front("key", 16, 62, 16, 7),
-      front("key", 16, 50, 16, 7),
-      front("key", 22, 36, 18, 8),
+      front("panel", 28, 58, 22, 62),
+      front("dark", -12, 54, 44, 50, { out: 0.6 }),
+      front("dark", -22, 54, 7, 7, { round: true, material: "steel", out: 1.2 }),
+      front("dark", -2, 54, 7, 7, { round: true, material: "steel", out: 1.2 }),
+      front("slot", -8, 96, 5, 5, { round: true, out: 0.4 }),
+      front("slot", 6, 96, 5, 5, { round: true, out: 0.4 }),
+      front("key", 28, 80, 12, 12, { round: true, material: "steel", out: 0.6 }),
+      front("key", 28, 62, 16, 8, { material: "alu", out: 0.6 }),
+      front("key", 28, 48, 16, 8, { material: "alu", out: 0.6 }),
+      front("key", 28, 34, 16, 8, { material: "alu", out: 0.6 }),
     ],
   },
 };
@@ -642,11 +655,13 @@ export function machine(m: Box, spec: MachineSpec) {
   for (const mark of spec.marks) {
     eachMark(mark, (x, y) => {
       const onTop = mark.face === "top";
-      const z = mark.face === "back" ? -d / 2 + thin / 2 - 0.05 : d / 2 - thin / 2 + 0.05;
-      const at: [number, number, number] = onTop ? [x, h - thin / 2 + 0.05, y] : [x, y, z];
-      if (mark.round) m.add(MATERIAL[mark.kind], cyl(mark.w / 2, thin, 24), at, onTop ? [0, 0, 0] : [90, 0, 0]);
-      else if (onTop) m.add(MATERIAL[mark.kind], box(mark.w, thin, mark.h), at);
-      else m.add(MATERIAL[mark.kind], box(mark.w, mark.h, thin), at);
+      const out = mark.out ?? 0;
+      const z = mark.face === "back" ? -d / 2 + thin / 2 - 0.05 - out : d / 2 - thin / 2 + 0.05 + out;
+      const at: [number, number, number] = onTop ? [x, h - thin / 2 + 0.05 + out, y] : [x, y, z];
+      const tone = mark.material ?? MATERIAL[mark.kind];
+      if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 24), at, onTop ? [0, 0, 0] : [90, 0, 0]);
+      else if (onTop) m.add(tone, box(mark.w, thin, mark.h), at);
+      else m.add(tone, box(mark.w, mark.h, thin), at);
     });
   }
   return m;
