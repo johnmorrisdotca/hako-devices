@@ -899,7 +899,6 @@ export const PLANNED: readonly PlannedDevice[] = [
   {"key":"razr-v3i","name":"RAZR V3i","family":"RAZR","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"rokr-e1","name":"ROKR E1","family":"ROKR","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"slvr-l7","name":"SLVR L7","family":"SLVR","shelf":"phones","maker":"Motorola","status":"planned"},
-  {"key":"startac","name":"StarTAC","family":"StarTAC","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"timeport-l7089","name":"Timeport L7089","family":"Timeport","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"v70","name":"V70","family":"V series","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"nokia-1011","name":"Nokia 1011","family":"Candybar","shelf":"phones","maker":"Nokia","status":"planned"},

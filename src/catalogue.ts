@@ -213,6 +213,7 @@ export const DEVICES: readonly Device[] = [
 
   whole("game-boy-dmg-01", "Game Boy (DMG-01)", "classics", [90, 32, 148], ports({ audio: 1 })),
   whole("nokia-3310", "Nokia 3310", "classics", [48, 22, 113], []),
+  whole("startac", "StarTAC", "classics", [26.9, 20, 93], []),
   whole("palm-iii", "Palm III", "classics", [81, 18, 119], []),
   whole("wii-rvl-001", "Wii (RVL-001)", "classics", [157, 197, 60], ports({ "usb-a": 2, power: 1 })),
   whole("xbox-series-x", "Xbox Series X", "classics", [151, 151, 301], ports({ "usb-a": 3, hdmi: 1, ethernet: 1, power: 1 })),
