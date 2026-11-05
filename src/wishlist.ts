@@ -2020,8 +2020,6 @@ export const PLANNED: readonly PlannedDevice[] = [
   {"key":"hp-45","name":"HP-45","family":"HP-45","shelf":"calculators","maker":"Hewlett-Packard","status":"planned"},
   {"key":"ti-sr-50","name":"TI SR-50","family":"TI SR","shelf":"calculators","maker":"Texas Instruments","status":"planned"},
   {"key":"hp-25","name":"HP-25","family":"HP-25","shelf":"calculators","maker":"Hewlett-Packard","status":"planned"},
-  {"key":"sony-tps-l2","name":"Sony Walkman TPS-L2","family":"Walkman","shelf":"music","maker":"Sony","status":"planned"},
-  {"key":"sony-wm-2","name":"Sony Walkman WM-2","family":"Walkman","shelf":"music","maker":"Sony","status":"planned"},
   {"key":"sony-wm-20","name":"Sony Walkman WM-20","family":"Walkman","shelf":"music","maker":"Sony","status":"planned"},
   {"key":"sony-wm-dd","name":"Sony Walkman WM-DD","family":"Walkman","shelf":"music","maker":"Sony","status":"planned"},
   {"key":"sony-d-50","name":"Sony Discman D-50","family":"Discman","shelf":"music","maker":"Sony","status":"planned"},

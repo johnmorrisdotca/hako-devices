@@ -571,6 +571,33 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     corner: 4,
     marks: [front("dark", 0, 165, 112, 112, { round: true })],
   },
+  // M+ gives 13.6 by 8.9 by 2.8 cm and names no axes. MoMA's page was not opened. A fan page's 88 by 133.5 by 29 mm is not stored. The mesh uses 89 mm across, 28 mm thick and 136 mm tall after the photograph of a tall thin player. The blue and the silver have no such tone. The controls on the right edge are not drawn. No rear panel was opened, so the back is plain. Places are not measured.
+  "sony-tps-l2": {
+    size: [89, 28, 136],
+    body: "plastic-char",
+    corner: 4,
+    marks: [
+      front("dark", -6, 58, 36, 72),
+      front("key", -28, 120, 16, 8),
+      front("light", 8, 120, 4, 4, { round: true }),
+      front("slot", 20, 120, 6, 6, { round: true }),
+      front("slot", 32, 120, 6, 6, { round: true }),
+    ],
+  },
+  // Radiomuseum names width 30 mm, height 109 mm and depth 80 mm. The photograph shows the control face far wider than 30 mm against that height, so those axis names are not used and the list stays blank. The mesh uses 80 mm across the control face, 30 mm thick and 109 mm tall. The belt holder and the battery case in the photograph are not part of the body. No back photograph was opened, so the back is plain. Places are not measured.
+  "sony-wm-2": {
+    size: [80, 30, 109],
+    body: "plastic-grey",
+    corner: 4,
+    marks: [
+      front("slot", -16, 96, 5, 5, { round: true }),
+      front("slot", -4, 96, 5, 5, { round: true }),
+      front("key", 24, 82, 14, 14, { round: true }),
+      front("key", 16, 62, 16, 7),
+      front("key", 16, 50, 16, 7),
+      front("key", 22, 36, 18, 8),
+    ],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };
