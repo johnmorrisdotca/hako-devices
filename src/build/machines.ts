@@ -148,13 +148,17 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
   "messagepad-original-model": {
     size: [114.3, 19.1, 184.8],
     body: "plastic-black",
-    corner: 10,
+    corner: 16,
     shape: "shell",
     marks: [
-      front("screen", 0, 112, 94, 112, { material: "black-glass", out: 0.25 }),
-      front("panel", 0, 64, 86, 12, { material: "plastic-grey", out: 0.4 }),
-      front("key", 62, 112, 5, 130, { material: "plastic-grey", out: 0.2 }),
-      front("key", 32, 26, 2.4, 2.4, { round: true, cols: 4, rows: 3, gap: 1.8, material: "alu-dark", out: 0.4 }),
+      front("panel", 0, 164, 98, 8, { material: "plastic-char", out: 0.5 }),
+      front("panel", -50, 112, 7, 96, { material: "plastic-char", out: 0.5 }),
+      front("panel", 50, 112, 7, 96, { material: "plastic-char", out: 0.5 }),
+      front("screen", 0, 114, 86, 92, { material: "black-glass", out: 0.2 }),
+      front("key", 0, 74, 6, 4, { cols: 7, rows: 1, gap: 3.5, material: "plastic-grey", out: 0.55 }),
+      front("key", 62, 108, 4, 120, { material: "plastic-grey", out: 0.2 }),
+      front("key", 52, 166, 7, 7, { round: true, material: "plastic-grey", out: 0.55 }),
+      front("key", 32, 28, 2.6, 2.6, { round: true, cols: 4, rows: 3, gap: 1.6, material: "alu-dark", out: 0.45 }),
     ],
   },
   // The museum page gives 80 x 115 x 10 mm, and the same page's inches (4.5 by 3.1 by 0.4, shorter and thinner) name the height, the width and the thickness. A metal slab, a green-grey screen, four round keys, a tall centre rocker and a dark cap. No word.
