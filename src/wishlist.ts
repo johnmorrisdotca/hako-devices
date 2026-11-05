@@ -959,7 +959,6 @@ export const PLANNED: readonly PlannedDevice[] = [
   {"key":"palm-vx","name":"Palm Vx","family":"Palm V","shelf":"phones","maker":"Palm","status":"planned"},
   {"key":"palm-vii","name":"Palm VII","family":"Palm VII","shelf":"phones","maker":"Palm","status":"planned"},
   {"key":"palm-viix","name":"Palm VIIx","family":"Palm VII","shelf":"phones","maker":"Palm","status":"planned"},
-  {"key":"pilot-1000","name":"Pilot 1000","family":"Pilot","shelf":"phones","maker":"Palm","status":"planned"},
   {"key":"pilot-5000","name":"Pilot 5000","family":"Pilot","shelf":"phones","maker":"Palm","status":"planned"},
   {"key":"palmpilot-personal","name":"PalmPilot Personal","family":"Pilot","shelf":"phones","maker":"Palm","status":"planned"},
   {"key":"palmpilot-professional","name":"PalmPilot Professional","family":"Pilot","shelf":"phones","maker":"Palm","status":"planned"},

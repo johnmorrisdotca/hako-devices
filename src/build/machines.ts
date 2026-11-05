@@ -104,6 +104,25 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     corner: 7,
     marks: [front("lcd", 0, 74, 58, 58), front("dark", 0, 32, 60, 18), front("key", 0, 13, 10, 6, { cols: 4, rows: 1, gap: 6 })],
   },
+  // The list already assigns the axes. A straight-on photograph of this model, scaled to 120 mm tall, is 79 mm across. A dark slab, a screen, a writing panel, a green power key and four round keys around a small rocker. No word.
+  "pilot-1000": {
+    size: [80, 18, 120],
+    body: "plastic-char",
+    corner: 6,
+    shape: "shell",
+    marks: [
+      front("screen", 0, 80, 64, 56, { out: 0.25 }),
+      front("panel", 0, 50, 60, 20, { material: "pcb-green", out: 0.4 }),
+      front("lcd", 0, 50, 26, 11, { material: "plastic-gloss", out: 0.55 }),
+      front("key", -34, 18, 7, 7, { material: "pcb-green", out: 0.45 }),
+      front("key", -22, 17, 8, 8, { round: true, material: "plastic-grey", out: 0.4 }),
+      front("key", -10, 17, 8, 8, { round: true, material: "plastic-grey", out: 0.4 }),
+      front("key", 2, 20, 8, 2.4, { material: "plastic-grey", out: 0.4 }),
+      front("key", 2, 15, 8, 2.4, { material: "plastic-grey", out: 0.4 }),
+      front("key", 14, 17, 8, 8, { round: true, material: "plastic-grey", out: 0.4 }),
+      front("key", 26, 17, 8, 8, { round: true, material: "plastic-grey", out: 0.4 }),
+    ],
+  },
   "wii-rvl-001": {
     size: [157, 197, 60],
     body: "plastic-white",
