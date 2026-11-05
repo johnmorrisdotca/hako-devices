@@ -750,6 +750,30 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 0, 30, 13, 8, { cols: 3, rows: 4, gap: 2, material: "plastic-white", out: 0.9 }),
     ],
   },
+  // The article's axes are already on the list: 66 mm across, 10.5 mm thick, 115 mm tall. A metal band, a black face, a screen, a square pad and four rows of keys. The rows are straight. No word.
+  "bold-9900": {
+    size: [66, 10.5, 115],
+    body: "brushed-silver",
+    corner: 12,
+    shape: "shell",
+    marks: [
+      front("panel", 0, 57.5, 62, 108, { material: "plastic-black", out: 0.12 }),
+      front("slot", 0, 108, 16, 1.5, { material: "alu-dark", out: 1.15 }),
+      front("screen", 0, 80, 56, 46, { out: 1.05 }),
+      front("key", -22, 50, 8, 3.2, { material: "alu-dark", out: 1.25 }),
+      front("panel", 0, 50, 12, 12, { material: "alu", out: 1.15 }),
+      front("key", 0, 50, 8, 8, { material: "plastic-black", out: 1.4 }),
+      front("key", 16, 50, 7, 3.4, { material: "alu-dark", out: 1.25 }),
+      front("key", 26, 50, 6, 6, { round: true, material: "plastic-char", out: 1.3 }),
+      front("key", 0, 39, 5.2, 4.2, { cols: 10, rows: 1, gap: 0.7, material: "plastic-grey", out: 1.25 }),
+      front("key", 0, 33, 5.2, 4.2, { cols: 10, rows: 1, gap: 0.7, material: "plastic-grey", out: 1.25 }),
+      front("key", 0, 27, 5.2, 4.2, { cols: 10, rows: 1, gap: 0.7, material: "plastic-grey", out: 1.25 }),
+      front("key", -22, 20, 10, 4.4, { material: "plastic-grey", out: 1.25 }),
+      front("key", 2, 20, 26, 4.6, { material: "plastic-grey", out: 1.25 }),
+      front("key", 22, 20, 10, 4.4, { material: "plastic-grey", out: 1.25 }),
+      front("key", 35, 62, 2, 12, { material: "plastic-black", out: 0.3 }),
+    ],
+  },
   // The article's axes are already on the list. The shell is 43.9 mm across and 132 mm tall, from a straight-on photograph scaled so the shell's long side is 132 mm. A stub antenna of 18 mm stands on the top right. The cover is blue. A screen window, a long centre key and pale number keys. No word.
   "nokia-5110": {
     size: [43.9, 31, 132],

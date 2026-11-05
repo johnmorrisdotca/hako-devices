@@ -26,7 +26,7 @@ export const TAG_DATA: Readonly<Record<string, Readonly<Partial<Record<string, r
   "blackberry-8820": {"maker":["BlackBerry"],"type":["Phone"],"decade":["2000s"]},
   "blackberry-bold-9000": {"maker":["BlackBerry"],"type":["Phone"],"decade":["2000s"]},
   "blackberry-bold-9700": {"maker":["BlackBerry"],"type":["Phone"],"decade":["2000s"],"os":["BlackBerry OS"],"wireless":["Wi-Fi","Bluetooth","Cellular"],"weight":["Under 1 kg"]},
-  "blackberry-bold-9900": {"maker":["BlackBerry"],"type":["Phone"],"decade":["2010s"]},
+  "bold-9900": {"maker":["BlackBerry"],"type":["Phone"],"decade":["2010s"]},
   "blackberry-curve-8300": {"maker":["BlackBerry"],"type":["Phone"],"decade":["2000s"]},
   "blackberry-curve-8310": {"maker":["BlackBerry"],"type":["Phone"],"decade":["2000s"]},
   "blackberry-curve-8320": {"maker":["BlackBerry"],"type":["Phone"],"decade":["2000s"]},
@@ -2551,7 +2551,7 @@ export const YEAR_DATA: Readonly<Record<string, number>> = {
   "blackberry-6280": 2003,
   "blackberry-bold-9000": 2008,
   "blackberry-bold-9700": 2009,
-  "blackberry-bold-9900": 2011,
+  "bold-9900": 2011,
   "blackberry-curve-8300": 2007,
   "blackberry-curve-8310": 2007,
   "blackberry-curve-8320": 2007,
@@ -4802,6 +4802,7 @@ export const YEAR_DATA: Readonly<Record<string, number>> = {
 
 /** The product line of each drawn device ("Power Mac", "iPhone"), as the list gives it. A machine the list only covers or plans has its line on its row in wishlist.ts. */
 export const LINE_DATA: Readonly<Record<string, string>> = {
+  "bold-9900": "Bold",
   "dynatac-8000x": "DynaTAC",
   "razr-v3": "RAZR",
   "razr-v3-shut": "RAZR",

@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2536 machines. 1025 distinct shapes still to build. 1179 entries are already built: the 387 devices in this package, plus the real models those meshes cover. 1495 entries have a sourced size; the other 1041 are `null` on purpose.**
+**2536 machines. 1024 distinct shapes still to build. 1180 entries are already built: the 388 devices in this package, plus the real models those meshes cover. 1495 entries have a sourced size; the other 1041 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -10,10 +10,10 @@ The shape count is the real work: a group of machines that share a body is one m
 
 | Phase | Group | Machines | Shapes to build | With a sourced size |
 |---|---|---:|---:|---:|
-| **1** | **Retro phones and PDAs** | **224** | **172** | **104** |
+| **1** | **Retro phones and PDAs** | **224** | **171** | **104** |
 |  | Nokia | 53 | 47 | 43 |
 |  | Palm | 48 | 31 | 15 |
-|  | BlackBerry | 32 | 20 | 10 |
+|  | BlackBerry | 32 | 19 | 10 |
 |  | Motorola | 15 | 10 | 6 |
 |  | Handspring | 13 | 7 | 3 |
 |  | Sony Ericsson | 13 | 12 | 13 |
@@ -286,7 +286,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2536** | **1025** | **1495** |
+|  | **Total** | **2536** | **1024** | **1495** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -338,7 +338,7 @@ No open dataset of outer dimensions for consoles or old phones was found. One se
 
 ## The machines
 
-### Phase 1: Retro phones and PDAs (224 machines, 172 shapes to build)
+### Phase 1: Retro phones and PDAs (224 machines, 171 shapes to build)
 
 **Apple Newton** (8 machines, 4 shapes)
 
@@ -372,9 +372,9 @@ BlackBerry 8700 (2005).
 
 BlackBerry 8800 (2007), BlackBerry 8820 (2007).
 
-**BlackBerry Bold** (3 machines, 3 shapes)
+**BlackBerry Bold** (3 machines, 2 shapes)
 
-BlackBerry Bold 9000 (2008), BlackBerry Bold 9700 (2009), BlackBerry Bold 9900 (2011).
+BlackBerry Bold 9000 (2008), BlackBerry Bold 9700 (2009), BlackBerry Bold 9900 (2011) *built*.
 
 **BlackBerry Curve** (5 machines, 3 shapes)
 

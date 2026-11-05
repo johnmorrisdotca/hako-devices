@@ -221,6 +221,7 @@ export const DEVICES: readonly Device[] = [
   whole("razr-v3-shut", "RAZR V3, shut", "classics", [53, 13.9, 98], []),
   whole("palm-iii", "Palm III", "classics", [81, 18, 119], []),
   whole("pilot-1000", "Pilot 1000", "classics", [80, 18, 120], []),
+  whole("bold-9900", "BlackBerry Bold 9900", "classics", [66, 10.5, 115], []),
   whole("wii-rvl-001", "Wii (RVL-001)", "classics", [157, 197, 60], ports({ "usb-a": 2, power: 1 })),
   whole("xbox-series-x", "Xbox Series X", "classics", [151, 151, 301], ports({ "usb-a": 3, hdmi: 1, ethernet: 1, power: 1 })),
   whole("playstation-2-fat", "PlayStation 2 (fat)", "classics", [302.3, 182.9, 78.7], ports({ "usb-a": 2, power: 1 })),
