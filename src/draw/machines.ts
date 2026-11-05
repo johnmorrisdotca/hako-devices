@@ -30,10 +30,11 @@ function paintOf(mark: Mark): ShapeStyle {
 
 function drawFace(d: Drawing, marks: readonly Mark[], thick: number, yShift: number) {
   for (const mark of marks) {
-    if (mark.face !== "front") continue;
+    if (mark.face !== "front" && mark.face !== "back") continue;
+    const sign = mark.face === "front" ? 1 : -1;
     const style = paintOf(mark);
     eachMark(mark, (x, y) => {
-      const c: Vec3 = [x, y + yShift, thick / 2 + 0.25 + (mark.out ?? 0)];
+      const c: Vec3 = [x, y + yShift, sign * (thick / 2 + 0.25 + (mark.out ?? 0))];
       if (mark.round) d.circle(c, X, Y, mark.w / 2, style, 4);
       else d.rect(c, X, Y, mark.w, mark.h, style, 4, Math.min(mark.w, mark.h) * 0.22);
     });

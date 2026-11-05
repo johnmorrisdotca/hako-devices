@@ -676,6 +676,9 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     marks: [
       front("slot", 0, 152, 16, 1.3, { out: 0.35 }),
       front("screen", 0, 118, 42, 52, { out: 0.4 }),
+      back("dark", 0, 150, 6, 6, { round: true, material: "plastic-black", out: 0.3 }),
+      back("screen", 0, 128, 22, 16, { out: 0.25 }),
+      back("dark", 0, 104, 11, 11, { round: true, material: "alu", out: 0.2 }),
       front("key", 0, 64, 16, 16, { round: true, material: "alu", out: 0.25 }),
       front("dark", 0, 64, 10, 10, { round: true, out: 0.4 }),
       front("key", 0, 64, 4.5, 4.5, { round: true, material: "shell-silver", out: 0.55 }),
@@ -761,12 +764,13 @@ function phoneShell(w: number, h: number, d: number, r: number): THREE.BufferGeo
   return g;
 }
 
-function frontMarks(m: Box, marks: readonly Mark[], yOf: (y: number) => number, thick: number) {
+function faceMarks(m: Box, marks: readonly Mark[], yOf: (y: number) => number, thick: number) {
   const thin = 0.45;
   for (const mark of marks) {
-    if (mark.face !== "front") continue;
+    if (mark.face !== "front" && mark.face !== "back") continue;
+    const sign = mark.face === "front" ? 1 : -1;
     eachMark(mark, (x, y) => {
-      const at: Vec3 = [x, yOf(y), thick / 2 - thin / 2 + 0.05 + (mark.out ?? 0)];
+      const at: Vec3 = [x, yOf(y), sign * (thick / 2 + (mark.out ?? 0))];
       const tone = mark.material ?? MATERIAL[mark.kind];
       if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 20), at, [90, 0, 0]);
       else m.add(tone, box(mark.w, mark.h, thin), at);
@@ -789,11 +793,11 @@ function flipPhone(m: Box, spec: MachineSpec) {
   if (spec.chin) m.add(spec.body, phoneShell(w * 0.94, spec.chin, lowerT + 2.4, Math.min(radius, spec.chin / 2 - 0.3)), [0, spec.chin / 2, 0.5]);
   m.add(spec.body, cyl(Math.min(lowerT, lidT) * 0.42, w * 0.46, 16), [0, hinge, 0], [0, 0, 90]);
   const lidMarks = spec.marks.filter((mark) => mark.y - mark.h / 2 >= hinge - 1);
-  frontMarks(m, spec.marks.filter((mark) => !lidMarks.includes(mark)), (y) => y, lowerT);
+  faceMarks(m, spec.marks.filter((mark) => !lidMarks.includes(mark)), (y) => y, lowerT);
   const frame = new THREE.Matrix4().makeTranslation(0, hinge, 0).multiply(new THREE.Matrix4().makeRotationX((-lean * Math.PI) / 180));
   m.within(frame, () => {
     m.add(spec.body, phoneShell(w, lidH, lidT, radius), [0, lidH / 2, 0]);
-    frontMarks(m, lidMarks, (y) => y - hinge, lidT);
+    faceMarks(m, lidMarks, (y) => y - hinge, lidT);
   });
   return m;
 }

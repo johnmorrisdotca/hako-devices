@@ -8,7 +8,7 @@ All notable changes to this project are written here. The format follows
 
 ### Added
 
-- StarTAC and RAZR V3, open. Each is two halves on a hinge, open at about 160 degrees, from a straight-on photograph scaled so the long side is the published longest figure. The articles name no axes, so the list sizes stay blank. The StarTAC's earpiece is on the lid. The RAZR's screen is in the upper half, with the dark pad, the round pad and a thicker chin below.
+- StarTAC and RAZR V3, open. Each is two halves on a hinge. The articles name no axes, so the list sizes stay blank. The StarTAC's earpiece is on the lid. The RAZR is 53 mm wide and each half is about 7 mm, with an etched keypad, and the back of the lid carries the external screen, the camera and a blank circle.
 - Nokia 3210 and Nokia 5110. The shells are rounded at the ends, from straight-on photographs. The 3210 has a silver cover, a green screen window, a long centre key and pale number keys. The 5110 has a blue cover, a stub antenna and the same keys.
 
 ## [0.19.0] - 2026-11-05
