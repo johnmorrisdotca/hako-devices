@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2521 machines. 1020 distinct shapes still to build. 1169 entries are already built: the 377 devices in this package, plus the real models those meshes cover. 1476 entries have a sourced size; the other 1045 are `null` on purpose.**
+**2521 machines. 1020 distinct shapes still to build. 1169 entries are already built: the 377 devices in this package, plus the real models those meshes cover. 1483 entries have a sourced size; the other 1038 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -159,8 +159,8 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Fire TV | 12 | 12 | 0 |
 |  | Chromecast | 7 | 7 | 0 |
 |  | Shield TV | 5 | 5 | 0 |
-| **9** | **Android phones and tablets** | **170** | **167** | **86** |
-|  | Pixel | 39 | 39 | 0 |
+| **9** | **Android phones and tablets** | **170** | **167** | **93** |
+|  | Pixel | 39 | 39 | 7 |
 |  | Galaxy Tab S | 33 | 33 | 33 |
 |  | Galaxy Tab A | 21 | 21 | 19 |
 |  | Galaxy S | 20 | 17 | 6 |
@@ -279,7 +279,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2521** | **1020** | **1476** |
+|  | **Total** | **2521** | **1020** | **1483** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
