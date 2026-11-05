@@ -52,7 +52,7 @@ export function createStage(startStyle: () => string) {
     return options;
   }
   const asKind = (kind: string): EmbedKind => ((EMBED_KINDS as readonly string[]).includes(kind) ? (kind as EmbedKind) : "element");
-  panel.labels = { data: "Data address" };
+  panel.labels = { data: "Data" };
   panel.note = "Copy the code for the machine on the screen. The embed page is for a site that cannot run script.";
   panel.generate = ({ kind }) => {
     const one = asKind(kind);
