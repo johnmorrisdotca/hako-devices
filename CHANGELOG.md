@@ -8,7 +8,7 @@ All notable changes to this project are written here. The format follows
 
 ### Added
 
-- Nokia 3210 and Nokia 5110. Both articles name no axes, so the list sizes stay blank. Each body follows a straight-on photograph scaled so the long side is the published longest figure, and the display and the keys are measured on that photograph. The 5110's antenna is not part of the one body. The depth is the remaining published figure, because neither photograph has a straight side.
+- Nokia 3210 and Nokia 5110. Both articles name no axes, so the list sizes stay blank. Each shell is rounded at the ends, from a straight-on photograph scaled so the long side is the published longest figure. The 3210 has a silver cover, a long centre key and pale number keys. The 5110 has a blue cover, a stub antenna, a screen window and the same keys. The depth is the remaining published figure, because neither photograph has a straight side.
 
 ## [0.18.0] - 2026-11-05
 

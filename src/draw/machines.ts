@@ -1,18 +1,56 @@
 // The drawings of the well-known machines, from the one description their meshes use (build/machines.ts).
+import * as THREE from "three";
 import type { Vec3 } from "../build/kit.ts";
-import { bandPoints, eachMark, type MachineSpec, type MarkKind } from "../build/machines.ts";
+import { bandPoints, eachMark, type MachineSpec, type Mark, type MarkKind } from "../build/machines.ts";
 import { DARK, HOLE } from "./common.ts";
-import { type Drawing, type ShapeStyle, X, Y } from "./drawing.ts";
+import { type Drawing, type ShapeStyle, type SolidStyle, X, Y } from "./drawing.ts";
 
 const FLAT: Vec3 = [0, 0, -1];
 const SCREEN: ShapeStyle = { fill: "#0d1a2e", stroke: "#8fa1b8", sw: 1 };
 const LCD: ShapeStyle = { fill: "#26364c", stroke: "#8fa1b8", sw: 1 };
 const KEY: ShapeStyle = { fill: "#232e40", stroke: "#8fa1b8", sw: 0.7 };
 const STYLE: Readonly<Record<Exclude<MarkKind, "light">, ShapeStyle>> = { screen: SCREEN, lcd: LCD, dark: HOLE, panel: DARK, slot: HOLE, key: KEY };
+const PAINT: Readonly<Record<string, ShapeStyle>> = {
+  "shell-silver": { fill: "#d5d8dc", stroke: "#8fa1b8", sw: 0.6 },
+  "plastic-white": { fill: "#e7e4dc", stroke: "#8fa1b8", sw: 0.5 },
+  "plastic-grey": { fill: "#6a7180", stroke: "#8fa1b8", sw: 0.5 },
+  "plastic-black": { fill: "#14161c", stroke: "#8fa1b8", sw: 0.5 },
+  "pale-glass": { fill: "#c5d2c0", stroke: "#8fa1b8", sw: 0.6 },
+  "pcb-green": { fill: "#1f6c40", stroke: "#8fa1b8", sw: 0.6 },
+  "shell-orange": { fill: "#c9652c", stroke: "#8fa1b8", sw: 0.5 },
+};
+const BLUE: SolidStyle = { top: "#7aa0cc", front: "#3f6fb0", side: "#2c4f86", sw: 1.3 };
+
+function paintOf(mark: Mark): ShapeStyle {
+  if (mark.kind === "light") return { fill: "#ff5a4a", stroke: "#8fa1b8", sw: 0.5 };
+  return (mark.material && PAINT[mark.material]) || STYLE[mark.kind];
+}
+
+/** A rounded front: the plan is the face, stood up. Wide keys are ovals. */
+function drawShell(d: Drawing, spec: MachineSpec) {
+  const [w, depth, h] = spec.size;
+  const r = Math.min(spec.corner, w / 2 - 0.6, h / 2 - 0.6);
+  const style = spec.body === "plastic-blue" ? BLUE : undefined;
+  const frame = new THREE.Matrix4().makeTranslation(0, h / 2, 0).multiply(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+  d.within(frame, () => d.rounded(0, 0, w, h, r, -depth / 2, depth / 2, style, 5));
+  if (spec.antenna) d.cylinder(w * 0.32, 0, 2.2, h - 3, h + spec.antenna, style, 10);
+  for (const mark of spec.marks) {
+    if (mark.face !== "front") continue;
+    const paint = paintOf(mark);
+    eachMark(mark, (x, y) => {
+      const c: Vec3 = [x, y, depth / 2 + 0.3 + (mark.out ?? 0)];
+      const oval = !mark.cols && !mark.round && mark.kind !== "panel" && mark.kind !== "slot" && mark.w > mark.h * 1.35;
+      if (mark.round) d.circle(c, X, Y, mark.w / 2, paint, 4);
+      else d.rect(c, X, Y, mark.w, mark.h, paint, 4, oval ? mark.h / 2 : Math.min(mark.w, mark.h) * 0.28);
+    });
+  }
+  return d;
+}
 
 export function machine(d: Drawing, spec: MachineSpec) {
   const [w, depth, h] = spec.size;
   const band: ShapeStyle = { stroke: "#8fa1b8", sw: 3 };
+  if (spec.shape === "shell") return drawShell(d, spec);
   if (spec.shape === "headphones") {
     d.line(bandPoints("headphones", w, depth, h), band, 1);
     for (const side of [-1, 1]) d.rounded(side * (w / 2 - 17), 0, 34, depth, spec.corner, 0, 110, { layer: 2 }, 5);

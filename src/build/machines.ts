@@ -1,5 +1,6 @@
 // Well-known machines, each one body with marks on its front and top: one description for its mesh and its drawing, placed from its published size. Plain geometry: no mark or logo.
-import { type Box, box, cyl, type Material, rbox, tube, type Vec3 } from "./kit.ts";
+import * as THREE from "three";
+import { type Box, box, cyl, type Material, rbox, roundedSquare, tube, type Vec3 } from "./kit.ts";
 
 export type MarkKind = "screen" | "lcd" | "dark" | "panel" | "slot" | "key" | "light";
 
@@ -30,7 +31,9 @@ export interface MachineSpec {
   corner: number;
   marks: readonly Mark[];
   /** Not one block: its own shape, in its size. */
-  shape?: "headphones" | "headset" | "can";
+  shape?: "headphones" | "headset" | "can" | "shell";
+  /** A stub of this length above the top, on the right. */
+  antenna?: number;
 }
 
 /** Points along the band over the head of a pair of headphones, or round the back of a headset. */
@@ -611,32 +614,39 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 28, 34, 16, 8, { material: "alu", out: 0.6 }),
     ],
   },
-  // The article gives 123.8 x 50.5 x 22.5 mm and names no axes, so the list size stays blank. The phone is one body, 50.8 mm across and 123.8 mm tall, from a straight-on photograph scaled so the long side is 123.8 mm. The 22.5 mm is the remaining figure, and that photograph has no side, so the mesh uses it for the depth. The display, the centre key, the key beside it and the number rows are measured on the photograph. No mark.
+  // The article gives 123.8 x 50.5 x 22.5 mm and names no axes, so the list size stays blank. The phone is 50.8 mm across and 123.8 mm tall, from a straight-on photograph scaled so the long side is 123.8 mm. The ends are round. A silver cover sits on the black shell over the display and the long centre key. The number keys are pale. The 22.5 mm is the remaining figure, and the photograph has no side, so the mesh uses it for the depth. No word.
   "nokia-3210": {
     size: [50.8, 22.5, 123.8],
     body: "plastic-char",
-    corner: 10,
+    corner: 16,
+    shape: "shell",
     marks: [
-      front("lcd", 0.9, 81.7, 42.6, 26.9),
-      front("key", -15.1, 63, 8, 6),
-      front("key", 0.9, 60, 14.1, 8),
-      front("key", 16, 63, 8, 5),
-      front("key", 16, 57, 8, 5),
-      front("key", 0, 29.3, 12, 6.2, { cols: 3, rows: 4, gap: 3 }),
+      front("panel", 0, 90, 42, 60, { material: "shell-silver", out: 0.45 }),
+      front("slot", -5, 112, 7, 1.3, { out: 0.85 }),
+      front("slot", -5, 108.5, 7, 1.3, { out: 0.85 }),
+      front("lcd", 0.9, 86, 30, 18, { material: "pcb-green", out: 0.95 }),
+      front("key", -15, 63, 9, 7, { material: "plastic-grey", out: 1 }),
+      front("key", 1, 62, 18, 8, { material: "plastic-white", out: 1 }),
+      front("key", 16, 61, 8, 11, { material: "shell-silver", out: 0.85 }),
+      front("key", 0, 29.3, 12, 6, { cols: 3, rows: 4, gap: 2.6, material: "plastic-white", out: 0.7 }),
     ],
   },
-  // The article gives 132 x 48 x 31 mm and names no axes, so the list size stays blank. The shell, not the antenna, is one body, 43.9 mm across and 132 mm tall, from a straight-on photograph scaled so the shell's long side is 132 mm. The antenna is not part of the one body. The 31 mm is the remaining figure, and the side photograph is held and tilted, so the mesh uses 31 mm for the depth. The display is the greener region. The centre key and the number rows are measured; the bottom number row sits one space below the three that separated. No mark.
+  // The article gives 132 x 48 x 31 mm and names no axes, so the list size stays blank. The shell is 43.9 mm across and 132 mm tall, from a straight-on photograph scaled so the shell's long side is 132 mm. A stub antenna stands on the top right, 18 mm, measured on that photograph. The cover is blue. The display is a window in a dark surround. The long centre key, the C key and the pale number keys are measured on the photograph. The 31 mm is the remaining figure, and the side photograph is held and tilted, so the mesh uses 31 mm for the depth. No word.
   "nokia-5110": {
     size: [43.9, 31, 132],
-    body: "plastic-char",
-    corner: 10,
+    body: "plastic-blue",
+    corner: 14,
+    shape: "shell",
+    antenna: 18,
     marks: [
-      front("lcd", 0, 79, 38, 36.5),
-      front("key", -11, 51.2, 7, 5),
-      front("key", 0, 51.2, 10, 6),
-      front("key", 14, 53.5, 6, 4),
-      front("key", 14, 49, 6, 4),
-      front("key", 0, 29.8, 9, 5.2, { cols: 3, rows: 4, gap: 3.3 }),
+      front("dark", -2, 112, 14, 14, { round: true, material: "plastic-black", out: 0.4 }),
+      front("light", 12, 114, 4, 4, { round: true, out: 0.55 }),
+      front("panel", 0, 80, 32, 28, { material: "plastic-black", out: 0.35 }),
+      front("lcd", 0, 81, 24, 18, { material: "pale-glass", out: 0.75 }),
+      front("key", -11, 52, 8, 6, { material: "plastic-grey", out: 0.7 }),
+      front("key", 0.5, 51, 16, 8, { material: "shell-silver", out: 0.8 }),
+      front("key", 14, 52, 7, 10, { material: "shell-silver", out: 0.7 }),
+      front("key", 0, 28, 10, 5.2, { cols: 3, rows: 4, gap: 2.4, material: "plastic-white", out: 0.6 }),
     ],
   },
 };
@@ -657,8 +667,51 @@ export function eachMark(mark: Mark, each: (x: number, y: number) => void) {
   }
 }
 
+/** A rounded front, extruded by the thickness, centred on its own middle. */
+function phoneShell(w: number, h: number, d: number, r: number): THREE.BufferGeometry {
+  const bevel = Math.min(0.8, d / 6);
+  const shape = roundedSquare(w, h, Math.min(r, w / 2 - 0.5, h / 2 - 0.5), 6);
+  const g = new THREE.ExtrudeGeometry(shape, {
+    depth: Math.max(0.4, d - 2 * bevel),
+    bevelEnabled: true,
+    bevelThickness: bevel,
+    bevelSize: bevel * 0.45,
+    bevelSegments: 2,
+    curveSegments: 6,
+  });
+  g.computeBoundingBox();
+  const box3 = g.boundingBox;
+  if (box3) g.translate(-(box3.min.x + box3.max.x) / 2, -(box3.min.y + box3.max.y) / 2, -(box3.min.z + box3.max.z) / 2);
+  g.deleteAttribute("uv");
+  g.computeVertexNormals();
+  return g;
+}
+
+/** One rounded shell, marks on the front, and a stub antenna when the phone has one. */
+function shellPhone(m: Box, spec: MachineSpec) {
+  const [w, d, h] = spec.size;
+  const r = Math.min(spec.corner, w / 2 - 0.6);
+  m.add(spec.body, phoneShell(w, h, d, r), [0, h / 2, 0]);
+  if (spec.antenna) m.add(spec.body, cyl(2.2, spec.antenna + 4, 12), [w * 0.32, h + spec.antenna / 2 - 2, 0]);
+  const thin = 0.45;
+  for (const mark of spec.marks) {
+    if (mark.face !== "front") continue;
+    eachMark(mark, (x, y) => {
+      const out = mark.out ?? 0;
+      const at: Vec3 = [x, y, d / 2 + out];
+      const tone = mark.material ?? MATERIAL[mark.kind];
+      const oval = !mark.cols && !mark.round && mark.kind !== "panel" && mark.kind !== "slot" && mark.w > mark.h * 1.35;
+      if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 20), at, [90, 0, 0]);
+      else if (oval) m.add(tone, cyl(mark.h / 2, thin, 22), at, [90, 0, 0], { scale: [mark.w / mark.h, 1, 1] });
+      else m.add(tone, box(mark.w, mark.h, thin), at);
+    });
+  }
+  return m;
+}
+
 export function machine(m: Box, spec: MachineSpec) {
   const [w, d, h] = spec.size;
+  if (spec.shape === "shell") return shellPhone(m, spec);
   if (spec.shape === "headphones") {
     for (const side of [-1, 1]) {
       m.add(spec.body, rbox(34, 110, d, spec.corner, 4), [side * (w / 2 - 17), 55, 0]);
