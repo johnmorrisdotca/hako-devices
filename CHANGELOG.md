@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- Galaxy S25, S25+ and S25 Ultra: the bottom edge has the microphone slot, the speaker and one small hole, measured from the accessory drawing's bottom view. The USB port's middle was measured and stays at the centre. The Ultra also has the short opening at the left of that edge.
+
 ## [0.17.0] - 2026-11-05
 
 ### Added
