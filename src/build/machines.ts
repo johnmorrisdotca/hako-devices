@@ -731,23 +731,23 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("slot", 0, 8, 1.1, 2.2, { cols: 5, rows: 1, gap: 1.5, out: 1.8 }),
     ],
   },
-  // The article's axes are already on the list. The shell is 50.8 mm across and 123.8 mm tall, from a straight-on photograph scaled so the long side is 123.8 mm. The ends are round. A silver cover, a green screen window, a long centre key and pale number keys. No word.
+  // The article's axes are already on the list. The shell is 50.8 mm across and 123.8 mm tall, from a straight-on photograph scaled so the long side is 123.8 mm. The ends are round and the middle is a little narrower. The silver cover's lower edge is a smile. The screen is a large green-grey window in the lower half of that cover. The silver bar, the C key and the rocker sit on the cover. No word.
   "nokia-3210": {
     size: [50.8, 22.5, 123.8],
-    body: "plastic-char",
+    body: "plastic-grey",
     corner: 16,
     shape: "shell",
     waist: 2,
     marks: [
-      front("panel", 0, 92, 40, 58, { material: "shell-silver", out: 0.2 }),
-      front("slot", -5, 112, 7, 1.3, { out: 0.9 }),
-      front("slot", -5, 108.5, 7, 1.3, { out: 0.9 }),
-      front("panel", 0.9, 90, 32, 24, { material: "bezel", out: 0.35 }),
-      front("lcd", 0.9, 90, 26, 20, { material: "screen-glass", out: 0.6 }),
-      front("key", -18, 56, 8, 7, { material: "plastic-white", out: 1.2 }),
-      front("key", 2, 55, 28, 8, { material: "shell-blue", out: 1.15 }),
-      front("key", 16, 56, 7, 12, { material: "plastic-grey", out: 1.25 }),
-      front("key", 0, 29.3, 12, 6.5, { cols: 3, rows: 4, gap: 2.4, material: "plastic-white", out: 0.85 }),
+      front("panel", 0, 84, 46, 72, { material: "shell-silver", out: 0.15 }),
+      front("slot", 0, 114, 3.2, 1.15, { cols: 5, rows: 1, gap: 1.6, out: 1.05 }),
+      front("panel", 0, 74, 36, 26, { material: "bezel", out: 0.9 }),
+      front("lcd", 0, 74, 32, 22, { material: "lcd-grey", out: 1.15 }),
+      front("key", -18, 58, 6.5, 6.5, { round: true, material: "plastic-white", out: 1.35 }),
+      front("key", 0, 56, 30, 10, { material: "shell-silver", out: 1.35 }),
+      front("slot", 0, 56, 10, 1.3, { material: "shell-blue", out: 1.7 }),
+      front("key", 17.5, 58, 5.5, 12, { material: "plastic-char", out: 1.3 }),
+      front("key", 0, 30, 13, 8, { cols: 3, rows: 4, gap: 2, material: "plastic-white", out: 0.9 }),
     ],
   },
   // The article's axes are already on the list. The shell is 43.9 mm across and 132 mm tall, from a straight-on photograph scaled so the shell's long side is 132 mm. A stub antenna of 18 mm stands on the top right. The cover is blue. A screen window, a long centre key and pale number keys. No word.
@@ -849,6 +849,43 @@ function flipPhone(m: Box, spec: MachineSpec) {
   return m;
 }
 
+/** A cover outline: round at the top, and a smile along the bottom (the middle hangs lower than the sides). Points sit around the middle. */
+export function smileOutline(w: number, h: number, dip: number): [number, number][] {
+  const r = Math.min(10, w / 4);
+  const hw = w / 2;
+  const hh = h / 2;
+  const pts: [number, number][] = [[-hw, -hh + dip], [-hw, hh - r]];
+  for (let k = 0; k <= 5; k++) {
+    const a = Math.PI - (Math.PI / 2) * (k / 5);
+    pts.push([-hw + r + r * Math.cos(a), hh - r + r * Math.sin(a)]);
+  }
+  for (let k = 0; k <= 5; k++) {
+    const a = Math.PI / 2 - (Math.PI / 2) * (k / 5);
+    pts.push([hw - r + r * Math.cos(a), hh - r + r * Math.sin(a)]);
+  }
+  pts.push([hw, -hh + dip]);
+  for (let i = 1; i < 16; i++) {
+    const x = hw - (i / 16) * w;
+    const u = x / hw;
+    pts.push([x, -hh + dip * u * u]);
+  }
+  return pts;
+}
+
+/** The silver cover: the smile outline, extruded a little and centred. */
+function smileCover(w: number, h: number, d: number, dip: number): THREE.BufferGeometry {
+  const s = new THREE.Shape();
+  smileOutline(w, h, dip).forEach(([x, y], i) => (i === 0 ? s.moveTo(x, y) : s.lineTo(x, y)));
+  s.closePath();
+  const g = new THREE.ExtrudeGeometry(s, { depth: d, bevelEnabled: false, curveSegments: 4 });
+  g.computeBoundingBox();
+  const box3 = g.boundingBox;
+  if (box3) g.translate(-(box3.min.x + box3.max.x) / 2, -(box3.min.y + box3.max.y) / 2, -(box3.min.z + box3.max.z) / 2);
+  g.deleteAttribute("uv");
+  g.computeVertexNormals();
+  return g;
+}
+
 /** A shell that is narrower at the middle and round at the ends. */
 function candyShell(w: number, h: number, d: number, pinch: number): THREE.BufferGeometry {
   const s = new THREE.Shape();
@@ -905,11 +942,14 @@ function shellPhone(m: Box, spec: MachineSpec) {
         return;
       }
       const at: Vec3 = [x, y, d / 2 + (mark.out ?? 0)];
-      const oval = !mark.cols && !mark.round && mark.kind !== "panel" && mark.kind !== "slot" && mark.w > mark.h * 1.35;
+      const oval = !mark.cols && !mark.round && mark.kind !== "panel" && mark.kind !== "slot" && mark.kind !== "lcd" && mark.kind !== "screen" && mark.w > mark.h * 1.35;
       const cover = mark.kind === "panel" && mark.h > 36;
-      if (cover) m.add(tone, phoneShell(mark.w, mark.h, 1.6, 8), [x, y, d / 2 + (mark.out ?? 0)]);
+      const tall = mark.kind === "key" && !mark.round && !mark.cols && mark.h > mark.w * 1.3;
+      if (cover && tone === "shell-silver") m.add(tone, smileCover(mark.w, mark.h, 1.6, 6), [x, y, d / 2 + (mark.out ?? 0)]);
+      else if (cover) m.add(tone, phoneShell(mark.w, mark.h, 1.6, 8), [x, y, d / 2 + (mark.out ?? 0)]);
       else if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 20), at, [90, 0, 0]);
-      else if (oval) m.add(tone, cyl(mark.h / 2, thin, 22), at, [90, 0, 0], { scale: [mark.w / mark.h, 1, 1] });
+      else if (tall) m.add(tone, cyl(mark.w / 2, thin, 16), at, [90, 0, 0], { scale: [1, 1, mark.h / mark.w] });
+      else if (oval) m.add(tone, cyl(mark.h / 2, thin, 28), at, [90, 0, 0], { scale: [mark.w / mark.h, 1, 1] });
       else m.add(tone, box(mark.w, mark.h, thin), at);
     });
   }

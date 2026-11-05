@@ -77,6 +77,8 @@ export const MATERIALS = {
   "shell-orange-panel": { color: "#d4835a", metal: 0.1, rough: 0.5 },
   "front-glass": { color: "#030406", metal: 0, rough: 0.62 },
   "pale-glass": { color: "#d6d8da", metal: 0, rough: 0.14 },
+  /** A green-grey LCD, as on the older candybar phones. */
+  "lcd-grey": { color: "#8d9a84", metal: 0, rough: 0.42 },
   "epaper-white": { color: "#efefe9", metal: 0, rough: 0.6 },
   "fpc-orange": { color: "#c98a2b", metal: 0.1, rough: 0.5 },
   "tv-frame": { color: "#1a1b1e", metal: 0.7, rough: 0.42 },

@@ -1,7 +1,7 @@
 // The drawings of the well-known machines, from the one description their meshes use (build/machines.ts).
 import * as THREE from "three";
 import type { Vec3 } from "../build/kit.ts";
-import { bandPoints, eachMark, type MachineSpec, type Mark, type MarkKind } from "../build/machines.ts";
+import { bandPoints, eachMark, type MachineSpec, type Mark, type MarkKind, smileOutline } from "../build/machines.ts";
 import { DARK, HOLE, METAL } from "./common.ts";
 import { type Drawing, type ShapeStyle, type SolidStyle, X, Y } from "./drawing.ts";
 
@@ -26,6 +26,7 @@ const PAINT: Readonly<Record<string, ShapeStyle>> = {
   clear: { fill: "#d5e4ef", stroke: "#8fa1b8", sw: 0.4 },
   bezel: { fill: "#14161c", stroke: "#8fa1b8", sw: 0.4 },
   "screen-glass": { fill: "#1a1e18", stroke: "#8fa1b8", sw: 0.4 },
+  "lcd-grey": { fill: "#8d9a84", stroke: "#8fa1b8", sw: 0.4 },
   "shell-blue": { fill: "#7f9fc4", stroke: "#8fa1b8", sw: 0.5 },
 };
 const BLUE: SolidStyle = { top: "#7aa0cc", front: "#3f6fb0", side: "#2c4f86", sw: 1.3 };
@@ -91,9 +92,15 @@ function drawShell(d: Drawing, spec: MachineSpec) {
         return;
       }
       const c: Vec3 = [x, y, depth / 2 + 0.3 + (mark.out ?? 0)];
-      const oval = !mark.cols && !mark.round && mark.kind !== "panel" && mark.kind !== "slot" && mark.w > mark.h * 1.35;
+      if (mark.kind === "panel" && mark.h > 36 && mark.material === "shell-silver") {
+        const z = c[2];
+        d.flat(smileOutline(mark.w, mark.h, 6).map(([px, py]) => [x + px, y + py, z] as Vec3), [0, 0, 1], paint, 4);
+        return;
+      }
+      const oval = !mark.cols && !mark.round && mark.kind !== "panel" && mark.kind !== "slot" && mark.kind !== "lcd" && mark.kind !== "screen" && mark.w > mark.h * 1.35;
+      const tall = mark.kind === "key" && !mark.round && !mark.cols && mark.h > mark.w * 1.3;
       if (mark.round) d.circle(c, X, Y, mark.w / 2, paint, 4);
-      else d.rect(c, X, Y, mark.w, mark.h, paint, 4, oval ? mark.h / 2 : Math.min(mark.w, mark.h) * 0.28);
+      else d.rect(c, X, Y, mark.w, mark.h, paint, 4, oval ? mark.h / 2 : tall ? mark.w / 2 : Math.min(mark.w, mark.h) * 0.28);
     });
   }
   return d;
