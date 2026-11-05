@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.20.0] - 2026-11-05
+
+Classic phones and PDAs, and new drawing tools (a lathe, domed plates, brushed metal).
+
 ### Added
 
 - StarTAC and RAZR V3, open. Each is two halves on a hinge. The articles name no axes, so the list sizes stay blank. The StarTAC's earpiece is on the lid, its screen is pale, its keys are raised pills, and a stub antenna stands on the right of the lower half. The RAZR is 53 mm wide, in brushed silver, each half about 7 mm, with a nav ring, domed key pads and the external screen on the back of the lid.
