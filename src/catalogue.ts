@@ -218,6 +218,7 @@ export const DEVICES: readonly Device[] = [
   whole("dynatac-8000x", "DynaTAC 8000X", "classics", [80, 40, 195], []),
   whole("startac", "StarTAC", "classics", [26.9, 20, 93], []),
   whole("razr-v3", "RAZR V3", "classics", [53, 13.9, 160], []),
+  whole("razr-v3-shut", "RAZR V3, shut", "classics", [53, 13.9, 98], []),
   whole("palm-iii", "Palm III", "classics", [81, 18, 119], []),
   whole("pilot-1000", "Pilot 1000", "classics", [80, 18, 120], []),
   whole("wii-rvl-001", "Wii (RVL-001)", "classics", [157, 197, 60], ports({ "usb-a": 2, power: 1 })),

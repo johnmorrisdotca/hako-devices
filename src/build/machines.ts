@@ -674,10 +674,12 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     lean: 20,
     half: 11,
     lidThick: 7,
+    antenna: 16,
     marks: [
       front("panel", 0, 80, 16, 12, { material: "plastic-black", out: 0.35 }),
       front("slot", 0, 81, 1.3, 1.3, { round: true, cols: 3, rows: 2, gap: 1.5, out: 0.7 }),
-      front("screen", 2.2, 35.6, 12.3, 12.1, { material: "shell-orange", out: 0.4 }),
+      front("screen", 2.2, 35.6, 12.3, 12.1, { material: "pale-glass", out: 0.4 }),
+      front("light", 10.2, 42, 1.6, 1.6, { round: true, out: 0.55 }),
       front("key", 0, 18.3, 6.2, 2.8, { cols: 3, rows: 4, gap: 1.1, material: "plastic-grey", out: 0.45 }),
       front("key", 0, 8.6, 4.2, 2.6, { cols: 4, rows: 1, gap: 1, material: "plastic-grey", out: 0.45 }),
       front("key", 0, 4.7, 5, 2.4, { cols: 3, rows: 1, gap: 1.2, material: "plastic-grey", out: 0.45 }),
@@ -710,6 +712,23 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 0, 54, 7, 3.4, { material: "alu-dark", out: 0.45 }),
       front("key", 0, 32, 13, 7, { cols: 3, rows: 4, gap: 1.6, material: "alu", out: 0.5 }),
       front("slot", 0, 8, 1.2, 3, { cols: 7, rows: 1, gap: 1.1, out: 1.6 }),
+    ],
+  },
+  // The same phone, shut. The article's 98 mm is the closed length and 13.9 mm the thickness; the list size stays blank, as on the open phone. A camera at the top rim, the external screen, a blank circle and a chin. A key past the right edge sits on the side. No mark.
+  "razr-v3-shut": {
+    size: [53, 13.9, 98],
+    body: "brushed-silver",
+    corner: 6,
+    shape: "shell",
+    chin: 16,
+    marks: [
+      front("dark", 0, 94, 6, 6, { round: true, material: "plastic-black", out: 0.55 }),
+      front("panel", 0, 70, 32, 24, { material: "bezel", out: 0.2 }),
+      front("screen", 0, 70, 24, 18, { out: 0.45 }),
+      front("dark", 0, 44, 12, 12, { round: true, material: "alu-dark", out: 0.22 }),
+      front("dark", 0, 44, 8, 8, { round: true, material: "brushed-silver", out: 0.48 }),
+      front("key", 28, 72, 2, 9, { material: "plastic-black", out: 0.3 }),
+      front("slot", 0, 8, 1.1, 2.2, { cols: 5, rows: 1, gap: 1.5, out: 1.8 }),
     ],
   },
   // The article's axes are already on the list. The shell is 50.8 mm across and 123.8 mm tall, from a straight-on photograph scaled so the long side is 123.8 mm. The ends are round. A silver cover, a green screen window, a long centre key and pale number keys. No word.
@@ -819,6 +838,7 @@ function flipPhone(m: Box, spec: MachineSpec) {
   m.add(spec.body, phoneShell(w, lowerH, lowerT, radius), [0, lowerH / 2, 0]);
   if (spec.chin) m.add(spec.body, phoneShell(w * 0.94, spec.chin, lowerT + 2.4, Math.min(radius, spec.chin / 2 - 0.3)), [0, spec.chin / 2, 0.5]);
   m.add(spec.body, cyl(2.4, w * 0.72, 18), [0, hinge, 1.4], [0, 0, 90]);
+  if (spec.antenna) m.add("rubber", cyl(1.1, spec.antenna, 10), [w / 2 + 0.8, hinge - 1, -1]);
   const lidMarks = spec.marks.filter((mark) => mark.y - mark.h / 2 >= hinge - 1);
   faceMarks(m, spec.marks.filter((mark) => !lidMarks.includes(mark)), (y) => y, lowerT);
   const frame = new THREE.Matrix4().makeTranslation(0, hinge, -1.6).multiply(new THREE.Matrix4().makeRotationX((-lean * Math.PI) / 180));
@@ -872,13 +892,19 @@ function shellPhone(m: Box, spec: MachineSpec) {
   const [w, d, h] = spec.size;
   const r = Math.min(spec.corner, w / 2 - 0.6);
   m.add(spec.body, spec.waist ? candyShell(w, h, d, spec.waist) : phoneShell(w, h, d, r), [0, h / 2, 0]);
+  if (spec.chin) m.add("alu-dark", phoneShell(w * 0.96, spec.chin, d + 1.2, 3), [0, spec.chin / 2, 0.7]);
   if (spec.antenna) m.add(spec.body, cyl(2.2, spec.antenna + 4, 12), [w * 0.32, h + spec.antenna / 2 - 2, 0]);
   const thin = 0.45;
   for (const mark of spec.marks) {
     if (mark.face !== "front") continue;
     eachMark(mark, (x, y) => {
-      const at: Vec3 = [x, y, d / 2 + (mark.out ?? 0)];
       const tone = mark.material ?? MATERIAL[mark.kind];
+      if (Math.abs(x) > w / 2) {
+        const side = x < 0 ? -1 : 1;
+        m.add(tone, box(1.6, mark.h, Math.min(6, d * 0.45)), [side * (w / 2 + 0.5), y, 0]);
+        return;
+      }
+      const at: Vec3 = [x, y, d / 2 + (mark.out ?? 0)];
       const oval = !mark.cols && !mark.round && mark.kind !== "panel" && mark.kind !== "slot" && mark.w > mark.h * 1.35;
       const cover = mark.kind === "panel" && mark.h > 36;
       if (cover) m.add(tone, phoneShell(mark.w, mark.h, 1.6, 8), [x, y, d / 2 + (mark.out ?? 0)]);

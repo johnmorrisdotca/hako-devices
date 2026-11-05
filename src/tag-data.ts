@@ -79,6 +79,7 @@ export const TAG_DATA: Readonly<Record<string, Readonly<Partial<Record<string, r
   "pebl-u6": {"maker":["Motorola"],"type":["Phone"],"decade":["2000s"]},
   "motorola-q": {"maker":["Motorola"],"type":["Phone"],"decade":["2000s"],"cpu":["Intel XScale PXA272 312 MHz"],"cpuMaker":["Intel"],"os":["Windows Mobile"],"wireless":["Bluetooth","Cellular"],"weight":["Under 1 kg"]},
   "razr-v3": {"maker":["Motorola"],"type":["Phone"],"decade":["2000s"],"discontinued":["2008"],"wireless":["Bluetooth","Cellular"],"weight":["Under 1 kg"]},
+  "razr-v3-shut": {"maker":["Motorola"],"type":["Phone"],"decade":["2000s"]},
   "razr-v3i": {"maker":["Motorola"],"type":["Phone"],"decade":["2000s"]},
   "rokr-e1": {"maker":["Motorola"],"type":["Phone"],"decade":["2000s"],"discontinued":["2006"],"wireless":["Bluetooth","Cellular"],"weight":["Under 1 kg"]},
   "slvr-l7": {"maker":["Motorola"],"type":["Phone"],"decade":["2000s"]},
@@ -2595,6 +2596,7 @@ export const YEAR_DATA: Readonly<Record<string, number>> = {
   "pebl-u6": 2005,
   "motorola-q": 2006,
   "razr-v3": 2004,
+  "razr-v3-shut": 2004,
   "razr-v3i": 2005,
   "rokr-e1": 2005,
   "slvr-l7": 2005,
@@ -4802,6 +4804,7 @@ export const YEAR_DATA: Readonly<Record<string, number>> = {
 export const LINE_DATA: Readonly<Record<string, string>> = {
   "dynatac-8000x": "DynaTAC",
   "razr-v3": "RAZR",
+  "razr-v3-shut": "RAZR",
   "startac": "StarTAC",
   "nokia-5110": "Candybar",
   "nokia-3210": "Candybar",

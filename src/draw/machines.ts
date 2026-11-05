@@ -64,6 +64,7 @@ function drawFlip(d: Drawing, spec: MachineSpec) {
   d.rounded(0, 0, w, lowerT, radius, 0, hinge - gap, style, 4);
   if (spec.chin) d.rounded(0, 0.5, w * 0.94, lowerT + 2.4, Math.min(3, spec.chin / 2 - 0.3), 0, spec.chin, style, 3);
   d.cylinder(0, 0, Math.min(lowerT, lidT) * 0.42, hinge - 1.1, hinge + 1.1, style, 12);
+  if (spec.antenna) d.cylinder(w / 2 + 0.8, -1, 1.1, hinge - spec.antenna / 2 - 1, hinge + spec.antenna / 2 - 1, undefined, 8);
   const lid = spec.marks.filter((mark) => mark.y - mark.h / 2 >= hinge - 1);
   drawFace(d, spec.marks.filter((mark) => !lid.includes(mark)), lowerT, 0);
   const frame = new THREE.Matrix4().makeTranslation(0, hinge, 0).multiply(new THREE.Matrix4().makeRotationX(-lean));
@@ -77,7 +78,7 @@ function drawFlip(d: Drawing, spec: MachineSpec) {
 function drawShell(d: Drawing, spec: MachineSpec) {
   const [w, depth, h] = spec.size;
   const r = Math.min(spec.corner, w / 2 - 0.6, h / 2 - 0.6);
-  const style = spec.body === "plastic-blue" ? BLUE : undefined;
+  const style = spec.body === "plastic-blue" ? BLUE : spec.body === "brushed-silver" || spec.body === "shell-silver" ? METAL : undefined;
   const frame = new THREE.Matrix4().makeTranslation(0, h / 2, 0).multiply(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
   d.within(frame, () => d.rounded(0, 0, w, h, r, -depth / 2, depth / 2, style, 5));
   if (spec.antenna && spec.shape === "shell") d.cylinder(w * 0.32, 0, 2.2, h - 3, h + spec.antenna, style, 10);
@@ -85,6 +86,10 @@ function drawShell(d: Drawing, spec: MachineSpec) {
     if (mark.face !== "front") continue;
     const paint = paintOf(mark);
     eachMark(mark, (x, y) => {
+      if (Math.abs(x) > w / 2) {
+        d.rect([Math.sign(x) * (w / 2 + 0.7), y, 0], X, Y, 1.6, mark.h, paint, 4, 0.4);
+        return;
+      }
       const c: Vec3 = [x, y, depth / 2 + 0.3 + (mark.out ?? 0)];
       const oval = !mark.cols && !mark.round && mark.kind !== "panel" && mark.kind !== "slot" && mark.w > mark.h * 1.35;
       if (mark.round) d.circle(c, X, Y, mark.w / 2, paint, 4);
