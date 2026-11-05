@@ -1,6 +1,7 @@
 node_modules/
 dist/
 site/
+.docs-examples/
 test-results/
 playwright-report/
 *.tgz

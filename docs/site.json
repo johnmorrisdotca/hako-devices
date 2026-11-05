@@ -1,0 +1,22 @@
+{
+  "title": "Hako Devices",
+  "kana": "箱",
+  "job": "line drawings and 3D views of Raspberry Pis, Macs, PCs, phones, tablets, game consoles, NAS boxes and classic machines",
+  "pitch": {
+    "en": "Line drawings and 3D views of computers, phones, consoles and NAS boxes, from published sizes, that you drop into a page and assemble from parts.",
+    "ja": "公開された寸法から、コンピューター、電話、ゲーム機、NASの線画と3Dを描きます。ページに置いて、部品から組み立てられます。"
+  },
+  "name": {
+    "en": "Hako is the Japanese word 箱 for a box.",
+    "ja": "Hako（箱）は「箱」を意味する日本語です。"
+  },
+  "entries": {
+    ".": { "en": "The catalogue, the parts and the fit check", "ja": "カタログ、部品、適合チェック" },
+    "./build": { "en": "Build a mesh and a line drawing", "ja": "メッシュと線画を作る" },
+    "./tags": { "en": "Filter by brand, type and the other tags", "ja": "ブランドや種類で絞り込む" },
+    "./colours": { "en": "The colours", "ja": "色の一覧" },
+    "./element": { "en": "The web components", "ja": "Webコンポーネント" },
+    "./embed": { "en": "Code to put on a page", "ja": "ページに置くコード" },
+    "./react": { "en": "A thin React wrapper", "ja": "Reactの薄い包み" }
+  }
+}
