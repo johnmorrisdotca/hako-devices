@@ -4815,6 +4815,7 @@ export const LINE_DATA: Readonly<Record<string, string>> = {
   "nokia-3210": "Candybar",
   "nokia-3310": "Candybar",
   "palm-iii": "Palm III",
+  "palm-v": "Palm V",
   "pilot-1000": "Pilot",
   "atari-2600-four-switch": "2600",
   "atari-5200-four-port": "5200",

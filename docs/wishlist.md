@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2536 machines. 1020 distinct shapes still to build. 1184 entries are already built: the 392 devices in this package, plus the real models those meshes cover. 1496 entries have a sourced size; the other 1040 are `null` on purpose.**
+**2536 machines. 1019 distinct shapes still to build. 1185 entries are already built: the 393 devices in this package, plus the real models those meshes cover. 1497 entries have a sourced size; the other 1039 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -10,9 +10,9 @@ The shape count is the real work: a group of machines that share a body is one m
 
 | Phase | Group | Machines | Shapes to build | With a sourced size |
 |---|---|---:|---:|---:|
-| **1** | **Retro phones and PDAs** | **224** | **167** | **105** |
+| **1** | **Retro phones and PDAs** | **224** | **166** | **106** |
 |  | Nokia | 53 | 47 | 43 |
-|  | Palm | 48 | 31 | 15 |
+|  | Palm | 48 | 30 | 16 |
 |  | BlackBerry | 32 | 17 | 11 |
 |  | Motorola | 15 | 10 | 6 |
 |  | Handspring | 13 | 6 | 3 |
@@ -286,7 +286,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2536** | **1020** | **1496** |
+|  | **Total** | **2536** | **1019** | **1497** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -338,7 +338,7 @@ No open dataset of outer dimensions for consoles or old phones was found. One se
 
 ## The machines
 
-### Phase 1: Retro phones and PDAs (224 machines, 167 shapes to build)
+### Phase 1: Retro phones and PDAs (224 machines, 166 shapes to build)
 
 **Apple Newton** (8 machines, 3 shapes)
 
@@ -552,9 +552,9 @@ LifeDrive (2005).
 
 Palm III (1998) *built*, Palm IIIe (1999), Palm IIIx (1999), Palm IIIc (2000), Palm IIIxe (2000).
 
-**Palm V** (2 machines, 1 shapes)
+**Palm V** (2 machines, 0 shapes)
 
-Palm V (1999), Palm Vx (1999).
+Palm V (1999) *built*, Palm Vx (1999).
 
 **Palm VII** (2 machines, 1 shapes)
 
