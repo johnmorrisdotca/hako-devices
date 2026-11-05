@@ -7,9 +7,11 @@ import {
   Box3,
   CanvasTexture,
   Color,
+  DataTexture,
   DirectionalLight,
   Group,
   HemisphereLight,
+  LinearFilter,
   LinearMipmapLinearFilter,
   MathUtils,
   Mesh,
@@ -20,6 +22,7 @@ import {
   PlaneGeometry,
   PMREMGenerator,
   RepeatWrapping,
+  RGBAFormat,
   Scene,
   Spherical,
   Sprite,
@@ -35,6 +38,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { FOV_DEG, frameFor, type ViewChoice } from "../framing.ts";
 import { bodyMaterial } from "./body.ts";
+import { brushNormalData } from "./brush.ts";
 import { pixelRatioFor } from "../pixels.ts";
 import { desktopPicture, oledPicture, panelPicture, paperPicture, phonePicture, type ScreenContent } from "../screen/picture.ts";
 import { canvas, paintBitmap, paintGlow, paintHalo, paintPanel, paintPerforation, paintPrint, paintSteps } from "./paint.ts";
@@ -112,6 +116,7 @@ export class DeviceViewer {
   private bodyParts: { material: MeshStandardMaterial; base: Color }[] | null = null;
   private flipped = false;
   private textures: Texture[] = [];
+  private brushed: DataTexture | null = null;
   private controls: OrbitControls;
   private clock = new Timer();
   private frame = 0;
@@ -202,6 +207,7 @@ export class DeviceViewer {
       if (/^spin-z/.test(node.name)) this.spinners.push({ node, axis: "z" });
       if (!(node instanceof Mesh)) return;
       const material = node.material as MeshStandardMaterial;
+      if (material.userData.brush === "line" && !material.normalMap) material.normalMap = this.brush();
       if (/^led-/.test(material.name) && !this.leds.some((led) => led.material === material)) this.leds.push({ material, base: material.emissiveIntensity, kind: material.name });
       const screen = /^screen-([a-z]+)-(\d+)x(\d+)/.exec(node.name);
       if (screen) this.screens.push({ mesh: node, kind: screen[1], pixels: [Number(screen[2]), Number(screen[3])], layers: [] });
@@ -388,6 +394,20 @@ export class DeviceViewer {
   private applyHome(): void {
     this.controls.target.copy(this.home.target);
     this.controls.update();
+  }
+
+  /** The brush of a brushed metal, made here from numbers: no address, so a strict page allows it. Disposed with the material that holds it. */
+  private brush(): DataTexture {
+    if (!this.brushed) {
+      const t = new DataTexture(brushNormalData(), 32, 32, RGBAFormat);
+      t.wrapS = t.wrapT = RepeatWrapping;
+      t.magFilter = LinearFilter;
+      t.minFilter = LinearMipmapLinearFilter;
+      t.generateMipmaps = true;
+      t.needsUpdate = true;
+      this.brushed = t;
+    }
+    return this.brushed;
   }
 
   private texture(picture: HTMLCanvasElement): CanvasTexture {

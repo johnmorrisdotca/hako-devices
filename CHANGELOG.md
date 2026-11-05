@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- Brushed silver no longer puts a picture in the .glb. The viewer makes the brush in code as a texture of bytes, so a page with a strict content security policy shows every device in 3D with no blob request. The .glb is smaller and has no images.
+
 ## [0.20.0] - 2026-11-05
 
 Classic phones and PDAs, and new drawing tools (a lathe, domed plates, brushed metal).

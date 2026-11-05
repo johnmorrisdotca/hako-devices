@@ -17,7 +17,7 @@ export interface MaterialSpec {
   strength?: number;
   /** Below 1 the material blends. */
   alpha?: number;
-  /** A normal pattern made in code. "line" is a fine brush along the face. */
+  /** A normal pattern the viewer makes in code. "line" is a fine brush along the face. */
   brush?: "line";
 }
 
@@ -99,7 +99,7 @@ export const MATERIALS = {
   "screen-face": { color: "#000000", metal: 0, rough: 0.25, glow: "#000000", strength: 1 },
   // A face for the caller's own print: clear until it is painted, in any viewer.
   print: { color: "#000000", metal: 0, rough: 0.5, alpha: 0 },
-  /** Silver with a fine brush. The lines are a generated normal map, not a picture. */
+  /** Silver with a fine brush. The lines are a normal map the viewer makes in code, not a picture. */
   "brushed-silver": { color: "#c5c8cc", metal: 1, rough: 0.38, brush: "line" },
   /** A flat plastic with no shine. */
   "matte-plastic": { color: "#2a2c31", metal: 0, rough: 0.86 },

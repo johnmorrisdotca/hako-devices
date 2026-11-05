@@ -26,7 +26,7 @@ test("a plate is chamfered, and a rise domes the front", () => {
   assert.ok(domedSize.z > flatSize.z + 0.3, `dome ${domedSize.z} over ${flatSize.z}`);
 });
 
-test("brushed metal carries a generated normal map, and a plain plastic does not", () => {
+test("brushed metal is marked for the viewer to brush, and the glb holds no picture", () => {
   const brushed = new Box("brushed");
   brushed.add("brushed-silver", box(4, 2, 1));
   const plain = new Box("plain");
@@ -37,7 +37,13 @@ test("brushed metal carries a generated normal map, and a plain plastic does not
   };
   const brushedJson = read(toGlb(brushed));
   const plainJson = read(toGlb(plain));
-  assert.ok(brushedJson.includes("normalTexture"), brushedJson.slice(0, 200));
-  assert.ok(brushedJson.includes("image/png"));
-  assert.ok(!plainJson.includes("normalTexture"));
+  assert.ok(brushedJson.includes('"extras":{"brush":"line"}'), brushedJson.slice(0, 200));
+  assert.ok(!plainJson.includes("brush"));
+  for (const json of [brushedJson, plainJson]) {
+    const parsed = JSON.parse(json);
+    assert.equal(parsed.images, undefined);
+    assert.equal(parsed.textures, undefined);
+    assert.equal(parsed.samplers, undefined);
+    assert.ok(!json.includes("normalTexture") && !json.includes("image/png"));
+  }
 });

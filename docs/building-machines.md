@@ -38,7 +38,7 @@ These helpers are in `src/build/kit.ts`. Run `pnpm machines` after a machine sta
 
 - `lathe(profile, segments)` revolves pairs of `[radius, height]` round the upright axis. A domed key, a round earpiece, an antenna or a nav ring. Turn it if the dome should face the front.
 - `plate(width, height, depth, edge, rise)` is a plate facing the front. `edge` drops the rim. `rise` domes the middle.
-- `brushed-silver` is silver with a fine brush. The lines are a normal map made in code when the mesh is written, not a picture file. `matte-plastic` is a flat plastic. `screen-glass` is a dark glossy glass. A machine that does not use `brushed-silver` is written exactly as before.
+- `brushed-silver` is silver with a fine brush. The .glb only says `brush: line` on the material; the viewer makes the normal map in code as a DataTexture, so the .glb holds no picture and a strict page loads nothing from a blob. `matte-plastic` is a flat plastic. `screen-glass` is a dark glossy glass. A machine that does not use `brushed-silver` is written exactly as before.
 
 ## The steps
 
