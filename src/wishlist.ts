@@ -817,7 +817,6 @@ export const COVERED: readonly CoveredDevice[] = [
 ];
 
 export const PLANNED: readonly PlannedDevice[] = [
-  {"key":"messagepad-original-model","name":"MessagePad (Original Model)","family":"Newton","shelf":"phones","maker":"Apple","status":"planned"},
   {"key":"messagepad-100","name":"MessagePad 100","family":"Newton","shelf":"phones","maker":"Apple","status":"planned"},
   {"key":"messagepad-110","name":"MessagePad 110","family":"Newton","shelf":"phones","maker":"Apple","status":"planned"},
   {"key":"messagepad-120","name":"MessagePad 120","family":"Newton","shelf":"phones","maker":"Apple","status":"planned"},

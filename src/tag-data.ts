@@ -4802,6 +4802,7 @@ export const YEAR_DATA: Readonly<Record<string, number>> = {
 
 /** The product line of each drawn device ("Power Mac", "iPhone"), as the list gives it. A machine the list only covers or plans has its line on its row in wishlist.ts. */
 export const LINE_DATA: Readonly<Record<string, string>> = {
+  "messagepad-original-model": "Newton",
   "bold-9900": "Bold",
   "curve-8520": "Curve",
   "visor-deluxe": "Visor",

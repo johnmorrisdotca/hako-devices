@@ -13,6 +13,7 @@ All notable changes to this project are written here. The format follows
 - Nokia 3210 and Nokia 5110. The 3210's shell is waisted and dark grey, with a silver cover whose lower edge curves. The screen is a large green-grey window in that cover. The centre key is a wide silver oval, with a C key and a rocker at its ends, and the number keys are separate ovals. The 5110 has a blue cover, a stub antenna and pale number keys.
 - Pilot 1000. A dark slab from a straight-on photograph of that model, with a screen, a writing panel, a green power key and four round keys. No word.
 - Visor Deluxe. The list size stays as it was. A dark slab, ribbed edges, a green-grey screen, four round keys and a wider centre key. No word.
+- MessagePad. The article labels the height, the width and the depth. The list stores the width, the depth and the height. A dark slab, a dark screen, a pen along the right edge and a speaker of small holes. No word.
 - Bold 9900. The list size stays as it was. A metal band around a black face, a glossy screen, a dark square in a metal ring, and four rows of domed keys. A thin metal fret sits between the rows, and each row smiles a little. No word.
 - Curve 8520. The list size stays as it was. A black body, a screen, a green key, a square pad, a red key and four straight rows. No word.
 - A lathe, a domed plate, and a brushed silver. The brush is a normal map made in code. See docs/building-machines.md.

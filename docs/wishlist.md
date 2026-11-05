@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2536 machines. 1022 distinct shapes still to build. 1182 entries are already built: the 390 devices in this package, plus the real models those meshes cover. 1495 entries have a sourced size; the other 1041 are `null` on purpose.**
+**2536 machines. 1021 distinct shapes still to build. 1183 entries are already built: the 391 devices in this package, plus the real models those meshes cover. 1495 entries have a sourced size; the other 1041 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -10,7 +10,7 @@ The shape count is the real work: a group of machines that share a body is one m
 
 | Phase | Group | Machines | Shapes to build | With a sourced size |
 |---|---|---:|---:|---:|
-| **1** | **Retro phones and PDAs** | **224** | **169** | **104** |
+| **1** | **Retro phones and PDAs** | **224** | **168** | **104** |
 |  | Nokia | 53 | 47 | 43 |
 |  | Palm | 48 | 31 | 15 |
 |  | BlackBerry | 32 | 18 | 10 |
@@ -19,7 +19,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Sony Ericsson | 13 | 12 | 13 |
 |  | Siemens | 11 | 11 | 4 |
 |  | Danger | 9 | 8 | 2 |
-|  | Apple | 8 | 4 | 4 |
+|  | Apple | 8 | 3 | 4 |
 |  | Ericsson | 8 | 8 | 0 |
 |  | Psion | 6 | 6 | 2 |
 |  | Compaq | 1 | 1 | 0 |
@@ -286,7 +286,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2536** | **1022** | **1495** |
+|  | **Total** | **2536** | **1021** | **1495** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -338,11 +338,11 @@ No open dataset of outer dimensions for consoles or old phones was found. One se
 
 ## The machines
 
-### Phase 1: Retro phones and PDAs (224 machines, 169 shapes to build)
+### Phase 1: Retro phones and PDAs (224 machines, 168 shapes to build)
 
-**Apple Newton** (8 machines, 4 shapes)
+**Apple Newton** (8 machines, 3 shapes)
 
-MessagePad (Original Model) (1993), MessagePad 100 (1994), MessagePad 110 (1994), MessagePad 120 (1995), MessagePad 130 (1996), MessagePad 2000 (1997), MessagePad 2100 (1997), eMate 300 (1997).
+MessagePad (Original Model) (1993) *built*, MessagePad 100 (1994), MessagePad 110 (1994), MessagePad 120 (1995), MessagePad 130 (1996), MessagePad 2000 (1997), MessagePad 2100 (1997), eMate 300 (1997).
 
 **Atari Portfolio** (1 machines, 1 shapes)
 

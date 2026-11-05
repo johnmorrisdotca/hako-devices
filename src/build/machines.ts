@@ -144,6 +144,19 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 26, 18, 8, 8, { round: true, material: "alu", out: 0.45 }),
     ],
   },
+  // The article labels height, width and depth. The list stores width, then depth, then height. A nearly straight photograph of the first one. A dark slab, a dark screen, a pen along the right edge and a speaker of small holes. No word.
+  "messagepad-original-model": {
+    size: [114.3, 19.1, 184.8],
+    body: "plastic-black",
+    corner: 10,
+    shape: "shell",
+    marks: [
+      front("screen", 0, 112, 94, 112, { material: "black-glass", out: 0.25 }),
+      front("panel", 0, 64, 86, 12, { material: "plastic-grey", out: 0.4 }),
+      front("key", 62, 112, 5, 130, { material: "plastic-grey", out: 0.2 }),
+      front("key", 32, 26, 2.4, 2.4, { round: true, cols: 4, rows: 3, gap: 1.8, material: "alu-dark", out: 0.4 }),
+    ],
+  },
   "wii-rvl-001": {
     size: [157, 197, 60],
     body: "plastic-white",
