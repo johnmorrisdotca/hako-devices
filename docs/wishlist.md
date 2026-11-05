@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2535 machines. 1033 distinct shapes still to build. 1170 entries are already built: the 378 devices in this package, plus the real models those meshes cover. 1497 entries have a sourced size; the other 1038 are `null` on purpose.**
+**2535 machines. 1032 distinct shapes still to build. 1171 entries are already built: the 379 devices in this package, plus the real models those meshes cover. 1495 entries have a sourced size; the other 1040 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -10,11 +10,11 @@ The shape count is the real work: a group of machines that share a body is one m
 
 | Phase | Group | Machines | Shapes to build | With a sourced size |
 |---|---|---:|---:|---:|
-| **1** | **Retro phones and PDAs** | **223** | **178** | **106** |
+| **1** | **Retro phones and PDAs** | **223** | **177** | **104** |
 |  | Nokia | 53 | 49 | 43 |
 |  | Palm | 48 | 32 | 15 |
 |  | BlackBerry | 32 | 20 | 10 |
-|  | Motorola | 14 | 13 | 8 |
+|  | Motorola | 14 | 12 | 6 |
 |  | Handspring | 13 | 7 | 3 |
 |  | Sony Ericsson | 13 | 12 | 13 |
 |  | Siemens | 11 | 11 | 4 |
@@ -286,7 +286,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2535** | **1033** | **1497** |
+|  | **Total** | **2535** | **1032** | **1495** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -338,7 +338,7 @@ No open dataset of outer dimensions for consoles or old phones was found. One se
 
 ## The machines
 
-### Phase 1: Retro phones and PDAs (223 machines, 178 shapes to build)
+### Phase 1: Retro phones and PDAs (223 machines, 177 shapes to build)
 
 **Apple Newton** (8 machines, 4 shapes)
 
@@ -456,9 +456,9 @@ Kyocera QCP-6035 (2001).
 
 Motorola Droid (2009).
 
-**Motorola DynaTAC** (1 machines, 1 shapes)
+**Motorola DynaTAC** (1 machines, 0 shapes)
 
-DynaTAC 8000X (1983).
+DynaTAC 8000X (1983) *built*.
 
 **Motorola MicroTAC** (1 machines, 1 shapes)
 

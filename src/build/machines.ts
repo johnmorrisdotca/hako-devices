@@ -29,6 +29,8 @@ export interface MachineSpec {
   body: Material;
   corner: number;
   marks: readonly Mark[];
+  /** A rod rising from the top. The length is a drawing, not a measured axis. */
+  antenna?: number;
   /** Not one block: its own shape, in its size. */
   shape?: "headphones" | "headset" | "can";
 }
@@ -611,6 +613,23 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 28, 34, 16, 8, { material: "alu", out: 0.6 }),
     ],
   },
+  // RigPix names width 40 mm, height 195 mm and depth 80 mm, with the battery and without the antenna. The photograph shows the face wider than the side, so that width is not used and the list stays blank. The mesh uses 80 mm across the face, 40 mm thick and 195 mm tall, cream, with a black face. The antenna is a drawing 160 mm long; no page opened names its length. No back photograph was opened, so the back is plain. Places are not measured.
+  "dynatac-8000x": {
+    size: [80, 40, 195],
+    body: "plastic-beige",
+    corner: 6,
+    antenna: 160,
+    marks: [
+      front("panel", 0, 98, 62, 168),
+      front("dark", 0, 168, 22, 22, { round: true, material: "alu-dark", out: 0.5 }),
+      front("slot", 0, 168, 2.4, 2.4, { round: true, cols: 3, rows: 3, gap: 2.4, out: 1.1 }),
+      front("light", 0, 146, 34, 8, { out: 0.6 }),
+      front("key", 0, 108, 14, 10, { cols: 3, rows: 4, gap: 3, material: "deck-white", out: 0.7 }),
+      front("key", 0, 68, 14, 9, { cols: 3, rows: 3, gap: 3, material: "deck-white", out: 0.7 }),
+      front("key", 17, 80, 14, 9, { material: "lid-red", out: 1.3 }),
+      front("slot", 0, 28, 28, 3, { out: 0.6 }),
+    ],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };
@@ -651,6 +670,7 @@ export function machine(m: Box, spec: MachineSpec) {
     m.add(spec.body, box(r, 4, 4), [r * 0.4, h * 0.86, 0]);
     m.add(spec.body, cyl(4, 10, 16), [r * 0.85, h * 0.86, 0]);
   } else m.add(spec.body, rbox(w, h, d, Math.min(spec.corner, Math.min(w, d, h) / 2 - 0.1), 4), [0, h / 2, 0]);
+  if (spec.antenna) m.add("rubber", cyl(3.2, spec.antenna, 16), [-w * 0.22, h + spec.antenna / 2 - 2, 0]);
   const thin = 0.5;
   for (const mark of spec.marks) {
     eachMark(mark, (x, y) => {
