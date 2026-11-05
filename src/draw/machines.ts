@@ -14,12 +14,16 @@ const PAINT: Readonly<Record<string, ShapeStyle>> = {
   "shell-orange": { fill: "#c9652c", stroke: "#8fa1b8", sw: 0.6 },
   "shell-silver": { fill: "#d5d8dc", stroke: "#8fa1b8", sw: 0.5 },
   alu: { fill: "#c9cdd3", stroke: "#8fa1b8", sw: 0.5 },
+  "alu-dark": { fill: "#6a6e76", stroke: "#8fa1b8", sw: 0.5 },
   "plastic-grey": { fill: "#5c6370", stroke: "#8fa1b8", sw: 0.5 },
   "plastic-white": { fill: "#e7e4dc", stroke: "#8fa1b8", sw: 0.5 },
   "plastic-black": { fill: "#14161c", stroke: "#8fa1b8", sw: 0.5 },
   "pale-glass": { fill: "#c5d2c0", stroke: "#8fa1b8", sw: 0.6 },
   "pcb-green": { fill: "#1f6c40", stroke: "#8fa1b8", sw: 0.5 },
   "plastic-gloss": { fill: "#14161a", stroke: "#8fa1b8", sw: 0.5 },
+  "plastic-blue": { fill: "#3f6fb0", stroke: "#8fa1b8", sw: 0.5 },
+  clear: { fill: "#d5e4ef", stroke: "#8fa1b8", sw: 0.4 },
+  bezel: { fill: "#14161c", stroke: "#8fa1b8", sw: 0.4 },
 };
 const BLUE: SolidStyle = { top: "#7aa0cc", front: "#3f6fb0", side: "#2c4f86", sw: 1.3 };
 
@@ -35,8 +39,12 @@ function drawFace(d: Drawing, marks: readonly Mark[], thick: number, yShift: num
     const style = paintOf(mark);
     eachMark(mark, (x, y) => {
       const c: Vec3 = [x, y + yShift, sign * (thick / 2 + 0.25 + (mark.out ?? 0))];
-      if (mark.round) d.circle(c, X, Y, mark.w / 2, style, 4);
-      else d.rect(c, X, Y, mark.w, mark.h, style, 4, Math.min(mark.w, mark.h) * 0.22);
+      const pill = mark.kind === "key" && !mark.round && mark.h > 2 && mark.w > mark.h * 1.3;
+      if (mark.round && mark.w >= 12) {
+        d.circle(c, X, Y, mark.w / 2, style, 4);
+        d.circle(c, X, Y, mark.w / 2 - 2.2, HOLE, 3);
+      } else if (mark.round) d.circle(c, X, Y, mark.w / 2, style, 4);
+      else d.rect(c, X, Y, mark.w, mark.h, style, 4, pill ? mark.h / 2 : Math.min(mark.w, mark.h) * 0.22);
     });
   }
 }

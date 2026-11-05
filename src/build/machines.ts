@@ -1,6 +1,6 @@
 // Well-known machines, each one body with marks on its front and top: one description for its mesh and its drawing, placed from its published size. Plain geometry: no mark or logo.
 import * as THREE from "three";
-import { type Box, box, cyl, type Material, rbox, roundedSquare, tube, type Vec3 } from "./kit.ts";
+import { type Box, box, cyl, type Material, rbox, roundedSquare, torus, tube, type Vec3 } from "./kit.ts";
 
 export type MarkKind = "screen" | "lcd" | "dark" | "panel" | "slot" | "key" | "light";
 
@@ -44,6 +44,8 @@ export interface MachineSpec {
   lidThick?: number;
   /** A thicker lip at the bottom, this tall. */
   chin?: number;
+  /** How far each side tucks in at the middle, for a waisted shell. */
+  waist?: number;
 }
 
 /** Points along the band over the head of a pair of headphones, or round the back of a headset. */
@@ -675,19 +677,19 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     chin: 12,
     marks: [
       front("slot", 0, 152, 16, 1.3, { out: 0.35 }),
-      front("screen", 0, 118, 42, 52, { out: 0.4 }),
+      front("panel", 0, 116, 46, 56, { material: "bezel", out: 0.12 }),
+      front("screen", 0, 116, 40, 48, { out: 0.4 }),
       back("dark", 0, 150, 6, 6, { round: true, material: "plastic-black", out: 0.3 }),
       back("screen", 0, 128, 22, 16, { out: 0.25 }),
       back("dark", 0, 104, 11, 11, { round: true, material: "alu", out: 0.2 }),
-      front("key", 0, 64, 16, 16, { round: true, material: "alu", out: 0.25 }),
-      front("dark", 0, 64, 10, 10, { round: true, out: 0.4 }),
-      front("key", 0, 64, 4.5, 4.5, { round: true, material: "shell-silver", out: 0.55 }),
-      front("key", -16, 68, 5, 3.5, { material: "alu", out: 0.3 }),
-      front("key", 16, 68, 5, 3.5, { material: "alu", out: 0.3 }),
-      front("key", -16, 60, 4, 4, { round: true, material: "pcb-green", out: 0.35 }),
-      front("key", 16, 60, 4, 4, { round: true, material: "lid-red", out: 0.35 }),
-      front("slot", 0, 38, 36, 0.45, { rows: 3, gap: 9, out: 0.3 }),
-      front("slot", 0, 38, 0.45, 30, { cols: 2, gap: 12, out: 0.3 }),
+      front("key", -14, 72, 8, 3.2, { material: "alu-dark", out: 0.45 }),
+      front("key", 14, 72, 8, 3.2, { material: "alu-dark", out: 0.45 }),
+      front("key", 0, 64, 16, 16, { round: true, material: "alu", out: 0.3 }),
+      front("key", 0, 64, 5, 5, { round: true, material: "shell-silver", out: 0.7 }),
+      front("key", -16, 64, 4.2, 4.2, { round: true, material: "pcb-green", out: 0.45 }),
+      front("key", 16, 64, 4.2, 4.2, { round: true, material: "lid-red", out: 0.45 }),
+      front("key", 0, 54, 7, 3.4, { material: "alu-dark", out: 0.45 }),
+      front("key", 0, 32, 13, 7, { cols: 3, rows: 4, gap: 1.6, material: "alu", out: 0.5 }),
       front("slot", 0, 8, 1.2, 3, { cols: 7, rows: 1, gap: 1.1, out: 1.6 }),
     ],
   },
@@ -697,15 +699,17 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     body: "plastic-char",
     corner: 16,
     shape: "shell",
+    waist: 3.5,
     marks: [
-      front("panel", 0, 90, 42, 60, { material: "shell-silver", out: 0.45 }),
-      front("slot", -5, 112, 7, 1.3, { out: 0.85 }),
-      front("slot", -5, 108.5, 7, 1.3, { out: 0.85 }),
-      front("lcd", 0.9, 86, 30, 18, { material: "pcb-green", out: 0.95 }),
-      front("key", -15, 63, 9, 7, { material: "plastic-grey", out: 1 }),
-      front("key", 1, 62, 18, 8, { material: "plastic-white", out: 1 }),
-      front("key", 16, 61, 8, 11, { material: "shell-silver", out: 0.85 }),
-      front("key", 0, 29.3, 12, 6, { cols: 3, rows: 4, gap: 2.6, material: "plastic-white", out: 0.7 }),
+      front("panel", 0, 92, 40, 58, { material: "shell-silver", out: 0.2 }),
+      front("slot", -5, 112, 7, 1.3, { out: 0.9 }),
+      front("slot", -5, 108.5, 7, 1.3, { out: 0.9 }),
+      front("lcd", 0.9, 90, 34, 22, { material: "pale-glass", out: 0.45 }),
+      front("lcd", 0.9, 90, 22, 17, { material: "black-glass", out: 0.85 }),
+      front("key", -16, 56, 8, 7, { material: "plastic-white", out: 1.3 }),
+      front("key", 1, 56, 20, 9, { material: "plastic-blue", out: 1.35 }),
+      front("key", 16, 56, 7, 12, { material: "plastic-grey", out: 1.25 }),
+      front("key", 0, 29.3, 12, 6.5, { cols: 3, rows: 4, gap: 2.4, material: "plastic-white", out: 0.85 }),
     ],
   },
   // The article's axes are already on the list. The shell is 43.9 mm across and 132 mm tall, from a straight-on photograph scaled so the shell's long side is 132 mm. A stub antenna of 18 mm stands on the top right. The cover is blue. A screen window, a long centre key and pale number keys. No word.
@@ -772,7 +776,10 @@ function faceMarks(m: Box, marks: readonly Mark[], yOf: (y: number) => number, t
     eachMark(mark, (x, y) => {
       const at: Vec3 = [x, yOf(y), sign * (thick / 2 + (mark.out ?? 0))];
       const tone = mark.material ?? MATERIAL[mark.kind];
-      if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 20), at, [90, 0, 0]);
+      const pill = mark.kind === "key" && !mark.round && mark.h > 2 && mark.w > mark.h * 1.3;
+      if (mark.round && mark.w >= 12) m.add(tone, torus(mark.w / 2 - 1.2, 0.9, 28, 8), at);
+      else if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 20), at, [90, 0, 0]);
+      else if (pill) m.add(tone, cyl(mark.h / 2, thin, 16), at, [90, 0, 0], { scale: [mark.w / mark.h, 1, 1] });
       else m.add(tone, box(mark.w, mark.h, thin), at);
     });
   }
@@ -791,10 +798,10 @@ function flipPhone(m: Box, spec: MachineSpec) {
   const radius = Math.min(spec.corner, w / 2 - 0.4);
   m.add(spec.body, phoneShell(w, lowerH, lowerT, radius), [0, lowerH / 2, 0]);
   if (spec.chin) m.add(spec.body, phoneShell(w * 0.94, spec.chin, lowerT + 2.4, Math.min(radius, spec.chin / 2 - 0.3)), [0, spec.chin / 2, 0.5]);
-  m.add(spec.body, cyl(Math.min(lowerT, lidT) * 0.42, w * 0.46, 16), [0, hinge, 0], [0, 0, 90]);
+  m.add(spec.body, cyl(2.4, w * 0.72, 18), [0, hinge, 1.4], [0, 0, 90]);
   const lidMarks = spec.marks.filter((mark) => mark.y - mark.h / 2 >= hinge - 1);
   faceMarks(m, spec.marks.filter((mark) => !lidMarks.includes(mark)), (y) => y, lowerT);
-  const frame = new THREE.Matrix4().makeTranslation(0, hinge, 0).multiply(new THREE.Matrix4().makeRotationX((-lean * Math.PI) / 180));
+  const frame = new THREE.Matrix4().makeTranslation(0, hinge, -1.6).multiply(new THREE.Matrix4().makeRotationX((-lean * Math.PI) / 180));
   m.within(frame, () => {
     m.add(spec.body, phoneShell(w, lidH, lidT, radius), [0, lidH / 2, 0]);
     faceMarks(m, lidMarks, (y) => y - hinge, lidT);
@@ -802,11 +809,49 @@ function flipPhone(m: Box, spec: MachineSpec) {
   return m;
 }
 
+/** A shell that is narrower at the middle and round at the ends. */
+function candyShell(w: number, h: number, d: number, pinch: number): THREE.BufferGeometry {
+  const s = new THREE.Shape();
+  const steps = 40;
+  const ys: number[] = [];
+  for (let i = 0; i <= steps; i++) ys.push(-h / 2 + (h * i) / steps);
+  const half = (y: number) => {
+    const u = (y + h / 2) / h;
+    const side = w / 2 - pinch * Math.sin(Math.PI * u);
+    const end = Math.min(u, 1 - u) * h;
+    const r = 12;
+    if (end < r) return side - r + Math.sqrt(Math.max(0.4, r * r - (r - end) * (r - end)));
+    return side;
+  };
+  const right = ys.map((y) => [half(y), y] as const);
+  const left = [...right].reverse().map(([x, y]) => [-x, y] as const);
+  for (const [i, [x, y]] of [...right, ...left].entries()) {
+    if (i === 0) s.moveTo(x, y);
+    else s.lineTo(x, y);
+  }
+  s.closePath();
+  const bevel = Math.min(0.8, d / 6);
+  const g = new THREE.ExtrudeGeometry(s, {
+    depth: Math.max(0.4, d - 2 * bevel),
+    bevelEnabled: true,
+    bevelThickness: bevel,
+    bevelSize: bevel * 0.45,
+    bevelSegments: 2,
+    curveSegments: 4,
+  });
+  g.computeBoundingBox();
+  const box3 = g.boundingBox;
+  if (box3) g.translate(-(box3.min.x + box3.max.x) / 2, -(box3.min.y + box3.max.y) / 2, -(box3.min.z + box3.max.z) / 2);
+  g.deleteAttribute("uv");
+  g.computeVertexNormals();
+  return g;
+}
+
 /** One rounded shell, marks on the front, and a stub antenna when the phone has one. The DynaTAC keeps its own shape. */
 function shellPhone(m: Box, spec: MachineSpec) {
   const [w, d, h] = spec.size;
   const r = Math.min(spec.corner, w / 2 - 0.6);
-  m.add(spec.body, phoneShell(w, h, d, r), [0, h / 2, 0]);
+  m.add(spec.body, spec.waist ? candyShell(w, h, d, spec.waist) : phoneShell(w, h, d, r), [0, h / 2, 0]);
   if (spec.antenna) m.add(spec.body, cyl(2.2, spec.antenna + 4, 12), [w * 0.32, h + spec.antenna / 2 - 2, 0]);
   const thin = 0.45;
   for (const mark of spec.marks) {
@@ -815,7 +860,9 @@ function shellPhone(m: Box, spec: MachineSpec) {
       const at: Vec3 = [x, y, d / 2 + (mark.out ?? 0)];
       const tone = mark.material ?? MATERIAL[mark.kind];
       const oval = !mark.cols && !mark.round && mark.kind !== "panel" && mark.kind !== "slot" && mark.w > mark.h * 1.35;
-      if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 20), at, [90, 0, 0]);
+      const cover = mark.kind === "panel" && mark.h > 36;
+      if (cover) m.add(tone, phoneShell(mark.w, mark.h, 1.6, 8), [x, y, d / 2 + (mark.out ?? 0)]);
+      else if (mark.round) m.add(tone, cyl(mark.w / 2, thin, 20), at, [90, 0, 0]);
       else if (oval) m.add(tone, cyl(mark.h / 2, thin, 22), at, [90, 0, 0], { scale: [mark.w / mark.h, 1, 1] });
       else m.add(tone, box(mark.w, mark.h, thin), at);
     });
