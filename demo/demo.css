@@ -17,6 +17,13 @@
 html { background: var(--ground); scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body { margin: 0; background: radial-gradient(1200px 600px at 70% -10%, rgb(108 208 255 / 0.08), transparent 60%), var(--ground); color: var(--ink); font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.45; }
+/* The shared header stays, and it stays one short bar. The pitch, the cloth and the family's list sit in the footer, so the first screen still holds the search, the kinds and a machine. */
+body > header { min-height: 0; margin: 0; padding: 0.2rem 0.75rem; align-items: center; }
+body > header .intro { min-height: 0; }
+body > header .intro p,
+body > header .cloth,
+body > header [data-help-switch] { display: none !important; }
+body > header nav a { display: none; }
 a { color: var(--accent); }
 h1, h2, h3 { margin: 0; line-height: 1.2; }
 h1 { font-size: 1.35rem; letter-spacing: -0.01em; white-space: nowrap; }
@@ -28,10 +35,10 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospac
 .kanji { color: var(--accent); font-weight: 500; }
 .pitch { margin: 0; color: var(--muted); font-size: 0.75rem; line-height: 1.25; flex: 1 1 18rem; min-width: 0; }
 .links { display: flex; gap: 0.25rem 1rem; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
-.links a { flex: none; color: var(--ink); text-decoration: none; padding: 0.3rem 0.1rem; border-bottom: 2px solid transparent; font-size: 0.9rem; }
+.links a { flex: none; color: var(--ink); text-decoration: none; min-height: 0; border: 0; border-bottom: 2px solid transparent; border-radius: 0; padding: 0.3rem 0.1rem; font-size: 0.9rem; display: inline; }
 .links a:hover { border-color: var(--line); }
 .links a[aria-current="page"] { border-color: var(--accent); color: var(--accent); }
-main { min-width: 0; padding: 0 0.6rem; }
+main { min-width: 0; max-width: none; margin: 0; padding: 0 0.6rem; }
 .panel { background: var(--raised); border: 1px solid var(--line); border-radius: 0.9rem; padding: 0.6rem; min-width: 0; }
 [hidden] { display: none !important; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -155,7 +162,11 @@ select, input[type="text"], input[type="search"] { min-height: 2.5rem; padding: 
 }
 /* A desk: the page is the window, and each list scrolls inside itself. */
 @media (min-width: 1180px) and (min-height: 620px) {
-  body { height: 100dvh; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+  body { height: 100dvh; display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto; }
+  body > header { grid-row: 1; }
+  body > nav { grid-row: 2; }
+  body > main { grid-row: 3; }
+  body > footer { grid-row: 4; max-height: 3.25rem; margin-top: 0; overflow: auto; }
   main { min-height: 0; }
   .view { height: 100%; min-height: 0; }
   .view-gallery { grid-template-columns: minmax(31rem, 37fr) minmax(0, 40fr) minmax(16rem, 19fr); grid-template-rows: auto minmax(0, 1fr); grid-template-areas: "browser stage side" "browser embed side"; }
