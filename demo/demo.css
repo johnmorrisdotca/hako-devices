@@ -12,6 +12,19 @@
   --good: #4ade80;
   --warn: #fbbf24;
   --bad: #f87171;
+  /* The family's chrome reads these. They stay with the night page, including when a light theme is asked for. */
+  --page: #070b13;
+  --surface: #182131;
+  --rule: #1f2a3c;
+}
+:root[data-theme="light"],
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #070b13;
+  --surface: #182131;
+  --rule: #1f2a3c;
+  --ink: #eef2f8;
+  --muted: #9aa6b8;
 }
 * { box-sizing: border-box; }
 html { background: var(--ground); scroll-behavior: smooth; }
