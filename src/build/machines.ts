@@ -611,6 +611,20 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
       front("key", 28, 34, 16, 8, { material: "alu", out: 0.6 }),
     ],
   },
+  // The article gives 53 x 98 x 13 mm and names no axes, so the list size stays blank. The open phone is one body, 31.8 mm across and 98 mm tall, from a straight-on photograph of a RAZR V3 scaled so the long side is 98 mm. The 13 mm is the closed thickness, and that photograph has no side, so the mesh uses it for the depth. The display, the round pad, the two keys beside it and the key rows are measured on the photograph. The speaker slots did not separate from the silver chin, and one body cannot show the hinge gap. No mark.
+  "razr-v3": {
+    size: [31.8, 13, 98],
+    body: "shell-silver",
+    corner: 8,
+    marks: [
+      front("screen", 0, 74.5, 23.5, 29.6),
+      front("key", 0, 34, 9, 9, { round: true }),
+      front("key", -8.4, 37.1, 2.4, 2.4, { round: true }),
+      front("key", 8.4, 37.1, 2.4, 2.4, { round: true }),
+      front("key", 0, 19.6, 6.4, 2.4, { cols: 3, rows: 3, gap: 0.9 }),
+      front("key", 0, 10.9, 6, 2.2, { cols: 3, rows: 1, gap: 2.2 }),
+    ],
+  },
 };
 
 const MATERIAL: Readonly<Record<MarkKind, Material>> = { screen: "black-glass", lcd: "pale-glass", dark: "plastic-gloss", panel: "plastic-black", slot: "hole", key: "key", light: "led-red" };

@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- RAZR V3, open. The article's 53 x 98 x 13 mm names no axes, so the list size stays blank. The body follows a straight-on photograph of a RAZR V3, scaled so the long side is 98 mm, and the display, the round pad and the keys are measured on that photograph. The depth is the 13 mm closed thickness, because the photograph has no side.
+
 ## [0.18.0] - 2026-11-05
 
 ### Added
