@@ -8,8 +8,8 @@ All notable changes to this project are written here. The format follows
 
 ### Added
 
-- StarTAC, open. Motorola's 93 x 52 x 20 mm names no axes, so the list size stays blank. The body follows a straight-on photograph of a StarTAC 8500, scaled so the long side is 93 mm, and the display and the keys are measured on that photograph. The depth is the 20 mm closed thickness, because the photograph has no side.
-- RAZR V3, open. The article's 53 x 98 x 13 mm names no axes, so the list size stays blank. The body follows a straight-on photograph of a RAZR V3, scaled so the long side is 98 mm, and the display, the round pad and the keys are measured on that photograph. The depth is the 13 mm closed thickness, because the photograph has no side.
+- StarTAC, open. Motorola's 93 x 52 x 20 mm names no axes, so the list size stays blank. Two halves on a hinge, open at about 160 degrees, from a straight-on photograph of a StarTAC 8500 scaled so the long side is 93 mm. The earpiece is on the lid. The display and the keys are on the lower half. Each half is thinner than the 20 mm closed thickness, because the photograph has no side.
+- RAZR V3, open. The article's 53 x 98 x 13 mm names no axes, so the list size stays blank. Two halves on a hinge, open at about 160 degrees, from a straight-on photograph of a RAZR V3 scaled so the long side is 98 mm. The screen is in the upper half. The lower half has the dark pad, the round pad and a thicker chin. Each half is thinner than the 13 mm closed thickness, because the photograph has no side.
 
 ## [0.18.0] - 2026-11-05
 
