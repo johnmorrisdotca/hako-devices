@@ -2047,6 +2047,8 @@ export const PLANNED: readonly PlannedDevice[] = [
   {"key":"samsung-galaxy-s24","name":"Galaxy S24","family":"Galaxy S","shelf":"android","maker":"Samsung","status":"planned"},
   {"key":"samsung-galaxy-s24-plus","name":"Galaxy S24+","family":"Galaxy S","shelf":"android","maker":"Samsung","status":"planned"},
   {"key":"samsung-galaxy-s24-ultra","name":"Galaxy S24 Ultra","family":"Galaxy S","shelf":"android","maker":"Samsung","status":"planned"},
+  {"key":"motorola-razr-2025","name":"motorola razr 2025","family":"razr","shelf":"android","maker":"Motorola","status":"planned"},
+  {"key":"motorola-razr-plus-2025","name":"motorola razr+ 2025","family":"razr","shelf":"android","maker":"Motorola","status":"planned"},
   {"key":"samsung-galaxy-note","name":"Galaxy Note","family":"Galaxy Note","shelf":"android","maker":"Samsung","status":"planned"},
   {"key":"samsung-galaxy-note-ii","name":"Galaxy Note II","family":"Galaxy Note","shelf":"android","maker":"Samsung","status":"planned"},
   {"key":"samsung-galaxy-note-4","name":"Galaxy Note 4","family":"Galaxy Note","shelf":"android","maker":"Samsung","status":"planned"},
