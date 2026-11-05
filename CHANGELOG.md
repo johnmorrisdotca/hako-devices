@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- StarTAC: the size is Motorola's own 93 x 52 x 20 mm. That page names no axes, and its picture is open and at an angle, so the keys and the screen are not drawn.
+
 ## [0.18.0] - 2026-11-05
 
 ### Added
