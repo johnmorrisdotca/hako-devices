@@ -2,6 +2,7 @@ node_modules/
 dist/
 site/
 .docs-examples/
+.usage/
 test-results/
 playwright-report/
 *.tgz

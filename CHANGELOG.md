@@ -14,6 +14,7 @@ All notable changes to this project are written here. The format follows
 - A guide shows the element in Angular.
 - A guide shows an iframe of the embed page.
 - Each guide has a Japanese twin. The Japanese awaits a native reader.
+- `pnpm test:usage` builds every example against the package as npm packs it and opens the page.
 - The demo's "Put this on your site" is the family's embed panel. The five ways are still there (the custom element, an iframe, a module, the SVG and a data address), with Copy, the note about the embed page, Open the embed page and Read the docs.
 - The demo uses the family's shared header and footer: the language picker, the theme switch, and the list of the other packages. This package is on that list. Those controls use the demo's night colours. The section tabs sit in the same gutter as the title.
 
