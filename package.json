@@ -157,6 +157,7 @@
     "test:demo": "pnpm site && playwright test",
     "screenshots": "pnpm site && node scripts/screenshots.ts",
     "wishlist": "node scripts/make-wishlist.ts",
+    "family:readme": "node scripts/family-readme.mjs",
     "machines": "node scripts/make-machines.ts"
   },
   "peerDependencies": {

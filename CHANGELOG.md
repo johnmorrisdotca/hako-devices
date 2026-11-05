@@ -6,6 +6,8 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+- The demo uses the family's shared header and footer: the language picker, the theme switch, and the list of the other packages. This package is on that list.
+
 ## [0.16.0] - 2026-11-03
 
 ### Fixed

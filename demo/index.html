@@ -1,22 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--family:head-->
     <meta name="color-scheme" content="dark" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'none'" />
-    <title>Hako Devices</title>
-    <meta name="description" content="Line drawings and 3D views of computers, boards, hats, NAS boxes, tablets and more, as a web component, with a typed way to assemble machines from parts." />
-    <link rel="icon" href="assets/parts/pi-zero-2w.svg" type="image/svg+xml" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'none'" />
+    <link rel="stylesheet" href="family.css" />
     <link rel="stylesheet" href="demo.css" />
   </head>
   <body>
-    <header class="top">
-      <div class="brand">
-        <h1>Hako Devices <span class="kanji" lang="ja">箱</span></h1>
-        <p class="pitch">Line drawings and 3D views of computers, boards, hats, NAS boxes and tablets, that you drop into a page and assemble from parts.</p>
-      </div>
-      <nav class="links" aria-label="Sections">
+    <!--family:header-->
+    <!--family:unreviewed-->
+    <nav class="links" aria-label="Sections">
         <a href="#gallery" data-view="gallery">Gallery</a>
         <a href="#builder" data-view="builder">Build</a>
         <a href="#lineup" data-view="lineup">To scale</a>
@@ -25,8 +19,6 @@
         <a href="machines.json">List (JSON)</a>
         <a href="https://github.com/johnmorrisdotca/hako-devices">GitHub</a>
       </nav>
-    </header>
-
     <main>
       <section class="view view-gallery" id="gallery" aria-labelledby="gallery-title">
         <div class="browser panel">
@@ -151,9 +143,7 @@
       </section>
     </main>
 
-    <footer class="foot">
-      <p>MIT licence. Product names appear only as plain descriptive words. All trademarks belong to their owners, and this project is not affiliated with any of them. No logo or brand printing is drawn on any device.</p>
-    </footer>
-    <script type="module" src="js/demo.js"></script>
+    <!--family:footer-->
+    <!--family:scripts js/demo.js-->
   </body>
 </html>
