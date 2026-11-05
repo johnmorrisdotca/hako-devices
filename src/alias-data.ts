@@ -4,7 +4,7 @@ export const ALIAS_DATA: Readonly<Record<string, readonly string[]>> = {
   "blackberry-bold-9000": ["bold-9000"],
   "blackberry-bold-9700": ["bold-9700"],
   "bold-9900": ["blackberry-bold-9900"],
-  "blackberry-curve-8300": ["curve-8300"],
+  "curve-8300": ["blackberry-curve-8300"],
   "blackberry-curve-8310": ["curve-8310"],
   "blackberry-curve-8320": ["curve-8320"],
   "curve-8520": ["blackberry-curve-8520"],

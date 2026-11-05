@@ -225,6 +225,7 @@ export const DEVICES: readonly Device[] = [
   whole("messagepad-original-model", "MessagePad", "classics", [114.3, 19.1, 184.8], []),
   whole("bold-9900", "BlackBerry Bold 9900", "classics", [66, 10.5, 115], []),
   whole("curve-8520", "BlackBerry Curve 8520", "classics", [60, 13.9, 109], []),
+  whole("curve-8300", "BlackBerry Curve 8300", "classics", [60, 15.5, 107], []),
   whole("wii-rvl-001", "Wii (RVL-001)", "classics", [157, 197, 60], ports({ "usb-a": 2, power: 1 })),
   whole("xbox-series-x", "Xbox Series X", "classics", [151, 151, 301], ports({ "usb-a": 3, hdmi: 1, ethernet: 1, power: 1 })),
   whole("playstation-2-fat", "PlayStation 2 (fat)", "classics", [302.3, 182.9, 78.7], ports({ "usb-a": 2, power: 1 })),

@@ -16,6 +16,7 @@ All notable changes to this project are written here. The format follows
 - MessagePad. The article labels the height, the width and the depth. The list stores the width, the depth and the height. A dark slab, a dark screen, a pen along the right edge and a speaker of small holes. No word.
 - Bold 9900. The list size stays as it was. A metal band around a black face, a glossy screen, a dark square in a metal ring, and four rows of domed keys. A thin metal fret sits between the rows, and each row smiles a little. No word.
 - Curve 8520. The list size stays as it was. A black body, a screen, a green key, a square pad, a red key and four straight rows. No word.
+- Curve 8300. GSMArena lists 107 by 60 by 15.5 mm, and the inches are a height, a width and a thickness. The list stores the width, the depth and the height. A silver body, a screen, a round ball in a metal ring, a green key, a red key and four rows. No word.
 - A lathe, a domed plate, and a brushed silver. The brush is a normal map made in code. See docs/building-machines.md.
 
 ## [0.19.0] - 2026-11-05

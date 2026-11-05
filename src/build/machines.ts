@@ -814,6 +814,30 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     ],
   },
   // The article's axes are already on the list: 60 mm across, 13.9 mm thick, 109 mm tall. A black body, a screen, a green key, a square pad, a red key and four rows. The rows are straight. No word.
+  // GSMArena lists 107 x 60 x 15.5 mm, and the inches are a height, a width and a thickness. The list stores the width, the depth and the height. A silver body, a screen, a round ball in a metal ring between a green key and a red key, and four rows. No word.
+  "curve-8300": {
+    size: [60, 15.5, 107],
+    body: "brushed-silver",
+    corner: 10,
+    shape: "shell",
+    marks: [
+      front("slot", 0, 100, 14, 1.4, { material: "alu-dark", out: 0.5 }),
+      front("screen", 0, 76, 48, 36, { material: "screen-glass", out: 0.35 }),
+      front("key", -24, 50, 6, 3.2, { material: "alu-dark", out: 0.55 }),
+      front("key", -15, 50, 7, 4, { material: "pcb-green", out: 0.55 }),
+      front("key", 0, 50, 12, 12, { round: true, material: "alu", out: 0.4 }),
+      front("key", 0, 50, 6.5, 6.5, { round: true, material: "plastic-black", out: 0.7 }),
+      front("key", 14, 50, 6, 3.2, { material: "alu-dark", out: 0.55 }),
+      front("key", 23, 50, 6, 6, { round: true, material: "lid-red", out: 0.6 }),
+      front("panel", 0, 28, 54, 30, { material: "plastic-black", out: 0.2 }),
+      front("key", 0, 38, 4.4, 3.4, { cols: 10, rows: 1, gap: 0.55, material: "alu", out: 0.7 }),
+      front("key", 0, 32, 4.4, 3.4, { cols: 10, rows: 1, gap: 0.55, material: "alu", out: 0.7 }),
+      front("key", 0, 26, 4.4, 3.4, { cols: 10, rows: 1, gap: 0.55, material: "alu", out: 0.7 }),
+      front("key", -20, 18, 9, 3.6, { material: "alu", out: 0.7 }),
+      front("key", 1, 18, 20, 3.8, { material: "alu", out: 0.7 }),
+      front("key", 20, 18, 9, 3.6, { material: "alu", out: 0.7 }),
+    ],
+  },
   "curve-8520": {
     size: [60, 13.9, 109],
     body: "plastic-black",
