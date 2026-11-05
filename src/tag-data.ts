@@ -5178,4 +5178,6 @@ export const LINE_DATA: Readonly<Record<string, string>> = {
   "samsung-galaxy-s25-plus": "Galaxy S",
   "samsung-galaxy-s25-ultra": "Galaxy S",
   "motorola-edge-2025": "edge",
+  "nokia-x30": "X series",
+  "nokia-xr21": "XR series",
 };
