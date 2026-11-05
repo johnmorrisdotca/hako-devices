@@ -895,7 +895,6 @@ export const PLANNED: readonly PlannedDevice[] = [
   {"key":"microtac","name":"MicroTAC","family":"MicroTAC","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"pebl-u6","name":"PEBL U6","family":"PEBL","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"motorola-q","name":"Motorola Q","family":"Q","shelf":"phones","maker":"Motorola","status":"planned"},
-  {"key":"razr-v3","name":"RAZR V3","family":"RAZR","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"razr-v3i","name":"RAZR V3i","family":"RAZR","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"rokr-e1","name":"ROKR E1","family":"ROKR","shelf":"phones","maker":"Motorola","status":"planned"},
   {"key":"slvr-l7","name":"SLVR L7","family":"SLVR","shelf":"phones","maker":"Motorola","status":"planned"},
