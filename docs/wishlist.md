@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2517 machines. 1021 distinct shapes still to build. 1164 entries are already built: the 372 devices in this package, plus the real models those meshes cover. 1470 entries have a sourced size; the other 1047 are `null` on purpose.**
+**2519 machines. 1020 distinct shapes still to build. 1167 entries are already built: the 375 devices in this package, plus the real models those meshes cover. 1473 entries have a sourced size; the other 1046 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -159,12 +159,12 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | Fire TV | 12 | 12 | 0 |
 |  | Chromecast | 7 | 7 | 0 |
 |  | Shield TV | 5 | 5 | 0 |
-| **9** | **Android phones and tablets** | **166** | **166** | **80** |
+| **9** | **Android phones and tablets** | **168** | **165** | **83** |
 |  | Pixel | 39 | 39 | 0 |
 |  | Galaxy Tab S | 33 | 33 | 33 |
 |  | Galaxy Tab A | 21 | 21 | 19 |
 |  | Galaxy Tab | 19 | 19 | 17 |
-|  | Galaxy S | 16 | 16 | 0 |
+|  | Galaxy S | 18 | 15 | 3 |
 |  | Nexus | 12 | 12 | 1 |
 |  | Galaxy Tab Active | 7 | 7 | 5 |
 |  | Galaxy Note | 5 | 5 | 0 |
@@ -279,7 +279,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2517** | **1021** | **1470** |
+|  | **Total** | **2519** | **1020** | **1473** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -1383,7 +1383,7 @@ Shield TV (2015), Shield TV Pro (2015), Shield TV (2017), Shield TV (2019), Shie
 
 Roku DVP (N1000) (2008), Roku HD (N1100) (2009), Roku HD-XR (N1101) (2009), Roku SD (N1050) (2009), Roku HD (2000) (2010), Roku XD (2050) (2010), Roku XDS (2100) (2010), Roku 2 HD (3000) (2011), Roku 2 XD (3050) (2011), Roku 2 XS (3100) (2011), Roku LT (2400) (2011), Roku HD (2500) (2012), Roku LT (2450) (2012), Roku Streaming Stick, MHL (3400, 3420) (2012), Roku 1, SE (2710) (2013), Roku 2 (2720) (2013), Roku 3 (4200) (2013), Roku LT (2700) (2013), Roku Streaming Stick, HDMI (3500) (2014), Roku 2 (4210) (2015), Roku 3 (4230) (2015), Roku 4 (4400) (2015), Roku Express (3700) (2016), Roku Express+ (3710) (2016), Roku Premiere (4620) (2016), Roku Premiere+ (4630) (2016), Roku Streaming Stick (3600) (2016), Roku Ultra (4640) (2016), Roku Express (3900) (2017), Roku Express+ (3910) (2017), Roku Streaming Stick (3800) (2017), Roku Streaming Stick+ (3810) (2017), Roku Ultra (4660) (2017), Roku Premiere (3920) (2018), Roku Premiere+ (3921) (2018), Roku Ultra (4661) (2018), Roku Express+ (3931) (2019), Roku Express, SE, LE (3930) (2019), Roku Ultra (4670) (2019), Roku Ultra LT (4662) (2019), Roku Streambar (9102) (2020), Roku Ultra (4800) (2020), Roku Express 4K (3940) (2021), Roku Express 4K+ (3941) (2021), Roku Streambar Pro (9101) (2021), Roku Streaming Stick 4K (3820) (2021), Roku Streaming Stick 4K+ (3821) (2021), Roku Ultra LT (4801) (2021), Roku Express (3960) (2022), Roku Ultra (4802) (2022), Roku Streambar SE (9104) (2024), Roku Ultra (4850) (2024), Roku Streaming Stick HD (3840) (2025), Roku Streaming Stick Plus (3830) (2025).
 
-### Phase 9: Android phones and tablets (166 machines, 166 shapes to build)
+### Phase 9: Android phones and tablets (168 machines, 165 shapes to build)
 
 **Google Nexus** (12 machines, 12 shapes)
 
@@ -1401,9 +1401,9 @@ HTC Dream (2008).
 
 Galaxy Note (2011), Galaxy Note II (2012), Galaxy Note 4 (2014), Galaxy Note7 (2016), Galaxy Note20 (2020).
 
-**Samsung Galaxy S** (16 machines, 16 shapes)
+**Samsung Galaxy S** (18 machines, 15 shapes)
 
-Galaxy S II (2011), Galaxy S III (2012), Galaxy S4 (2013), Galaxy S5 (2014), Galaxy S6 (2015), Galaxy S7 (2016), Galaxy S8 (2017), Galaxy S9 (2018), Galaxy S10 (2019), Galaxy S20 (2020), Galaxy S21 (2021), Galaxy S22 (2022), Galaxy S23 (2023), Galaxy S24 (2024), Galaxy S25 (2025), Galaxy S.
+Galaxy S II (2011), Galaxy S III (2012), Galaxy S4 (2013), Galaxy S5 (2014), Galaxy S6 (2015), Galaxy S7 (2016), Galaxy S8 (2017), Galaxy S9 (2018), Galaxy S10 (2019), Galaxy S20 (2020), Galaxy S21 (2021), Galaxy S22 (2022), Galaxy S23 (2023), Galaxy S24 (2024), Galaxy S25 (2025) *built*, Galaxy S25 Ultra (2025) *built*, Galaxy S25+ (2025) *built*, Galaxy S.
 
 **Samsung Galaxy Tab** (19 machines, 19 shapes)
 

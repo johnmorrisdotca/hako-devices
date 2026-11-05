@@ -103,4 +103,7 @@ export const SLAB_ROWS: readonly SlabRow[] = [
   ["apple-watch-ultra-49-mm", "Apple Watch Ultra (49 mm), 2022", [38.42, 45.7, 10.62], {}],
   ["apple-watch-ultra-2-49-mm", "Apple Watch Ultra 2 and Ultra 3 (49 mm), 2023 and 2025", [38.42, 45.7, 10.62], {}],
   ["apple-watch-ultra-4-49-mm", "Apple Watch Ultra 4 (49 mm), 2026", [38.42, 45.7, 10.62], {}],
+  ["samsung-galaxy-s25", "Galaxy S25, 2025", [70.5, 146.9, 7.2], { "usb-c": 1 }],
+  ["samsung-galaxy-s25-plus", "Galaxy S25+, 2025", [75.8, 158.4, 7.3], { "usb-c": 1 }],
+  ["samsung-galaxy-s25-ultra", "Galaxy S25 Ultra, 2025", [77.6, 162.8, 8.2], { "usb-c": 1 }],
 ];
