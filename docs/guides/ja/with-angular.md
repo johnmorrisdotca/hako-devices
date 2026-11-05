@@ -5,7 +5,7 @@ order: 6
 description: Angular で要素を使い、ビルドして開けるページを作ります。
 ---
 
-タグを使うコンポーネントに `CUSTOM_ELEMENTS_SCHEMA` を追加します。`ngOnInit` はサーバーでの描画でも実行されるので、インポートはブラウザーのときだけ行います。下のファイルは `examples/angular/` にあるものと同じ内容です。
+タグを使うコンポーネントに `CUSTOM_ELEMENTS_SCHEMA` を追加します。`ngOnInit` はサーバーサイドレンダリング（SSR）でも実行されるので、インポートはブラウザーのときだけ行います。下のファイルは `examples/angular/` にあるものと同じ内容です。
 
 ```ts
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnInit } from "@angular/core";
