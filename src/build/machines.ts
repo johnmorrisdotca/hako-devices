@@ -762,10 +762,10 @@ export const MACHINES: Readonly<Record<string, MachineSpec>> = {
     marks: [
       front("panel", 0, 57.5, 62, 108, { material: "plastic-black", out: 0.12 }),
       front("slot", 0, 108, 16, 1.5, { material: "alu-dark", out: 1.15 }),
-      front("screen", 0, 80, 56, 46, { out: 1.05 }),
+      front("screen", 0, 80, 56, 46, { material: "screen-glass", out: 1.05 }),
       front("key", -22, 50, 8, 3.2, { material: "alu-dark", out: 1.25 }),
-      front("panel", 0, 50, 12, 12, { material: "alu", out: 1.15 }),
-      front("key", 0, 50, 8, 8, { material: "plastic-black", out: 1.4 }),
+      front("panel", 0, 50, 13, 13, { material: "alu", out: 1.1 }),
+      front("screen", 0, 50, 8, 8, { material: "screen-glass", out: 1.5 }),
       front("key", 16, 50, 7, 3.4, { material: "alu-dark", out: 1.25 }),
       front("key", 26, 50, 6, 6, { round: true, material: "plastic-char", out: 1.3 }),
       front("slot", 0, 42.2, 56, 0.7, { material: "alu", out: 1.55, bow: 1.3 }),
