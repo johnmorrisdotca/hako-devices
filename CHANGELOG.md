@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- The Sony Walkman TPS-L2 and the WM-2. Both stay blank on the list. M+ names no axes for the TPS-L2, and the WM-2's named width does not match the control face in its photograph. The note states each mesh. The WM-20 and the WM-DD are not drawn.
+
 ## [0.17.0] - 2026-11-05
 
 ### Added

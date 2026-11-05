@@ -2,7 +2,7 @@
 
 Every machine hako-devices wants to draw, in build order. The data is in [`data/wishlist.json`](../data/wishlist.json), one entry per machine. Names are descriptive only: no logos, no trademarks in the drawings. Checked on 2026-10-31.
 
-**2519 machines. 1020 distinct shapes still to build. 1167 entries are already built: the 375 devices in this package, plus the real models those meshes cover. 1473 entries have a sourced size; the other 1046 are `null` on purpose.**
+**2519 machines. 1018 distinct shapes still to build. 1169 entries are already built: the 377 devices in this package, plus the real models those meshes cover. 1473 entries have a sourced size; the other 1046 are `null` on purpose.**
 
 The shape count is the real work: a group of machines that share a body is one mesh. It counts each `formFactorGroup` that has a planned machine and no built mesh.
 
@@ -244,8 +244,8 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | HP-45 | 1 | 1 | 0 |
 |  | TI SR | 1 | 1 | 0 |
 |  | HP-25 | 1 | 1 | 0 |
-| **14** | **Personal music** | **13** | **13** | **0** |
-|  | Walkman | 4 | 4 | 0 |
+| **14** | **Personal music** | **13** | **11** | **0** |
+|  | Walkman | 4 | 2 | 0 |
 |  | Discman | 2 | 2 | 0 |
 |  | MiniDisc | 2 | 2 | 0 |
 |  | Rio | 1 | 1 | 0 |
@@ -279,7 +279,7 @@ The shape count is the real work: a group of machines that share a body is one m
 |  | TVS series | 3 | 3 | 0 |
 |  | Drobo | 1 | 1 | 1 |
 |  | TBS series | 1 | 1 | 0 |
-|  | **Total** | **2519** | **1020** | **1473** |
+|  | **Total** | **2519** | **1018** | **1473** |
 
 A shape shared across two rows is counted in each row, so a column of sub-rows can add up to more than its phase. Phase and total rows count each shape once.
 
@@ -1721,7 +1721,7 @@ TI-84 Plus *built*.
 
 TI-Nspire, TI-Nspire CX.
 
-### Phase 14: Personal music (13 machines, 13 shapes to build)
+### Phase 14: Personal music (13 machines, 11 shapes to build)
 
 **Creative Nomad** (1 machines, 1 shapes)
 
@@ -1747,9 +1747,9 @@ Sony Discman D-50 (1984), Sony Discman D-NE1.
 
 Sony MiniDisc MZ-1, Sony MiniDisc MZ-RH1.
 
-**Sony Walkman** (4 machines, 4 shapes)
+**Sony Walkman** (4 machines, 2 shapes)
 
-Sony Walkman TPS-L2, Sony Walkman WM-2, Sony Walkman WM-20, Sony Walkman WM-DD.
+Sony Walkman TPS-L2 (1979) *built*, Sony Walkman WM-2 (1981) *built*, Sony Walkman WM-20, Sony Walkman WM-DD.
 
 **iRiver H300** (1 machines, 1 shapes)
 

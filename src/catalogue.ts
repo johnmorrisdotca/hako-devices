@@ -254,6 +254,8 @@ export const DEVICES: readonly Device[] = [
   whole("playstation-vita-pch-1000", "PlayStation Vita (PCH-1000)", "classics", [182, 18.6, 83.55], []),
   whole("xbox-one", "Xbox One", "classics", [333, 274, 79], []),
   whole("xbox-series-s", "Xbox Series S", "classics", [151, 65, 275], []),
+  whole("sony-tps-l2", "Sony Walkman TPS-L2", "classics", [89, 28, 136], ports({ audio: 2, power: 1 })),
+  whole("sony-wm-2", "Sony Walkman WM-2", "classics", [80, 30, 109], ports({ audio: 2 })),
 
   whole("nintendo-64", "Nintendo 64", "classics", [260, 190, 73], ports({ power: 1 })),
   whole("game-boy-advance-agb-001", "Game Boy Advance (AGB-001)", "classics", [144.5, 24.5, 82], ports({ audio: 1 })),
