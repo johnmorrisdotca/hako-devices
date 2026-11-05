@@ -10,6 +10,7 @@ All notable changes to this project are written here. The format follows
 
 - Galaxy S25, S25+ and S25 Ultra: the bottom edge has the microphone slot, the speaker and one small hole, measured from the accessory drawing's bottom view. The USB port's middle was measured and stays at the centre. The Ultra also has the short opening at the left of that edge.
 - Galaxy S24, S24+ and S24 Ultra: the published outer sizes are on the list. Samsung's accessory page no longer has an S24 drawing, so the cameras and buttons are not drawn.
+- Pixel 9, 9 Pro, 9 Pro XL, 9 Pro Fold, Pixel 8, 8 Pro and 8a: the published outer sizes are on the list. The Fold's size is the folded phone. Google publishes no accessory drawing, so the cameras and buttons are not drawn.
 
 ## [0.17.0] - 2026-11-05
 
