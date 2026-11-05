@@ -6,6 +6,12 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+## [0.17.0] - 2026-11-05
+
+### Added
+
+- Samsung Galaxy S25, S25+ and S25 Ultra (HAKO-DEVICES-47): the first Android phones on the phone shelf. Outer sizes from Samsung's specification pages; cameras, flash, buttons and ports measured from Samsung's accessory drawing, scaled to the published height (the drawn width then matches the published width on all three). No camera-island height is drawn, because the drawing gives none.
+
 ## [0.16.0] - 2026-11-03
 
 ### Fixed
