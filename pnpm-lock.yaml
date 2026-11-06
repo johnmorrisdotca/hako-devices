@@ -24,8 +24,8 @@ importers:
         specifier: ^9.0.0
         version: 9.39.5
       '@johnmorrisdotca/kazoku-ui':
-        specifier: 0.16.0
-        version: 0.16.0(three@0.186.1)
+        specifier: 0.19.0
+        version: 0.19.0(three@0.186.1)
       '@playwright/test':
         specifier: 1.64.0
         version: 1.64.0
@@ -361,8 +361,8 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@johnmorrisdotca/kazoku-ui@0.16.0':
-    resolution: {integrity: sha512-1/gK3hkR/gOybcPheO9DpGg5IkNWbhrUQf8gDzLEJNfXashn1Ns2wfVRStYX4BJXIFQJ88XYk8vvCF1q85/++g==}
+  '@johnmorrisdotca/kazoku-ui@0.19.0':
+    resolution: {integrity: sha512-TVrdG67TImrpdy+tY7LgFpvArmseBg61coM7FeONnq154V77FbXmNMMeFKAwY1v6KStQGkB46Qlj1eGI16pYCg==}
     engines: {node: '>=22'}
     peerDependencies:
       three: '>=0.160.0'
@@ -1694,7 +1694,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@johnmorrisdotca/kazoku-ui@0.16.0(three@0.186.1)':
+  '@johnmorrisdotca/kazoku-ui@0.19.0(three@0.186.1)':
     optionalDependencies:
       three: 0.186.1
 

@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- Kazoku UI is 0.19.0.
+
 ## [0.20.1] - 2026-11-05
 
 ### Fixed
