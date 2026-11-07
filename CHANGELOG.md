@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- The family pitch for Hako Devices says smartphone and 3D view (KAZOKU-UI-56).
+
 ## [0.20.1] - 2026-11-05
 
 ### Fixed

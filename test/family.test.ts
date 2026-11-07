@@ -1,5 +1,5 @@
 // What this package holds the same way as every package of the family: the shared template and the README writer, the one list of the family, and the README
-// block written from it. This copy is the template of 2026-11-03 with Hako Devices added to the list (thirty-six packages, the geography group, a line in English and Japanese), and the README writer's number words reaching thirty-six. The other packages take the same files when they are next touched.
+// block written from it. This copy is the template of 2026-11-06. The Hako pitch says smartphone and 3D view. The other packages take the same files when they are next touched.
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
@@ -27,7 +27,7 @@ const sha = (path: string) => createHash("sha256").update(readFileSync(path)).di
 const pkg = JSON.parse(read("package.json")) as { name: string };
 const id = pkg.name.replace(/^@[^/]+\//, "");
 
-const TEMPLATE = { version: "2026-11-03", sha256: "9c000f0443fb591d622ba2d7f689546743e9470c47645917680b3f3d1ad077e6" };
+const TEMPLATE = { version: "2026-11-06", sha256: "e23396fa182cac39182993f283b37eaf5f67a3d4c680a3f9fced1121edd0e875" };
 const WRITER_SHA = "64030a0bbc9af3d275fa81219c20d09a06d01b92465a56a7067ed1da337d18cb";
 const CSS_SHA = "31df0a58f422070ca4023d5498566b26bc55a5f9a0751f1520d36c61bbb562c9";
 

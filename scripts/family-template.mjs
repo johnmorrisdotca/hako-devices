@@ -46,7 +46,7 @@
 const OWNER = "johnmorrisdotca";
 
 /** The day this file was last changed, in every repository at once. A test records the file's hash beside it. */
-export const FAMILY_TEMPLATE_VERSION = "2026-11-03";
+export const FAMILY_TEMPLATE_VERSION = "2026-11-06";
 
 /** The packages, in the order the footer lists them. `kana` is the name as it is written in Japanese. */
 export const FAMILY = [
@@ -153,7 +153,7 @@ export const FAMILY_PITCH = {
 /** Japanese pitches for the new geography and developer members; awaiting native review. */
 export const FAMILY_PITCH_JA = {
   "address-plus": "アメリカ、カナダ、日本、オーストラリア、フランス、ドイツ、イギリスの住所を解析・整形",
-  "hako-devices": "公開された寸法から、コンピューター、電話、ゲーム機、NASの線画と3Dを描きます",
+  "hako-devices": "公開された寸法から、コンピューター、スマートフォン、ゲーム機、NASの線画と3Dビューを描きます",
   "hata": "国と行政区画の旗を、実際の縦横比のSVGで収録。ISOコードで引けます",
   "kuni": "世界の国と行政区画を、ISOコードと英語・日本語の名称つきで収録",
   "uchusen-rockets": "出典つきの寸法からロケットを描きます。線画と3Dで、分解して回して見られ、ロケットが本当に組み合わさるかも確かめられます",
