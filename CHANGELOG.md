@@ -8,7 +8,7 @@ All notable changes to this project are written here. The format follows
 
 ### Changed
 
-- Kazoku UI is 0.19.0.
+- Kazoku UI is 0.19.0. Ctrl and the wheel zoom the device, and a browser test presses that.
 
 ## [0.20.1] - 2026-11-05
 
