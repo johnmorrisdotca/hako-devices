@@ -505,7 +505,7 @@ test("the family's view controls turn, tip, zoom and move the device, and anothe
   expect(problems).toEqual([]);
 });
 
-test("the bar shows one true zoom number, and More holds tilt, Front and moving it", async ({ page }) => {
+test("the bar shows one true zoom number, the axis chips choose tilt, and More holds Front and moving it", async ({ page }) => {
   const problems = watch(page);
   await page.goto(URL);
   const bar = page.locator('[data-testid="view-bar"]');
@@ -527,7 +527,7 @@ test("the bar shows one true zoom number, and More holds tilt, Front and moving 
   // pressing it goes back to the whole device
   await number.click();
   await expect(number).toHaveText("1×");
-  // the rest is one press away, and the angle is there without it
+  // the rest is one press away, and the angle is there without it; the one slider is the angle's until the Tilt chip is pressed, then it runs the tilt's range
   const angle = bar.locator("#yaw");
   const tilt = bar.locator("#tilt");
   const front = bar.locator('[data-b="front"]');
@@ -535,13 +535,15 @@ test("the bar shows one true zoom number, and More holds tilt, Front and moving 
   await expect(tilt).toBeHidden();
   await expect(front).toBeHidden();
   await bar.locator('[data-b="more"]').click();
-  await expect(tilt).toBeVisible();
   await expect(front).toBeVisible();
+  await bar.locator('[data-b="axis-tilt"]').click();
+  await expect(bar.locator('[data-b="axis-tilt"]')).toHaveAttribute("aria-pressed", "true");
+  await expect(angle).toHaveAttribute("max", "30");
   // the buttons that move it come once there is room to move it
   await bar.evaluate((node) => (node as Bar).set({ zoom: 2 }));
   await expect(bar.locator('[data-b="left"]')).toBeVisible();
   await bar.locator('[data-b="more"]').click();
-  await expect(tilt).toBeHidden();
+  await expect(front).toBeHidden();
   expect(problems).toEqual([]);
 });
 

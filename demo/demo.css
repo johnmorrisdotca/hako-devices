@@ -194,6 +194,7 @@ select, input[type="text"], input[type="search"] { min-height: 2.5rem; padding: 
   .tiles { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr)); }
   .tiles[data-both="true"] { grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); }
   .side { overflow: hidden auto; }
+  .embed { overflow: hidden auto; }
   .view-builder, .view-lineup, .view-screen { overflow: auto; }
   .view-builder { display: grid; grid-template-rows: auto minmax(0, 1fr); }
   .builder { grid-template-columns: minmax(30rem, 37fr) minmax(0, 40fr) minmax(16rem, 23fr); height: 100%; min-height: 0; }

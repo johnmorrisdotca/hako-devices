@@ -6,6 +6,10 @@ All notable changes to this project are written here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- The demo's `@johnmorrisdotca/kazoku-ui` is 0.53, still pinned exactly (MODULES-1506): the plain wheel no longer zooms the view (Ctrl or Command with the wheel does), and a drag turns, Shift and a drag rolls, Ctrl or Command and a drag moves. `e2e/gestures.demo.ts` runs kazoku-ui's `checkGestures` on the demo's 3D device. The bar is taller (the Angle, Tilt, Roll and All chips are a row of their own), so on a desk the embed panel scrolls inside its own box instead of pushing the page past the window; the browser tests follow (the Tilt chip, not More, shows the tilt).
+
 ## [0.20.1] - 2026-11-05
 
 ### Fixed
